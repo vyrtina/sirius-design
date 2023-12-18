@@ -1,0 +1,216 @@
+{
+    "typography" : {
+        "font": {
+            "headlines": {
+                "value": "'Playfair Display', 'Times New Roman', Times, serif"
+            },
+            "body": {
+                "value": "'Roboto', Arial, Helvetica, sans-serif"
+            }
+        },
+        "weight": {
+            "regular": {
+                "value": "400"
+            },
+            "medium": {
+                "value": "500"
+            },
+            "semibold": {
+                "value": "600"
+            },
+            "bold": {
+                "value": "700"
+            }
+        },
+        " ": {
+            "display": {
+                "Large": {
+                    "font": {
+                        "value": "{typography.font.headlines}"
+                    },
+                    "size": {
+                        "value": "3.8125rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "110%"
+                    },
+                    "letter-spacing": {
+                        "value": "-0.07625rem"
+                    }
+                },
+                " ": {
+                    "font": {
+                        "value": "{typography.font.headlines}"
+                    },
+                    "size": {
+                        "value": "3.0625rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "120%"
+                    },
+                    "letter-spacing": {
+                        "value": "-0.06125rem"
+                    }
+                },
+                "small": {
+                    "font": {
+                        "value": "{typography.font.headlines}"
+                    },
+                    "size": {
+                        "value": "2.4375rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "120%"
+                    },
+                    "letter-spacing": {
+                        "value": "-0.03656rem"
+                    }
+                }
+            },
+            "headline": {
+                "large": {
+                    "font": {
+                        "value": "{typography.font.headlines}"
+                    },
+                    "size": {
+                        "value": "1.9375rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "130%"
+                    },
+                    "letter-spacing": {
+                        "value": "-0.02906rem"
+                    }
+                },
+                " ": {
+                    "font": {
+                        "value": "{typography.font.headlines}"
+                    },
+                    "size": {
+                        "value": "1.5625rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "130%"
+                    },
+                    "letter-spacing": {
+                        "value": "-0.00781rem"
+                    }
+                }
+            },
+            "body": {
+                "large": {
+                    "font": {
+                        "value": "{typography.font.body}"
+                    },
+                    "size": {
+                        "value": "1.25rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "130%"
+                    },
+                    "letter-spacing": {
+                        "value": "normal"
+                    }
+                },
+                " ": {
+                    "font": {
+                        "value": "{typography.font.body}"
+                    },
+                    "size": {
+                        "value": "1rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "140%"
+                    },
+                    "letter-spacing": {
+                        "value": "normal"
+                    }
+                },
+                "small": {
+                    "font": {
+                        "value": "{typography.font.body}"
+                    },
+                    "size": {
+                        "value": "0.8125rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "150%"
+                    },
+                    "letter-spacing": {
+                        "value": "normal"
+                    }
+                }
+            },
+            "label" : {
+                "small": {
+                    "font": {
+                        "value": "{typography.font.body}"
+                    },
+                    "size": {
+                        "value": "0.625rem"
+                    },
+                    "style": {
+                        "value": "normal"
+                    },
+                    "weight": {
+                        "value": "{typography.weight.regular}"
+                    },
+                    "line-height": {
+                        "value": "150%"
+                    },
+                    "letter-spacing": {
+                        "value": "normal"
+                    }
+                }
+            }
+        }
+    }
+}

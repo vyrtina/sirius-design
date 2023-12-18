@@ -1,0 +1,82 @@
+@import "../../styles/index";
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 1.125rem;
+    width: 1.125rem;
+    outline: none;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    cursor: pointer;
+    border: $sd-border-width-s solid $sd-color-primary;
+    background: rgba($color: $sd-color-primary, $alpha: 0);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    border-radius: 0.2rem;
+    justify-content: center;
+    align-items: center;
+    &:not(:checked) {
+        @include state-render-overlay($sd-color-primary);
+    }
+}
+
+input:after {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 7.2px;
+    left: 50%;
+    top: 50%;
+    margin-left: -2px;
+    margin-top: -3.6px;
+    position: absolute;
+    transition: transform 0.3s ease, opacity 0.2s;
+    border: 2px solid $sd-color-on-primary;
+    border-top: 0;
+    border-left: 0;
+    transform: rotate(20deg);
+    opacity: 0;
+}
+
+input:checked {
+    background: $sd-color-primary;
+    border-color: $sd-color-primary;
+    transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.32, 1.2), opacity 0.3s;
+    &::after {
+        opacity: 1;
+        transform: rotate(43deg);
+    }
+}
+
+input:disabled {
+    @include state-render-disabled(false);
+    border-color: rgba($color: $sd-color-on-surface, $alpha: 0.38);
+    &:checked {
+        @include state-render-disabled-bg();
+    }
+}
+
+input:disabled:after {
+    border-color: rgba($color: $sd-color-on-surface, $alpha: 0.38);
+}
+
+input:disabled + label {
+    @include state-render-disabled-element();
+}
+
+input:focus-visible {
+    @include outline-focus();
+}
+
+input + label {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+*:after {
+    box-sizing: border-box;
+}

@@ -1,0 +1,11 @@
+@import "button";
+
+button {
+    color: $sd-color-primary;
+    @include state-render-overlay($sd-color-primary);
+}
+
+button.invert {
+    color: $sd-color-surface;
+    @include state-render-overlay($sd-color-surface);
+}

@@ -1,0 +1,117 @@
+@use "sass:color";
+@use "./tokens";
+
+//surface layering
+$sd-color-surface-level-1: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 5%);
+$sd-color-surface-level-2: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 8%);
+$sd-color-surface-level-3: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 11%);
+$sd-color-surface-level-4: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 12%);
+$sd-color-surface-level-5: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 14%);
+
+//return True if the color is "dark"
+@function is-dark-color($color) {
+    @return (color.lightness($color) < 50%);
+}
+
+@function state-color($color, $state-type) {
+    @if is-dark-color($color) {
+        @return map-get(
+            (
+                "hover": color.scale($color, $lightness: 8%),
+                "focus": color.scale($color, $lightness: 12%),
+                "press": color.scale($color, $lightness: 12%),
+                "drag": color.scale($color, $lightness: 16%),
+            ),
+            $state-type
+        );
+    } @else {
+        @return map-get(
+            (
+                "hover": color.scale($color, $lightness: -8%),
+                "focus": color.scale($color, $lightness: -12%),
+                "press": color.scale($color, $lightness: -12%),
+                "drag": color.scale($color, $lightness: -16%),
+            ),
+            $state-type
+        );
+    }
+}
+
+@function state-color-overlay($color, $state-type) {
+    @return map-get(
+        (
+            "hover": rgba($color: $color, $alpha: 0.08),
+            "focus": rgba($color: $color, $alpha: 0.12),
+            "press": rgba($color: $color, $alpha: 0.12),
+            "drag": rgba($color: $color, $alpha: 0.14),
+        ),
+        $state-type
+    );
+}
+
+@mixin state-render($color, $apply-shadow: true) {
+    &:enabled {
+        &:hover {
+            background: state-color($color, "hover");
+        }
+        &:focus {
+            background: state-color($color, "focus");
+        }
+        &:active {
+            background: state-color($color, "press");
+        }
+        @if $apply-shadow {
+            &:hover {
+                box-shadow: tokens.$sd-shadow-level-1;
+            }
+            &:focus {
+                box-shadow: tokens.$sd-shadow-level-2;
+            }
+            &:active {
+                box-shadow: tokens.$sd-shadow-level-2;
+            }
+        }
+    }
+}
+
+@mixin state-render-overlay($color) {
+    &:enabled {
+        &:hover {
+            background: state-color-overlay($color, "hover");
+        }
+        &:active {
+            background: state-color-overlay($color, "press");
+        }
+        &:focus {
+            background: state-color-overlay($color, "focus");
+        }
+    }
+}
+
+@mixin state-render-disabled-bg() {
+    &:disabled {
+        background: rgba($color: tokens.$sd-color-disabled, $alpha: 0.12);
+    }
+}
+
+@mixin state-render-disabled-element() {
+    &:disabled {
+        color: tokens.$sd-color-on-surface;
+        opacity: 0.38;
+        cursor: not-allowed;
+    }
+}
+
+@mixin state-render-disabled($render-bg: true) {
+    @if $render-bg {
+        @include state-render-disabled-bg();
+    }
+    &:disabled {
+        color: tokens.$sd-color-on-surface;
+        cursor: not-allowed;
+        box-shadow: none;
+        & * {
+            opacity: 0.38;
+        }
+    }
+}
