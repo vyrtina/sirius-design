@@ -1,7 +1,7 @@
 import { LitElement, html, nothing, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./button-plain.scss?inline";
-import "material-symbols/outlined.css";
+import "../icon/icon";
 
 @customElement("button-plain")
 export class ButtonPlain extends LitElement {

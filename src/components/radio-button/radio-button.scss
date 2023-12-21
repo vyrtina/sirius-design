@@ -1,0 +1,74 @@
+@import "../../styles/_index";
+
+:host {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+
+    & * {
+        cursor: pointer;
+    }
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: $sd-border-radius-circle;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: border-color 0.2s ease-out;
+    @include sd-border(false);
+    &:focus-visible {
+        @include outline-focus();
+    }
+}
+
+input:before {
+    content: "";
+}
+
+input:checked,
+input:hover,
+input:focus {
+    border-color: $sd-color-primary;
+}
+
+input:checked:before {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: $sd-color-primary;
+    block-size: 100%;
+    inline-size: 100%;
+    width: 0.75rem;
+    height: 0.75rem;
+    transition: background-color 0.2s ease-out;
+}
+
+input:disabled {
+    border-color: $sd-color-on-surface;
+    opacity: 0.38;
+    cursor: not-allowed;
+
+    & + label,
+    &::before {
+        color: $sd-color-on-surface;
+        opacity: 0.38;
+    }
+}
+
+:host:has(input:disabled) {
+    & * {
+        cursor: not-allowed;
+
+        & label {
+            color: var(--color-disabled-text, #989898);
+        }
+    }
+}

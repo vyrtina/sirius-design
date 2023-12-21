@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import "./checkbox";
+import "./switch";
 
 const meta: Meta = {
-    title: "components/checkbox",
-    component: "sd-checkbox",
+    title: "components/switch",
+    component: "sd-switch",
     argTypes: {
         disabled: {
             type: "boolean",
@@ -17,27 +17,27 @@ const meta: Meta = {
         },
     },
     render: ({ label, disabled, checked }) => html`
-        <sd-checkbox ?checked=${checked} ?disabled=${disabled}>
+        <sd-switch ?checked=${checked} ?disabled=${disabled}>
             <p slot="label">${label}</p>
-        </sd-checkbox>
+        </sd-switch>
     `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Checked: Story = {
+export const ToggleOn: Story = {
     args: {
         disabled: false,
         checked: true,
-        label: "checkbox",
+        label: "switch",
     },
 };
 
-export const Unchecked: Story = {
+export const ToggleOff: Story = {
     args: {
         disabled: false,
         checked: false,
-        label: "checkbox",
+        label: "switch",
     },
 };

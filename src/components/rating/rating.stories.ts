@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
-import "./checkbox";
+import "./rating";
 
 const meta: Meta = {
-    title: "components/checkbox",
-    component: "sd-checkbox",
+    title: "components/rating",
+    component: "sd-rating",
     argTypes: {
         disabled: {
             type: "boolean",
@@ -15,29 +14,35 @@ const meta: Meta = {
         label: {
             type: "string",
         },
+        size: {
+            options: ["small", "default"],
+            control: "select",
+        },
+        icon: {
+            type: "string",
+        },
     },
-    render: ({ label, disabled, checked }) => html`
-        <sd-checkbox ?checked=${checked} ?disabled=${disabled}>
-            <p slot="label">${label}</p>
-        </sd-checkbox>
-    `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Checked: Story = {
+export const Default: Story = {
     args: {
         disabled: false,
         checked: true,
         label: "checkbox",
+        size: "default",
+        icon: "star",
     },
 };
 
-export const Unchecked: Story = {
+export const Custom: Story = {
     args: {
         disabled: false,
         checked: false,
         label: "checkbox",
+        size: "small",
+        icon: "bolt",
     },
 };

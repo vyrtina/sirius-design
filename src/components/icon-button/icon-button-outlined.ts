@@ -14,7 +14,7 @@ export class IconButtonOutlined extends LitElement {
         "outlined";
     @property({ type: String }) icon = "edit";
     @property({ type: String }) size: "small" | "medium" | "large" | "extra-large" =
-        "large";
+        "medium";
     @property({}) onClick = () => {};
 
     render() {

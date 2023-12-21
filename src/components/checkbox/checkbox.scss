@@ -1,4 +1,4 @@
-@import "../../styles/index";
+@import "../../styles/_index";
 
 input {
     -webkit-appearance: none;
@@ -17,7 +17,7 @@ input {
     border-radius: 0.2rem;
     justify-content: center;
     align-items: center;
-    &:not(:checked) {
+    &:enabled:not(:checked) {
         @include state-render-overlay($sd-color-primary);
     }
 }

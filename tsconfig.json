@@ -20,5 +20,19 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.js"], // Adjust for your file types
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      },
+      "extends": [
+        // ... other ESLint extensions
+        "plugin:lit/recommended" // Use the Lit plugin recommended rules
+      ]
+    }
+  ]
 }

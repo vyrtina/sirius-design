@@ -1,4 +1,4 @@
-@use './tokens';
+@use "./tokens";
 
 @mixin display-large {
     font-family: tokens.$sd-typography-display-large-font;
@@ -79,4 +79,40 @@
     font-weight: tokens.$sd-typography-label-small-weight;
     line-height: tokens.$sd-typography-label-small-line-height;
     letter-spacing: tokens.$sd-typography-label-small-letter-spacing;
+}
+
+.display-large {
+    @include display-large();
+}
+
+.display {
+    @include display();
+}
+
+.display-small {
+    @include display-small();
+}
+
+.headline-large {
+    @include headline-large();
+}
+
+.headline {
+    @include headline();
+}
+
+.body-large {
+    @include body-large();
+}
+
+.body {
+    @include body();
+}
+
+.body-small {
+    @include body-small();
+}
+
+.label-small {
+    @include label-small();
 }

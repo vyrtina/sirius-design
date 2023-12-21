@@ -1,7 +1,7 @@
 
 /**
  * Do not edit directly
- * Generated on Mon, 18 Dec 2023 21:20:52 GMT
+ * Generated on Thu, 21 Dec 2023 21:48:32 GMT
  */
 
 $sd-typography-label-small-letter-spacing: normal !default;
@@ -87,6 +87,26 @@ $sd-shadow-level-4: 0px 8px 16px rgba(0, 0, 0, 0.14), 0px 8px 16px rgba(0, 0, 0,
 $sd-shadow-level-3: 0px 4px 8px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.14) !default;
 $sd-shadow-level-2: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 2px 4px rgba(0, 0, 0, 0.14) !default;
 $sd-shadow-level-1: 0px 1px 2px rgba(0, 0, 0, 0.14), 0px 1px 2px rgba(0, 0, 0, 0.14) !default;
+$sd-motion-duration-050: 50ms !default;
+$sd-motion-duration-1000: 1000ms !default;
+$sd-motion-duration-900: 900ms !default;
+$sd-motion-duration-800: 800ms !default;
+$sd-motion-duration-700: 700ms !default;
+$sd-motion-duration-600: 600ms !default;
+$sd-motion-duration-550: 550ms !default;
+$sd-motion-duration-500: 500ms !default;
+$sd-motion-duration-450: 450ms !default;
+$sd-motion-duration-400: 400ms !default;
+$sd-motion-duration-350: 350ms !default;
+$sd-motion-duration-300: 300ms !default;
+$sd-motion-duration-250: 250ms !default;
+$sd-motion-duration-200: 200ms !default;
+$sd-motion-duration-150: 150ms !default;
+$sd-motion-duration-100: 100ms !default;
+$sd-motion-easing-linear: cubic-bezier(0, 0, 1, 1) !default;
+$sd-motion-easing-ease-in-out: cubic-bezier(0.86, 0, 0.07, 1) !default;
+$sd-motion-easing-ease-in: cubic-bezier(0.755, 0.05, 0.855, 0.06) !default;
+$sd-motion-easing-ease-out: cubic-bezier(0.23, 1, 0.32, 1) !default;
 $sd-color-palette-cyan-1300: #002a46 !default;
 $sd-color-palette-cyan-1200: #00395d !default;
 $sd-color-palette-cyan-1100: #004a73 !default;
@@ -168,7 +188,7 @@ $sd-border-width-s: 1px !default;
 $sd-border-width-0: 0px !default;
 $sd-border-radius-medium: 0.25rem !default;
 $sd-border-radius-large: 0.5rem !default;
-$sd-border-radius-circle: 50% !default;
+$sd-border-radius-circle: 999999rem !default;
 $sd-typography-label-small-weight: $sd-typography-weight-regular !default;
 $sd-typography-label-small-font: $sd-typography-font-body !default;
 $sd-typography-body-small-weight: $sd-typography-weight-regular !default;
@@ -321,6 +341,32 @@ $tokens: (
         '1200': $sd-color-palette-cyan-1200,
         '1300': $sd-color-palette-cyan-1300
       )
+    )
+  ),
+  'motion': (
+    'easing': (
+      'ease-out': $sd-motion-easing-ease-out,
+      'ease-in': $sd-motion-easing-ease-in,
+      'ease-in-out': $sd-motion-easing-ease-in-out,
+      'linear': $sd-motion-easing-linear
+    ),
+    'duration': (
+      '100': $sd-motion-duration-100,
+      '150': $sd-motion-duration-150,
+      '200': $sd-motion-duration-200,
+      '250': $sd-motion-duration-250,
+      '300': $sd-motion-duration-300,
+      '350': $sd-motion-duration-350,
+      '400': $sd-motion-duration-400,
+      '450': $sd-motion-duration-450,
+      '500': $sd-motion-duration-500,
+      '550': $sd-motion-duration-550,
+      '600': $sd-motion-duration-600,
+      '700': $sd-motion-duration-700,
+      '800': $sd-motion-duration-800,
+      '900': $sd-motion-duration-900,
+      '1000': $sd-motion-duration-1000,
+      '050': $sd-motion-duration-050
     )
   ),
   'shadow': (

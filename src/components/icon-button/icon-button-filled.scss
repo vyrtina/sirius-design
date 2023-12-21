@@ -4,7 +4,9 @@ button {
     background: $sd-color-primary;
     color: $sd-color-on-primary;
 
-    @include state-render($sd-color-primary, 1);
+    &:enabled {
+        @include state-render($sd-color-primary, 1);
+    }
 
     &:disabled {
         background: rgba($color: $sd-color-on-surface, $alpha: 0.12);
@@ -15,5 +17,7 @@ button.invert {
     background: $sd-color-surface;
     color: $sd-color-on-surface;
 
-    @include state-render($sd-color-surface, true);
+    &:enabled {
+        @include state-render($sd-color-surface, true);
+    }
 }

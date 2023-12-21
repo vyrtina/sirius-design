@@ -8,12 +8,13 @@ export class Icon extends LitElement {
     @property({ type: String }) icon = "edit";
     @property({ type: String }) shape: "outlined" | "rounded" | "sharp" = "outlined";
     @property({ type: String }) size: "small" | "medium" | "large" | "extra-large" =
-        "large";
+        "medium";
+
     static styles = unsafeCSS(styles);
 
     render() {
         return html`
-            <span class=${"material-symbols-" + this.shape + " " + this.size}
+            <span class=${"material-symbols-" + this.shape + " " + this.size} id="icon"
                 >${this.icon}</span
             >
         `;

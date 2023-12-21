@@ -1,0 +1,74 @@
+@import "../../styles/_index";
+
+:host {
+    width: min-content;
+    height: min-content;
+    display: block;
+}
+
+input {
+    height: 0;
+    width: 0;
+    appearance: none;
+    position: absolute;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: $sd-space-050;
+    width: min-content;
+    height: min-content;
+    cursor: pointer;
+}
+
+.visual {
+    width: 3rem;
+    height: 1.5rem;
+    position: relative;
+    background: $sd-color-surface-level-1;
+    display: block;
+    border-radius: $sd-border-radius-circle;
+}
+
+.visual::after {
+    content: "";
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-color: $sd-color-on-primary;
+    border-radius: $sd-border-radius-circle;
+    transition: 0.3s;
+}
+
+input:checked + label > .visual {
+    background: $sd-color-primary;
+    &::after {
+        left: calc(100% - 0.1875rem);
+        transform: translateX(-100%);
+    }
+}
+
+input:not(:disabled) + label:active > .visual::after {
+    width: calc(50% + 0.1875rem);
+}
+
+input:disabled + label {
+    color: $sd-color-on-surface;
+    opacity: 0.38;
+    cursor: not-allowed;
+}
+
+input:disabled + label > .visual {
+    background-color: rgba($color: $sd-color-disabled, $alpha: 0.12);
+    &::after {
+        background-color: $sd-color-on-surface;
+        opacity: 0.38;
+    }
+}
+
+input:focus-visible + label > .visual {
+    @include outline-focus();
+}

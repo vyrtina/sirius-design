@@ -13,7 +13,7 @@ export class IconButtonPlain extends LitElement {
     @property({ type: String }) icon_shape: "outlined" | "sharp" | "rounded" =
         "outlined";
     @property({ type: String }) size: "small" | "medium" | "large" | "extra-large" =
-        "large";
+        "medium";
     @property({}) onClick = () => {};
 
     render() {

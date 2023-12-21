@@ -8,11 +8,19 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
-    @include typography.body;
 }
 
 @mixin outline-focus($width: tokens.$sd-border-width-m) {
     outline: $width solid tokens.$sd-color-accent;
     outline-offset: tokens.$sd-space-012;
+}
+
+@mixin sd-border($use-primary: true) {
+    border-width: tokens.$sd-border-width-m;
+    border-style: solid;
+    @if $use-primary {
+        border-color: tokens.$sd-color-primary;
+    } @else {
+        border-color: tokens.$sd-color-border;
+    }
 }

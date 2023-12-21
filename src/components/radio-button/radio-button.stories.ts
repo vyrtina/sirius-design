@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import "./checkbox";
+import "./radio-button";
 
 const meta: Meta = {
-    title: "components/checkbox",
-    component: "sd-checkbox",
+    title: "components/radio-button",
+    component: "sd-radio-button",
     argTypes: {
         disabled: {
             type: "boolean",
@@ -12,14 +12,20 @@ const meta: Meta = {
         checked: {
             type: "boolean",
         },
+        name: {
+            type: "string",
+        },
+        value: {
+            type: "string",
+        },
         label: {
             type: "string",
         },
     },
     render: ({ label, disabled, checked }) => html`
-        <sd-checkbox ?checked=${checked} ?disabled=${disabled}>
-            <p slot="label">${label}</p>
-        </sd-checkbox>
+        <sd-radio-button ?checked=${checked} ?disabled=${disabled}>
+            <a slot="label">${label}</a>
+        </sd-radio-button>
     `,
 };
 
@@ -30,7 +36,9 @@ export const Checked: Story = {
     args: {
         disabled: false,
         checked: true,
-        label: "checkbox",
+        name: "radio",
+        value: "1",
+        label: "radio",
     },
 };
 
@@ -38,6 +46,8 @@ export const Unchecked: Story = {
     args: {
         disabled: false,
         checked: false,
-        label: "checkbox",
+        name: "radio",
+        value: "1",
+        label: "radio",
     },
 };

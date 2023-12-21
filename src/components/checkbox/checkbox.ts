@@ -8,19 +8,19 @@ export class Checkbox extends LitElement {
 
     @property({ type: Boolean }) disabled = false;
     @property({ type: Boolean }) checked = false;
-    @property({ type: String }) size: "small" | "medium" | "large" | "extra-large" =
-        "large";
-    @property({}) onClick = () => {};
 
     render() {
         return html`
             <input
-                id="ck"
+                id=${"ck-" + this.id}
                 type="checkbox"
                 ?disabled=${this.disabled}
                 ?checked=${this.checked}
+                aria-labelledby=${"ck-label-" + this.id}
             />
-            <label for="ck" class="body">Checkbox</label>
+            <label for=${"ck-" + this.id} class="body" id=${"ck-label-" + this.id}
+                ><slot name="label"></slot
+            ></label>
         `;
     }
 }

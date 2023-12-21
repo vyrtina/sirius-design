@@ -2,11 +2,11 @@
 @use "./tokens";
 
 //surface layering
-$sd-color-surface-level-1: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 5%);
-$sd-color-surface-level-2: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 8%);
-$sd-color-surface-level-3: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 11%);
-$sd-color-surface-level-4: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 12%);
-$sd-color-surface-level-5: mix(tokens.$sd-color-surface, tokens.$sd-color-primary, 14%);
+$sd-color-surface-level-1: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 5%);
+$sd-color-surface-level-2: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 8%);
+$sd-color-surface-level-3: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 11%);
+$sd-color-surface-level-4: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 12%);
+$sd-color-surface-level-5: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 14%);
 
 //return True if the color is "dark"
 @function is-dark-color($color) {
@@ -50,47 +50,43 @@ $sd-color-surface-level-5: mix(tokens.$sd-color-surface, tokens.$sd-color-primar
 }
 
 @mixin state-render($color, $apply-shadow: true) {
-    &:enabled {
+    &:hover {
+        background: state-color($color, "hover");
+    }
+    &:focus {
+        background: state-color($color, "focus");
+    }
+    &:active {
+        background: state-color($color, "press");
+    }
+    @if $apply-shadow {
         &:hover {
-            background: state-color($color, "hover");
+            box-shadow: tokens.$sd-shadow-level-1;
         }
         &:focus {
-            background: state-color($color, "focus");
+            box-shadow: tokens.$sd-shadow-level-2;
         }
         &:active {
-            background: state-color($color, "press");
-        }
-        @if $apply-shadow {
-            &:hover {
-                box-shadow: tokens.$sd-shadow-level-1;
-            }
-            &:focus {
-                box-shadow: tokens.$sd-shadow-level-2;
-            }
-            &:active {
-                box-shadow: tokens.$sd-shadow-level-2;
-            }
+            box-shadow: tokens.$sd-shadow-level-2;
         }
     }
 }
 
 @mixin state-render-overlay($color) {
-    &:enabled {
-        &:hover {
-            background: state-color-overlay($color, "hover");
-        }
-        &:active {
-            background: state-color-overlay($color, "press");
-        }
-        &:focus {
-            background: state-color-overlay($color, "focus");
-        }
+    &:hover {
+        background: state-color-overlay($color, "hover");
+    }
+    &:active {
+        background: state-color-overlay($color, "press");
+    }
+    &:focus {
+        background: state-color-overlay($color, "focus");
     }
 }
 
 @mixin state-render-disabled-bg() {
     &:disabled {
-        background: rgba($color: tokens.$sd-color-disabled, $alpha: 0.12);
+        background-color: rgba($color: tokens.$sd-color-disabled, $alpha: 0.12);
     }
 }
 

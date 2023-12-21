@@ -1,0 +1,36 @@
+@import "../../styles/index";
+
+:host {
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: $sd-color-on-surface;
+    position: relative;
+    display: inline-block;
+    padding-bottom: $sd-space-025;
+    border-radius: $sd-border-radius-medium;
+}
+
+a:focus-visible {
+    @include outline-focus();
+}
+
+a::before {
+    content: "";
+    background: linear-gradient(to right, $sd-color-primary 45%, $sd-color-border 55%);
+    background-size: 220% 100%;
+    background-position: 100% 50%;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    transition: $sd-motion-duration-400 $sd-motion-easing-ease-out;
+}
+
+a:hover::before {
+    background-position: 0% 50%;
+}

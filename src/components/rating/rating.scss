@@ -1,0 +1,39 @@
+@import "../../styles/_index";
+
+:host {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+input {
+    display: none;
+}
+
+label {
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+    color: var(--color-accent);
+    &.small {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+input:checked ~ label sd-icon {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+label:hover sd-icon,
+label:hover ~ label sd-icon {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.rate-count {
+    margin-left: 0.5rem;
+}
+
+sd-icon {
+    color: $sd-color-primary;
+}

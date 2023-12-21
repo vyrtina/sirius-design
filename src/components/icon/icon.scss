@@ -1,45 +1,25 @@
 @import "material-symbols";
 
 :host {
-    display: inline-block;
+    display: inline-flex;
 }
 
-:host([size="small"]) {
-    height: 1.25rem;
-    width: 1.25rem;
-}
-
-:host([size="medium"]) {
-    height: 1.5rem;
-    width: 1.5rem;
-}
-
-:host([size="large"]) {
-    height: 2.5rem;
-    width: 2.5rem;
-}
-
-:host([size="extra-large"]) {
-    height: 3rem;
-    width: 3rem;
+span {
+    font-variation-settings: inherit;
 }
 
 .small {
     font-size: 1.25rem;
-    font-variation-settings: "OPSZ" 20;
 }
 
 .medium {
     font-size: 1.5rem;
-    font-variation-settings: "OPSZ" 24;
 }
 
 .large {
     font-size: 2.5rem;
-    font-variation-settings: "OPSZ" 40;
 }
 
 .extra-large {
     font-size: 3rem;
-    font-variation-settings: "OPSZ" 48;
 }
