@@ -1,7 +1,7 @@
 
 /**
  * Do not edit directly
- * Generated on Thu, 21 Dec 2023 21:48:32 GMT
+ * Generated on Mon, 25 Dec 2023 19:36:58 GMT
  */
 
 $sd-typography-label-small-letter-spacing: normal !default;
@@ -107,6 +107,28 @@ $sd-motion-easing-linear: cubic-bezier(0, 0, 1, 1) !default;
 $sd-motion-easing-ease-in-out: cubic-bezier(0.86, 0, 0.07, 1) !default;
 $sd-motion-easing-ease-in: cubic-bezier(0.755, 0.05, 0.855, 0.06) !default;
 $sd-motion-easing-ease-out: cubic-bezier(0.23, 1, 0.32, 1) !default;
+$sd-columns-xl: 12 !default;
+$sd-columns-l: 12 !default;
+$sd-columns-m: 8 !default;
+$sd-columns-s: 4 !default;
+$sd-columns-xs: 4 !default;
+$sd-gutter-xl: 32px !default;
+$sd-gutter-l: 32px !default;
+$sd-gutter-m: 24px !default;
+$sd-gutter-s: 16px !default;
+$sd-gutter-xs: 16px !default;
+$sd-margin-xl: 64px !default;
+$sd-margin-l: 64px !default;
+$sd-margin-m: 32px !default;
+$sd-margin-s: 16px !default;
+$sd-margin-xs: 16px !default;
+$sd-breakpoint-xl: 1440px !default;
+$sd-breakpoint-l: 1024px !default;
+$sd-breakpoint-m: 768px !default;
+$sd-breakpoint-s: 320px !default;
+$sd-breakpoint-xs: 0px !default;
+$sd-opacity-scrim: 0.32 !default;
+$sd-opacity-glass: 0.6 !default;
 $sd-color-palette-cyan-1300: #002a46 !default;
 $sd-color-palette-cyan-1200: #00395d !default;
 $sd-color-palette-cyan-1100: #004a73 !default;
@@ -207,17 +229,20 @@ $sd-typography-display-weight: $sd-typography-weight-regular !default;
 $sd-typography-display-font: $sd-typography-font-headlines !default;
 $sd-typography-display-large-weight: $sd-typography-weight-regular !default;
 $sd-typography-display-large-font: $sd-typography-font-headlines !default;
+$sd-color-text-placeholder: $sd-color-neutral-500 !default;
 $sd-color-border: $sd-color-neutral-400 !default;
 $sd-color-disabled: $sd-color-neutral-800 !default;
 $sd-color-on-surface: $sd-color-neutral-800 !default;
-$sd-color-surface-success: $sd-color-palette-green-100 !default;
-$sd-color-surface-info: $sd-color-palette-blue-100 !default;
 $sd-color-surface: $sd-color-neutral-200 !default;
 $sd-color-background: $sd-color-neutral-100 !default;
-$sd-color-on-accent: $sd-color-palette-blue-900 !default;
 $sd-color-accent: $sd-color-palette-blue-900 !default;
 $sd-color-on-primary: $sd-color-neutral-100 !default;
 $sd-color-primary: $sd-color-neutral-700 !default;
+$sd-color-on-error: $sd-color-neutral-900 !default;
+$sd-color-icon-error: $sd-color-palette-red-1100 !default;
+$sd-color-text-error: $sd-color-palette-red-1100 !default;
+$sd-color-surface-error: $sd-color-palette-red-100 !default;
+$sd-color-error: $sd-color-palette-red-800 !default;
 
 $tokens: (
   'border': (
@@ -234,22 +259,16 @@ $tokens: (
     )
   ),
   'color': (
+    'error': $sd-color-error,
+    'surface-error': $sd-color-surface-error,
+    'text-error': $sd-color-text-error,
+    'icon-error': $sd-color-icon-error,
+    'on-error': $sd-color-on-error,
     'primary': $sd-color-primary,
     'on-primary': $sd-color-on-primary,
     'accent': $sd-color-accent,
-    'on-accent': $sd-color-on-accent,
     'background': $sd-color-background,
-    'surface': (
-      ' ': (
-        ' ': $sd-color-surface
-      ),
-      'info': (
-        ' ': $sd-color-surface-info
-      ),
-      'success': (
-        ' ': $sd-color-surface-success
-      )
-    ),
+    'surface': $sd-color-surface,
     'on-surface': $sd-color-on-surface,
     'disabled': $sd-color-disabled,
     'border': $sd-color-border,
@@ -341,7 +360,42 @@ $tokens: (
         '1200': $sd-color-palette-cyan-1200,
         '1300': $sd-color-palette-cyan-1300
       )
+    ),
+    'text': (
+      'placeholder': $sd-color-text-placeholder
     )
+  ),
+  'opacity': (
+    'glass': $sd-opacity-glass,
+    'scrim': $sd-opacity-scrim
+  ),
+  'breakpoint': (
+    'xs': $sd-breakpoint-xs,
+    's': $sd-breakpoint-s,
+    'm': $sd-breakpoint-m,
+    'l': $sd-breakpoint-l,
+    'xl': $sd-breakpoint-xl
+  ),
+  'margin': (
+    'xs': $sd-margin-xs,
+    's': $sd-margin-s,
+    'm': $sd-margin-m,
+    'l': $sd-margin-l,
+    'xl': $sd-margin-xl
+  ),
+  'gutter': (
+    'xs': $sd-gutter-xs,
+    's': $sd-gutter-s,
+    'm': $sd-gutter-m,
+    'l': $sd-gutter-l,
+    'xl': $sd-gutter-xl
+  ),
+  'columns': (
+    'xs': $sd-columns-xs,
+    's': $sd-columns-s,
+    'm': $sd-columns-m,
+    'l': $sd-columns-l,
+    'xl': $sd-columns-xl
   ),
   'motion': (
     'easing': (

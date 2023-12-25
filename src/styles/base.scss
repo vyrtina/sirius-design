@@ -6,8 +6,17 @@
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     padding: 0;
+    margin: 0;
 }
 
 @mixin outline-focus($width: tokens.$sd-border-width-m) {
@@ -15,12 +24,18 @@
     outline-offset: tokens.$sd-space-012;
 }
 
-@mixin sd-border($use-primary: true) {
-    border-width: tokens.$sd-border-width-m;
-    border-style: solid;
-    @if $use-primary {
-        border-color: tokens.$sd-color-primary;
-    } @else {
-        border-color: tokens.$sd-color-border;
-    }
+@mixin sd-border($color: tokens.$sd-color-primary, $width: tokens.$sd-border-width-m) {
+    border: $width solid $color;
+}
+
+.media-responsive-height {
+    width: 100%;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+@mixin frosted-glass {
+    background: rgba(0, 0, 0, tokens.$sd-opacity-glass);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
 }

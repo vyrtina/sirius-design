@@ -1,0 +1,73 @@
+{
+    "breakpoint": {
+        "xs": {
+            "value": "0px"
+        },
+        "s": {
+            "value": "320px"
+        },
+        "m": {
+            "value": "768px"
+        },
+        "l": {
+            "value": "1024px"
+        },
+        "xl": {
+            "value": "1440px"
+        }
+    },
+
+    "margin": {
+        "xs": {
+            "value": "16px"
+        },
+        "s": {
+            "value": "16px"
+        },
+        "m": {
+            "value": "32px"
+        },
+        "l": {
+            "value": "64px"
+        },
+        "xl": {
+            "value": "64px"
+        }
+    },
+
+    "gutter": {
+        "xs": {
+            "value": "16px"
+        },
+        "s": {
+            "value": "16px"
+        },
+        "m": {
+            "value": "24px"
+        },
+        "l": {
+            "value": "32px"
+        },
+        "xl": {
+            "value": "32px"
+        }
+    },
+
+    "columns": {
+        "xs": {
+            "value": 4
+        },
+        "s": {
+            "value": 4
+        },
+        "m": {
+            "value": 8
+        },
+        "l": {
+            "value": 12
+        },
+        "xl": {
+            "value": 12
+        }
+    }
+}

@@ -4,7 +4,7 @@ import "./button-filled";
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta: Meta = {
     title: "components/button/button-filled",
-    component: "button-filled",
+    component: "sd-button-filled",
     argTypes: {
         disabled: {
             type: "boolean",

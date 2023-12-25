@@ -1,0 +1,19 @@
+{
+    "color": {
+        "error": {
+            "value": "{color.palette.red.800}"
+        },
+        "surface-error": {
+            "value": "{color.palette.red.100}"
+        },
+        "text-error": {
+            "value": "{color.palette.red.1100}"
+        },
+        "icon-error": {
+            "value": "{color.palette.red.1100}"
+        },
+        "on-error": {
+            "value": "{color.neutral.900}"
+        }
+    }
+}

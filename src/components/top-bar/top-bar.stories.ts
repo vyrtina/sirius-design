@@ -1,15 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
-import "./icon-button-plain";
+import "./top-bar";
 
 const meta: Meta = {
-    title: "components/icon-button/icon-button-plain",
-    component: "sd-icon-button-plain",
+    title: "components/top-bar",
+    component: "sd-top-bar",
     argTypes: {
         disabled: {
             type: "boolean",
         },
         invert: {
             type: "boolean",
+        },
+        primary: {
+            type: "boolean",
+        },
+        label: {
+            type: "string",
+        },
+        href: {
+            type: "string",
+        },
+        download: {
+            type: "string",
         },
         size: {
             options: ["small", "medium", "large", "extra-large"],
@@ -21,10 +33,14 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-export const Primary: Story = {
+export const Default: Story = {
     args: {
         disabled: false,
         invert: false,
-        size: "medium",
+        primary: false,
+        label: "Button",
+        href: "",
+        download: "",
+        size: "large",
     },
 };

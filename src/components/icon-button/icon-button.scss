@@ -10,7 +10,6 @@ button {
     all: unset;
     box-sizing: border-box;
     display: inline-flex;
-    //padding: $sd-space-075;
     align-items: center;
     justify-content: center;
     border-radius: 6.25rem;
@@ -30,7 +29,9 @@ button {
         @include outline-focus;
     }
 
-    @include state-render-disabled(false);
+    &:disabled {
+        @include state-render-disabled(false);
+    }
 }
 
 //style sizes

@@ -1,0 +1,33 @@
+@use "./tokens.scss";
+
+//mobile design first
+$sd-margin: tokens.$sd-margin-xs;
+$sd-cols: tokens.$sd-columns-xs;
+$sd-gutter: tokens.$sd-gutter-xs;
+
+@media only screen and (min-width: tokens.$sd-breakpoint-s) {
+    $sd-margin: tokens.$sd-margin-s;
+    $sd-cols: tokens.$sd-columns-s;
+    $sd-gutter: tokens.$sd-gutter-s;
+}
+
+@media only screen and (min-width: tokens.$sd-breakpoint-m) {
+    $sd-margin: tokens.$sd-margin-m;
+    $sd-cols: tokens.$sd-columns-m;
+    $sd-gutter: tokens.$sd-gutter-m;
+}
+@media only screen and (min-width: tokens.$sd-breakpoint-l) {
+    $sd-margin: tokens.$sd-margin-l;
+    $sd-cols: tokens.$sd-columns-l;
+    $sd-gutter: tokens.$sd-gutter-l;
+}
+
+@media only screen and (min-width: tokens.$sd-breakpoint-xl) {
+    $sd-margin: tokens.$sd-margin-xl;
+    $sd-cols: tokens.$sd-columns-xl;
+    $sd-gutter: tokens.$sd-gutter-xl;
+}
+
+//header
+$sd-header-with-search-height-xs: 112px;
+$sd-header-with-search-height-m: 56px;

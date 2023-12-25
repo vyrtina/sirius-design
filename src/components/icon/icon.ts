@@ -14,7 +14,7 @@ export class Icon extends LitElement {
 
     render() {
         return html`
-            <span class=${"material-symbols-" + this.shape + " " + this.size} id="icon"
+            <span class=${"material-symbols-" + this.shape + " " + this.size}
                 >${this.icon}</span
             >
         `;

@@ -9,18 +9,11 @@
         "accent": {
             "value": "{color.palette.blue.900}"
         },
-        "on-accent": {
-            "value": "{color.palette.blue.900}"
-        },
         "background": {
             "value": "{color.neutral.100}"
         },
         "surface": {
-            " ": {
-                " ": {
-                    "value": "{color.neutral.200}"
-                }
-            },
+            "value": "{color.neutral.200}",
             "info": {
                 " ": {
                     "value": "{color.palette.blue.100}"
@@ -40,6 +33,14 @@
         },
         "border": {
             "value": "{color.neutral.400}"
+        }
+    },
+    "opacity": {
+        "glass": {
+            "value": "0.6"
+        },
+        "scrim": {
+            "value": "0.32"
         }
     }
 }

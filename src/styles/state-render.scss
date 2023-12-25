@@ -1,13 +1,6 @@
 @use "sass:color";
 @use "./tokens";
 
-//surface layering
-$sd-color-surface-level-1: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 5%);
-$sd-color-surface-level-2: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 8%);
-$sd-color-surface-level-3: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 11%);
-$sd-color-surface-level-4: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 12%);
-$sd-color-surface-level-5: mix(tokens.$sd-color-primary, tokens.$sd-color-surface, 14%);
-
 //return True if the color is "dark"
 @function is-dark-color($color) {
     @return (color.lightness($color) < 50%);
@@ -51,13 +44,13 @@ $sd-color-surface-level-5: mix(tokens.$sd-color-primary, tokens.$sd-color-surfac
 
 @mixin state-render($color, $apply-shadow: true) {
     &:hover {
-        background: state-color($color, "hover");
+        background-color: state-color($color, "hover");
     }
     &:focus {
-        background: state-color($color, "focus");
+        background-color: state-color($color, "focus");
     }
     &:active {
-        background: state-color($color, "press");
+        background-color: state-color($color, "press");
     }
     @if $apply-shadow {
         &:hover {
@@ -74,40 +67,34 @@ $sd-color-surface-level-5: mix(tokens.$sd-color-primary, tokens.$sd-color-surfac
 
 @mixin state-render-overlay($color) {
     &:hover {
-        background: state-color-overlay($color, "hover");
+        background-color: state-color-overlay($color, "hover");
     }
     &:active {
-        background: state-color-overlay($color, "press");
+        background-color: state-color-overlay($color, "press");
     }
     &:focus {
-        background: state-color-overlay($color, "focus");
+        background-color: state-color-overlay($color, "focus");
     }
 }
 
 @mixin state-render-disabled-bg() {
-    &:disabled {
-        background-color: rgba($color: tokens.$sd-color-disabled, $alpha: 0.12);
-    }
+    background-color: rgba($color: tokens.$sd-color-disabled, $alpha: 0.12);
 }
 
 @mixin state-render-disabled-element() {
-    &:disabled {
-        color: tokens.$sd-color-on-surface;
-        opacity: 0.38;
-        cursor: not-allowed;
-    }
+    color: tokens.$sd-color-on-surface;
+    opacity: 0.38;
+    cursor: not-allowed;
 }
 
 @mixin state-render-disabled($render-bg: true) {
     @if $render-bg {
         @include state-render-disabled-bg();
     }
-    &:disabled {
-        color: tokens.$sd-color-on-surface;
-        cursor: not-allowed;
-        box-shadow: none;
-        & * {
-            opacity: 0.38;
-        }
+    color: tokens.$sd-color-on-surface;
+    cursor: not-allowed;
+    box-shadow: none;
+    & * {
+        opacity: 0.38;
     }
 }

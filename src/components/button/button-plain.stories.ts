@@ -4,7 +4,7 @@ import "./button-plain";
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta: Meta = {
     title: "components/button/button-plain",
-    component: "button-plain",
+    component: "sd-button-plain",
     argTypes: {
         disabled: {
             type: "boolean",

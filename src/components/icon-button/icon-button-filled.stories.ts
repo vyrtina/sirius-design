@@ -3,7 +3,7 @@ import "./icon-button-filled";
 
 const meta: Meta = {
     title: "components/icon-button/icon-button-filled",
-    component: "icon-button-filled",
+    component: "sd-icon-button-filled",
     argTypes: {
         disabled: {
             type: "boolean",

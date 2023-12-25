@@ -8,7 +8,9 @@ button {
         @include state-render($sd-color-primary, true);
     }
 
-    @include state-render-disabled-bg();
+    &:disabled {
+        @include state-render-disabled-bg();
+    }
 }
 
 button.invert:not(:disabled) {

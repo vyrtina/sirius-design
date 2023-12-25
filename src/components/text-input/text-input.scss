@@ -1,0 +1,78 @@
+@import "../../styles/index";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+input {
+    border: none;
+    outline: none;
+    background: rgba($color: $sd-color-primary, $alpha: 0);
+    color: $sd-color-on-surface;
+}
+
+input::placeholder {
+    color: $sd-color-text-placeholder;
+}
+
+.sd-text-field {
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 0.75rem;
+    height: 3rem;
+    align-self: stretch;
+    border-radius: $sd-border-radius-large;
+    outline: $sd-border-width-s solid $sd-color-border;
+    transition: background $sd-motion-duration-100 $sd-motion-easing-linear;
+    &:enabled {
+        @include state-render-overlay($sd-color-primary);
+    }
+}
+
+sd-icon {
+    color: $sd-color-text-placeholder;
+}
+
+.sd-text-field:has(input:invalid) {
+    outline: 2px solid $sd-color-error;
+    background-color: $sd-color-surface-error;
+    @include state-render($sd-color-surface-error);
+    & sd-icon {
+        color: $sd-color-icon-error;
+    }
+    & + .error-label {
+        visibility: visible;
+    }
+}
+
+.sd-text-field:has(input:focus-visible) {
+    outline: 2px solid $sd-color-primary;
+}
+
+label:has(+ .sd-text-field input:disabled) {
+    @include state-render-disabled-element();
+}
+
+.sd-text-field:has(input:disabled) {
+    @include state-render-disabled(false);
+}
+
+input:disabled {
+    cursor: not-allowed;
+}
+
+.error-label {
+    display: inline-flex;
+    align-items: center;
+    gap: $sd-space-025;
+    margin-top: $sd-space-025;
+    color: $sd-color-text-error;
+    visibility: hidden;
+    & sd-icon {
+        color: $sd-color-icon-error;
+    }
+}

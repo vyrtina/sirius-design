@@ -3,7 +3,7 @@ import "./button-outlined";
 
 const meta: Meta = {
     title: "components/button/button-outlined",
-    component: "button-outlined",
+    component: "sd-button-outlined",
     argTypes: {
         disabled: {
             type: "boolean",

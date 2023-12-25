@@ -28,6 +28,7 @@ input {
 }
 
 input::placeholder {
+    @include typo-body();
     color: $sd-color-on-surface;
     opacity: 0.38;
 }
@@ -63,5 +64,26 @@ input::-webkit-search-cancel-button {
     height: 2.5rem;
     & sd-icon {
         padding: $sd-space-050;
+    }
+}
+
+.search-div.invert {
+    @include sd-border($sd-color-surface);
+    color: $sd-color-surface;
+    & input {
+        color: $sd-color-surface;
+    }
+    &:hover {
+        background: state-color-overlay($sd-color-surface, "hover");
+    }
+    &:has(input:focus) {
+        background: state-color-overlay($sd-color-surface, "focus");
+    }
+    &:has(input:active) {
+        background: state-color-overlay($sd-color-surface, "press");
+    }
+    & input::placeholder {
+        color: $sd-color-surface;
+        opacity: 0.38;
     }
 }
