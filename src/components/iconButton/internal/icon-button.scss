@@ -1,0 +1,74 @@
+@import "../../../styles/index";
+
+:host {
+    display: block;
+    width: min-content;
+    height: min-content;
+}
+
+.button {
+    all: unset;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 6.25rem;
+    z-index: 0;
+    transition:
+        background 0.25s ease-out,
+        color 0.25s ease-out,
+        box-shadow 0.25s ease-out;
+    cursor: pointer;
+
+    &:focus {
+        outline: 0px solid rgba(0, 0, 0, 0);
+    }
+
+    &:focus-visible {
+        @include base-outline-focus;
+    }
+
+    &:disabled {
+        @include state-render-disabled(false);
+    }
+}
+
+.background {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    border-radius: inherit;
+    z-index: -1;
+    transition:
+        background 0.25s ease-out,
+        box-shadow 0.25s ease-out;
+}
+
+.link {
+    height: 100%;
+    outline: none;
+    position: absolute;
+    width: 100%;
+    border-radius: inherit;
+}
+
+//style sizes
+.button {
+    &.s {
+        height: 2.25rem;
+        width: 2.25rem;
+    }
+    &.m {
+        height: 3rem;
+        width: 3rem;
+    }
+    &.l {
+        height: 4rem;
+        width: 4rem;
+    }
+    &.xl {
+        height: 4.5rem;
+        width: 4.5rem;
+    }
+}

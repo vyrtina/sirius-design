@@ -1,0 +1,27 @@
+@use "./typography";
+@use "./tokens.scss";
+@use "base";
+@forward "./normalize";
+@forward "layout";
+
+.invert {
+    color: tokens.$sd-color-surface;
+}
+
+.media-responsive-height {
+    width: 100%;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+}
+
+:focus-visible {
+    @include base.outline-focus();
+}

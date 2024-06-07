@@ -1,19 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "./link";
 
 const meta: Meta = {
     title: "components/link",
     component: "sd-link",
-    argTypes: {
-        disabled: {
-            type: "boolean",
-        },
-        invert: {
-            type: "boolean",
-        },
-        primary: {
-            type: "boolean",
-        },
+    tags: ["autodocs"],
+    /*argTypes: {
         label: {
             type: "string",
         },
@@ -23,11 +16,8 @@ const meta: Meta = {
         download: {
             type: "string",
         },
-        size: {
-            options: ["small", "medium", "large", "extra-large"],
-            control: { type: "select" },
-        },
-    },
+    },*/
+    render: ({ label }) => html` <sd-link> ${label} </sd-link> `,
 };
 
 export default meta;
@@ -35,12 +25,9 @@ type Story = StoryObj;
 
 export const Default: Story = {
     args: {
-        disabled: false,
-        invert: false,
-        primary: false,
-        label: "Button",
+        size: "s",
+        label: "A link",
         href: "",
         download: "",
-        size: "large",
     },
 };

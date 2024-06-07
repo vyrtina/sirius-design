@@ -37,10 +37,13 @@
     },
     "opacity": {
         "glass": {
-            "value": "0.6"
+            "value": "0.8"
         },
         "scrim": {
             "value": "0.32"
+        },
+        "placeholder": {
+            "value": "0.5"
         }
     }
 }

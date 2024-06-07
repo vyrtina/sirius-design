@@ -6,7 +6,7 @@
     @return (color.lightness($color) < 50%);
 }
 
-@function state-color($color, $state-type) {
+@function state-color($color: tokens.$sd-color-primary, $state-type) {
     @if is-dark-color($color) {
         @return map-get(
             (
@@ -30,7 +30,7 @@
     }
 }
 
-@function state-color-overlay($color, $state-type) {
+@function state-color-overlay($color: tokens.$sd-color-primary, $state-type) {
     @return map-get(
         (
             "hover": rgba($color: $color, $alpha: 0.08),
@@ -42,7 +42,7 @@
     );
 }
 
-@mixin state-render($color, $apply-shadow: true) {
+@mixin state-render($color: tokens.$sd-color-primary, $apply-shadow: true) {
     &:hover {
         background-color: state-color($color, "hover");
     }
@@ -65,7 +65,7 @@
     }
 }
 
-@mixin state-render-overlay($color) {
+@mixin state-render-overlay($color: tokens.$sd-color-primary) {
     &:hover {
         background-color: state-color-overlay($color, "hover");
     }
@@ -94,7 +94,12 @@
     color: tokens.$sd-color-on-surface;
     cursor: not-allowed;
     box-shadow: none;
-    & * {
+    & {
         opacity: 0.38;
     }
+}
+
+@mixin state-animation() {
+    transition: background-color tokens.$sd-motion-duration-200
+        tokens.$sd-motion-easing-ease-out;
 }

@@ -5,8 +5,8 @@
 }
 
 a {
+    color: inherit;
     text-decoration: none;
-    color: $sd-color-on-surface;
     position: relative;
     display: inline-block;
     padding-bottom: $sd-space-025;
@@ -14,7 +14,7 @@ a {
 }
 
 a:focus-visible {
-    @include outline-focus();
+    @include base-outline-focus();
 }
 
 a::before {

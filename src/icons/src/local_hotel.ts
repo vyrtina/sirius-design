@@ -1,0 +1,29 @@
+/**
+ * generated file
+ * do not edit directly
+ */
+
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { Icon, sizes } from '../../components/icon/icon';
+
+
+@customElement("sd-icon-local-hotel")
+export class IconLocalHotel extends Icon {
+    constructor() {
+        super();
+        this.setAttribute("aria-hidden", "true");
+    }
+
+    protected override renderSVG() {
+        return html `
+                <svg fill="currentColor" height=${sizes.get(this.size)} width=${sizes.get(this.size)} viewBox="0 0 24 24"><path d="M7 14c1.66 0 3-1.34 3-3S8.66 8 7 8s-3 1.34-3 3 1.34 3 3 3zm0-4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm12-3h-8v8H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4zm2 8h-8V9h6c1.1 0 2 .9 2 2v4z"/></svg>
+        `
+      }
+}
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "sd-icon-local-hotel": IconLocalHotel;
+    }
+}

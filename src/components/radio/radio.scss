@@ -1,0 +1,105 @@
+@use "../../styles/base";
+@use "../../styles/tokens";
+@use "../../styles/state-render" as sr;
+
+:host {
+    display: inline-flex;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    vertical-align: top; // Fix extra space when placed inside display: block
+
+    cursor: pointer;
+    border-radius: tokens.$sd-border-radius-circle;
+}
+
+.container {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.background {
+    width: 2.5rem;
+    height: 2.5rem;
+    z-index: 1;
+    box-sizing: border-box;
+    border-radius: tokens.$sd-border-radius-circle;
+    @include sr.state-render-overlay;
+    @include sr.state-animation;
+}
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: inherit;
+
+    width: 3rem;
+    height: 3rem;
+}
+
+input:before,
+input:after {
+    content: "";
+    box-sizing: border-box;
+}
+
+input:before {
+    display: none;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: tokens.$sd-border-radius-circle;
+    background-color: tokens.$sd-color-primary;
+    transition: background-color 0.2s ease-out;
+}
+
+input:after {
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: tokens.$sd-border-radius-circle;
+
+    @include base.sd-border();
+}
+
+input:checked,
+input:hover,
+input:focus {
+    border-color: tokens.$sd-color-primary;
+}
+
+input:checked:before {
+    display: inline-block;
+}
+
+input:disabled {
+    border-color: tokens.$sd-color-on-surface;
+    opacity: 0.38;
+    cursor: not-allowed;
+
+    & + label,
+    &::before {
+        color: tokens.$sd-color-on-surface;
+        opacity: 0.38;
+    }
+}
+
+:host:has(input:disabled) {
+    & * {
+        cursor: not-allowed;
+
+        & label {
+            color: var(--color-disabled-text, #989898);
+        }
+    }
+}

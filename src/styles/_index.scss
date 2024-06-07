@@ -1,6 +1,5 @@
-@forward "./normalize.scss";
 @forward "./tokens.scss";
 @forward "./state-render.scss";
 @forward "./typography.scss" as typo-*;
-@forward "./base.scss";
+@forward "./base.scss" as base-*;
 @forward "./layout.scss";

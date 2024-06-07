@@ -1,0 +1,13 @@
+@import "./internal/icon-button";
+
+button {
+    &:enabled {
+        @include state-render-overlay($sd-color-primary);
+    }
+}
+
+button.invert {
+    &:enabled {
+        @include state-render-overlay($sd-color-surface);
+    }
+}

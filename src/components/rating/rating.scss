@@ -4,6 +4,8 @@
     display: inline-flex;
     align-items: center;
     flex-direction: row-reverse;
+    width: min-content;
+    position: relative;
 }
 
 input {
@@ -21,19 +23,15 @@ label {
     }
 }
 
-input:checked ~ label sd-icon {
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
-}
-
-input:enabled + label:hover sd-icon,
-input:enabled + label:hover ~ label sd-icon {
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+input:enabled + label:hover *,
+input:enabled + label:hover ~ label * {
+    color: state-color($sd-color-primary, "hover");
 }
 
 .rate-count {
     margin-left: 0.5rem;
 }
 
-sd-icon {
+label * {
     color: $sd-color-primary;
 }

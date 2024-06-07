@@ -1,4 +1,4 @@
-@import "button";
+@import "./internal/button";
 
 button {
     border: $sd-border-width-m solid $sd-color-primary;

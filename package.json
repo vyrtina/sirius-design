@@ -1,34 +1,90 @@
 {
-  "name": "sirius-design",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "build-style-dictionary": "node tokens/build.js"
-  },
-  "dependencies": {
-    "@storybook/addon-a11y": "^7.6.5",
-    "@storybook/addon-interactions": "^7.6.5",
-    "lit": "^3.1.0",
-    "material-symbols": "^0.14.3",
-    "storybook-addon-pseudo-states": "^2.1.2"
-  },
-  "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.5",
-    "@storybook/addon-links": "^7.6.5",
-    "@storybook/blocks": "^7.6.5",
-    "@storybook/web-components": "^7.6.5",
-    "@storybook/web-components-vite": "^7.6.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "storybook": "^7.6.5",
-    "style-dictionary": "^3.9.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
-  }
+    "name": "sirius-design",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "files": [
+        "src/**/**/*.ts",
+        "src/**/**/*.stories.ts"
+    ],
+    "main": "dist/main.js",
+    "customElements": "./custom-elements.json",
+    "types": "dist/main.d.ts",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "build-ts": "tsc",
+        "preview": "vite preview",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build",
+        "build-style-dictionary": "node tokens/build.js",
+        "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+        "lint:fix": "eslint --fix 'src/**/*.{jsx,ts,tsx}'",
+        "prepublishOnly": "npm run build",
+        "update-icon-components": "npx  gulp --gulpfile src/icons/gulpfile.js",
+        "link": "npm link"
+    },
+    "author": "Fakroon",
+    "license": "MIT",
+    "peerDependencies": {
+        "@storybook/addon-a11y": "^7.6.5",
+        "@storybook/addon-interactions": "^7.6.5",
+        "lit": "^3.1.0",
+        "storybook-addon-pseudo-states": "^3.0.1"
+    },
+    "devDependencies": {
+        "@custom-elements-manifest/analyzer": "^0.9.4",
+        "@storybook/addon-a11y": "^8.0.5",
+        "@storybook/addon-essentials": "^8.0.5",
+        "@storybook/addon-interactions": "^8.0.5",
+        "@storybook/addon-links": "^8.0.5",
+        "@storybook/blocks": "^8.0.5",
+        "@storybook/web-components": "^8.0.5",
+        "@storybook/web-components-vite": "^8.0.5",
+        "@types/gulp": "^4.0.17",
+        "@types/node": "^20.10.6",
+        "@typescript-eslint/eslint-plugin": "^6.16.0",
+        "cem-plugin-better-lit-types": "^0.2.1",
+        "custom-elements-manifest": "^2.0.0",
+        "eslint": "^8.56.0",
+        "eslint-config-standard-with-typescript": "^43.0.0",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-n": "^16.5.0",
+        "eslint-plugin-promise": "^6.1.1",
+        "glob": "^10.3.10",
+        "gulp": "^4.0.2",
+        "lit": "^3.1.0",
+        "sass": "^1.69.5",
+        "storybook": "^8.0.5",
+        "storybook-addon-pseudo-states": "^3.0.1",
+        "style-dictionary": "^3.9.1",
+        "ts-node": "^10.9.2",
+        "tslib": "^2.6.2",
+        "typescript": "^5.3.3",
+        "vite": "^5.0.8",
+        "vite-plugin-cem": "^0.8.0",
+        "vite-plugin-dts": "^3.7.0",
+        "vite-plugin-lib-inject-css": "^1.3.0"
+    },
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vyrtina/sirius-design.git"
+    },
+    "dependencies": {
+        "@material-design-icons/svg": "^0.14.13",
+        "@storybook/addon-docs": "^8.0.5",
+        "gulp-data": "^1.3.1",
+        "gulp-if": "^3.0.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-replace": "^1.1.4",
+        "gulp-svgmin": "^4.1.0",
+        "gulp-svgstore": "^9.0.0",
+        "gulp-template": "^6.0.0",
+        "gulp-wrap": "^0.15.0",
+        "react": "^18.2.0"
+    }
 }
+

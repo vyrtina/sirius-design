@@ -1,3 +1,4 @@
+@use "../../styles/typography";
 @import "../../styles/index";
 
 :host {
@@ -16,10 +17,12 @@
     justify-content: center;
 
     & h1 {
+        @include typography.sd-display();
         margin-bottom: 0.5rem;
     }
 
     & h3 {
+        @include typography.sd-headline-large();
         margin-bottom: 1rem;
     }
 

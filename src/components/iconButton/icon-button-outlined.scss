@@ -1,0 +1,48 @@
+@import "./internal/icon-button";
+
+button {
+    border: $sd-border-width-m solid $sd-color-primary;
+    background: rgba($color: $sd-color-primary, $alpha: 0);
+    color: $sd-color-on-surface;
+
+    &:enabled {
+        @include state-render-overlay($sd-color-primary);
+    }
+
+    &:disabled {
+        border-color: rgba($color: $sd-color-primary, $alpha: 0.12);
+    }
+}
+
+button.primary {
+    &:enabled {
+        &:hover,
+        &:active {
+            background: $sd-color-primary;
+            color: $sd-color-on-primary;
+        }
+    }
+}
+
+button.invert {
+    border-color: $sd-color-surface;
+    color: $sd-color-surface;
+
+    &:enabled {
+        @include state-render-overlay($sd-color-surface);
+    }
+
+    &:disabled {
+        border-color: rgba($color: $sd-color-surface, $alpha: 0.12);
+    }
+}
+
+button.invert.primary {
+    &:enabled {
+        &:hover,
+        &:active {
+            background: $sd-color-surface;
+            color: $sd-color-on-surface;
+        }
+    }
+}

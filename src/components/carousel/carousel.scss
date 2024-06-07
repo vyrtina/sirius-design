@@ -17,8 +17,9 @@
     transition-duration: 0s, 500ms;
     transition-property: visibility, opacity;
     transition-delay: 0s;
-    padding: 2rem $sd-margin;
+    padding: 2rem var(--sd-margin);
     align-items: flex-start;
+    box-sizing: border-box;
 
     &.hidden {
         visibility: hidden;
@@ -44,7 +45,7 @@ input {
     padding: 2px;
     height: 2rem;
     cursor: pointer;
-    @include frosted-glass();
+    @include base-frosted-glass();
 }
 
 .sd-dot:first-of-type {
@@ -123,6 +124,6 @@ input:checked + .sd-dot::after {
     }
 
     .sd-dot:first-of-type {
-        margin-left: $sd-margin;
+        margin-left: var(--sd-margin);
     }
 }

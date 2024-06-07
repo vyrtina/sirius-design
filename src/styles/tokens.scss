@@ -1,7 +1,7 @@
 
 /**
  * Do not edit directly
- * Generated on Mon, 25 Dec 2023 19:36:58 GMT
+ * Generated on Sun, 03 Mar 2024 18:37:43 GMT
  */
 
 $sd-typography-label-small-letter-spacing: normal !default;
@@ -127,8 +127,9 @@ $sd-breakpoint-l: 1024px !default;
 $sd-breakpoint-m: 768px !default;
 $sd-breakpoint-s: 320px !default;
 $sd-breakpoint-xs: 0px !default;
+$sd-opacity-placeholder: 0.5 !default;
 $sd-opacity-scrim: 0.32 !default;
-$sd-opacity-glass: 0.6 !default;
+$sd-opacity-glass: 0.8 !default;
 $sd-color-palette-cyan-1300: #002a46 !default;
 $sd-color-palette-cyan-1200: #00395d !default;
 $sd-color-palette-cyan-1100: #004a73 !default;
@@ -367,7 +368,8 @@ $tokens: (
   ),
   'opacity': (
     'glass': $sd-opacity-glass,
-    'scrim': $sd-opacity-scrim
+    'scrim': $sd-opacity-scrim,
+    'placeholder': $sd-opacity-placeholder
   ),
   'breakpoint': (
     'xs': $sd-breakpoint-xs,

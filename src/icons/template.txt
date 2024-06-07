@@ -1,0 +1,29 @@
+/**
+ * generated file
+ * do not edit directly
+ */
+
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { Icon, sizes } from '../../components/icon/icon';
+
+
+@customElement("<%= component_name %>")
+export class <%= icon_class %> extends Icon {
+    constructor() {
+        super();
+        this.setAttribute("aria-hidden", "true");
+    }
+
+    protected override renderSVG() {
+        return html `
+                <svg fill="currentColor" height=<%= sizes %> width=<%= sizes %> viewBox="0 0 24 24"><%= contents %></svg>
+        `
+      }
+}
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "<%= component_name %>": <%= icon_class %>;
+    }
+}

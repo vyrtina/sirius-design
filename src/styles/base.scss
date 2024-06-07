@@ -1,26 +1,8 @@
 @use "./typography";
 @use "./tokens.scss";
 
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    padding: 0;
-    margin: 0;
-}
-
 @mixin outline-focus($width: tokens.$sd-border-width-m) {
-    outline: $width solid tokens.$sd-color-accent;
+    outline: $width auto tokens.$sd-color-accent;
     outline-offset: tokens.$sd-space-012;
 }
 
@@ -28,14 +10,8 @@ h6 {
     border: $width solid $color;
 }
 
-.media-responsive-height {
-    width: 100%;
-    object-fit: contain;
-    object-position: bottom;
-}
-
-@mixin frosted-glass {
+@mixin frosted-glass() {
     background: rgba(0, 0, 0, tokens.$sd-opacity-glass);
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }

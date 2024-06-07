@@ -1,0 +1,30 @@
+@import "./internal/icon-button";
+
+.button {
+    color: $sd-color-on-primary;
+}
+
+.background {
+    background-color: $sd-color-primary;
+
+    @include state-render($sd-color-primary, 1);
+}
+
+.link:hover ~ .background {
+    background-color: state-color($state-type: "hover");
+    box-shadow: $sd-shadow-level-1;
+}
+
+.link:active ~ .background {
+    background-color: state-color($state-type: "press");
+    box-shadow: $sd-shadow-level-2;
+}
+
+.link:focus ~ .background {
+    background-color: state-color($state-type: "focus");
+    box-shadow: $sd-shadow-level-2;
+}
+
+.button:disabled .background {
+    background: rgba($color: $sd-color-on-surface, $alpha: 0.12);
+}

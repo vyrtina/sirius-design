@@ -1,0 +1,5386 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-filled.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardFilled",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-filled",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardFilled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-filled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-outlined.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardOutlined",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-outlined",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardOutlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-outlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/button-filled.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdButtonFilled",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "attribute": "invert",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "attribute": "hasText",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "attribute": "onClick",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "Button",
+            "module": "/src/components/button/internal/button"
+          },
+          "tagName": "sd-button-filled",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "invert",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "hasText",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "onClick",
+              "fieldName": "onClick",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdButtonFilled",
+          "declaration": {
+            "name": "SdButtonFilled",
+            "module": "src/components/button/button-filled.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-button-filled",
+          "declaration": {
+            "name": "SdButtonFilled",
+            "module": "src/components/button/button-filled.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/button-outlined.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdButtonOutlined",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "attribute": "invert",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "attribute": "hasText",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "attribute": "onClick",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "Button",
+            "module": "/src/components/button/internal/button"
+          },
+          "tagName": "sd-button-outlined",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "invert",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "hasText",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "onClick",
+              "fieldName": "onClick",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdButtonOutlined",
+          "declaration": {
+            "name": "SdButtonOutlined",
+            "module": "src/components/button/button-outlined.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-button-outlined",
+          "declaration": {
+            "name": "SdButtonOutlined",
+            "module": "src/components/button/button-outlined.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/button-plain.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdButtonPlain",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "attribute": "invert",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "attribute": "hasText",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "attribute": "onClick",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "Button",
+            "module": "/src/components/button/internal/button"
+          },
+          "tagName": "sd-button-plain",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "invert",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "hasText",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "onClick",
+              "fieldName": "onClick",
+              "inheritedFrom": {
+                "name": "Button",
+                "module": "src/components/button/internal/button.ts"
+              },
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdButtonPlain",
+          "declaration": {
+            "name": "SdButtonPlain",
+            "module": "src/components/button/button-plain.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-button-plain",
+          "declaration": {
+            "name": "SdButtonPlain",
+            "module": "src/components/button/button-plain.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/checkbox/checkbox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Checkbox",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "attribute": "checked"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled"
+            },
+            {
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "checked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-checkbox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "src/components/checkbox/checkbox.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-checkbox",
+          "declaration": {
+            "name": "Checkbox",
+            "module": "src/components/checkbox/checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon/icon.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "sizes",
+          "default": "new Map<String, Number>([\r\n    [\"s\", 20],\r\n    [\"m\", 24],\r\n    [\"l\", 40],\r\n    [\"xl\", 48],\r\n])"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Icon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": "boolean",
+              "default": false,
+              "attribute": "fill"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "edit",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderSVG",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "unknown"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "fill",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "fill"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "edit",
+              "fieldName": "name"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "sizes",
+          "declaration": {
+            "name": "sizes",
+            "module": "src/components/icon/icon.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/carousel/carousel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Carousel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "autoTransition",
+              "type": "boolean",
+              "default": true,
+              "attribute": "autoTransition"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": "number",
+              "default": 0,
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "_slideIndex",
+              "type": "number",
+              "privacy": "private",
+              "default": 0
+            },
+            {
+              "kind": "method",
+              "name": "_showSlideRadio",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_changeRadio",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_showSlide",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_prevSlide"
+            },
+            {
+              "kind": "method",
+              "name": "_nextSlide"
+            },
+            {
+              "kind": "method",
+              "name": "_autoShowSlides"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "autoTransition",
+              "type": "boolean",
+              "default": true,
+              "fieldName": "autoTransition"
+            },
+            {
+              "name": "count",
+              "type": "number",
+              "default": 0,
+              "fieldName": "count"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-carousel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Carousel",
+          "declaration": {
+            "name": "Carousel",
+            "module": "src/components/carousel/carousel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-carousel",
+          "declaration": {
+            "name": "Carousel",
+            "module": "src/components/carousel/carousel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/carousel/slider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Slider",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-slider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Slider",
+          "declaration": {
+            "name": "Slider",
+            "module": "src/components/carousel/slider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-slider",
+          "declaration": {
+            "name": "Slider",
+            "module": "src/components/carousel/slider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/iconButton/icon-button-filled.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdIconButtonFilled",
+          "members": [
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "attribute": "invert",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "attribute": "size",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "attribute": "type",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "attribute": "toggle",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "attribute": "selected",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabelSelected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "attribute": "aria-label-selected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "attribute": "href",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "attribute": "target",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "description": "The labels this element is associated with.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLink",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderIcon",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderSelectedIcon",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "IconButton",
+            "module": "/src/components/iconButton/internal/icon-button"
+          },
+          "tagName": "sd-icon-button-filled",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "fieldName": "invert",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "fieldName": "type",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "fieldName": "toggle",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "fieldName": "selected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "aria-label-selected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "fieldName": "ariaLabelSelected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "fieldName": "href",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "fieldName": "target",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "InputEvent"
+              },
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdIconButtonFilled",
+          "declaration": {
+            "name": "SdIconButtonFilled",
+            "module": "src/components/iconButton/icon-button-filled.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon-button-filled",
+          "declaration": {
+            "name": "SdIconButtonFilled",
+            "module": "src/components/iconButton/icon-button-filled.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/iconButton/icon-button-outlined.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdIconButtonOutlined",
+          "members": [
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "attribute": "invert",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "attribute": "size",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "attribute": "type",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "attribute": "toggle",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "attribute": "selected",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabelSelected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "attribute": "aria-label-selected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "attribute": "href",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "attribute": "target",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "description": "The labels this element is associated with.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLink",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderIcon",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderSelectedIcon",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "IconButton",
+            "module": "/src/components/iconButton/internal/icon-button"
+          },
+          "tagName": "sd-icon-button-outlined",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "fieldName": "invert",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "fieldName": "type",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "fieldName": "toggle",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "fieldName": "selected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "aria-label-selected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "fieldName": "ariaLabelSelected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "fieldName": "href",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "fieldName": "target",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "InputEvent"
+              },
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdIconButtonOutlined",
+          "declaration": {
+            "name": "SdIconButtonOutlined",
+            "module": "src/components/iconButton/icon-button-outlined.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon-button-outlined",
+          "declaration": {
+            "name": "SdIconButtonOutlined",
+            "module": "src/components/iconButton/icon-button-outlined.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/iconButton/icon-button-plain.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdIconButtonPlain",
+          "members": [
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "attribute": "invert",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "attribute": "size",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "attribute": "type",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "attribute": "toggle",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "attribute": "selected",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabelSelected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "attribute": "aria-label-selected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "attribute": "href",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "attribute": "target",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "description": "The labels this element is associated with.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLink",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderIcon",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderSelectedIcon",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "IconButton",
+            "module": "/src/components/iconButton/internal/icon-button"
+          },
+          "tagName": "sd-icon-button-plain",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "fieldName": "invert",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "fieldName": "type",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "fieldName": "toggle",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "fieldName": "selected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "aria-label-selected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "fieldName": "ariaLabelSelected",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "fieldName": "href",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "fieldName": "target",
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "InputEvent"
+              },
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              },
+              "inheritedFrom": {
+                "name": "IconButton",
+                "module": "src/components/iconButton/internal/icon-button.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdIconButtonPlain",
+          "declaration": {
+            "name": "SdIconButtonPlain",
+            "module": "src/components/iconButton/icon-button-plain.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon-button-plain",
+          "declaration": {
+            "name": "SdIconButtonPlain",
+            "module": "src/components/iconButton/icon-button-plain.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/link/link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdLink",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "download",
+              "type": "string",
+              "default": "",
+              "attribute": "download"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "fieldName": "href"
+            },
+            {
+              "name": "download",
+              "type": "string",
+              "default": "",
+              "fieldName": "download"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdLink",
+          "declaration": {
+            "name": "SdLink",
+            "module": "src/components/link/link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-link",
+          "declaration": {
+            "name": "SdLink",
+            "module": "src/components/link/link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/radio/radio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdRadio",
+          "members": [
+            {
+              "kind": "field",
+              "name": "checked",
+              "description": "Whether or not the radio is selected.",
+              "attribute": "checked",
+              "type": "boolean"
+            },
+            {
+              "kind": "field",
+              "name": "[CHECKED]",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the radio is required. If any radio is required in a group,\nall radios are implicitly required.",
+              "attribute": "required"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "default",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "container",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "selectionController",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new SingleSelectionController(this)"
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleKeydown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "kind": "method",
+              "name": "[getFormValue]"
+            },
+            {
+              "kind": "method",
+              "name": "[getFormState]"
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback"
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "[createValidator]"
+            },
+            {
+              "kind": "method",
+              "name": "[getValidityAnchor]"
+            },
+            {
+              "kind": "field",
+              "name": "role",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"radio\""
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              }
+            },
+            {
+              "name": "input",
+              "type": {
+                "text": "InputEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "checked",
+              "description": "Whether or not the radio is selected.",
+              "fieldName": "checked",
+              "type": "boolean"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the radio is required. If any radio is required in a group,\nall radios are implicitly required.",
+              "fieldName": "required"
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "default": "default",
+              "fieldName": "value"
+            }
+          ],
+          "superclass": {
+            "name": "radioBaseClass",
+            "module": "src/components/radio/radio.ts"
+          },
+          "tagName": "sd-radio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdRadio",
+          "declaration": {
+            "name": "SdRadio",
+            "module": "src/components/radio/radio.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-radio",
+          "declaration": {
+            "name": "SdRadio",
+            "module": "src/components/radio/radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/radio/single-selection-controller.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A `ReactiveController` that provides root node-scoped single selection for\r\nelements, similar to native `<input type=\"radio\">` selection.\r\n\r\nTo use, elements should add the controller and call\r\n`selectionController.handleCheckedChange()` in a getter/setter. This must\r\nbe synchronous to match native behavior.",
+          "name": "SingleSelectionController",
+          "members": [
+            {
+              "kind": "field",
+              "name": "controls",
+              "type": "array",
+              "description": "All single selection elements in the host element's root with the same\n`name` attribute, including the host element.",
+              "readonly": true,
+              "items": [
+                {
+                  "$ref": "#/definitions/SingleSelectionElement"
+                }
+              ],
+              "minItems": 1,
+              "additionalItems": {
+                "description": "An element that supports single-selection with `SingleSelectionController`.",
+                "type": "object",
+                "properties": {
+                  "checked": {
+                    "description": "Whether or not the element is selected.",
+                    "type": "boolean"
+                  },
+                  "accessKey": {
+                    "type": "string"
+                  },
+                  "accessKeyLabel": {
+                    "type": "string"
+                  },
+                  "autocapitalize": {
+                    "type": "string"
+                  },
+                  "dir": {
+                    "type": "string"
+                  },
+                  "draggable": {
+                    "type": "boolean"
+                  },
+                  "hidden": {
+                    "type": "boolean"
+                  },
+                  "inert": {
+                    "type": "boolean"
+                  },
+                  "innerText": {
+                    "type": "string"
+                  },
+                  "lang": {
+                    "type": "string"
+                  },
+                  "offsetHeight": {
+                    "type": "number"
+                  },
+                  "offsetLeft": {
+                    "type": "number"
+                  },
+                  "offsetParent": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/Element"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "offsetTop": {
+                    "type": "number"
+                  },
+                  "offsetWidth": {
+                    "type": "number"
+                  },
+                  "outerText": {
+                    "type": "string"
+                  },
+                  "spellcheck": {
+                    "type": "boolean"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "translate": {
+                    "type": "boolean"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^[0-9]+$": {
+                        "$ref": "#/definitions/Attr"
+                      }
+                    }
+                  },
+                  "classList": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^[0-9]+$": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "className": {
+                    "type": "string"
+                  },
+                  "clientHeight": {
+                    "type": "number"
+                  },
+                  "clientLeft": {
+                    "type": "number"
+                  },
+                  "clientTop": {
+                    "type": "number"
+                  },
+                  "clientWidth": {
+                    "type": "number"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "localName": {
+                    "type": "string"
+                  },
+                  "namespaceURI": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "onfullscreenchange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onfullscreenerror": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "outerHTML": {
+                    "type": "string"
+                  },
+                  "ownerDocument": {
+                    "$ref": "#/definitions/Document"
+                  },
+                  "part": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^[0-9]+$": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "prefix": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "scrollHeight": {
+                    "type": "number"
+                  },
+                  "scrollLeft": {
+                    "type": "number"
+                  },
+                  "scrollTop": {
+                    "type": "number"
+                  },
+                  "scrollWidth": {
+                    "type": "number"
+                  },
+                  "shadowRoot": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ShadowRoot"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "slot": {
+                    "type": "string"
+                  },
+                  "tagName": {
+                    "type": "string"
+                  },
+                  "baseURI": {
+                    "type": "string"
+                  },
+                  "childNodes": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/ChildNode"
+                    }
+                  },
+                  "firstChild": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "isConnected": {
+                    "type": "boolean"
+                  },
+                  "lastChild": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "nextSibling": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "nodeName": {
+                    "type": "string"
+                  },
+                  "nodeType": {
+                    "type": "number"
+                  },
+                  "nodeValue": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "parentElement": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/HTMLElement"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "parentNode": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ParentNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "previousSibling": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "textContent": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ATTRIBUTE_NODE": {
+                    "type": "number"
+                  },
+                  "CDATA_SECTION_NODE": {
+                    "type": "number"
+                  },
+                  "COMMENT_NODE": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_FRAGMENT_NODE": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_NODE": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_CONTAINED_BY": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_CONTAINS": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_DISCONNECTED": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_FOLLOWING": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_PRECEDING": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_TYPE_NODE": {
+                    "type": "number"
+                  },
+                  "ELEMENT_NODE": {
+                    "type": "number"
+                  },
+                  "ENTITY_NODE": {
+                    "type": "number"
+                  },
+                  "ENTITY_REFERENCE_NODE": {
+                    "type": "number"
+                  },
+                  "NOTATION_NODE": {
+                    "type": "number"
+                  },
+                  "PROCESSING_INSTRUCTION_NODE": {
+                    "type": "number"
+                  },
+                  "TEXT_NODE": {
+                    "type": "number"
+                  },
+                  "ariaAtomic": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaAutoComplete": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaBusy": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaChecked": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaColCount": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaColIndex": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaColSpan": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaCurrent": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaDisabled": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaExpanded": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaHasPopup": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaHidden": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaKeyShortcuts": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaLabel": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaLevel": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaLive": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaModal": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaMultiLine": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaMultiSelectable": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaOrientation": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaPlaceholder": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaPosInSet": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaPressed": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaReadOnly": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaRequired": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaRoleDescription": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaRowCount": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaRowIndex": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaRowSpan": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaSelected": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaSetSize": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaSort": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaValueMax": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaValueMin": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaValueNow": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ariaValueText": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "innerHTML": {
+                    "type": "string"
+                  },
+                  "nextElementSibling": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/Element"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "previousElementSibling": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/Element"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "childElementCount": {
+                    "type": "number"
+                  },
+                  "children": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^[0-9]+$": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  },
+                  "firstElementChild": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/Element"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "lastElementChild": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/Element"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "assignedSlot": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/HTMLSlotElement"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oncopy": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oncut": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpaste": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "style": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "patternProperties": {
+                      "^[0-9]+$": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "contentEditable": {
+                    "type": "string"
+                  },
+                  "enterKeyHint": {
+                    "type": "string"
+                  },
+                  "inputMode": {
+                    "type": "string"
+                  },
+                  "isContentEditable": {
+                    "type": "boolean"
+                  },
+                  "onabort": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onanimationcancel": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onanimationend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onanimationiteration": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onanimationstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onauxclick": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onblur": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oncanplay": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oncanplaythrough": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onchange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onclick": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onclose": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oncontextmenu": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oncuechange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondblclick": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondrag": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondragend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondragenter": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondragleave": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondragover": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondragstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondrop": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ondurationchange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onemptied": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onended": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onerror": {
+                    "$ref": "#/definitions/OnErrorEventHandler"
+                  },
+                  "onfocus": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onformdata": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ongotpointercapture": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oninput": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "oninvalid": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onkeydown": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onkeypress": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onkeyup": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onload": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onloadeddata": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onloadedmetadata": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onloadstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onlostpointercapture": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmousedown": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmouseenter": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmouseleave": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmousemove": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmouseout": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmouseover": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onmouseup": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpause": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onplay": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onplaying": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointercancel": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointerdown": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointerenter": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointerleave": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointermove": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointerout": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointerover": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onpointerup": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onprogress": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onratechange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onreset": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onresize": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onscroll": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onsecuritypolicyviolation": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onseeked": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onseeking": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onselect": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onselectionchange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onselectstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onslotchange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onstalled": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onsubmit": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onsuspend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontimeupdate": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontoggle": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontouchcancel": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontouchend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontouchmove": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontouchstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontransitioncancel": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontransitionend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontransitionrun": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "ontransitionstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onvolumechange": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onwaiting": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onwebkitanimationend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onwebkitanimationiteration": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onwebkitanimationstart": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onwebkittransitionend": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "onwheel": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "autofocus": {
+                    "type": "boolean"
+                  },
+                  "dataset": {
+                    "$ref": "#/definitions/DOMStringMap"
+                  },
+                  "nonce": {
+                    "type": "string"
+                  },
+                  "tabIndex": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            {
+              "kind": "field",
+              "name": "focused",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "root",
+              "type": {
+                "text": "ParentNode | null"
+              },
+              "privacy": "private",
+              "default": null,
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/ParentNode"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "hostConnected"
+            },
+            {
+              "kind": "method",
+              "name": "hostDisconnected"
+            },
+            {
+              "kind": "method",
+              "name": "handleCheckedChange",
+              "description": "Should be called whenever the host's `checked` property changes\r\nsynchronously."
+            },
+            {
+              "kind": "field",
+              "name": "handleFocusIn",
+              "privacy": "private",
+              "readonly": true,
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "handleFocusOut",
+              "privacy": "private",
+              "readonly": true,
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "uncheckSiblings",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "updateTabIndices",
+              "privacy": "private",
+              "description": "Updates the `tabindex` of the host and its siblings."
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "readonly": true,
+              "description": "Handles arrow key events from the host. Using the arrow keys will\nselect and check the next or previous sibling with the host's\n`name` attribute.",
+              "type": "object",
+              "additionalProperties": false
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SingleSelectionController",
+          "declaration": {
+            "name": "SingleSelectionController",
+            "module": "src/components/radio/single-selection-controller.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/rating/rating.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdRating",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name attribute of the radio `input` elements.\nThis input `name` should be unique within the page.\nBeing unique within a form is insufficient since the `name` is used to generated IDs.",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": "boolean",
+              "default": false,
+              "description": "Removes all hover effects and pointer events.",
+              "attribute": "readonly"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The label to display beside the rating.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The size of the component.",
+              "attribute": "size",
+              "enum": [
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "If `true`, the component is disabled.",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "defaultvalue",
+              "type": "number",
+              "default": 0,
+              "description": "The default value. Use when the component is not controlled.",
+              "attribute": "defaultvalue"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": "number",
+              "default": 5,
+              "description": "Maximum rating.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "precision",
+              "type": "number",
+              "default": 1,
+              "description": "define the minimum increment value change allowed.",
+              "attribute": "precision"
+            },
+            {
+              "kind": "field",
+              "name": "onChange",
+              "description": "Callback fired when the value changes.",
+              "parameters": [
+                {
+                  "description": "The event source of the callback.",
+                  "name": "event",
+                  "type": {
+                    "text": "React.SyntheticEvent"
+                  }
+                },
+                {
+                  "description": "The new value.",
+                  "name": "value",
+                  "type": {
+                    "text": "number|null"
+                  }
+                }
+              ],
+              "attribute": "onChange",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "onHoverChange",
+              "description": "Callback function that is fired when the hover state changes.",
+              "parameters": [
+                {
+                  "description": "The event source of the callback.",
+                  "name": "event",
+                  "type": {
+                    "text": "React.SyntheticEvent"
+                  }
+                },
+                {
+                  "description": "The new value.",
+                  "name": "value",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "attribute": "onHoverChange",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "number",
+              "privacy": "protected",
+              "default": 0,
+              "description": "The rating value."
+            },
+            {
+              "kind": "method",
+              "name": "_renderRatingChange",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_renderIcons",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name attribute of the radio `input` elements.\nThis input `name` should be unique within the page.\nBeing unique within a form is insufficient since the `name` is used to generated IDs.",
+              "fieldName": "name"
+            },
+            {
+              "name": "readonly",
+              "type": "boolean",
+              "default": false,
+              "description": "Removes all hover effects and pointer events.",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The label to display beside the rating.",
+              "fieldName": "label"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The size of the component.",
+              "fieldName": "size",
+              "enum": [
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "If `true`, the component is disabled.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "defaultvalue",
+              "type": "number",
+              "default": 0,
+              "description": "The default value. Use when the component is not controlled.",
+              "fieldName": "defaultvalue"
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "default": 5,
+              "description": "Maximum rating.",
+              "fieldName": "max"
+            },
+            {
+              "name": "precision",
+              "type": "number",
+              "default": 1,
+              "description": "define the minimum increment value change allowed.",
+              "fieldName": "precision"
+            },
+            {
+              "name": "onChange",
+              "description": "Callback fired when the value changes.",
+              "parameters": [
+                {
+                  "description": "The event source of the callback.",
+                  "name": "event",
+                  "type": {
+                    "text": "React.SyntheticEvent"
+                  }
+                },
+                {
+                  "description": "The new value.",
+                  "name": "value",
+                  "type": {
+                    "text": "number|null"
+                  }
+                }
+              ],
+              "fieldName": "onChange",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "name": "onHoverChange",
+              "description": "Callback function that is fired when the hover state changes.",
+              "parameters": [
+                {
+                  "description": "The event source of the callback.",
+                  "name": "event",
+                  "type": {
+                    "text": "React.SyntheticEvent"
+                  }
+                },
+                {
+                  "description": "The new value.",
+                  "name": "value",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "fieldName": "onHoverChange",
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-rating",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdRating",
+          "declaration": {
+            "name": "SdRating",
+            "module": "src/components/rating/rating.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-rating",
+          "declaration": {
+            "name": "SdRating",
+            "module": "src/components/rating/rating.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/searchBar/search-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdSearchBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "attribute": "invert"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": "string",
+              "default": "Search ...",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "attribute": "defaultValue"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "default",
+              "attribute": "size",
+              "enum": [
+                "default",
+                "small"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_searchChanged",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_deleteSearch",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled"
+            },
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "invert"
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "default": "Search ...",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "default",
+              "fieldName": "size",
+              "enum": [
+                "default",
+                "small"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-search-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdSearchBar",
+          "declaration": {
+            "name": "SdSearchBar",
+            "module": "src/components/searchBar/search-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-search-bar",
+          "declaration": {
+            "name": "SdSearchBar",
+            "module": "src/components/searchBar/search-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/switch/switch.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Switch",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "attribute": "checked"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled"
+            },
+            {
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "checked"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-switch",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Switch",
+          "declaration": {
+            "name": "Switch",
+            "module": "src/components/switch/switch.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-switch",
+          "declaration": {
+            "name": "Switch",
+            "module": "src/components/switch/switch.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/textInput/text-area.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TextArea",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "attribute": "required"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "Label",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": "string",
+              "default": "Placeholder",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "maxLength",
+              "type": "number",
+              "default": "undefined",
+              "attribute": "maxLength"
+            },
+            {
+              "kind": "field",
+              "name": "minLength",
+              "type": "number",
+              "default": "undefined",
+              "attribute": "minLength"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": "number",
+              "default": "undefined",
+              "attribute": "rows"
+            },
+            {
+              "kind": "field",
+              "name": "cols",
+              "type": "number",
+              "default": "undefined",
+              "attribute": "cols"
+            },
+            {
+              "kind": "field",
+              "name": "textError",
+              "type": "string",
+              "default": "This is a default Text error",
+              "attribute": "textError"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "attribute": "defaultValue"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "attribute": "name"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "required"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "Label",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "default": "Placeholder",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "maxLength",
+              "type": "number",
+              "default": "undefined",
+              "fieldName": "maxLength"
+            },
+            {
+              "name": "minLength",
+              "type": "number",
+              "default": "undefined",
+              "fieldName": "minLength"
+            },
+            {
+              "name": "rows",
+              "type": "number",
+              "default": "undefined",
+              "fieldName": "rows"
+            },
+            {
+              "name": "cols",
+              "type": "number",
+              "default": "undefined",
+              "fieldName": "cols"
+            },
+            {
+              "name": "textError",
+              "type": "string",
+              "default": "This is a default Text error",
+              "fieldName": "textError"
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "fieldName": "name"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-text-area",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TextArea",
+          "declaration": {
+            "name": "TextArea",
+            "module": "src/components/textInput/text-area.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-text-area",
+          "declaration": {
+            "name": "TextArea",
+            "module": "src/components/textInput/text-area.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/textInput/text-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "TextInput",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "attribute": "required"
+            },
+            {
+              "kind": "field",
+              "name": "useIcon",
+              "type": "boolean",
+              "default": false,
+              "attribute": "useIcon"
+            },
+            {
+              "kind": "field",
+              "name": "icon",
+              "type": "string",
+              "default": "home",
+              "attribute": "icon"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "Label",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": "string",
+              "default": "Placeholder",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "maxLength",
+              "type": "number",
+              "default": "undefined",
+              "attribute": "maxLength"
+            },
+            {
+              "kind": "field",
+              "name": "minLength",
+              "type": "number",
+              "default": "undefined",
+              "attribute": "minLength"
+            },
+            {
+              "kind": "field",
+              "name": "pattern",
+              "type": "string",
+              "default": "undefined",
+              "attribute": "pattern"
+            },
+            {
+              "kind": "field",
+              "name": "textError",
+              "type": "string",
+              "default": "This is a default Text error",
+              "attribute": "textError"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "attribute": "defaultValue"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "attribute": "name"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "required"
+            },
+            {
+              "name": "useIcon",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "useIcon"
+            },
+            {
+              "name": "icon",
+              "type": "string",
+              "default": "home",
+              "fieldName": "icon"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "Label",
+              "fieldName": "label"
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "default": "Placeholder",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "maxLength",
+              "type": "number",
+              "default": "undefined",
+              "fieldName": "maxLength"
+            },
+            {
+              "name": "minLength",
+              "type": "number",
+              "default": "undefined",
+              "fieldName": "minLength"
+            },
+            {
+              "name": "pattern",
+              "type": "string",
+              "default": "undefined",
+              "fieldName": "pattern"
+            },
+            {
+              "name": "textError",
+              "type": "string",
+              "default": "This is a default Text error",
+              "fieldName": "textError"
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "fieldName": "name"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-text-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "TextInput",
+          "declaration": {
+            "name": "TextInput",
+            "module": "src/components/textInput/text-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-text-input",
+          "declaration": {
+            "name": "TextInput",
+            "module": "src/components/textInput/text-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/topBar/top-bar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdTopBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "method",
+              "name": "_sidebarControl"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-top-bar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdTopBar",
+          "declaration": {
+            "name": "SdTopBar",
+            "module": "src/components/topBar/top-bar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-top-bar",
+          "declaration": {
+            "name": "SdTopBar",
+            "module": "src/components/topBar/top-bar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/internal/card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Card",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Card",
+          "declaration": {
+            "name": "Card",
+            "module": "src/components/card/internal/card.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/button/internal/button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Button",
+          "members": [
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "attribute": "invert"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "attribute": "hasText"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "onClick",
+              "attribute": "onClick",
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "attributes": [
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "disabled"
+            },
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "invert"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "Button",
+              "fieldName": "label"
+            },
+            {
+              "name": "hasText",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "hasText"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "onClick",
+              "fieldName": "onClick",
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Button",
+          "declaration": {
+            "name": "Button",
+            "module": "src/components/button/internal/button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/iconButton/internal/icon-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "IconButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "attribute": "invert"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "attribute": "type",
+              "reflects": true,
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "attribute": "toggle"
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "ariaLabelSelected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "attribute": "aria-label-selected"
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "attribute": "target",
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "description": "The labels this element is associated with.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "renderLink",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderIcon",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderSelectedIcon",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "InputEvent"
+              }
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "Event"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "invert",
+              "type": "boolean",
+              "default": false,
+              "description": "invert default theme",
+              "fieldName": "invert"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "description": "size of the icon button",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "default": "button",
+              "description": "The default behavior of the button. May be \"button\" (default) , \"reset\", or \"submit\"",
+              "fieldName": "type",
+              "enum": [
+                "button",
+                "reset",
+                "submit"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether or not the button is disabled.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "toggle",
+              "type": "boolean",
+              "default": false,
+              "description": "When true, the button will toggle between selected and unselected\nstates",
+              "fieldName": "toggle"
+            },
+            {
+              "name": "selected",
+              "type": "boolean",
+              "default": false,
+              "description": "Sets the selected state. When false, displays the default icon. When true,\ndisplays the selected icon, or the default icon If no `slot=\"selected\"`\nicon is provided.",
+              "fieldName": "selected"
+            },
+            {
+              "name": "aria-label-selected",
+              "type": "string",
+              "default": "",
+              "description": "The `aria-label` of the button when the button is toggleable and selected.",
+              "fieldName": "ariaLabelSelected"
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `href` resource attribute.",
+              "fieldName": "href"
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Sets the underlying `HTMLAnchorElement`'s `target` attribute.",
+              "fieldName": "target",
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "iconButtonBaseClass",
+            "module": "src/components/iconButton/internal/icon-button.ts"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "IconButton",
+          "declaration": {
+            "name": "IconButton",
+            "module": "src/components/iconButton/internal/icon-button.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

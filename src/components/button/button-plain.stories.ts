@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
+import "../../icons/src/edit";
 import "./button-plain";
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta: Meta = {
     title: "components/button/button-plain",
-    component: "sd-button-plain",
     argTypes: {
         disabled: {
             type: "boolean",
@@ -15,26 +15,35 @@ const meta: Meta = {
         label: {
             type: "string",
         },
-        useIcon: {
+        hasIcon: {
             type: "boolean",
         },
         size: {
-            options: ["small", "medium", "large", "extra-large"],
+            options: ["s", "m", "l", "xl"],
             control: { type: "select" },
         },
     },
+    render: ({ label, hasIcon, disabled, invert, size }) =>
+        html`
+            <sd-button-plain
+                ?hasIcon=${hasIcon}
+                ?disabled=${disabled}
+                ?invert=${invert}
+                size=${size}>
+                <sd-icon-edit slot="icon"></sd-icon-edit>${label}
+            </sd-button-plain>
+        `,
 };
 
 export default meta;
 type Story = StoryObj;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
     args: {
         disabled: false,
         invert: false,
-        useIcon: true,
+        hasIcon: true,
         label: "Button",
-        size: "large",
+        size: "m",
     },
 };

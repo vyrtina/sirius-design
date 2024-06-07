@@ -1,7 +1,8 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import styles from "./carousel.scss?inline";
-import "../icon/icon";
+import "../../icons/src/chevron_left";
+import "../../icons/src/chevron_right";
 
 @customElement("sd-carousel")
 export class Carousel extends LitElement {
@@ -42,10 +43,10 @@ export class Carousel extends LitElement {
         }
         return html`
             <a class="nav-btn prev" @click="${this._prevSlide}">
-                <sd-icon icon="chevron_left"></sd-icon>
+                <sd-icon-chevron-left></sd-icon-chevron-left>
             </a>
             <a class="nav-btn next" @click="${this._nextSlide}">
-                <sd-icon icon="chevron_right"></sd-icon>
+                <sd-icon-chevron-right></sd-icon-chevron-right>
             </a>
             ${sliderTemplates}
         `;

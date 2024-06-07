@@ -26,7 +26,7 @@ label {
     width: 3rem;
     height: 1.5rem;
     position: relative;
-    background: $sd-color-surface-level-1;
+    background: $sd-color-surface;
     display: block;
     border-radius: $sd-border-radius-circle;
 }
@@ -70,5 +70,5 @@ input:disabled + label > .visual {
 }
 
 input:focus-visible + label > .visual {
-    @include outline-focus();
+    @include base-outline-focus();
 }

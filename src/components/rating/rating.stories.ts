@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
+import "../../icons/src/edit";
 import "./rating";
 
 const meta: Meta = {
@@ -8,7 +10,7 @@ const meta: Meta = {
         disabled: {
             type: "boolean",
         },
-        checked: {
+        readonly: {
             type: "boolean",
         },
         label: {
@@ -18,10 +20,16 @@ const meta: Meta = {
             options: ["small", "default"],
             control: "select",
         },
-        icon: {
-            type: "string",
+        defaultvalue: {
+            type: "number",
         },
     },
+    render: ({}) =>
+        html`
+            <sd-rating>
+                <sd-icon-edit></sd-icon-edit>
+            </sd-rating>
+        `,
 };
 
 export default meta;
@@ -30,19 +38,19 @@ type Story = StoryObj;
 export const Default: Story = {
     args: {
         disabled: false,
-        checked: true,
-        label: "checkbox",
+        readonly: false,
+        defaultvalue: 3,
+        label: "(1,699)",
         size: "default",
-        icon: "star",
     },
 };
 
 export const Custom: Story = {
     args: {
         disabled: false,
-        checked: false,
-        label: "checkbox",
+        readonly: true,
+        defaultvalue: 4,
+        label: "Very Good",
         size: "small",
-        icon: "bolt",
     },
 };

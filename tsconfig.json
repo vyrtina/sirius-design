@@ -1,38 +1,47 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "ES2020",
+        "experimentalDecorators": true,
+        "useDefineForClassFields": false,
+        "module": "ESNext",
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+        /* Bundler mode */
+        "moduleResolution": "Bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
 
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src"],
-  "overrides": [
-    {
-      "files": ["*.ts", "*.js"], // Adjust for your file types
-      "parserOptions": {
-        "ecmaFeatures": {
-          "jsx": true
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true
+    },
+    "include": ["./src"],
+    "exclude": ["node_modules", "**/__tests__/*", "src/**/**/*.stories.ts"],
+    "overrides": [
+        {
+            "files": ["*.ts", "*.js"], // Adjust for your file types
+            "parserOptions": {
+                "ecmaFeatures": {
+                    "jsx": true
+                }
+            },
+            "extends": [
+                // ... other ESLint extensions
+                "plugin:lit/recommended" // Use the Lit plugin recommended rules
+            ]
         }
-      },
-      "extends": [
-        // ... other ESLint extensions
-        "plugin:lit/recommended" // Use the Lit plugin recommended rules
-      ]
+    ],
+    // these options are overrides used only by ts-node
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs"
+        }
     }
-  ]
 }
+

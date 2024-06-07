@@ -1,14 +1,15 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import VitePluginCustomElementsManifest from "vite-plugin-cem";
 
 export default defineConfig({
-    plugins: [],
+    plugins: [VitePluginCustomElementsManifest()],
     assetsInclude: ["/sb-preview/runtime.js"],
     //root: resolve('./static/'),
     //base: '/static/',
     server: {
         host: "localhost",
-        port: 5173,
+        port: 5170,
         open: false,
         watch: {
             usePolling: true,

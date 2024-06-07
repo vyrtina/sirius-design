@@ -1,118 +1,190 @@
 @use "./tokens";
 
-@mixin display-large {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+    font-weight: inherit;
+}
+
+.sd-weight-thin {
+    font-weight: 100;
+}
+
+.sd-weight-extralight {
+    font-weight: 200;
+}
+
+.sd-weight-light {
+    font-weight: 300;
+}
+
+.sd-weight-normal {
+    font-weight: 400;
+}
+
+.sd-weight-medium {
+    font-weight: 500;
+}
+
+.sd-weight-semibold {
+    font-weight: 600;
+}
+
+.sd-weight-bold {
+    font-weight: 700;
+}
+
+.sd-weight-extrabold {
+    font-weight: 800;
+}
+
+.sd-weight-black {
+    font-weight: 900;
+}
+
+
+@mixin sd-display-large {
     font-family: tokens.$sd-typography-display-large-font;
     font-size: tokens.$sd-typography-display-large-size;
-    font-style: tokens.$sd-typography-display-large-style;
-    font-weight: tokens.$sd-typography-display-large-weight;
+    //font-style: tokens.$sd-typography-display-large-style;
+    //font-weight: tokens.$sd-typography-display-large-weight;
     line-height: tokens.$sd-typography-display-large-line-height;
     letter-spacing: tokens.$sd-typography-display-large-letter-spacing;
 }
 
-@mixin display {
+@mixin sd-display {
     font-family: tokens.$sd-typography-display-font;
     font-size: tokens.$sd-typography-display-size;
-    font-style: tokens.$sd-typography-display-style;
-    font-weight: tokens.$sd-typography-display-weight;
+    //font-style: tokens.$sd-typography-display-style;
+    //font-weight: tokens.$sd-typography-display-weight;
     line-height: tokens.$sd-typography-display-line-height;
     letter-spacing: tokens.$sd-typography-display-letter-spacing;
 }
 
-@mixin display-small {
+@mixin sd-display-small {
     font-family: tokens.$sd-typography-display-small-font;
     font-size: tokens.$sd-typography-display-small-size;
-    font-style: tokens.$sd-typography-display-small-style;
-    font-weight: tokens.$sd-typography-display-small-weight;
+    //font-style: tokens.$sd-typography-display-small-style;
+    //font-weight: tokens.$sd-typography-display-small-weight;
     line-height: tokens.$sd-typography-display-small-line-height;
     letter-spacing: tokens.$sd-typography-display-small-letter-spacing;
 }
 
-@mixin headline-large {
+@mixin sd-headline-large {
     font-family: tokens.$sd-typography-headline-large-font;
     font-size: tokens.$sd-typography-headline-large-size;
-    font-style: tokens.$sd-typography-headline-large-style;
-    font-weight: tokens.$sd-typography-headline-large-weight;
+    //font-style: tokens.$sd-typography-headline-large-style;
+    //font-weight: tokens.$sd-typography-headline-large-weight;
     line-height: tokens.$sd-typography-headline-large-line-height;
     letter-spacing: tokens.$sd-typography-headline-large-letter-spacing;
 }
 
-@mixin headline {
+@mixin sd-headline {
     font-family: tokens.$sd-typography-headline-font;
     font-size: tokens.$sd-typography-headline-size;
-    font-style: tokens.$sd-typography-headline-style;
-    font-weight: tokens.$sd-typography-headline-weight;
+    //font-style: tokens.$sd-typography-headline-style;
+    //font-weight: tokens.$sd-typography-headline-weight;
     line-height: tokens.$sd-typography-headline-line-height;
     letter-spacing: tokens.$sd-typography-headline-letter-spacing;
 }
 
-@mixin body-large {
+@mixin sd-body-large {
     font-family: tokens.$sd-typography-body-large-font;
     font-size: tokens.$sd-typography-body-large-size;
-    font-style: tokens.$sd-typography-body-large-style;
-    font-weight: tokens.$sd-typography-body-large-weight;
+    //font-style: tokens.$sd-typography-body-large-style;
+    //font-weight: tokens.$sd-typography-body-large-weight;
     line-height: tokens.$sd-typography-body-large-line-height;
     letter-spacing: tokens.$sd-typography-body-large-letter-spacing;
 }
 
-@mixin body {
+@mixin sd-body {
     font-family: tokens.$sd-typography-body-font;
     font-size: tokens.$sd-typography-body-size;
-    font-style: tokens.$sd-typography-body-style;
-    font-weight: tokens.$sd-typography-body-weight;
+    //font-style: tokens.$sd-typography-body-style;
+    //font-weight: tokens.$sd-typography-body-weight;
     line-height: tokens.$sd-typography-body-line-height;
     letter-spacing: tokens.$sd-typography-body-letter-spacing;
 }
 
-@mixin body-small {
+@mixin sd-body-small {
     font-family: tokens.$sd-typography-body-small-font;
     font-size: tokens.$sd-typography-body-small-size;
-    font-style: tokens.$sd-typography-body-small-style;
-    font-weight: tokens.$sd-typography-body-small-weight;
+    //font-style: tokens.$sd-typography-body-small-style;
+    //font-weight: tokens.$sd-typography-body-small-weight;
     line-height: tokens.$sd-typography-body-small-line-height;
     letter-spacing: tokens.$sd-typography-body-small-letter-spacing;
 }
 
-@mixin label-small {
+@mixin sd-label-small {
     font-family: tokens.$sd-typography-label-small-font;
     font-size: tokens.$sd-typography-label-small-size;
-    font-style: tokens.$sd-typography-label-small-style;
-    font-weight: tokens.$sd-typography-label-small-weight;
+    //font-style: tokens.$sd-typography-label-small-style;
+    //font-weight: tokens.$sd-typography-label-small-weight;
     line-height: tokens.$sd-typography-label-small-line-height;
     letter-spacing: tokens.$sd-typography-label-small-letter-spacing;
 }
 
-.display-large {
-    @include display-large();
+.sd-display-large {
+    @include sd-display-large();
 }
 
-.display {
-    @include display();
+.sd-display {
+    @include sd-display();
 }
 
-.display-small {
-    @include display-small();
+.sd-display-small {
+    @include sd-display-small();
 }
 
-.headline-large {
-    @include headline-large();
+.sd-headline-large {
+    @include sd-headline-large();
 }
 
-.headline {
-    @include headline();
+.sd-headline {
+    @include sd-headline();
 }
 
-.body-large {
-    @include body-large();
+.sd-body-large {
+    @include sd-body-large();
 }
 
-.body {
-    @include body();
+.sd-body {
+    @include sd-body();
 }
 
-.body-small {
-    @include body-small();
+.sd-body-small {
+    @include sd-body-small();
 }
 
-.label-small {
-    @include label-small();
+.sd-label-small {
+    @include sd-label-small();
+}
+
+body {
+    @include sd-body();
+    font-weight: 400;
+}
+
+h1 {
+    @include sd-display();
+}
+
+h2 {
+    @include sd-headline();
+}
+
+h3,
+h4 {
+    @include sd-headline();
+}
+
+h5,
+h6 {
+    @include sd-body-large();
 }
