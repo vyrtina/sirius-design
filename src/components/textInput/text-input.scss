@@ -1,30 +1,24 @@
+@use "../../styles/typography";
+@use "../../styles/tokens";
 @import "../../styles/index";
 
 :host {
+    display: inline;
+    box-sizing: border-box;
+}
+
+.text-field {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.25rem;
 }
 
-input {
-    border: none;
-    outline: none;
-    background: rgba($color: $sd-color-primary, $alpha: 0);
-    color: $sd-color-on-surface;
-}
-
-input::placeholder {
-    color: $sd-color-text-placeholder;
-}
-
-.sd-text-field {
+.field {
     display: flex;
-    padding: 0.75rem;
-    align-items: center;
-    gap: 0.75rem;
     height: 3rem;
+    align-items: center;
     align-self: stretch;
+    align-items: stretch;
     border-radius: $sd-border-radius-large;
     outline: $sd-border-width-s solid $sd-color-border;
     transition: background $sd-motion-duration-100 $sd-motion-easing-linear;
@@ -33,15 +27,65 @@ input::placeholder {
     }
 }
 
-sd-icon {
+input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 0 1rem;
+    background: rgba($color: $sd-color-primary, $alpha: 0);
+    color: $sd-color-on-surface;
+    @include typography.sd-body();
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: stretch;
+    gap: 0.125rem;
+    @include typography.sd-body();
+}
+
+.label {
+    width: fit-content;
+    @include typography.sd-body();
+    &.drawAsterisk::after {
+        content: "*";
+    }
+}
+
+.error-text,
+.help-text {
+    @include typography.sd-body-small();
+}
+
+.help-text {
+    color: tokens.$sd-color-neutral-700;
+}
+
+input::placeholder {
     color: $sd-color-text-placeholder;
 }
 
-.sd-text-field:has(input:invalid) {
+.leading-icon,
+.trailing-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    color: $sd-color-neutral-600;
+}
+.leading-icon::slotted(*) {
+    margin: 0 0.75rem;
+}
+.trailing-icon::slotted(*) {
+    margin: 0 0.75rem;
+}
+
+.field.error {
     outline: 2px solid $sd-color-error;
     background-color: $sd-color-surface-error;
     @include state-render($sd-color-surface-error);
-    & sd-icon {
+    & .leading-icon,
+    .trailing-icon {
         color: $sd-color-icon-error;
     }
     & + .error-label {
@@ -49,15 +93,15 @@ sd-icon {
     }
 }
 
-.sd-text-field:has(input:focus-visible) {
+.field:has(input:focus-visible) {
     outline: 2px solid $sd-color-primary;
 }
 
-label:has(+ .sd-text-field input:disabled) {
+.label:has(+ .sd-text-field input:disabled) {
     @include state-render-disabled-element();
 }
 
-.sd-text-field:has(input:disabled) {
+.field:has(input:disabled) {
     @include state-render-disabled(false);
 }
 
@@ -65,14 +109,34 @@ input:disabled {
     cursor: not-allowed;
 }
 
-.error-label {
+//error styling
+.error .field {
+    outline: 2px solid $sd-color-error;
+}
+
+.error-text {
     display: inline-flex;
     align-items: center;
     gap: $sd-space-025;
     margin-top: $sd-space-025;
     color: $sd-color-text-error;
-    visibility: hidden;
     & sd-icon {
         color: $sd-color-icon-error;
+    }
+}
+
+.input__clear,
+.input__password-toggle {
+    background: none;
+    padding: 0;
+    border: none;
+    width: 3rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: tokens.$sd-color-text-placeholder;
+    cursor: pointer;
+    &:hover {
+        color: tokens.$sd-color-neutral-600;
     }
 }

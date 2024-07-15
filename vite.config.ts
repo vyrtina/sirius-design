@@ -19,7 +19,7 @@ export default defineConfig({
         },
     },
     resolve: {
-        extensions: [".ts", ".css", ".scss", ".mdx"],
+        extensions: [".ts", ".css", ".scss", ".mdx", ".json"],
     },
     build: {
         assetsDir: resolve("./src/assets/"),

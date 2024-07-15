@@ -8,7 +8,7 @@ import {
     createValidator,
     getValidityAnchor,
     mixinConstraintValidation,
-} from "../../utils/behaviors/constraint-validators.js";
+} from "../../utils/behaviors/constraint-validation.js";
 import {
     internals,
     mixinElementInternals,

@@ -1,0 +1,185 @@
+@use "../../styles/tokens.scss";
+
+:host {
+    display: block;
+}
+
+/** The popup */
+.select {
+    flex: 1 1 auto;
+    display: inline-flex;
+    width: 100%;
+    position: relative;
+    vertical-align: middle;
+}
+
+.select::part(popup) {
+    z-index: 900;
+}
+
+.select[data-current-placement^="top"]::part(popup) {
+    transform-origin: bottom;
+}
+
+.select[data-current-placement^="bottom"]::part(popup) {
+    transform-origin: top;
+}
+
+/* Combobox */
+.select__combobox {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    position: relative;
+    align-items: center;
+    justify-content: start;
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: pointer;
+
+    //
+    padding: 0.5rem 0.75rem;
+    border-radius: tokens.$sd-border-radius-medium;
+    border: 1px solid tokens.$sd-color-border;
+}
+
+.select__display-input {
+    position: relative;
+    width: 100%;
+    font: inherit;
+    border: none;
+    background: none;
+    color: var(--sl-input-color);
+    cursor: inherit;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+}
+
+.select__display-input::placeholder {
+    color: var(--sl-input-placeholder-color);
+}
+
+.select:not(.select--disabled):hover .select__display-input {
+    color: var(--sl-input-color-hover);
+}
+
+.select__display-input:focus {
+    outline: none;
+}
+
+/* Visually hide the display input when multiple is enabled */
+.select--multiple:not(.select--placeholder-visible) .select__display-input {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.select__value-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: -1;
+}
+
+.select__tags {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.select__tags::slotted(sl-tag) {
+    cursor: pointer !important;
+}
+
+.select--disabled .select__tags,
+.select--disabled .select__tags::slotted(sl-tag) {
+    cursor: not-allowed !important;
+}
+
+/* Prefix */
+.select__prefix {
+    flex: 0;
+    display: inline-flex;
+    align-items: center;
+    color: var(--sl-input-placeholder-color);
+}
+
+/* Clear button */
+.select__clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: inherit;
+    color: var(--sl-input-icon-color);
+    border: none;
+    background: none;
+    padding: 0;
+    transition: var(--sl-transition-fast) color;
+    cursor: pointer;
+}
+
+.select__clear:hover {
+    color: var(--sl-input-icon-color-hover);
+}
+
+.select__clear:focus {
+    outline: none;
+}
+
+/* Expand icon */
+.select__expand-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    transition: var(--sl-transition-medium) rotate ease;
+    rotate: 0;
+    margin-inline-start: var(--sl-spacing-small);
+}
+
+.select--open .select__expand-icon {
+    rotate: -180deg;
+}
+
+/* Listbox */
+.select__listbox {
+    display: block;
+    position: relative;
+    box-shadow: var(--sl-shadow-large);
+    background: var(--sl-panel-background-color);
+    border: 1px solid tokens.$sd-color-primary;
+    border-radius: tokens.$sd-border-radius-medium;
+    padding-block: var(--sl-spacing-x-small);
+    padding-inline: 0;
+    overflow: auto;
+    overscroll-behavior: none;
+
+    /* Make sure it adheres to the popup's auto size */
+    max-width: var(--auto-size-available-width);
+    max-height: var(--auto-size-available-height);
+}
+
+.select__listbox ::slotted(sl-divider) {
+    --spacing: var(--sl-spacing-x-small);
+}
+
+.select__listbox ::slotted(small) {
+    display: block;
+    font-size: var(--sl-font-size-small);
+    font-weight: var(--sl-font-weight-semibold);
+    color: var(--sl-color-neutral-500);
+    padding-block: var(--sl-spacing-2x-small);
+    padding-inline: var(--sl-spacing-x-large);
+}

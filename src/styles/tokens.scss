@@ -1,7 +1,7 @@
 
 /**
  * Do not edit directly
- * Generated on Sun, 03 Mar 2024 18:37:43 GMT
+ * Generated on Mon, 15 Jul 2024 20:00:02 GMT
  */
 
 $sd-typography-label-small-letter-spacing: normal !default;
@@ -127,6 +127,11 @@ $sd-breakpoint-l: 1024px !default;
 $sd-breakpoint-m: 768px !default;
 $sd-breakpoint-s: 320px !default;
 $sd-breakpoint-xs: 0px !default;
+$sd-state-drag-layer-opacity: 0.16 !default;
+$sd-state-click-layer-opacity: 0.12 !default;
+$sd-state-focus-layer-opacity: 0.12 !default;
+$sd-state-hover-layer-opacity: 0.08 !default;
+$sd-opacity-disabled: 0.38 !default;
 $sd-opacity-placeholder: 0.5 !default;
 $sd-opacity-scrim: 0.32 !default;
 $sd-opacity-glass: 0.8 !default;
@@ -369,7 +374,22 @@ $tokens: (
   'opacity': (
     'glass': $sd-opacity-glass,
     'scrim': $sd-opacity-scrim,
-    'placeholder': $sd-opacity-placeholder
+    'placeholder': $sd-opacity-placeholder,
+    'disabled': $sd-opacity-disabled
+  ),
+  'state': (
+    'hover': (
+      'layer-opacity': $sd-state-hover-layer-opacity
+    ),
+    'focus': (
+      'layer-opacity': $sd-state-focus-layer-opacity
+    ),
+    'click': (
+      'layer-opacity': $sd-state-click-layer-opacity
+    ),
+    'drag': (
+      'layer-opacity': $sd-state-drag-layer-opacity
+    )
   ),
   'breakpoint': (
     'xs': $sd-breakpoint-xs,

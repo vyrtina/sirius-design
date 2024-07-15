@@ -1,0 +1,88 @@
+@use "../../styles/typography" as typo;
+@import "../../styles/_index";
+
+:host {
+    display: block;
+    width: min-content;
+    height: min-content;
+    cursor: pointer;
+}
+
+:host([disabled]) {
+    cursor: default;
+    pointer-events: none;
+}
+
+.button {
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    padding: 0 $sd-space-100;
+    align-items: center;
+    border-radius: 6.25rem;
+    cursor: inherit;
+    transition:
+        background 0.25s ease-out,
+        color 0.25s ease-out,
+        box-shadow 0.25s ease-out;
+    height: 3rem;
+    width: 100%;
+    justify-content: center;
+    white-space: nowrap;
+    color: inherit;
+
+    & .label {
+        padding: 0 $sd-space-050;
+    }
+
+    &:focus {
+        outline: 0px solid rgba(0, 0, 0, 0);
+    }
+
+    &:focus-visible {
+        @include base-outline-focus;
+    }
+
+    &:disabled {
+        @include state-render-disabled(false);
+    }
+}
+
+button.plain {
+    &:enabled {
+        @include state-render-overlay($sd-color-primary);
+    }
+}
+
+button.outlined {
+    border: $sd-border-width-m solid $sd-color-primary;
+    background: rgba($color: $sd-color-primary, $alpha: 0);
+    color: $sd-color-on-surface;
+
+    &:enabled {
+        @include state-render-overlay($sd-color-primary);
+    }
+
+    &:disabled {
+        border-color: rgba($color: $sd-color-primary, $alpha: 0.12);
+    }
+}
+
+.button.filled {
+    background: $sd-color-primary;
+    color: $sd-color-on-primary;
+
+    &:enabled {
+        @include state-render($sd-color-primary, true);
+    }
+
+    &:disabled {
+        @include state-render-disabled-bg();
+    }
+}
+
+.button.icon-only {
+    padding: 0;
+    height: 3rem;
+    width: 3rem;
+}

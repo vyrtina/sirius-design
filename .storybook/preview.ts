@@ -6,7 +6,7 @@ import {
 } from "cem-plugin-better-lit-types/storybook";
 import manifest from "../custom-elements.json";
 
-setCustomElementsManifest(manifest);
+//setCustomElementsManifest(manifest);
 
 const preview: Preview = {
     parameters: {

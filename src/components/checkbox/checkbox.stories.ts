@@ -5,19 +5,13 @@ import "./checkbox";
 const meta: Meta = {
     title: "components/checkbox",
     component: "sd-checkbox",
-    argTypes: {
-        disabled: {
-            type: "boolean",
-        },
-        checked: {
-            type: "boolean",
-        },
-        label: {
-            type: "string",
-        },
+    tags: ["autodocs"],
+    args: {
+        checked: true,
+        label: "label",
     },
-    render: ({ label, disabled, checked }) => html`
-        <sd-checkbox ?checked=${checked} ?disabled=${disabled}>
+    render: ({ label, checked, indeterminate }) => html`
+        <sd-checkbox ?checked=${checked} ?indeterminate=${indeterminate}>
             <p slot="label">${label}</p>
         </sd-checkbox>
     `,
@@ -28,16 +22,23 @@ type Story = StoryObj;
 
 export const Checked: Story = {
     args: {
-        disabled: false,
-        checked: true,
-        label: "checkbox",
+        indeterminate: true,
     },
 };
 
-export const Unchecked: Story = {
+export const Form: Story = {
     args: {
-        disabled: false,
-        checked: false,
-        label: "checkbox",
+        name: "name",
+        value: "value",
+    },
+    render: ({ label, checked, name, value }) => {
+        return html`
+            <form method="GET">
+                <sd-checkbox ?checked=${checked} name=${name} value=${value}
+                    ><p slot="label">${label}</p></sd-checkbox
+                >
+                <sd-button type="submit">Submit</sd-button>
+            </form>
+        `;
     },
 };

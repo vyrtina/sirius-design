@@ -6,7 +6,7 @@ export default {
     /** Globs to exclude */
     exclude: ["src/**/*.stories.ts", "src/icons"],
     /** Directory to output CEM to */
-    outdir: "./",
+    outdir: "./.storybook/",
     /** Run in dev mode, provides extra logging */
     dev: true,
     /** Run in watch mode, runs on file changes */

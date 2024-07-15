@@ -44,6 +44,9 @@
         },
         "placeholder": {
             "value": "0.5"
+        },
+        "disabled": {
+            "value": "0.38"
         }
     }
 }

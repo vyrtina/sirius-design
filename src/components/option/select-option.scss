@@ -1,0 +1,104 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/base.scss";
+
+:host {
+    display: block;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+:host(:focus) {
+    outline: none;
+}
+
+.option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    padding: 0.5rem 0.75rem;
+}
+
+.option--current,
+.option--current.option--disabled {
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
+    opacity: 1;
+}
+
+.option__label {
+    flex: 1 1 auto;
+    display: inline-block;
+}
+
+.option__prefix,
+.option__suffix {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.option__prefix::slotted(*) {
+    margin-inline-end: var(--sl-spacing-x-small);
+}
+
+.option__suffix::slotted(*) {
+    margin-inline-start: var(--sl-spacing-x-small);
+}
+
+@media (forced-colors: active) {
+    :host(:hover:not([aria-disabled="true"])) .option {
+        outline: dashed 1px SelectedItem;
+        outline-offset: -1px;
+    }
+}
+
+.container {
+    position: relative;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
+.state-layer {
+    position: absolute;
+    inset: 0;
+    background-color: tokens.$sd-color-primary;
+    opacity: 0;
+}
+
+:host(:hover) .state-layer {
+    opacity: tokens.$sd-state-hover-layer-opacity;
+}
+
+:host(:active) .state-layer {
+    opacity: tokens.$sd-state-click-layer-opacity;
+}
+
+:host(:focus) {
+    & .container {
+        @include base.outline-focus();
+    }
+    & .state-layer {
+        opacity: tokens.$sd-state-focus-layer-opacity;
+    }
+}
+
+:host([disabled]) {
+    & .state-layer {
+        opacity: 0;
+    }
+    & .container {
+        opacity: tokens.$sd-opacity-disabled;
+        cursor: not-allowed;
+    }
+}
+
+.container.selected {
+    background-color: tokens.$sd-color-primary;
+    color: tokens.$sd-color-on-primary;
+
+    & .state-layer {
+        background-color: tokens.$sd-color-on-primary;
+    }
+}

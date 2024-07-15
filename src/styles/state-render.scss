@@ -84,7 +84,6 @@
 @mixin state-render-disabled-element() {
     color: tokens.$sd-color-on-surface;
     opacity: 0.38;
-    cursor: not-allowed;
 }
 
 @mixin state-render-disabled($render-bg: true) {
@@ -92,9 +91,8 @@
         @include state-render-disabled-bg();
     }
     color: tokens.$sd-color-on-surface;
-    cursor: not-allowed;
     box-shadow: none;
-    & {
+    & * {
         opacity: 0.38;
     }
 }

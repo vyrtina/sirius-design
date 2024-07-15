@@ -39,7 +39,7 @@ export class SdTopBar extends LitElement {
         `;
     }
 
-    _sidebarControl() {
+    private _sidebarControl() {
         var menu = <HTMLElement>this.shadowRoot?.getElementById("menu-links");
 
         if (menu.classList.contains("display")) {

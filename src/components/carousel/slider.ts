@@ -1,7 +1,7 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
 import styles from "./slider.scss?inline";
-import "../button/button-filled";
+import "../button/button";
 
 @customElement("sd-slider")
 export class Slider extends LitElement {

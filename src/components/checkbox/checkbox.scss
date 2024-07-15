@@ -18,7 +18,10 @@ input {
     cursor: pointer;
     border: $sd-border-width-s solid $sd-color-primary;
     background: rgba($color: $sd-color-primary, $alpha: 0);
-    transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    transition:
+        background 0.3s,
+        border-color 0.3s,
+        box-shadow 0.2s;
     border-radius: 0.2rem;
     justify-content: center;
     align-items: center;
@@ -37,7 +40,9 @@ input:after {
     margin-left: -2px;
     margin-top: -3.6px;
     position: absolute;
-    transition: transform 0.3s ease, opacity 0.2s;
+    transition:
+        transform 0.3s ease,
+        opacity 0.2s;
     border: 2px solid $sd-color-on-primary;
     border-top: 0;
     border-left: 0;
@@ -48,7 +53,9 @@ input:after {
 input:checked {
     background: $sd-color-primary;
     border-color: $sd-color-primary;
-    transition: transform 0.6s cubic-bezier(0.2, 0.85, 0.32, 1.2), opacity 0.3s;
+    transition:
+        transform 0.6s cubic-bezier(0.2, 0.85, 0.32, 1.2),
+        opacity 0.3s;
     &::after {
         opacity: 1;
         transform: rotate(43deg);
@@ -84,4 +91,8 @@ input + label {
 
 *:after {
     box-sizing: border-box;
+}
+
+input:indeterminate {
+    color: aqua;
 }

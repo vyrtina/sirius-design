@@ -239,7 +239,7 @@
               "kind": "field",
               "name": "button",
               "type": {
-                "text": "| HTMLButtonElement\r\n        | HTMLLinkElement\r\n        | null"
+                "text": "HTMLButtonElement | HTMLLinkElement | undefined"
               },
               "privacy": "private",
               "readonly": true,
@@ -249,9 +249,6 @@
                 },
                 {
                   "$ref": "#/definitions/HTMLLinkElement"
-                },
-                {
-                  "type": "null"
                 }
               ]
             },
@@ -754,191 +751,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/icon/icon.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "sizes",
-          "default": "new Map<String, Number>([\r\n    [\"s\", 20],\r\n    [\"m\", 24],\r\n    [\"l\", 40],\r\n    [\"xl\", 48],\r\n])"
-        },
-        {
-          "kind": "class",
-          "description": "",
-          "name": "Icon",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": "boolean",
-              "default": false,
-              "attribute": "fill"
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "edit",
-              "attribute": "name"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "attribute": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "renderSVG",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "unknown"
-                }
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "fill",
-              "type": "boolean",
-              "default": false,
-              "fieldName": "fill"
-            },
-            {
-              "name": "name",
-              "type": "string",
-              "default": "edit",
-              "fieldName": "name"
-            },
-            {
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "fieldName": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-icon",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "sizes",
-          "declaration": {
-            "name": "sizes",
-            "module": "src/components/icon/icon.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Icon",
-          "declaration": {
-            "name": "Icon",
-            "module": "src/components/icon/icon.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-icon",
-          "declaration": {
-            "name": "Icon",
-            "module": "src/components/icon/icon.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/card/card-filled.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCardFilled",
-          "members": [],
-          "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
-          },
-          "tagName": "sd-card-filled",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdCardFilled",
-          "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-card-filled",
-          "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/card/card-outlined.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCardOutlined",
-          "members": [],
-          "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
-          },
-          "tagName": "sd-card-outlined",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdCardOutlined",
-          "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-card-outlined",
-          "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/checkbox/checkbox.ts",
       "declarations": [
         {
@@ -951,7 +763,7 @@
               "name": "formControlController",
               "privacy": "private",
               "readonly": true,
-              "default": "new FormControlController(this, {})",
+              "default": "new FormControlController(this, {\r\n        value: (control: SdCheckbox) =>\r\n            control.checked ? control.value || \"on\" : undefined,\r\n    })",
               "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
               "type": "object",
               "properties": {
@@ -1356,6 +1168,2260 @@
           "declaration": {
             "name": "SdCheckbox",
             "module": "src/components/checkbox/checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-filled.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardFilled",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-filled",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardFilled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-filled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-outlined.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardOutlined",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-outlined",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardOutlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-outlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon/icon.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "sizes",
+          "default": "new Map<String, Number>([\r\n    [\"s\", 20],\r\n    [\"m\", 24],\r\n    [\"l\", 40],\r\n    [\"xl\", 48],\r\n])"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Icon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": "boolean",
+              "default": false,
+              "attribute": "fill"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "edit",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderSVG",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "unknown"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "fill",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "fill"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "edit",
+              "fieldName": "name"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "sizes",
+          "declaration": {
+            "name": "sizes",
+            "module": "src/components/icon/icon.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/link/link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdLink",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "download",
+              "type": "string",
+              "default": "",
+              "attribute": "download"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "fieldName": "href"
+            },
+            {
+              "name": "download",
+              "type": "string",
+              "default": "",
+              "fieldName": "download"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-link",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdLink",
+          "declaration": {
+            "name": "SdLink",
+            "module": "src/components/link/link.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-link",
+          "declaration": {
+            "name": "SdLink",
+            "module": "src/components/link/link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/option/select-option.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdSelectOption",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the option in a disabled state, preventing selection.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "cachedTextLabel",
+              "type": "string",
+              "privacy": "private",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": "array"
+            },
+            {
+              "kind": "method",
+              "name": "handleDefaultSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleSelectedChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleValueChange"
+            },
+            {
+              "kind": "method",
+              "name": "getTextLabel",
+              "description": "Returns a plain text label based on the option's content."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+              "fieldName": "value"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the option in a disabled state, preventing selection.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-select-option",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdSelectOption",
+            "module": "src/components/option/select-option.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-select-option",
+          "declaration": {
+            "name": "SdSelectOption",
+            "module": "src/components/option/select-option.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/option/select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdSelect",
+          "cssParts": [
+            {
+              "description": "The form control that wraps the label, input, and help text.",
+              "name": "form-control"
+            },
+            {
+              "description": "The label's wrapper.",
+              "name": "form-control-label"
+            },
+            {
+              "description": "The select's wrapper.",
+              "name": "form-control-input"
+            },
+            {
+              "description": "The help text's wrapper.",
+              "name": "form-control-help-text"
+            },
+            {
+              "description": "The container the wraps the prefix, combobox, clear icon, and expand button.",
+              "name": "combobox"
+            },
+            {
+              "description": "The container that wraps the prefix slot.",
+              "name": "prefix"
+            },
+            {
+              "description": "The element that displays the selected option's label, an `<input>` element.",
+              "name": "display-input"
+            },
+            {
+              "description": "The listbox container where options are slotted.",
+              "name": "listbox"
+            },
+            {
+              "description": "The container that houses option tags when `multiselect` is used.",
+              "name": "tags"
+            },
+            {
+              "description": "The individual tags that represent each multiselect option.",
+              "name": "tag"
+            },
+            {
+              "description": "The tag's base part.",
+              "name": "tag__base"
+            },
+            {
+              "description": "The tag's content part.",
+              "name": "tag__content"
+            },
+            {
+              "description": "The tag's remove button.",
+              "name": "tag__remove-button"
+            },
+            {
+              "description": "The tag's remove button base part.",
+              "name": "tag__remove-button__base"
+            },
+            {
+              "description": "The clear button.",
+              "name": "clear-button"
+            },
+            {
+              "description": "The container that wraps the expand icon.",
+              "name": "expand-icon"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.",
+              "name": ""
+            },
+            {
+              "description": "The input's label. Alternatively, you can use the `label` attribute.",
+              "name": "label"
+            },
+            {
+              "description": "Used to prepend a presentational icon or similar element to the combobox.",
+              "name": "prefix"
+            },
+            {
+              "description": "An icon to use in lieu of the default clear icon.",
+              "name": "clear-icon"
+            },
+            {
+              "description": "The icon to show when the control is expanded and collapsed. Rotates on open and close.",
+              "name": "expand-icon"
+            },
+            {
+              "description": "Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.",
+              "name": "help-text"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "formControlController",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sl-blur\", \"sl-input\"],\r\n    })",
+              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
+              "type": "object",
+              "properties": {
+                "host": {},
+                "form": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "patternProperties": {
+                        "^[0-9]+$": {
+                          "$ref": "#/definitions/Element"
+                        }
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "options": {
+                  "$ref": "#/definitions/FormControlControllerOptions"
+                },
+                "handleFormData": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleFormSubmit": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleFormReset": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleInteraction": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "checkFormValidity": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "reportFormValidity": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "typeToSelectString",
+              "type": "string",
+              "privacy": "private",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "typeToSelectTimeout",
+              "type": "number",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "closeWatcher",
+              "type": {
+                "text": "CloseWatcher | null | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "popup",
+              "type": "object",
+              "properties": {
+                "anchorEl": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "cleanup": {},
+                "popup": {
+                  "description": "A reference to the internal popup container. Useful for animating and styling the popup with JavaScript.",
+                  "$ref": "#/definitions/HTMLElement"
+                },
+                "arrowEl": {
+                  "$ref": "#/definitions/HTMLElement"
+                },
+                "anchor": {
+                  "description": "The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor\nelement `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the\n`anchor` slot instead.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "active": {
+                  "description": "Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn\ndown and the popup will be hidden.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "placement": {
+                  "description": "The preferred placement of the popup. Note that the actual placement will vary as configured to keep the\npanel inside of the viewport.",
+                  "enum": [
+                    "bottom",
+                    "bottom-end",
+                    "bottom-start",
+                    "left",
+                    "left-end",
+                    "left-start",
+                    "right",
+                    "right-end",
+                    "right-start",
+                    "top",
+                    "top-end",
+                    "top-start"
+                  ],
+                  "type": "string",
+                  "default": "top"
+                },
+                "strategy": {
+                  "description": "Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is\nclipped, using a `fixed` position strategy can often workaround it.",
+                  "enum": [
+                    "absolute",
+                    "fixed"
+                  ],
+                  "type": "string",
+                  "default": "absolute"
+                },
+                "distance": {
+                  "description": "The distance in pixels from which to offset the panel away from its anchor.",
+                  "type": "number",
+                  "default": 0
+                },
+                "skidding": {
+                  "description": "The distance in pixels from which to offset the panel along its anchor.",
+                  "type": "number",
+                  "default": 0
+                },
+                "arrow": {
+                  "description": "Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and\n`--arrow-color` custom properties. For additional customizations, you can also target the arrow using\n`::part(arrow)` in your stylesheet.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "arrowPlacement": {
+                  "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+                  "enum": [
+                    "anchor",
+                    "center",
+                    "end",
+                    "start"
+                  ],
+                  "type": "string",
+                  "default": "anchor"
+                },
+                "arrowPadding": {
+                  "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+                  "type": "number",
+                  "default": 10
+                },
+                "flip": {
+                  "description": "When set, placement of the popup will flip to the opposite site to keep it in view. You can use\n`flipFallbackPlacements` to further configure how the fallback placement is determined.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "flipFallbackPlacements": {
+                  "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+                  "type": "string",
+                  "default": ""
+                },
+                "flipFallbackStrategy": {
+                  "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+                  "enum": [
+                    "best-fit",
+                    "initial"
+                  ],
+                  "type": "string",
+                  "default": "best-fit"
+                },
+                "flipBoundary": {
+                  "description": "The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  ]
+                },
+                "flipPadding": {
+                  "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+                  "type": "number",
+                  "default": 0
+                },
+                "shift": {
+                  "description": "Moves the popup along the axis to keep it in view when clipped.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "shiftBoundary": {
+                  "description": "The shift boundary describes clipping element(s) that overflow will be checked relative to when shifting. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  ]
+                },
+                "shiftPadding": {
+                  "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+                  "type": "number",
+                  "default": 0
+                },
+                "autoSize": {
+                  "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+                  "enum": [
+                    "both",
+                    "horizontal",
+                    "vertical"
+                  ],
+                  "type": "string"
+                },
+                "sync": {
+                  "description": "Syncs the popup's width or height to that of the anchor element.",
+                  "enum": [
+                    "both",
+                    "height",
+                    "width"
+                  ],
+                  "type": "string"
+                },
+                "autoSizeBoundary": {
+                  "description": "The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  ]
+                },
+                "autoSizePadding": {
+                  "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+                  "type": "number",
+                  "default": 0
+                },
+                "hoverBridge": {
+                  "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "updateHoverBridge": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "dir": {
+                  "type": "string",
+                  "default": ""
+                },
+                "lang": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "combobox",
+              "type": {
+                "text": "HTMLSlotElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "displayInput",
+              "type": {
+                "text": "HTMLInputElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "valueInput",
+              "type": {
+                "text": "HTMLInputElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "listbox",
+              "type": {
+                "text": "HTMLSlotElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasFocus",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "displayLabel",
+              "type": "string",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "currentOption",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                  "type": "string",
+                  "default": ""
+                },
+                "disabled": {
+                  "description": "Draws the option in a disabled state, preventing selection.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "cachedTextLabel": {
+                  "type": "string",
+                  "default": ""
+                },
+                "selected": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "current": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "labels": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/HTMLElement"
+                  }
+                },
+                "dir": {
+                  "type": "string",
+                  "default": ""
+                },
+                "lang": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "selectedOptions",
+              "type": "array",
+              "default": [],
+              "items": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "disabled": {
+                    "description": "Draws the option in a disabled state, preventing selection.",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "cachedTextLabel": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "selected": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "current": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/HTMLElement"
+                    }
+                  },
+                  "dir": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "lang": {
+                    "type": "string",
+                    "default": ""
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the select, submitted as a name/value pair with form data.",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
+              "attribute": "value",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The select's size.",
+              "attribute": "size",
+              "reflects": true,
+              "enum": [
+                "large",
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": "string",
+              "default": "",
+              "description": "Placeholder text to show as a hint when the select is empty.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": "boolean",
+              "default": false,
+              "description": "Allows more than one option to be selected.",
+              "attribute": "multiple",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxOptionsVisible",
+              "type": "number",
+              "default": 3,
+              "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+              "attribute": "max-options-visible"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the select control.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clearable",
+              "type": "boolean",
+              "default": false,
+              "description": "Adds a clear button when the select is not empty.",
+              "attribute": "clearable"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hoist",
+              "type": "boolean",
+              "default": false,
+              "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+              "attribute": "hoist"
+            },
+            {
+              "kind": "field",
+              "name": "filled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws a filled select.",
+              "attribute": "filled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pill",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws a pill-style select with rounded edges.",
+              "attribute": "pill",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": "string",
+              "default": "bottom",
+              "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
+              "attribute": "placement",
+              "reflects": true,
+              "enum": [
+                "bottom",
+                "top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "helpText",
+              "type": "string",
+              "default": "",
+              "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "attribute": "help-text"
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": "string",
+              "default": "",
+              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+              "attribute": "form",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "The select's required attribute.",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "getTag",
+              "type": "object",
+              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+              "attribute": "getTag",
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "description": "Gets the validity state object",
+              "readonly": true,
+              "type": "object",
+              "properties": {
+                "badInput": {
+                  "type": "boolean"
+                },
+                "customError": {
+                  "type": "boolean"
+                },
+                "patternMismatch": {
+                  "type": "boolean"
+                },
+                "rangeOverflow": {
+                  "type": "boolean"
+                },
+                "rangeUnderflow": {
+                  "type": "boolean"
+                },
+                "stepMismatch": {
+                  "type": "boolean"
+                },
+                "tooLong": {
+                  "type": "boolean"
+                },
+                "tooShort": {
+                  "type": "boolean"
+                },
+                "typeMismatch": {
+                  "type": "boolean"
+                },
+                "valid": {
+                  "type": "boolean"
+                },
+                "valueMissing": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "description": "Gets the validation message",
+              "readonly": true,
+              "type": "string"
+            },
+            {
+              "kind": "method",
+              "name": "addOpenListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "removeOpenListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleFocus",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleBlur",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentFocusIn",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentMouseDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleLabelClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleComboboxMouseDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleComboboxKeyDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleClearClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleClearMouseDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOptionClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDefaultSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getAllOptions",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFirstOption",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "setCurrentOption",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdOption | null"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "setSelectedOptions",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdOption | SdOption[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleOptionSelection",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdOption"
+                  }
+                },
+                {
+                  "name": "force",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "selectionChanged",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "tags",
+              "privacy": "protected",
+              "readonly": true,
+              "type": "array",
+              "items": {}
+            },
+            {
+              "kind": "method",
+              "name": "handleInvalid",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleValueChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleOpenChange"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Shows the listbox."
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "description": "Hides the listbox."
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
+            },
+            {
+              "kind": "method",
+              "name": "getForm",
+              "return": {
+                "type": {
+                  "text": "HTMLFormElement | null"
+                }
+              },
+              "description": "Gets the associated form, if one exists."
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
+            },
+            {
+              "kind": "method",
+              "name": "setCustomValidity",
+              "parameters": [
+                {
+                  "name": "message",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Sets a custom validation message. Pass an empty string to restore validity."
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "FocusOptions"
+                  }
+                }
+              ],
+              "description": "Sets focus on the control."
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "description": "Removes focus from the control."
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when the control's value changes.",
+              "name": "sl-change"
+            },
+            {
+              "description": "Emitted when the control's value is cleared.",
+              "name": "sl-clear"
+            },
+            {
+              "description": "Emitted when the control receives input.",
+              "name": "sl-input"
+            },
+            {
+              "description": "Emitted when the control gains focus.",
+              "name": "sl-focus"
+            },
+            {
+              "description": "Emitted when the control loses focus.",
+              "name": "sl-blur"
+            },
+            {
+              "description": "Emitted when the select's menu opens.",
+              "name": "sl-show"
+            },
+            {
+              "description": "Emitted after the select's menu opens and all animations are complete.",
+              "name": "sl-after-show"
+            },
+            {
+              "description": "Emitted when the select's menu closes.",
+              "name": "sl-hide"
+            },
+            {
+              "description": "Emitted after the select's menu closes and all animations are complete.",
+              "name": "sl-after-hide"
+            },
+            {
+              "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied.",
+              "name": "sl-invalid"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the select, submitted as a name/value pair with form data.",
+              "fieldName": "name"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
+              "fieldName": "value",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The select's size.",
+              "fieldName": "size",
+              "enum": [
+                "large",
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "default": "",
+              "description": "Placeholder text to show as a hint when the select is empty.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "multiple",
+              "type": "boolean",
+              "default": false,
+              "description": "Allows more than one option to be selected.",
+              "fieldName": "multiple"
+            },
+            {
+              "name": "max-options-visible",
+              "type": "number",
+              "default": 3,
+              "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+              "fieldName": "maxOptionsVisible"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the select control.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "default": false,
+              "description": "Adds a clear button when the select is not empty.",
+              "fieldName": "clearable"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
+              "fieldName": "open"
+            },
+            {
+              "name": "hoist",
+              "type": "boolean",
+              "default": false,
+              "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+              "fieldName": "hoist"
+            },
+            {
+              "name": "filled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws a filled select.",
+              "fieldName": "filled"
+            },
+            {
+              "name": "pill",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws a pill-style select with rounded edges.",
+              "fieldName": "pill"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
+            },
+            {
+              "name": "placement",
+              "type": "string",
+              "default": "bottom",
+              "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
+              "fieldName": "placement",
+              "enum": [
+                "bottom",
+                "top"
+              ]
+            },
+            {
+              "name": "help-text",
+              "type": "string",
+              "default": "",
+              "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "fieldName": "helpText"
+            },
+            {
+              "name": "form",
+              "type": "string",
+              "default": "",
+              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+              "fieldName": "form"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "The select's required attribute.",
+              "fieldName": "required"
+            },
+            {
+              "name": "getTag",
+              "type": "object",
+              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+              "fieldName": "getTag",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "summary": "Selects allow you to choose items from a menu of predefined options.",
+          "tagName": "sd-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdSelect",
+            "module": "src/components/option/select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-select",
+          "declaration": {
+            "name": "SdSelect",
+            "module": "src/components/option/select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/popup/popup.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdPopup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "anchorEl",
+              "type": {
+                "text": "Element | null | undefined"
+              },
+              "privacy": "private",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "cleanup",
+              "type": {
+                "text": "ReturnType<typeof autoUpdate> | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "popup",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "description": "A reference to the internal popup container. Useful for animating and styling the popup with JavaScript."
+            },
+            {
+              "kind": "field",
+              "name": "arrowEl",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "anchor",
+              "type": {
+                "text": "Element | string | undefined"
+              },
+              "description": "The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor\nelement `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the\n`anchor` slot instead.",
+              "attribute": "anchor",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": "boolean",
+              "default": false,
+              "description": "Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn\ndown and the popup will be hidden.",
+              "attribute": "active",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": "string",
+              "default": "top",
+              "description": "The preferred placement of the popup. Note that the actual placement will vary as configured to keep the\npanel inside of the viewport.",
+              "attribute": "placement",
+              "reflects": true,
+              "enum": [
+                "bottom",
+                "bottom-end",
+                "bottom-start",
+                "left",
+                "left-end",
+                "left-start",
+                "right",
+                "right-end",
+                "right-start",
+                "top",
+                "top-end",
+                "top-start"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "strategy",
+              "type": "string",
+              "default": "absolute",
+              "description": "Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is\nclipped, using a `fixed` position strategy can often workaround it.",
+              "attribute": "strategy",
+              "reflects": true,
+              "enum": [
+                "absolute",
+                "fixed"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "distance",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel away from its anchor.",
+              "attribute": "distance"
+            },
+            {
+              "kind": "field",
+              "name": "skidding",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel along its anchor.",
+              "attribute": "skidding"
+            },
+            {
+              "kind": "field",
+              "name": "arrow",
+              "type": "boolean",
+              "default": false,
+              "description": "Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and\n`--arrow-color` custom properties. For additional customizations, you can also target the arrow using\n`::part(arrow)` in your stylesheet.",
+              "attribute": "arrow"
+            },
+            {
+              "kind": "field",
+              "name": "arrowPlacement",
+              "type": "string",
+              "default": "anchor",
+              "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+              "attribute": "arrow-placement",
+              "enum": [
+                "anchor",
+                "center",
+                "end",
+                "start"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "arrowPadding",
+              "type": "number",
+              "default": 10,
+              "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+              "attribute": "arrow-padding"
+            },
+            {
+              "kind": "field",
+              "name": "flip",
+              "type": "boolean",
+              "default": false,
+              "description": "When set, placement of the popup will flip to the opposite site to keep it in view. You can use\n`flipFallbackPlacements` to further configure how the fallback placement is determined.",
+              "attribute": "flip"
+            },
+            {
+              "kind": "field",
+              "name": "flipFallbackPlacements",
+              "type": "string",
+              "default": "",
+              "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+              "attribute": "flip-fallback-placements"
+            },
+            {
+              "kind": "field",
+              "name": "flipFallbackStrategy",
+              "type": "string",
+              "default": "best-fit",
+              "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+              "attribute": "flip-fallback-strategy",
+              "enum": [
+                "best-fit",
+                "initial"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "flipBoundary",
+              "type": {
+                "text": "Element | Element[] | undefined"
+              },
+              "description": "The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+              "attribute": "flipBoundary",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Element"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "flipPadding",
+              "type": "number",
+              "default": 0,
+              "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+              "attribute": "flip-padding"
+            },
+            {
+              "kind": "field",
+              "name": "shift",
+              "type": "boolean",
+              "default": false,
+              "description": "Moves the popup along the axis to keep it in view when clipped.",
+              "attribute": "shift"
+            },
+            {
+              "kind": "field",
+              "name": "shiftBoundary",
+              "type": {
+                "text": "Element | Element[] | undefined"
+              },
+              "description": "The shift boundary describes clipping element(s) that overflow will be checked relative to when shifting. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+              "attribute": "shiftBoundary",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Element"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "shiftPadding",
+              "type": "number",
+              "default": 0,
+              "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+              "attribute": "shift-padding"
+            },
+            {
+              "kind": "field",
+              "name": "autoSize",
+              "type": "string",
+              "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+              "attribute": "auto-size",
+              "enum": [
+                "both",
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "sync",
+              "type": "string",
+              "description": "Syncs the popup's width or height to that of the anchor element.",
+              "attribute": "sync",
+              "enum": [
+                "both",
+                "height",
+                "width"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "autoSizeBoundary",
+              "type": {
+                "text": "Element | Element[] | undefined"
+              },
+              "description": "The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+              "attribute": "autoSizeBoundary",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Element"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "autoSizePadding",
+              "type": "number",
+              "default": 0,
+              "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+              "attribute": "auto-size-padding"
+            },
+            {
+              "kind": "field",
+              "name": "hoverBridge",
+              "type": "boolean",
+              "default": false,
+              "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+              "attribute": "hover-bridge"
+            },
+            {
+              "kind": "method",
+              "name": "getPopup",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getArrowElement",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleAnchorChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "start",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "stop",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reposition",
+              "description": "Forces the popup to recalculate and reposition itself."
+            },
+            {
+              "kind": "field",
+              "name": "updateHoverBridge",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            }
+          ],
+          "attributes": [
+            {
+              "name": "anchor",
+              "type": {
+                "text": "Element | string | undefined"
+              },
+              "description": "The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor\nelement `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the\n`anchor` slot instead.",
+              "fieldName": "anchor",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "active",
+              "type": "boolean",
+              "default": false,
+              "description": "Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn\ndown and the popup will be hidden.",
+              "fieldName": "active"
+            },
+            {
+              "name": "placement",
+              "type": "string",
+              "default": "top",
+              "description": "The preferred placement of the popup. Note that the actual placement will vary as configured to keep the\npanel inside of the viewport.",
+              "fieldName": "placement",
+              "enum": [
+                "bottom",
+                "bottom-end",
+                "bottom-start",
+                "left",
+                "left-end",
+                "left-start",
+                "right",
+                "right-end",
+                "right-start",
+                "top",
+                "top-end",
+                "top-start"
+              ]
+            },
+            {
+              "name": "strategy",
+              "type": "string",
+              "default": "absolute",
+              "description": "Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is\nclipped, using a `fixed` position strategy can often workaround it.",
+              "fieldName": "strategy",
+              "enum": [
+                "absolute",
+                "fixed"
+              ]
+            },
+            {
+              "name": "distance",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel away from its anchor.",
+              "fieldName": "distance"
+            },
+            {
+              "name": "skidding",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel along its anchor.",
+              "fieldName": "skidding"
+            },
+            {
+              "name": "arrow",
+              "type": "boolean",
+              "default": false,
+              "description": "Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and\n`--arrow-color` custom properties. For additional customizations, you can also target the arrow using\n`::part(arrow)` in your stylesheet.",
+              "fieldName": "arrow"
+            },
+            {
+              "name": "arrow-placement",
+              "type": "string",
+              "default": "anchor",
+              "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+              "fieldName": "arrowPlacement",
+              "enum": [
+                "anchor",
+                "center",
+                "end",
+                "start"
+              ]
+            },
+            {
+              "name": "arrow-padding",
+              "type": "number",
+              "default": 10,
+              "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+              "fieldName": "arrowPadding"
+            },
+            {
+              "name": "flip",
+              "type": "boolean",
+              "default": false,
+              "description": "When set, placement of the popup will flip to the opposite site to keep it in view. You can use\n`flipFallbackPlacements` to further configure how the fallback placement is determined.",
+              "fieldName": "flip"
+            },
+            {
+              "name": "flip-fallback-placements",
+              "type": "string",
+              "default": "",
+              "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+              "fieldName": "flipFallbackPlacements"
+            },
+            {
+              "name": "flip-fallback-strategy",
+              "type": "string",
+              "default": "best-fit",
+              "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+              "fieldName": "flipFallbackStrategy",
+              "enum": [
+                "best-fit",
+                "initial"
+              ]
+            },
+            {
+              "name": "flipBoundary",
+              "type": {
+                "text": "Element | Element[] | undefined"
+              },
+              "description": "The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+              "fieldName": "flipBoundary",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Element"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "flip-padding",
+              "type": "number",
+              "default": 0,
+              "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+              "fieldName": "flipPadding"
+            },
+            {
+              "name": "shift",
+              "type": "boolean",
+              "default": false,
+              "description": "Moves the popup along the axis to keep it in view when clipped.",
+              "fieldName": "shift"
+            },
+            {
+              "name": "shiftBoundary",
+              "type": {
+                "text": "Element | Element[] | undefined"
+              },
+              "description": "The shift boundary describes clipping element(s) that overflow will be checked relative to when shifting. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+              "fieldName": "shiftBoundary",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Element"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "shift-padding",
+              "type": "number",
+              "default": 0,
+              "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+              "fieldName": "shiftPadding"
+            },
+            {
+              "name": "auto-size",
+              "type": "string",
+              "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+              "fieldName": "autoSize",
+              "enum": [
+                "both",
+                "horizontal",
+                "vertical"
+              ]
+            },
+            {
+              "name": "sync",
+              "type": "string",
+              "description": "Syncs the popup's width or height to that of the anchor element.",
+              "fieldName": "sync",
+              "enum": [
+                "both",
+                "height",
+                "width"
+              ]
+            },
+            {
+              "name": "autoSizeBoundary",
+              "type": {
+                "text": "Element | Element[] | undefined"
+              },
+              "description": "The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+              "fieldName": "autoSizeBoundary",
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Element"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Element"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "auto-size-padding",
+              "type": "number",
+              "default": 0,
+              "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+              "fieldName": "autoSizePadding"
+            },
+            {
+              "name": "hover-bridge",
+              "type": "boolean",
+              "default": false,
+              "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+              "fieldName": "hoverBridge"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-popup",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdPopup",
+            "module": "src/components/popup/popup.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-popup",
+          "declaration": {
+            "name": "SdPopup",
+            "module": "src/components/popup/popup.ts"
           }
         }
       ]
@@ -3315,96 +5381,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/link/link.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdLink",
-          "members": [
-            {
-              "kind": "field",
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "attribute": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "href",
-              "type": "string",
-              "default": "",
-              "attribute": "href"
-            },
-            {
-              "kind": "field",
-              "name": "download",
-              "type": "string",
-              "default": "",
-              "attribute": "download"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "fieldName": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            },
-            {
-              "name": "href",
-              "type": "string",
-              "default": "",
-              "fieldName": "href"
-            },
-            {
-              "name": "download",
-              "type": "string",
-              "default": "",
-              "fieldName": "download"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-link",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdLink",
-          "declaration": {
-            "name": "SdLink",
-            "module": "src/components/link/link.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-link",
-          "declaration": {
-            "name": "SdLink",
-            "module": "src/components/link/link.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/rating/rating.ts",
       "declarations": [
         {
@@ -4298,18 +6274,10 @@
               "kind": "field",
               "name": "input",
               "type": {
-                "text": "HTMLInputElement | null"
+                "text": "HTMLInputElement | undefined"
               },
               "privacy": "private",
-              "readonly": true,
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/HTMLInputElement"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "readonly": true
             },
             {
               "kind": "method",
@@ -5049,7 +7017,8 @@
             },
             {
               "kind": "method",
-              "name": "_sidebarControl"
+              "name": "_sidebarControl",
+              "privacy": "private"
             }
           ],
           "superclass": {

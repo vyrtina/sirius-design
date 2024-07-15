@@ -1,68 +1,53 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 import "./text-input";
+import "../../icons/src/agriculture";
+import "../../icons/src/photo_camera";
+import { error } from "console";
 
 const meta: Meta = {
     title: "components/text-input",
     component: "sd-text-input",
-    argTypes: {
-        disabled: {
-            type: "boolean",
-        },
-        required: {
-            type: "boolean",
-        },
-        useIcon: {
-            type: "boolean",
-        },
-        icon: {
-            type: "string",
-        },
-        label: {
-            type: "string",
-        },
-        placeholder: {
-            type: "string",
-        },
-        pattern: {
-            type: "string",
-        },
-        minLength: {
-            type: "number",
-        },
-        maxLength: {
-            type: "number",
-        },
-        textError: {
-            type: "string",
-        },
+    tags: ["autodocs"],
+    args: {
+        label: "label",
+        placeholder: "placeholder",
+        type: "text",
+        "help-text": "this is a help text",
+        clearable: true,
     },
 };
 
 export default meta;
 type Story = StoryObj;
 
-export const Default: Story = {
+export const Text: Story = {};
+
+export const WithIcons: Story = {
+    render: ({ label, placeholder, type, clearable }) => html`
+        <sd-text-input
+            label=${label}
+            placeholder=${placeholder}
+            type=${type}
+            ?clearable=${clearable}>
+            <sd-icon-agriculture slot="icon"></sd-icon-agriculture>
+            <sd-icon-photo-camera slot="trailing-icon"></sd-icon-photo-camera>
+        </sd-text-input>
+    `,
+};
+
+export const Password: Story = {
     args: {
-        disabled: false,
-        required: false,
-        useIcon: false,
-        icon: "home",
-        label: "label",
-        placeholder: "placeholder",
-        defaultValue: "",
+        type: "password",
+        passwordToggle: true,
     },
 };
 
 export const Invalid: Story = {
     args: {
-        disabled: false,
-        required: false,
-        useIcon: false,
-        icon: "home",
-        label: "label",
-        placeholder: "placeholder",
-        defaultValue: "wrong input",
-        pattern: "\\d{4,4}",
-        textError: "Input should be a 4 digit code",
+        value: "as68ka",
+        error: true,
+        "error-text": "string must only contains caracters",
+        required: true,
     },
 };
