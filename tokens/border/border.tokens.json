@@ -1,27 +1,37 @@
 {
     "border": {
+        "type": "dimension",
         "radius": {
             "circle": {
                 "value": "999999rem"
             },
-            "large": {
+            "extra-small": {
+                "value": "0.25rem"
+            },
+            "small": {
                 "value": "0.5rem"
             },
             "medium": {
-                "value": "0.25rem"
+                "value": "0.75rem"
+            },
+            "large": {
+                "value": "1rem"
+            },
+            "exra-large": {
+                "value": "1.75rem"
             }
         },
         "width": {
             "0": {
                 "value": "0px"
             },
-            "s": {
+            "small": {
                 "value": "1px"
             },
-            "m": {
+            "medium": {
                 "value": "2px"
             },
-            "l": {
+            "large": {
                 "value": "4px"
             }
         }

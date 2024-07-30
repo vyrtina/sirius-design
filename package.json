@@ -24,7 +24,8 @@
         "update-icon-components": "npx  gulp --gulpfile src/icons/gulpfile.js",
         "update-custom-elements": "npx cem analyze",
         "test-storybook": "test-storybook",
-        "link": "npm link"
+        "link": "npm link",
+        "build-token-file": "node tokens/build_index.js"
     },
     "author": "Fakroon",
     "license": "MIT",
@@ -57,7 +58,7 @@
         "eslint-plugin-n": "^16.5.0",
         "eslint-plugin-promise": "^6.1.1",
         "glob": "^10.3.10",
-        "gulp": "^4.0.2",
+        "gulp": "^5.0.0",
         "lit": "^3.1.0",
         "sass": "^1.69.5",
         "storybook": "^8.0.5",
@@ -91,6 +92,9 @@
         "gulp-svgstore": "^9.0.0",
         "gulp-template": "^6.0.0",
         "gulp-wrap": "^0.15.0",
+        "json-concat": "^0.0.1",
+        "json-merger": "^1.1.5",
         "react": "^18.2.0"
     }
 }
+

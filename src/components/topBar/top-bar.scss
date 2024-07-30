@@ -32,7 +32,7 @@
 
 ::slotted(sd-search-bar) {
     width: 100%;
-    padding: $sd-space-050 0;
+    padding: $sd-spacing-050 0;
 }
 
 .links {
@@ -75,7 +75,7 @@
     height: 0;
     width: 100%;
     justify-content: center;
-    gap: $sd-space-100;
+    gap: $sd-spacing-100;
     padding: 0 var(--sd-margin);
     position: absolute;
     top: $sd-header-with-search-height-xs;

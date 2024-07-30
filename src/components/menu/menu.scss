@@ -1,0 +1,16 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/layer.scss";
+
+:host {
+    display: block;
+    position: relative;
+    @include layer.surface-2();
+    border-radius: tokens.$sd-border-radius-extra-small;
+    padding: 0.5rem 0;
+    overflow: auto;
+    overscroll-behavior: none;
+}
+
+::slotted(sd-divider) {
+    --spacing: 0.5rem;
+}

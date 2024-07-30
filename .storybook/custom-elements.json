@@ -4,6 +4,197 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/components/breadcrumb/breadcrumb-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdBreadcrumbItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "description": "Tells the browser where to open the link. Only used when `href` is set.",
+              "attribute": "target",
+              "enum": [
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "type": "string",
+              "default": "noreferrer noopener",
+              "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
+              "attribute": "rel"
+            },
+            {
+              "kind": "field",
+              "name": "separatorRight",
+              "type": "boolean",
+              "default": false,
+              "attribute": "separator-right"
+            },
+            {
+              "kind": "method",
+              "name": "renderSeparator",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": "string",
+              "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
+              "fieldName": "href"
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "description": "Tells the browser where to open the link. Only used when `href` is set.",
+              "fieldName": "target",
+              "enum": [
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "name": "rel",
+              "type": "string",
+              "default": "noreferrer noopener",
+              "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
+              "fieldName": "rel"
+            },
+            {
+              "name": "separator-right",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "separatorRight"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-breadcrumb-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdBreadcrumbItem",
+            "module": "src/components/breadcrumb/breadcrumb-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-breadcrumb-item",
+          "declaration": {
+            "name": "SdBreadcrumbItem",
+            "module": "src/components/breadcrumb/breadcrumb-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/breadcrumb/breadcrumb.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdBreadcrumb",
+          "cssParts": [
+            {
+              "description": "The component's base wrapper.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "One or more breadcrumb items to display.",
+              "name": ""
+            },
+            {
+              "description": "The separator to use between breadcrumb items. Works best with `<sl-icon>`.",
+              "name": "separator"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "defaultSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotChange",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "summary": "Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.",
+          "tagName": "sd-breadcrumb",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdBreadcrumb",
+            "module": "src/components/breadcrumb/breadcrumb.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-breadcrumb",
+          "declaration": {
+            "name": "SdBreadcrumb",
+            "module": "src/components/breadcrumb/breadcrumb.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/button/button.ts",
       "declarations": [
         {
@@ -95,19 +286,18 @@
             },
             {
               "kind": "field",
-              "name": "iconOnly",
-              "type": "boolean",
-              "default": false,
-              "description": "render the button as an icon button",
-              "attribute": "iconOnly"
-            },
-            {
-              "kind": "field",
               "name": "disabled",
               "type": "boolean",
               "default": false,
               "attribute": "disabled",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "description": "the label of the button. can be used as a replacement for the slot. for icon buttons, this field is required",
+              "attribute": "label"
             },
             {
               "kind": "field",
@@ -241,7 +431,6 @@
               "type": {
                 "text": "HTMLButtonElement | HTMLLinkElement | undefined"
               },
-              "privacy": "private",
               "readonly": true,
               "anyOf": [
                 {
@@ -413,8 +602,7 @@
             },
             {
               "kind": "method",
-              "name": "renderContent",
-              "privacy": "private"
+              "name": "renderContent"
             }
           ],
           "attributes": [
@@ -443,17 +631,16 @@
               ]
             },
             {
-              "name": "iconOnly",
-              "type": "boolean",
-              "default": false,
-              "description": "render the button as an icon button",
-              "fieldName": "iconOnly"
-            },
-            {
               "name": "disabled",
               "type": "boolean",
               "default": false,
               "fieldName": "disabled"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "description": "the label of the button. can be used as a replacement for the slot. for icon buttons, this field is required",
+              "fieldName": "label"
             },
             {
               "name": "type",
@@ -589,162 +776,6 @@
           "declaration": {
             "name": "SdButton",
             "module": "src/components/button/button.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/carousel/carousel.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "Carousel",
-          "members": [
-            {
-              "kind": "field",
-              "name": "autoTransition",
-              "type": "boolean",
-              "default": true,
-              "attribute": "autoTransition"
-            },
-            {
-              "kind": "field",
-              "name": "count",
-              "type": "number",
-              "default": 0,
-              "attribute": "count"
-            },
-            {
-              "kind": "field",
-              "name": "_slideIndex",
-              "type": "number",
-              "privacy": "private",
-              "default": 0
-            },
-            {
-              "kind": "method",
-              "name": "_showSlideRadio",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_changeRadio",
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_showSlide",
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_prevSlide"
-            },
-            {
-              "kind": "method",
-              "name": "_nextSlide"
-            },
-            {
-              "kind": "method",
-              "name": "_autoShowSlides"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "autoTransition",
-              "type": "boolean",
-              "default": true,
-              "fieldName": "autoTransition"
-            },
-            {
-              "name": "count",
-              "type": "number",
-              "default": 0,
-              "fieldName": "count"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-carousel",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Carousel",
-          "declaration": {
-            "name": "Carousel",
-            "module": "src/components/carousel/carousel.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-carousel",
-          "declaration": {
-            "name": "Carousel",
-            "module": "src/components/carousel/carousel.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/carousel/slider.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "Slider",
-          "members": [],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-slider",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "Slider",
-          "declaration": {
-            "name": "Slider",
-            "module": "src/components/carousel/slider.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-slider",
-          "declaration": {
-            "name": "Slider",
-            "module": "src/components/carousel/slider.ts"
           }
         }
       ]
@@ -1156,7 +1187,7 @@
       "exports": [
         {
           "kind": "js",
-          "name": "SdCheckbox",
+          "name": "default",
           "declaration": {
             "name": "SdCheckbox",
             "module": "src/components/checkbox/checkbox.ts"
@@ -1246,302 +1277,102 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/icon/icon.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "sizes",
-          "default": "new Map<String, Number>([\r\n    [\"s\", 20],\r\n    [\"m\", 24],\r\n    [\"l\", 40],\r\n    [\"xl\", 48],\r\n])"
-        },
-        {
-          "kind": "class",
-          "description": "",
-          "name": "Icon",
-          "members": [
-            {
-              "kind": "field",
-              "name": "fill",
-              "type": "boolean",
-              "default": false,
-              "attribute": "fill"
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "edit",
-              "attribute": "name"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "attribute": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "renderSVG",
-              "privacy": "protected",
-              "return": {
-                "type": {
-                  "text": "unknown"
-                }
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "fill",
-              "type": "boolean",
-              "default": false,
-              "fieldName": "fill"
-            },
-            {
-              "name": "name",
-              "type": "string",
-              "default": "edit",
-              "fieldName": "name"
-            },
-            {
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "fieldName": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-icon",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "sizes",
-          "declaration": {
-            "name": "sizes",
-            "module": "src/components/icon/icon.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "Icon",
-          "declaration": {
-            "name": "Icon",
-            "module": "src/components/icon/icon.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-icon",
-          "declaration": {
-            "name": "Icon",
-            "module": "src/components/icon/icon.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/link/link.ts",
+      "path": "src/components/carousel/carousel.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdLink",
+          "name": "SdCarousel",
           "members": [
             {
               "kind": "field",
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "attribute": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "href",
-              "type": "string",
-              "default": "",
-              "attribute": "href"
-            },
-            {
-              "kind": "field",
-              "name": "download",
-              "type": "string",
-              "default": "",
-              "attribute": "download"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "size",
-              "type": "string",
-              "default": "m",
-              "fieldName": "size",
-              "enum": [
-                "l",
-                "m",
-                "s",
-                "xl"
-              ]
-            },
-            {
-              "name": "href",
-              "type": "string",
-              "default": "",
-              "fieldName": "href"
-            },
-            {
-              "name": "download",
-              "type": "string",
-              "default": "",
-              "fieldName": "download"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-link",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdLink",
-          "declaration": {
-            "name": "SdLink",
-            "module": "src/components/link/link.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-link",
-          "declaration": {
-            "name": "SdLink",
-            "module": "src/components/link/link.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/option/select-option.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdSelectOption",
-          "members": [
-            {
-              "kind": "field",
-              "name": "value",
-              "type": "string",
-              "default": "",
-              "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "disabled",
+              "name": "autoTransition",
               "type": "boolean",
-              "default": false,
-              "description": "Draws the option in a disabled state, preventing selection.",
-              "attribute": "disabled",
-              "reflects": true
+              "default": true,
+              "attribute": "autoTransition"
             },
             {
               "kind": "field",
-              "name": "cachedTextLabel",
-              "type": "string",
+              "name": "count",
+              "type": "number",
+              "default": 0,
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "_slideIndex",
+              "type": "number",
               "privacy": "private",
-              "default": ""
-            },
-            {
-              "kind": "field",
-              "name": "selected",
-              "type": "boolean",
-              "default": false
-            },
-            {
-              "kind": "field",
-              "name": "current",
-              "type": "boolean",
-              "default": false
-            },
-            {
-              "kind": "field",
-              "name": "labels",
-              "type": "array"
+              "default": 0
             },
             {
               "kind": "method",
-              "name": "handleDefaultSlotChange",
-              "privacy": "private"
+              "name": "_showSlideRadio",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
-              "name": "handleDisabledChange"
+              "name": "_changeRadio",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
-              "name": "handleSelectedChange"
+              "name": "_showSlide",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
-              "name": "handleValueChange"
+              "name": "_prevSlide"
             },
             {
               "kind": "method",
-              "name": "getTextLabel",
-              "description": "Returns a plain text label based on the option's content."
+              "name": "_nextSlide"
+            },
+            {
+              "kind": "method",
+              "name": "_autoShowSlides"
             }
           ],
           "attributes": [
             {
-              "name": "value",
-              "type": "string",
-              "default": "",
-              "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
-              "fieldName": "value"
+              "name": "autoTransition",
+              "type": "boolean",
+              "default": true,
+              "fieldName": "autoTransition"
             },
             {
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws the option in a disabled state, preventing selection.",
-              "fieldName": "disabled"
+              "name": "count",
+              "type": "number",
+              "default": 0,
+              "fieldName": "count"
             }
           ],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "tagName": "sd-select-option",
+          "tagName": "sd-carousel",
           "customElement": true
         }
       ],
@@ -1550,198 +1381,422 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "SdSelectOption",
-            "module": "src/components/option/select-option.ts"
+            "name": "SdCarousel",
+            "module": "src/components/carousel/carousel.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-select-option",
+          "name": "sd-carousel",
           "declaration": {
-            "name": "SdSelectOption",
-            "module": "src/components/option/select-option.ts"
+            "name": "SdCarousel",
+            "module": "src/components/carousel/carousel.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/option/select.ts",
+      "path": "src/components/carousel/slider.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdSelect",
-          "cssParts": [
-            {
-              "description": "The form control that wraps the label, input, and help text.",
-              "name": "form-control"
-            },
-            {
-              "description": "The label's wrapper.",
-              "name": "form-control-label"
-            },
-            {
-              "description": "The select's wrapper.",
-              "name": "form-control-input"
-            },
-            {
-              "description": "The help text's wrapper.",
-              "name": "form-control-help-text"
-            },
-            {
-              "description": "The container the wraps the prefix, combobox, clear icon, and expand button.",
-              "name": "combobox"
-            },
-            {
-              "description": "The container that wraps the prefix slot.",
-              "name": "prefix"
-            },
-            {
-              "description": "The element that displays the selected option's label, an `<input>` element.",
-              "name": "display-input"
-            },
-            {
-              "description": "The listbox container where options are slotted.",
-              "name": "listbox"
-            },
-            {
-              "description": "The container that houses option tags when `multiselect` is used.",
-              "name": "tags"
-            },
-            {
-              "description": "The individual tags that represent each multiselect option.",
-              "name": "tag"
-            },
-            {
-              "description": "The tag's base part.",
-              "name": "tag__base"
-            },
-            {
-              "description": "The tag's content part.",
-              "name": "tag__content"
-            },
-            {
-              "description": "The tag's remove button.",
-              "name": "tag__remove-button"
-            },
-            {
-              "description": "The tag's remove button base part.",
-              "name": "tag__remove-button__base"
-            },
-            {
-              "description": "The clear button.",
-              "name": "clear-button"
-            },
-            {
-              "description": "The container that wraps the expand icon.",
-              "name": "expand-icon"
-            }
-          ],
-          "slots": [
-            {
-              "description": "The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.",
-              "name": ""
-            },
-            {
-              "description": "The input's label. Alternatively, you can use the `label` attribute.",
-              "name": "label"
-            },
-            {
-              "description": "Used to prepend a presentational icon or similar element to the combobox.",
-              "name": "prefix"
-            },
-            {
-              "description": "An icon to use in lieu of the default clear icon.",
-              "name": "clear-icon"
-            },
-            {
-              "description": "The icon to show when the control is expanded and collapsed. Rotates on open and close.",
-              "name": "expand-icon"
-            },
-            {
-              "description": "Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.",
-              "name": "help-text"
-            }
-          ],
+          "name": "SdCarouselSlider",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-carousel-slider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdCarouselSlider",
+            "module": "src/components/carousel/slider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-carousel-slider",
+          "declaration": {
+            "name": "SdCarouselSlider",
+            "module": "src/components/carousel/slider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/drawer/drawer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdDrawer",
           "members": [
             {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sl-blur\", \"sl-input\"],\r\n    })",
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
+              "kind": "field",
+              "name": "originalTrigger",
+              "type": {
+                "text": "HTMLElement | null"
               },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "typeToSelectString",
-              "type": "string",
               "privacy": "private",
-              "default": ""
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/HTMLElement"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             {
-              "kind": "field",
-              "name": "typeToSelectTimeout",
-              "type": "number",
-              "privacy": "private"
+              "kind": "method",
+              "name": "modal",
+              "privacy": "public",
+              "default": "new Modal(this)"
             },
             {
               "kind": "field",
               "name": "closeWatcher",
               "type": {
-                "text": "CloseWatcher | null | undefined"
+                "text": "CloseWatcher | null"
               },
               "privacy": "private"
             },
+            {
+              "kind": "field",
+              "name": "drawer",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "overlay",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "visible",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the drawer is visible. You can toggle this attribute to show and hide the drawer, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the drawer's visible state.",
+              "attribute": "visible",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The drawer's label as displayed in the header. You should always include a relevant label even when using\n`no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": "string",
+              "default": "start",
+              "description": "Side from which the drawer will appear.",
+              "attribute": "placement",
+              "reflects": true,
+              "enum": [
+                "bottom",
+                "end",
+                "start",
+                "top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "contained",
+              "type": "boolean",
+              "default": false,
+              "description": "By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of\nits parent element, set this attribute and add `position: relative` to the parent.",
+              "attribute": "contained",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "noHeader",
+              "type": "boolean",
+              "default": false,
+              "description": "Removes the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the drawer.",
+              "attribute": "no-header",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "noBackdrop",
+              "type": "boolean",
+              "default": false,
+              "description": "If true, the backdrop is not rendered.",
+              "attribute": "no-backdrop",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "collapsed",
+              "type": "boolean",
+              "default": false,
+              "description": "if the variant is push, collapse the sidebar to a minimized size",
+              "attribute": "collapsed"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": "string",
+              "default": "overlay",
+              "description": "The variant to use.",
+              "attribute": "variant",
+              "enum": [
+                "overlay",
+                "push"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "requestClose",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "source",
+                  "type": {
+                    "text": "\"close-button\" | \"keyboard\" | \"overlay\""
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addOpenListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "removeOpenListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleOpenChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleNoModalChange"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Shows the drawer."
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "description": "Hides the drawer"
+            },
+            {
+              "kind": "method",
+              "name": "toggleDisplay"
+            },
+            {
+              "kind": "method",
+              "name": "renderDrawer",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderPanel",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "visible",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the drawer is visible. You can toggle this attribute to show and hide the drawer, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the drawer's visible state.",
+              "fieldName": "visible"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The drawer's label as displayed in the header. You should always include a relevant label even when using\n`no-header`, as it is required for proper accessibility. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
+            },
+            {
+              "name": "placement",
+              "type": "string",
+              "default": "start",
+              "description": "Side from which the drawer will appear.",
+              "fieldName": "placement",
+              "enum": [
+                "bottom",
+                "end",
+                "start",
+                "top"
+              ]
+            },
+            {
+              "name": "contained",
+              "type": "boolean",
+              "default": false,
+              "description": "By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of\nits parent element, set this attribute and add `position: relative` to the parent.",
+              "fieldName": "contained"
+            },
+            {
+              "name": "no-header",
+              "type": "boolean",
+              "default": false,
+              "description": "Removes the header. This will also remove the default close button, so please ensure you provide an easy,\naccessible way for users to dismiss the drawer.",
+              "fieldName": "noHeader"
+            },
+            {
+              "name": "no-backdrop",
+              "type": "boolean",
+              "default": false,
+              "description": "If true, the backdrop is not rendered.",
+              "fieldName": "noBackdrop"
+            },
+            {
+              "name": "collapsed",
+              "type": "boolean",
+              "default": false,
+              "description": "if the variant is push, collapse the sidebar to a minimized size",
+              "fieldName": "collapsed"
+            },
+            {
+              "name": "variant",
+              "type": "string",
+              "default": "overlay",
+              "description": "The variant to use.",
+              "fieldName": "variant",
+              "enum": [
+                "overlay",
+                "push"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-drawer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdDrawer",
+            "module": "src/components/drawer/drawer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-drawer",
+          "declaration": {
+            "name": "SdDrawer",
+            "module": "src/components/drawer/drawer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/divider/divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdDivider",
+          "members": [
+            {
+              "kind": "field",
+              "name": "vertical",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the divider in a vertical orientation.",
+              "attribute": "vertical",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleVerticalChange"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "vertical",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the divider in a vertical orientation.",
+              "fieldName": "vertical"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdDivider",
+            "module": "src/components/divider/divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-divider",
+          "declaration": {
+            "name": "SdDivider",
+            "module": "src/components/divider/divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/dropdown/dropdown.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdDropdown",
+          "members": [
             {
               "kind": "field",
               "name": "popup",
@@ -1961,164 +2016,531 @@
             },
             {
               "kind": "field",
-              "name": "combobox",
+              "name": "trigger",
               "type": {
-                "text": "HTMLSlotElement | undefined"
+                "text": "HTMLSlotElement"
               }
             },
             {
               "kind": "field",
-              "name": "displayInput",
+              "name": "panel",
               "type": {
-                "text": "HTMLInputElement | undefined"
+                "text": "HTMLSlotElement"
               }
             },
             {
               "kind": "field",
-              "name": "valueInput",
+              "name": "closeWatcher",
               "type": {
-                "text": "HTMLInputElement | undefined"
-              }
+                "text": "CloseWatcher | null"
+              },
+              "privacy": "private"
             },
             {
               "kind": "field",
-              "name": "listbox",
-              "type": {
-                "text": "HTMLSlotElement | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hasFocus",
+              "name": "open",
               "type": "boolean",
-              "privacy": "private",
-              "default": false
+              "default": false,
+              "description": "Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you\ncan use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.",
+              "attribute": "open",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "displayLabel",
+              "name": "placement",
               "type": "string",
-              "default": ""
+              "default": "bottom-start",
+              "description": "The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel\ninside of the viewport.",
+              "attribute": "placement",
+              "reflects": true,
+              "enum": [
+                "bottom",
+                "bottom-end",
+                "bottom-start",
+                "left",
+                "left-end",
+                "left-start",
+                "right",
+                "right-end",
+                "right-start",
+                "top",
+                "top-end",
+                "top-start"
+              ]
             },
             {
               "kind": "field",
-              "name": "currentOption",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the dropdown so the panel will not open.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "stayOpenOnSelect",
+              "type": "boolean",
+              "default": false,
+              "description": "By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for\ndropdowns that allow for multiple interactions.",
+              "attribute": "stay-open-on-select",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "containingElement",
+              "type": {
+                "text": "HTMLElement | undefined"
+              },
+              "description": "The dropdown will close when the user interacts outside of this element (e.g. clicking). Useful for composing other\ncomponents that use a dropdown internally."
+            },
+            {
+              "kind": "field",
+              "name": "distance",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel away from its trigger.",
+              "attribute": "distance"
+            },
+            {
+              "kind": "field",
+              "name": "skidding",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel along its trigger.",
+              "attribute": "skidding"
+            },
+            {
+              "kind": "field",
+              "name": "hoist",
+              "type": "boolean",
+              "default": false,
+              "description": "Enable this option to prevent the panel from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+              "attribute": "hoist"
+            },
+            {
+              "kind": "field",
+              "name": "sync",
+              "type": "string",
+              "default": "undefined",
+              "description": "Syncs the popup width or height to that of the trigger element.",
+              "attribute": "sync",
+              "reflects": true,
+              "enum": [
+                "both",
+                "height",
+                "width"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "focusOnTrigger"
+            },
+            {
+              "kind": "method",
+              "name": "getMenu"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentMouseDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handlePanelSelect",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleTriggerClick"
+            },
+            {
+              "kind": "method",
+              "name": "handleTriggerKeyDown",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleTriggerKeyUp",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleTriggerSlotChange"
+            },
+            {
+              "kind": "method",
+              "name": "updateAccessibleTrigger"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Shows the dropdown panel."
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "description": "Hides the dropdown panel"
+            },
+            {
+              "kind": "method",
+              "name": "reposition",
+              "description": "Instructs the dropdown menu to reposition. Useful when the position or size of the trigger changes when the menu\r\nis activated."
+            },
+            {
+              "kind": "method",
+              "name": "addOpenListeners"
+            },
+            {
+              "kind": "method",
+              "name": "removeOpenListeners"
+            },
+            {
+              "kind": "method",
+              "name": "handleOpenChange"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you\ncan use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.",
+              "fieldName": "open"
+            },
+            {
+              "name": "placement",
+              "type": "string",
+              "default": "bottom-start",
+              "description": "The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel\ninside of the viewport.",
+              "fieldName": "placement",
+              "enum": [
+                "bottom",
+                "bottom-end",
+                "bottom-start",
+                "left",
+                "left-end",
+                "left-start",
+                "right",
+                "right-end",
+                "right-start",
+                "top",
+                "top-end",
+                "top-start"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the dropdown so the panel will not open.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "stay-open-on-select",
+              "type": "boolean",
+              "default": false,
+              "description": "By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for\ndropdowns that allow for multiple interactions.",
+              "fieldName": "stayOpenOnSelect"
+            },
+            {
+              "name": "distance",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel away from its trigger.",
+              "fieldName": "distance"
+            },
+            {
+              "name": "skidding",
+              "type": "number",
+              "default": 0,
+              "description": "The distance in pixels from which to offset the panel along its trigger.",
+              "fieldName": "skidding"
+            },
+            {
+              "name": "hoist",
+              "type": "boolean",
+              "default": false,
+              "description": "Enable this option to prevent the panel from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+              "fieldName": "hoist"
+            },
+            {
+              "name": "sync",
+              "type": "string",
+              "default": "undefined",
+              "description": "Syncs the popup width or height to that of the trigger element.",
+              "fieldName": "sync",
+              "enum": [
+                "both",
+                "height",
+                "width"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-dropdown",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdDropdown",
+            "module": "src/components/dropdown/dropdown.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-dropdown",
+          "declaration": {
+            "name": "SdDropdown",
+            "module": "src/components/dropdown/dropdown.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon/icon.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "sizes",
+          "default": "new Map<String, Number>([\r\n    [\"s\", 20],\r\n    [\"m\", 24],\r\n    [\"l\", 40],\r\n    [\"xl\", 48],\r\n])"
+        },
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Icon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "fill",
+              "type": "boolean",
+              "default": false,
+              "attribute": "fill"
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "edit",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderSVG",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "unknown"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "fill",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "fill"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "edit",
+              "fieldName": "name"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-icon",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "sizes",
+          "declaration": {
+            "name": "sizes",
+            "module": "src/components/icon/icon.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "Icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/components/icon/icon.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/icon-button/icon-button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdIconButton",
+          "members": [
+            {
+              "kind": "method",
+              "name": "renderContent",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formControlController",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"click\"],\r\n    })",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
               "type": "object",
               "properties": {
-                "value": {
-                  "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
-                  "type": "string",
-                  "default": ""
+                "host": {},
+                "form": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "patternProperties": {
+                        "^[0-9]+$": {
+                          "$ref": "#/definitions/Element"
+                        }
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 },
-                "disabled": {
-                  "description": "Draws the option in a disabled state, preventing selection.",
-                  "type": "boolean",
-                  "default": false
+                "options": {
+                  "$ref": "#/definitions/FormControlControllerOptions"
                 },
-                "cachedTextLabel": {
-                  "type": "string",
-                  "default": ""
+                "handleFormData": {
+                  "type": "object",
+                  "additionalProperties": false
                 },
-                "selected": {
-                  "type": "boolean",
-                  "default": false
+                "handleFormSubmit": {
+                  "type": "object",
+                  "additionalProperties": false
                 },
-                "current": {
-                  "type": "boolean",
-                  "default": false
+                "handleFormReset": {
+                  "type": "object",
+                  "additionalProperties": false
                 },
-                "labels": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/HTMLElement"
-                  }
+                "handleInteraction": {
+                  "type": "object",
+                  "additionalProperties": false
                 },
-                "dir": {
-                  "type": "string",
-                  "default": ""
+                "checkFormValidity": {
+                  "type": "object",
+                  "additionalProperties": false
                 },
-                "lang": {
-                  "type": "string",
-                  "default": ""
+                "reportFormValidity": {
+                  "type": "object",
+                  "additionalProperties": false
                 }
               },
               "additionalProperties": false
             },
             {
               "kind": "field",
-              "name": "selectedOptions",
-              "type": "array",
-              "default": [],
-              "items": {
-                "type": "object",
-                "properties": {
-                  "value": {
-                    "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
-                    "type": "string",
-                    "default": ""
-                  },
-                  "disabled": {
-                    "description": "Draws the option in a disabled state, preventing selection.",
-                    "type": "boolean",
-                    "default": false
-                  },
-                  "cachedTextLabel": {
-                    "type": "string",
-                    "default": ""
-                  },
-                  "selected": {
-                    "type": "boolean",
-                    "default": false
-                  },
-                  "current": {
-                    "type": "boolean",
-                    "default": false
-                  },
-                  "labels": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/definitions/HTMLElement"
-                    }
-                  },
-                  "dir": {
-                    "type": "string",
-                    "default": ""
-                  },
-                  "lang": {
-                    "type": "string",
-                    "default": ""
-                  }
-                },
-                "additionalProperties": false
-              }
-            },
-            {
-              "kind": "field",
-              "name": "name",
+              "name": "variant",
               "type": "string",
-              "default": "",
-              "description": "The name of the select, submitted as a name/value pair with form data.",
-              "attribute": "name"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string | string[]"
+              "default": "filled",
+              "description": "choose the style of the button.",
+              "attribute": "variant",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
               },
-              "default": "",
-              "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
-              "attribute": "value",
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "string"
-                }
+              "enum": [
+                "filled",
+                "outlined",
+                "plain"
               ]
             },
             {
@@ -2126,9 +2548,12 @@
               "name": "size",
               "type": "string",
               "default": "medium",
-              "description": "The select's size.",
+              "description": "The button’s size.",
               "attribute": "size",
-              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
               "enum": [
                 "large",
                 "medium",
@@ -2137,141 +2562,247 @@
             },
             {
               "kind": "field",
-              "name": "placeholder",
-              "type": "string",
-              "default": "",
-              "description": "Placeholder text to show as a hint when the select is empty.",
-              "attribute": "placeholder"
-            },
-            {
-              "kind": "field",
-              "name": "multiple",
-              "type": "boolean",
-              "default": false,
-              "description": "Allows more than one option to be selected.",
-              "attribute": "multiple",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "maxOptionsVisible",
-              "type": "number",
-              "default": 3,
-              "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
-              "attribute": "max-options-visible"
-            },
-            {
-              "kind": "field",
               "name": "disabled",
               "type": "boolean",
               "default": false,
-              "description": "Disables the select control.",
               "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "clearable",
-              "type": "boolean",
-              "default": false,
-              "description": "Adds a clear button when the select is not empty.",
-              "attribute": "clearable"
-            },
-            {
-              "kind": "field",
-              "name": "open",
-              "type": "boolean",
-              "default": false,
-              "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
-              "attribute": "open",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "hoist",
-              "type": "boolean",
-              "default": false,
-              "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
-              "attribute": "hoist"
-            },
-            {
-              "kind": "field",
-              "name": "filled",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws a filled select.",
-              "attribute": "filled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "pill",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws a pill-style select with rounded edges.",
-              "attribute": "pill",
-              "reflects": true
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "field",
               "name": "label",
               "type": "string",
-              "default": "",
-              "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
-              "attribute": "label"
+              "description": "the label of the button. can be used as a replacement for the slot. for icon buttons, this field is required",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "field",
-              "name": "placement",
+              "name": "type",
               "type": "string",
-              "default": "bottom",
-              "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
-              "attribute": "placement",
-              "reflects": true,
+              "default": "button",
+              "attribute": "type",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
               "enum": [
-                "bottom",
-                "top"
+                "button",
+                "reset",
+                "submit"
               ]
             },
             {
               "kind": "field",
-              "name": "helpText",
+              "name": "name",
               "type": "string",
               "default": "",
-              "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
-              "attribute": "help-text"
+              "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "attribute": "href",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Tells the browser where to open the link. Only used when `href` is present.",
+              "attribute": "target",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "type": "string",
+              "default": "noreferrer noopener",
+              "description": "When using `href`, this attribute will map to the underlying link's `rel` attribute. Unlike regular links, the\ndefault is `noreferrer noopener` to prevent security exploits. However, if you're using `target` to point to a\nspecific tab/window, this will prevent that from working correctly. You can remove or change the default value by\nsetting the attribute to an empty string or a value of your choice, respectively.",
+              "attribute": "rel",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "download",
+              "type": "string",
+              "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
+              "attribute": "download",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "field",
               "name": "form",
               "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+              "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
               "attribute": "form",
-              "reflects": true
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "field",
-              "name": "required",
+              "name": "formAction",
+              "type": "string",
+              "description": "Used to override the form owner's `action` attribute.",
+              "attribute": "formaction",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formEnctype",
+              "type": "string",
+              "description": "Used to override the form owner's `enctype` attribute.",
+              "attribute": "formenctype",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "enum": [
+                "application/x-www-form-urlencoded",
+                "multipart/form-data",
+                "text/plain"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "formMethod",
+              "type": "string",
+              "description": "Used to override the form owner's `method` attribute.",
+              "attribute": "formmethod",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "enum": [
+                "get",
+                "post"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "formNoValidate",
+              "type": "boolean",
+              "description": "Used to override the form owner's `novalidate` attribute.",
+              "attribute": "formnovalidate",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formTarget",
+              "type": "string",
+              "description": "Used to override the form owner's `target` attribute.",
+              "attribute": "formtarget",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "trailingIcon",
               "type": "boolean",
               "default": false,
-              "description": "The select's required attribute.",
-              "attribute": "required",
-              "reflects": true
+              "description": "Whether to render the icon at the inline end of the label rather than the\ninline start.\n_Note: Link buttons cannot have trailing icons.",
+              "attribute": "trailing-icon",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "field",
-              "name": "getTag",
-              "type": "object",
-              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
-              "attribute": "getTag",
-              "additionalProperties": false
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The value of the button, submitted as a pair with the button's name as part of the form data, but only when this\nbutton is the submitter. This attribute is ignored when `href` is present.",
+              "attribute": "value",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "button",
+              "type": {
+                "text": "HTMLButtonElement | HTMLLinkElement | undefined"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/HTMLButtonElement"
+                },
+                {
+                  "$ref": "#/definitions/HTMLLinkElement"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getButton",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "field",
               "name": "validity",
               "description": "Gets the validity state object",
               "readonly": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
               "type": "object",
               "properties": {
                 "badInput": {
@@ -2315,192 +2846,38 @@
               "name": "validationMessage",
               "description": "Gets the validation message",
               "readonly": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
               "type": "string"
             },
             {
               "kind": "method",
-              "name": "addOpenListeners",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "removeOpenListeners",
-              "privacy": "private"
+              "name": "handleBlur",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "method",
               "name": "handleFocus",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleBlur",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleDocumentFocusIn",
               "privacy": "private",
-              "type": "object",
-              "additionalProperties": false
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "method",
-              "name": "handleDocumentKeyDown",
+              "name": "handleClick",
               "privacy": "private",
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "handleDocumentMouseDown",
-              "privacy": "private",
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "handleLabelClick",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleComboboxMouseDown",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleComboboxKeyDown",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleClearClick",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleClearMouseDown",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleOptionClick",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDefaultSlotChange",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "getAllOptions",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "getFirstOption",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "setCurrentOption",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "SdOption | null"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "setSelectedOptions",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "SdOption | SdOption[]"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "toggleOptionSelection",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "SdOption"
-                  }
-                },
-                {
-                  "name": "force",
-                  "optional": true,
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "selectionChanged",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "tags",
-              "privacy": "protected",
-              "readonly": true,
-              "type": "array",
-              "items": {}
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "method",
@@ -2513,62 +2890,37 @@
                     "text": "Event"
                   }
                 }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleDisabledChange"
-            },
-            {
-              "kind": "method",
-              "name": "handleValueChange"
-            },
-            {
-              "kind": "method",
-              "name": "handleOpenChange"
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "description": "Shows the listbox."
-            },
-            {
-              "kind": "method",
-              "name": "hide",
-              "description": "Hides the listbox."
-            },
-            {
-              "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
-            },
-            {
-              "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists."
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
-            },
-            {
-              "kind": "method",
-              "name": "setCustomValidity",
-              "parameters": [
-                {
-                  "name": "message",
-                  "type": {
-                    "text": "string"
-                  }
-                }
               ],
-              "description": "Sets a custom validation message. Pass an empty string to restore validity."
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "isButton",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledChange",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "click",
+              "description": "Simulates a click on the button.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "method",
@@ -2582,90 +2934,122 @@
                   }
                 }
               ],
-              "description": "Sets focus on the control."
+              "description": "Sets focus on the button.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "kind": "method",
               "name": "blur",
-              "description": "Removes focus from the control."
+              "description": "Removes focus from the button.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getForm",
+              "return": {
+                "type": {
+                  "text": "HTMLFormElement | null"
+                }
+              },
+              "description": "Gets the associated form, if one exists.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "description": "Checks for validity and shows the browser's validation message if the control is invalid.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "setCustomValidity",
+              "parameters": [
+                {
+                  "name": "message",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Sets a custom validation message. Pass an empty string to restore validity.",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderButton",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLink",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             }
           ],
-          "events": [
-            {
-              "description": "Emitted when the control's value changes.",
-              "name": "sl-change"
-            },
-            {
-              "description": "Emitted when the control's value is cleared.",
-              "name": "sl-clear"
-            },
-            {
-              "description": "Emitted when the control receives input.",
-              "name": "sl-input"
-            },
-            {
-              "description": "Emitted when the control gains focus.",
-              "name": "sl-focus"
-            },
-            {
-              "description": "Emitted when the control loses focus.",
-              "name": "sl-blur"
-            },
-            {
-              "description": "Emitted when the select's menu opens.",
-              "name": "sl-show"
-            },
-            {
-              "description": "Emitted after the select's menu opens and all animations are complete.",
-              "name": "sl-after-show"
-            },
-            {
-              "description": "Emitted when the select's menu closes.",
-              "name": "sl-hide"
-            },
-            {
-              "description": "Emitted after the select's menu closes and all animations are complete.",
-              "name": "sl-after-hide"
-            },
-            {
-              "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied.",
-              "name": "sl-invalid"
-            }
-          ],
+          "superclass": {
+            "name": "SdButton",
+            "module": "/src/components/button/button.js"
+          },
+          "tagName": "sd-icon-button",
+          "customElement": true,
           "attributes": [
             {
-              "name": "name",
+              "name": "variant",
               "type": "string",
-              "default": "",
-              "description": "The name of the select, submitted as a name/value pair with form data.",
-              "fieldName": "name"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "string | string[]"
+              "default": "filled",
+              "description": "choose the style of the button.",
+              "fieldName": "variant",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
               },
-              "default": "",
-              "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
-              "fieldName": "value",
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "string"
-                }
+              "enum": [
+                "filled",
+                "outlined",
+                "plain"
               ]
             },
             {
               "name": "size",
               "type": "string",
               "default": "medium",
-              "description": "The select's size.",
+              "description": "The button’s size.",
               "fieldName": "size",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
               "enum": [
                 "large",
                 "medium",
@@ -2673,121 +3057,281 @@
               ]
             },
             {
-              "name": "placeholder",
-              "type": "string",
-              "default": "",
-              "description": "Placeholder text to show as a hint when the select is empty.",
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "multiple",
-              "type": "boolean",
-              "default": false,
-              "description": "Allows more than one option to be selected.",
-              "fieldName": "multiple"
-            },
-            {
-              "name": "max-options-visible",
-              "type": "number",
-              "default": 3,
-              "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
-              "fieldName": "maxOptionsVisible"
-            },
-            {
               "name": "disabled",
               "type": "boolean",
               "default": false,
-              "description": "Disables the select control.",
-              "fieldName": "disabled"
-            },
-            {
-              "name": "clearable",
-              "type": "boolean",
-              "default": false,
-              "description": "Adds a clear button when the select is not empty.",
-              "fieldName": "clearable"
-            },
-            {
-              "name": "open",
-              "type": "boolean",
-              "default": false,
-              "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
-              "fieldName": "open"
-            },
-            {
-              "name": "hoist",
-              "type": "boolean",
-              "default": false,
-              "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
-              "fieldName": "hoist"
-            },
-            {
-              "name": "filled",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws a filled select.",
-              "fieldName": "filled"
-            },
-            {
-              "name": "pill",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws a pill-style select with rounded edges.",
-              "fieldName": "pill"
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "name": "label",
               "type": "string",
-              "default": "",
-              "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
-              "fieldName": "label"
+              "description": "the label of the button. can be used as a replacement for the slot. for icon buttons, this field is required",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
-              "name": "placement",
+              "name": "type",
               "type": "string",
-              "default": "bottom",
-              "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
-              "fieldName": "placement",
+              "default": "button",
+              "fieldName": "type",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
               "enum": [
-                "bottom",
-                "top"
+                "button",
+                "reset",
+                "submit"
               ]
             },
             {
-              "name": "help-text",
+              "name": "name",
               "type": "string",
               "default": "",
-              "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
-              "fieldName": "helpText"
+              "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "fieldName": "href",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "default": "",
+              "description": "Tells the browser where to open the link. Only used when `href` is present.",
+              "fieldName": "target",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "enum": [
+                "",
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "name": "rel",
+              "type": "string",
+              "default": "noreferrer noopener",
+              "description": "When using `href`, this attribute will map to the underlying link's `rel` attribute. Unlike regular links, the\ndefault is `noreferrer noopener` to prevent security exploits. However, if you're using `target` to point to a\nspecific tab/window, this will prevent that from working correctly. You can remove or change the default value by\nsetting the attribute to an empty string or a value of your choice, respectively.",
+              "fieldName": "rel",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "name": "download",
+              "type": "string",
+              "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
+              "fieldName": "download",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
               "name": "form",
               "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "fieldName": "form"
+              "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
+              "fieldName": "form",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
-              "name": "required",
+              "name": "formaction",
+              "type": "string",
+              "description": "Used to override the form owner's `action` attribute.",
+              "fieldName": "formAction",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "name": "formenctype",
+              "type": "string",
+              "description": "Used to override the form owner's `enctype` attribute.",
+              "fieldName": "formEnctype",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "enum": [
+                "application/x-www-form-urlencoded",
+                "multipart/form-data",
+                "text/plain"
+              ]
+            },
+            {
+              "name": "formmethod",
+              "type": "string",
+              "description": "Used to override the form owner's `method` attribute.",
+              "fieldName": "formMethod",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "enum": [
+                "get",
+                "post"
+              ]
+            },
+            {
+              "name": "formnovalidate",
+              "type": "boolean",
+              "description": "Used to override the form owner's `novalidate` attribute.",
+              "fieldName": "formNoValidate",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "name": "formtarget",
+              "type": "string",
+              "description": "Used to override the form owner's `target` attribute.",
+              "fieldName": "formTarget",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "name": "trailing-icon",
               "type": "boolean",
               "default": false,
-              "description": "The select's required attribute.",
-              "fieldName": "required"
+              "description": "Whether to render the icon at the inline end of the label rather than the\ninline start.\n_Note: Link buttons cannot have trailing icons.",
+              "fieldName": "trailingIcon",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
             },
             {
-              "name": "getTag",
-              "type": "object",
-              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
-              "fieldName": "getTag",
-              "additionalProperties": false
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The value of the button, submitted as a pair with the button's name as part of the form data, but only when this\nbutton is the submitter. This attribute is ignored when `href` is present.",
+              "fieldName": "value",
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdIconButton",
+            "module": "src/components/icon-button/icon-button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-icon-button",
+          "declaration": {
+            "name": "SdIconButton",
+            "module": "src/components/icon-button/icon-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/link/link.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdLink",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "attribute": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "download",
+              "type": "string",
+              "default": "",
+              "attribute": "download"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": "string",
+              "default": "m",
+              "fieldName": "size",
+              "enum": [
+                "l",
+                "m",
+                "s",
+                "xl"
+              ]
+            },
+            {
+              "name": "href",
+              "type": "string",
+              "default": "",
+              "fieldName": "href"
+            },
+            {
+              "name": "download",
+              "type": "string",
+              "default": "",
+              "fieldName": "download"
             }
           ],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "LitElement",
+            "package": "lit"
           },
-          "summary": "Selects allow you to choose items from a menu of predefined options.",
-          "tagName": "sd-select",
+          "tagName": "sd-link",
           "customElement": true
         }
       ],
@@ -2796,16 +3340,585 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "SdSelect",
-            "module": "src/components/option/select.ts"
+            "name": "SdLink",
+            "module": "src/components/link/link.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-select",
+          "name": "sd-link",
           "declaration": {
-            "name": "SdSelect",
-            "module": "src/components/option/select.ts"
+            "name": "SdLink",
+            "module": "src/components/link/link.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/menu/menu-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdMenuItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "cachedTextLabel",
+              "type": "string",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "defaultSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "menuItem",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": "string",
+              "default": "normal",
+              "description": "The type of menu item to render. To use `checked`, this value must be set to `checkbox`.",
+              "attribute": "type",
+              "enum": [
+                "checkbox",
+                "normal"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the item in a checked state.",
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "A unique value to store in the menu item. This can be used as a way to identify menu items when selected.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the menu item in a loading state.",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the menu item in a disabled state, preventing selection.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "submenuSlot",
+              "type": "array"
+            },
+            {
+              "kind": "method",
+              "name": "submenuController",
+              "type": "object",
+              "privacy": "private",
+              "default": "new SubmenuController(this)",
+              "description": "A reactive controller to manage the registration of event listeners for submenus.",
+              "properties": {
+                "host": {},
+                "popupRef": {},
+                "enableSubmenuTimer": {
+                  "type": "number",
+                  "default": -1
+                },
+                "isConnected": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "isPopupConnected": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "skidding": {
+                  "type": "number",
+                  "default": 0
+                },
+                "submenuOpenDelay": {
+                  "type": "number",
+                  "enum": [
+                    100
+                  ],
+                  "default": 100
+                },
+                "handleMouseMove": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleMouseOver": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleKeyDown": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleClick": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleFocusOut": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handlePopupMouseover": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handlePopupReposition": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDefaultSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleHostClick",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseOver",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleCheckedChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleTypeChange"
+            },
+            {
+              "kind": "method",
+              "name": "getTextLabel",
+              "description": "Returns a text label based on the contents of the menu item's default slot."
+            },
+            {
+              "kind": "method",
+              "name": "hasSubmenu"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "type",
+              "type": "string",
+              "default": "normal",
+              "description": "The type of menu item to render. To use `checked`, this value must be set to `checkbox`.",
+              "fieldName": "type",
+              "enum": [
+                "checkbox",
+                "normal"
+              ]
+            },
+            {
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the item in a checked state.",
+              "fieldName": "checked"
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "A unique value to store in the menu item. This can be used as a way to identify menu items when selected.",
+              "fieldName": "value"
+            },
+            {
+              "name": "loading",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the menu item in a loading state.",
+              "fieldName": "loading"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the menu item in a disabled state, preventing selection.",
+              "fieldName": "disabled"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-menu-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdMenuItem",
+            "module": "src/components/menu/menu-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-menu-item",
+          "declaration": {
+            "name": "SdMenuItem",
+            "module": "src/components/menu/menu-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/menu/menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdMenu",
+          "members": [
+            {
+              "kind": "field",
+              "name": "defaultSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "isMenuItem",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
+                }
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdMenu",
+            "module": "src/components/menu/menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-menu",
+          "declaration": {
+            "name": "SdMenu",
+            "module": "src/components/menu/menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/menu/submenu-controller.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A reactive controller to manage the registration of event listeners for submenus.",
+          "name": "SubmenuController",
+          "members": [
+            {
+              "kind": "field",
+              "name": "host",
+              "type": {
+                "text": "ReactiveControllerHost & SdMenuItem"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "popupRef",
+              "type": {
+                "text": "Ref<SdPopup>"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "enableSubmenuTimer",
+              "type": "number",
+              "privacy": "private",
+              "default": -1
+            },
+            {
+              "kind": "field",
+              "name": "isConnected",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "isPopupConnected",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "skidding",
+              "type": "number",
+              "privacy": "private",
+              "default": 0
+            },
+            {
+              "kind": "field",
+              "name": "submenuOpenDelay",
+              "type": "number",
+              "privacy": "private",
+              "readonly": true,
+              "default": 100,
+              "enum": [
+                100
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "hostConnected"
+            },
+            {
+              "kind": "method",
+              "name": "hostDisconnected"
+            },
+            {
+              "kind": "method",
+              "name": "hostUpdated"
+            },
+            {
+              "kind": "method",
+              "name": "addListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "removeListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseMove",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleMouseOver",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleSubmenuEntry",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleFocusOut",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handlePopupMouseover",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handlePopupReposition",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "setSubmenuState",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "enableSubmenu",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "delay",
+                  "default": "true"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "disableSubmenu",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "updateSkidding",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "isExpanded",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderSubmenu"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SubmenuController",
+          "declaration": {
+            "name": "SubmenuController",
+            "module": "src/components/menu/submenu-controller.ts"
           }
         }
       ]
@@ -3604,7 +4717,7 @@
       "exports": [
         {
           "kind": "js",
-          "name": "SdRadio",
+          "name": "default",
           "declaration": {
             "name": "SdRadio",
             "module": "src/components/radio/radio.ts"
@@ -5338,7 +6451,7 @@
               "additionalProperties": false
             },
             {
-              "kind": "field",
+              "kind": "method",
               "name": "handleFocusOut",
               "privacy": "private",
               "readonly": true,
@@ -5656,7 +6769,7 @@
       "exports": [
         {
           "kind": "js",
-          "name": "SdRating",
+          "name": "default",
           "declaration": {
             "name": "SdRating",
             "module": "src/components/rating/rating.ts"
@@ -5674,136 +6787,1505 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/searchBar/search-bar.ts",
+      "path": "src/components/select/select-option.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdSearchBar",
+          "name": "SdSelectOption",
           "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+              "attribute": "value",
+              "reflects": true
+            },
             {
               "kind": "field",
               "name": "disabled",
               "type": "boolean",
               "default": false,
-              "attribute": "disabled"
+              "description": "Draws the option in a disabled state, preventing selection.",
+              "attribute": "disabled",
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "invert",
+              "name": "cachedTextLabel",
+              "type": "string",
+              "privacy": "private",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "selected",
               "type": "boolean",
-              "default": false,
-              "attribute": "invert"
+              "default": false
             },
             {
               "kind": "field",
-              "name": "placeholder",
-              "type": "string",
-              "default": "Search ...",
-              "attribute": "placeholder"
+              "name": "current",
+              "type": "boolean",
+              "default": false
             },
             {
               "kind": "field",
-              "name": "defaultValue",
-              "type": "string",
-              "default": "",
-              "attribute": "defaultValue"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": "string",
-              "default": "default",
-              "attribute": "size",
-              "enum": [
-                "default",
-                "small"
-              ]
+              "name": "labels",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "baseURI": {
+                    "type": "string"
+                  },
+                  "childNodes": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/ChildNode"
+                    }
+                  },
+                  "firstChild": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "isConnected": {
+                    "type": "boolean"
+                  },
+                  "lastChild": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "nextSibling": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "nodeName": {
+                    "type": "string"
+                  },
+                  "nodeType": {
+                    "type": "number"
+                  },
+                  "nodeValue": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ownerDocument": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/Document"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "parentElement": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/HTMLElement"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "parentNode": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ParentNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "previousSibling": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/ChildNode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "textContent": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "ATTRIBUTE_NODE": {
+                    "type": "number"
+                  },
+                  "CDATA_SECTION_NODE": {
+                    "type": "number"
+                  },
+                  "COMMENT_NODE": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_FRAGMENT_NODE": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_NODE": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_CONTAINED_BY": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_CONTAINS": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_DISCONNECTED": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_FOLLOWING": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_POSITION_PRECEDING": {
+                    "type": "number"
+                  },
+                  "DOCUMENT_TYPE_NODE": {
+                    "type": "number"
+                  },
+                  "ELEMENT_NODE": {
+                    "type": "number"
+                  },
+                  "ENTITY_NODE": {
+                    "type": "number"
+                  },
+                  "ENTITY_REFERENCE_NODE": {
+                    "type": "number"
+                  },
+                  "NOTATION_NODE": {
+                    "type": "number"
+                  },
+                  "PROCESSING_INSTRUCTION_NODE": {
+                    "type": "number"
+                  },
+                  "TEXT_NODE": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false
+              }
             },
             {
               "kind": "method",
-              "name": "_searchChanged",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
+              "name": "handleDefaultSlotChange",
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "_deleteSearch",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
+              "name": "handleDisabledChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleSelectedChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleValueChange"
+            },
+            {
+              "kind": "method",
+              "name": "getTextLabel",
+              "description": "Returns a plain text label based on the option's content."
             }
           ],
           "attributes": [
             {
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+              "fieldName": "value"
+            },
+            {
               "name": "disabled",
               "type": "boolean",
               "default": false,
+              "description": "Draws the option in a disabled state, preventing selection.",
               "fieldName": "disabled"
-            },
-            {
-              "name": "invert",
-              "type": "boolean",
-              "default": false,
-              "fieldName": "invert"
-            },
-            {
-              "name": "placeholder",
-              "type": "string",
-              "default": "Search ...",
-              "fieldName": "placeholder"
-            },
-            {
-              "name": "defaultValue",
-              "type": "string",
-              "default": "",
-              "fieldName": "defaultValue"
-            },
-            {
-              "name": "size",
-              "type": "string",
-              "default": "default",
-              "fieldName": "size",
-              "enum": [
-                "default",
-                "small"
-              ]
             }
           ],
           "superclass": {
-            "name": "LitElement",
-            "package": "lit"
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
           },
-          "tagName": "sd-search-bar",
+          "tagName": "sd-select-option",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SdSearchBar",
+          "name": "default",
           "declaration": {
-            "name": "SdSearchBar",
-            "module": "src/components/searchBar/search-bar.ts"
+            "name": "SdSelectOption",
+            "module": "src/components/select/select-option.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-search-bar",
+          "name": "sd-select-option",
           "declaration": {
-            "name": "SdSearchBar",
-            "module": "src/components/searchBar/search-bar.ts"
+            "name": "SdSelectOption",
+            "module": "src/components/select/select-option.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/select/select.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdSelect",
+          "cssParts": [
+            {
+              "description": "The form control that wraps the label, input, and help text.",
+              "name": "form-control"
+            },
+            {
+              "description": "The label's wrapper.",
+              "name": "form-control-label"
+            },
+            {
+              "description": "The select's wrapper.",
+              "name": "form-control-input"
+            },
+            {
+              "description": "The help text's wrapper.",
+              "name": "form-control-help-text"
+            },
+            {
+              "description": "The container the wraps the prefix, combobox, clear icon, and expand button.",
+              "name": "combobox"
+            },
+            {
+              "description": "The container that wraps the prefix slot.",
+              "name": "prefix"
+            },
+            {
+              "description": "The element that displays the selected option's label, an `<input>` element.",
+              "name": "display-input"
+            },
+            {
+              "description": "The listbox container where options are slotted.",
+              "name": "listbox"
+            },
+            {
+              "description": "The container that houses option tags when `multiselect` is used.",
+              "name": "tags"
+            },
+            {
+              "description": "The individual tags that represent each multiselect option.",
+              "name": "tag"
+            },
+            {
+              "description": "The tag's base part.",
+              "name": "tag__base"
+            },
+            {
+              "description": "The tag's content part.",
+              "name": "tag__content"
+            },
+            {
+              "description": "The tag's remove button.",
+              "name": "tag__remove-button"
+            },
+            {
+              "description": "The tag's remove button base part.",
+              "name": "tag__remove-button__base"
+            },
+            {
+              "description": "The clear button.",
+              "name": "clear-button"
+            },
+            {
+              "description": "The container that wraps the expand icon.",
+              "name": "expand-icon"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.",
+              "name": ""
+            },
+            {
+              "description": "The input's label. Alternatively, you can use the `label` attribute.",
+              "name": "label"
+            },
+            {
+              "description": "Used to prepend a presentational icon or similar element to the combobox.",
+              "name": "prefix"
+            },
+            {
+              "description": "An icon to use in lieu of the default clear icon.",
+              "name": "clear-icon"
+            },
+            {
+              "description": "The icon to show when the control is expanded and collapsed. Rotates on open and close.",
+              "name": "expand-icon"
+            },
+            {
+              "description": "Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.",
+              "name": "help-text"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "formControlController",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sl-blur\", \"sl-input\"],\r\n    })",
+              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
+              "type": "object",
+              "properties": {
+                "host": {},
+                "form": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "patternProperties": {
+                        "^[0-9]+$": {
+                          "$ref": "#/definitions/Element"
+                        }
+                      }
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "options": {
+                  "$ref": "#/definitions/FormControlControllerOptions"
+                },
+                "handleFormData": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleFormSubmit": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleFormReset": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "handleInteraction": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "checkFormValidity": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "reportFormValidity": {
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "typeToSelectString",
+              "type": "string",
+              "privacy": "private",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "typeToSelectTimeout",
+              "type": "number",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "closeWatcher",
+              "type": {
+                "text": "CloseWatcher | null | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "popup",
+              "type": "object",
+              "properties": {
+                "anchorEl": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "cleanup": {},
+                "popup": {
+                  "description": "A reference to the internal popup container. Useful for animating and styling the popup with JavaScript.",
+                  "$ref": "#/definitions/HTMLElement"
+                },
+                "arrowEl": {
+                  "$ref": "#/definitions/HTMLElement"
+                },
+                "anchor": {
+                  "description": "The element the popup will be anchored to. If the anchor lives outside of the popup, you can provide the anchor\nelement `id`, a DOM element reference, or a `VirtualElement`. If the anchor lives inside the popup, use the\n`anchor` slot instead.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "active": {
+                  "description": "Activates the positioning logic and shows the popup. When this attribute is removed, the positioning logic is torn\ndown and the popup will be hidden.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "placement": {
+                  "description": "The preferred placement of the popup. Note that the actual placement will vary as configured to keep the\npanel inside of the viewport.",
+                  "enum": [
+                    "bottom",
+                    "bottom-end",
+                    "bottom-start",
+                    "left",
+                    "left-end",
+                    "left-start",
+                    "right",
+                    "right-end",
+                    "right-start",
+                    "top",
+                    "top-end",
+                    "top-start"
+                  ],
+                  "type": "string",
+                  "default": "top"
+                },
+                "strategy": {
+                  "description": "Determines how the popup is positioned. The `absolute` strategy works well in most cases, but if overflow is\nclipped, using a `fixed` position strategy can often workaround it.",
+                  "enum": [
+                    "absolute",
+                    "fixed"
+                  ],
+                  "type": "string",
+                  "default": "absolute"
+                },
+                "distance": {
+                  "description": "The distance in pixels from which to offset the panel away from its anchor.",
+                  "type": "number",
+                  "default": 0
+                },
+                "skidding": {
+                  "description": "The distance in pixels from which to offset the panel along its anchor.",
+                  "type": "number",
+                  "default": 0
+                },
+                "arrow": {
+                  "description": "Attaches an arrow to the popup. The arrow's size and color can be customized using the `--arrow-size` and\n`--arrow-color` custom properties. For additional customizations, you can also target the arrow using\n`::part(arrow)` in your stylesheet.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "arrowPlacement": {
+                  "description": "The placement of the arrow. The default is `anchor`, which will align the arrow as close to the center of the\nanchor as possible, considering available space and `arrow-padding`. A value of `start`, `end`, or `center` will\nalign the arrow to the start, end, or center of the popover instead.",
+                  "enum": [
+                    "anchor",
+                    "center",
+                    "end",
+                    "start"
+                  ],
+                  "type": "string",
+                  "default": "anchor"
+                },
+                "arrowPadding": {
+                  "description": "The amount of padding between the arrow and the edges of the popup. If the popup has a border-radius, for example,\nthis will prevent it from overflowing the corners.",
+                  "type": "number",
+                  "default": 10
+                },
+                "flip": {
+                  "description": "When set, placement of the popup will flip to the opposite site to keep it in view. You can use\n`flipFallbackPlacements` to further configure how the fallback placement is determined.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "flipFallbackPlacements": {
+                  "description": "If the preferred placement doesn't fit, popup will be tested in these fallback placements until one fits. Must be a\nstring of any number of placements separated by a space, e.g. \"top bottom left\". If no placement fits, the flip\nfallback strategy will be used instead.",
+                  "type": "string",
+                  "default": ""
+                },
+                "flipFallbackStrategy": {
+                  "description": "When neither the preferred placement nor the fallback placements fit, this value will be used to determine whether\nthe popup should be positioned using the best available fit based on available space or as it was initially\npreferred.",
+                  "enum": [
+                    "best-fit",
+                    "initial"
+                  ],
+                  "type": "string",
+                  "default": "best-fit"
+                },
+                "flipBoundary": {
+                  "description": "The flip boundary describes clipping element(s) that overflow will be checked relative to when flipping. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  ]
+                },
+                "flipPadding": {
+                  "description": "The amount of padding, in pixels, to exceed before the flip behavior will occur.",
+                  "type": "number",
+                  "default": 0
+                },
+                "shift": {
+                  "description": "Moves the popup along the axis to keep it in view when clipped.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "shiftBoundary": {
+                  "description": "The shift boundary describes clipping element(s) that overflow will be checked relative to when shifting. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  ]
+                },
+                "shiftPadding": {
+                  "description": "The amount of padding, in pixels, to exceed before the shift behavior will occur.",
+                  "type": "number",
+                  "default": 0
+                },
+                "autoSize": {
+                  "description": "When set, this will cause the popup to automatically resize itself to prevent it from overflowing.",
+                  "enum": [
+                    "both",
+                    "horizontal",
+                    "vertical"
+                  ],
+                  "type": "string"
+                },
+                "sync": {
+                  "description": "Syncs the popup's width or height to that of the anchor element.",
+                  "enum": [
+                    "both",
+                    "height",
+                    "width"
+                  ],
+                  "type": "string"
+                },
+                "autoSizeBoundary": {
+                  "description": "The auto-size boundary describes clipping element(s) that overflow will be checked relative to when resizing. By\ndefault, the boundary includes overflow ancestors that will cause the element to be clipped. If needed, you can\nchange the boundary by passing a reference to one or more elements to this property.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/definitions/Element"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Element"
+                      }
+                    }
+                  ]
+                },
+                "autoSizePadding": {
+                  "description": "The amount of padding, in pixels, to exceed before the auto-size behavior will occur.",
+                  "type": "number",
+                  "default": 0
+                },
+                "hoverBridge": {
+                  "description": "When a gap exists between the anchor and the popup element, this option will add a \"hover bridge\" that fills the\ngap using an invisible element. This makes listening for events such as `mouseenter` and `mouseleave` more sane\nbecause the pointer never technically leaves the element. The hover bridge will only be drawn when the popover is\nactive.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "updateHoverBridge": {
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "dir": {
+                  "type": "string",
+                  "default": ""
+                },
+                "lang": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "combobox",
+              "type": {
+                "text": "HTMLSlotElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "displayInput",
+              "type": {
+                "text": "HTMLInputElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "valueInput",
+              "type": {
+                "text": "HTMLInputElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "listbox",
+              "type": {
+                "text": "HTMLSlotElement | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "hasFocus",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "displayLabel",
+              "type": "string",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "currentOption",
+              "type": "object",
+              "properties": {
+                "value": {
+                  "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                  "type": "string",
+                  "default": ""
+                },
+                "disabled": {
+                  "description": "Draws the option in a disabled state, preventing selection.",
+                  "type": "boolean",
+                  "default": false
+                },
+                "cachedTextLabel": {
+                  "type": "string",
+                  "default": ""
+                },
+                "selected": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "current": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "labels": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Node"
+                  }
+                },
+                "dir": {
+                  "type": "string",
+                  "default": ""
+                },
+                "lang": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "selectedOptions",
+              "type": "array",
+              "default": [],
+              "items": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "disabled": {
+                    "description": "Draws the option in a disabled state, preventing selection.",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "cachedTextLabel": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "selected": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "current": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Node"
+                    }
+                  },
+                  "dir": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "lang": {
+                    "type": "string",
+                    "default": ""
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the select, submitted as a name/value pair with form data.",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
+              "attribute": "value",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": "string",
+              "default": "",
+              "description": "Placeholder text to show as a hint when the select is empty.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": "boolean",
+              "default": false,
+              "description": "Allows more than one option to be selected.",
+              "attribute": "multiple",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxOptionsVisible",
+              "type": "number",
+              "default": 3,
+              "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+              "attribute": "max-options-visible"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the select control.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "clearable",
+              "type": "boolean",
+              "default": false,
+              "description": "Adds a clear button when the select is not empty.",
+              "attribute": "clearable"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hoist",
+              "type": "boolean",
+              "default": false,
+              "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+              "attribute": "hoist"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": "string",
+              "default": "bottom",
+              "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
+              "attribute": "placement",
+              "reflects": true,
+              "enum": [
+                "bottom",
+                "top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "helpText",
+              "type": "string",
+              "default": "",
+              "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "attribute": "help-text"
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": "string",
+              "default": "",
+              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+              "attribute": "form",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "The select's required attribute.",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "getTag",
+              "type": "object",
+              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+              "attribute": "getTag",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "getPopup",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getDisplayInput",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getValueInput",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getListbox",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "description": "Gets the validity state object",
+              "readonly": true,
+              "type": "object",
+              "properties": {
+                "badInput": {
+                  "type": "boolean"
+                },
+                "customError": {
+                  "type": "boolean"
+                },
+                "patternMismatch": {
+                  "type": "boolean"
+                },
+                "rangeOverflow": {
+                  "type": "boolean"
+                },
+                "rangeUnderflow": {
+                  "type": "boolean"
+                },
+                "stepMismatch": {
+                  "type": "boolean"
+                },
+                "tooLong": {
+                  "type": "boolean"
+                },
+                "tooShort": {
+                  "type": "boolean"
+                },
+                "typeMismatch": {
+                  "type": "boolean"
+                },
+                "valid": {
+                  "type": "boolean"
+                },
+                "valueMissing": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "description": "Gets the validation message",
+              "readonly": true,
+              "type": "string"
+            },
+            {
+              "kind": "method",
+              "name": "addOpenListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "removeOpenListeners",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleFocus",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleBlur",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentFocusIn",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentMouseDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleLabelClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleComboboxMouseDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleComboboxKeyDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleClearClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleClearMouseDown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleOptionClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDefaultSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getAllOptions",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "getFirstOption",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "setCurrentOption",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdSelectOption | null"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "setSelectedOptions",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdSelectOption | SdSelectOption[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "toggleOptionSelection",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdSelectOption"
+                  }
+                },
+                {
+                  "name": "force",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "selectionChanged",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "tags",
+              "privacy": "protected",
+              "readonly": true,
+              "type": "array",
+              "items": {}
+            },
+            {
+              "kind": "method",
+              "name": "handleInvalid",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleValueChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleOpenChange"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Shows the listbox."
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "description": "Hides the listbox."
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
+            },
+            {
+              "kind": "method",
+              "name": "getForm",
+              "return": {
+                "type": {
+                  "text": "HTMLFormElement | null"
+                }
+              },
+              "description": "Gets the associated form, if one exists."
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
+            },
+            {
+              "kind": "method",
+              "name": "setCustomValidity",
+              "parameters": [
+                {
+                  "name": "message",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Sets a custom validation message. Pass an empty string to restore validity."
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "FocusOptions"
+                  }
+                }
+              ],
+              "description": "Sets focus on the control."
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "description": "Removes focus from the control."
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderHelpText",
+              "privacy": "private"
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when the control's value changes.",
+              "name": "sl-change"
+            },
+            {
+              "description": "Emitted when the control's value is cleared.",
+              "name": "sl-clear"
+            },
+            {
+              "description": "Emitted when the control receives input.",
+              "name": "sl-input"
+            },
+            {
+              "description": "Emitted when the control gains focus.",
+              "name": "sl-focus"
+            },
+            {
+              "description": "Emitted when the control loses focus.",
+              "name": "sl-blur"
+            },
+            {
+              "description": "Emitted when the select's menu opens.",
+              "name": "sl-show"
+            },
+            {
+              "description": "Emitted after the select's menu opens and all animations are complete.",
+              "name": "sl-after-show"
+            },
+            {
+              "description": "Emitted when the select's menu closes.",
+              "name": "sl-hide"
+            },
+            {
+              "description": "Emitted after the select's menu closes and all animations are complete.",
+              "name": "sl-after-hide"
+            },
+            {
+              "description": "Emitted when the form control has been checked for validity and its constraints aren't satisfied.",
+              "name": "sl-invalid"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the select, submitted as a name/value pair with form data.",
+              "fieldName": "name"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
+              "fieldName": "value",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "default": "",
+              "description": "Placeholder text to show as a hint when the select is empty.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "multiple",
+              "type": "boolean",
+              "default": false,
+              "description": "Allows more than one option to be selected.",
+              "fieldName": "multiple"
+            },
+            {
+              "name": "max-options-visible",
+              "type": "number",
+              "default": 3,
+              "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
+              "fieldName": "maxOptionsVisible"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the select control.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "clearable",
+              "type": "boolean",
+              "default": false,
+              "description": "Adds a clear button when the select is not empty.",
+              "fieldName": "clearable"
+            },
+            {
+              "name": "open",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
+              "fieldName": "open"
+            },
+            {
+              "name": "hoist",
+              "type": "boolean",
+              "default": false,
+              "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
+              "fieldName": "hoist"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
+            },
+            {
+              "name": "placement",
+              "type": "string",
+              "default": "bottom",
+              "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
+              "fieldName": "placement",
+              "enum": [
+                "bottom",
+                "top"
+              ]
+            },
+            {
+              "name": "help-text",
+              "type": "string",
+              "default": "",
+              "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "fieldName": "helpText"
+            },
+            {
+              "name": "form",
+              "type": "string",
+              "default": "",
+              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
+              "fieldName": "form"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "The select's required attribute.",
+              "fieldName": "required"
+            },
+            {
+              "name": "getTag",
+              "type": "object",
+              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+              "fieldName": "getTag",
+              "additionalProperties": false
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "summary": "Selects allow you to choose items from a menu of predefined options.",
+          "tagName": "sd-select",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdSelect",
+            "module": "src/components/select/select.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-select",
+          "declaration": {
+            "name": "SdSelect",
+            "module": "src/components/select/select.ts"
           }
         }
       ]
@@ -5857,7 +8339,7 @@
       "exports": [
         {
           "kind": "js",
-          "name": "Switch",
+          "name": "default",
           "declaration": {
             "name": "Switch",
             "module": "src/components/switch/switch.ts"
@@ -7032,7 +9514,7 @@
       "exports": [
         {
           "kind": "js",
-          "name": "SdTopBar",
+          "name": "default",
           "declaration": {
             "name": "SdTopBar",
             "module": "src/components/topBar/top-bar.ts"

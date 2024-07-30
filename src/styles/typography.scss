@@ -48,7 +48,6 @@ h6 {
     font-weight: 900;
 }
 
-
 @mixin sd-display-large {
     font-family: tokens.$sd-typography-display-large-font;
     font-size: tokens.$sd-typography-display-large-size;
@@ -130,39 +129,39 @@ h6 {
     letter-spacing: tokens.$sd-typography-label-small-letter-spacing;
 }
 
-.sd-display-large {
+.sd-text-display-large {
     @include sd-display-large();
 }
 
-.sd-display {
+.sd-text-display {
     @include sd-display();
 }
 
-.sd-display-small {
+.sd-text-display-small {
     @include sd-display-small();
 }
 
-.sd-headline-large {
+.sd-text-headline-large {
     @include sd-headline-large();
 }
 
-.sd-headline {
+.sd-text-headline {
     @include sd-headline();
 }
 
-.sd-body-large {
+.sd-text-body-large {
     @include sd-body-large();
 }
 
-.sd-body {
+.sd-text-body {
     @include sd-body();
 }
 
-.sd-body-small {
+.sd-text-body-small {
     @include sd-body-small();
 }
 
-.sd-label-small {
+.sd-text-label-small {
     @include sd-label-small();
 }
 

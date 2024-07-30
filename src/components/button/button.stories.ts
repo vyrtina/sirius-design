@@ -8,10 +8,12 @@ const meta: Meta = {
     component: "sd-button",
     tags: ["autodocs"],
     args: {
-        label: "button",
+        textLabel: "button",
     },
-    render: ({ label, variant }) => {
-        return html` <sd-button variant=${variant}>${label}</sd-button> `;
+    render: ({ textLabel, variant, disabled }) => {
+        return html`
+            <sd-button variant=${variant} ?disabled=${disabled}>${textLabel}</sd-button>
+        `;
     },
 };
 
@@ -33,19 +35,5 @@ export const Outlined: Story = {
 export const Plain: Story = {
     args: {
         variant: "plain",
-    },
-};
-
-export const IconOnly: Story = {
-    args: {
-        variant: "outlined",
-        IconOnly: true,
-    },
-    render: ({ variant, IconOnly }) => {
-        return html`
-            <sd-button id="button" variant=${variant} ?iconOnly=${IconOnly}>
-                <sd-icon-edit></sd-icon-edit>
-            </sd-button>
-        `;
     },
 };

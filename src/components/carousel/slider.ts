@@ -1,10 +1,9 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement } from "lit/decorators.js";
 import styles from "./slider.scss?inline";
-import "../button/button";
 
-@customElement("sd-slider")
-export class Slider extends LitElement {
+@customElement("sd-carousel-slider")
+export default class SdCarouselSlider extends LitElement {
     static styles = unsafeCSS(styles);
 
     render() {
@@ -23,6 +22,6 @@ export class Slider extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "sd-slider": Slider;
+        "sd-carousel-slider": SdCarouselSlider;
     }
 }

@@ -1,6 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { classMap } from "lit/directives/class-map.js";
-import { property, state, customElement, queryAssignedElements } from "lit/decorators.js";
+import { property, state, customElement, queryAssignedNodes } from "lit/decorators.js";
 import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./select-option.scss?inline";
@@ -23,8 +23,8 @@ export default class SdSelectOption extends SdElement {
     @state() selected = false; // the option is selected and has aria-selected="true"
     @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
 
-    @queryAssignedElements()
-    labels!: Array<HTMLElement>;
+    @queryAssignedNodes()
+    labels!: Array<Node>;
 
     connectedCallback() {
         super.connectedCallback();
@@ -32,7 +32,7 @@ export default class SdSelectOption extends SdElement {
         this.setAttribute("aria-selected", "false");
     }
 
-    private handleDefaultSlotChange() {
+    handleDefaultSlotChange() {
         const textLabel = this.getTextLabel();
 
         // Ignore the first time the label is set
@@ -77,9 +77,19 @@ export default class SdSelectOption extends SdElement {
     getTextLabel() {
         let label = "";
 
-        this.labels.forEach((slotLabel) => {
-            label += slotLabel.textContent;
-        });
+        if (this.labels.length > 0) {
+            this.labels.forEach((node) => {
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (!(node as HTMLElement).hasAttribute("slot")) {
+                        label += (node as HTMLElement).textContent;
+                    }
+                }
+
+                if (node.nodeType === Node.TEXT_NODE) {
+                    label += node.textContent;
+                }
+            });
+        }
 
         return label.trim();
     }

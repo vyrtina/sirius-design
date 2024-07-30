@@ -1,8 +1,7 @@
 @use "../../styles/tokens";
 
 :host {
-    --sd-z-index-dropdown: 900;
-    --arrow-color: tokens.$sd-color-neutral-700;
+    --arrow-color: tokens.$sd-color-palette-netral-700;
     --arrow-size: 6px;
 
     /*
@@ -20,6 +19,7 @@
     isolation: isolate;
     max-width: var(--auto-size-available-width, none);
     max-height: var(--auto-size-available-height, none);
+    z-index: tokens.$sd-z-index-dropdown;
 }
 
 .popup--fixed {
@@ -35,7 +35,7 @@
     width: calc(var(--arrow-size-diagonal) * 2);
     height: calc(var(--arrow-size-diagonal) * 2);
     rotate: 45deg;
-    background: tokens.$sd-color-neutral-700;
+    background: var(--arrow-color);
     z-index: -1;
 }
 
@@ -46,7 +46,7 @@
 
 .popup-hover-bridge {
     position: fixed;
-    z-index: calc(var(--sd-z-index-dropdown) - 1);
+    z-index: calc(tokens.$sd-z-index-dropdown - 1);
     top: 0;
     right: 0;
     bottom: 0;

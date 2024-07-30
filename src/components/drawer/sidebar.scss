@@ -1,0 +1,96 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/layer.scss";
+
+:host {
+    --size: 25rem;
+    --size-collapsed: 5rem;
+    --topnav-height: 0px;
+    display: contents;
+}
+
+.panel {
+    inset-inline-start: 0;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 2rem 0;
+    overflow: hidden;
+    flex-direction: column;
+    overflow: auto;
+    pointer-events: all;
+
+    &.variant--overlay {
+        z-index: tokens.$sd-z-index-modal;
+        @include layer.surface-3();
+    }
+
+    &.variant--push {
+        @include layer.surface-1();
+        z-index: 1;
+        &.collapsed {
+            --size: var(--size-collapsed);
+        }
+    }
+}
+
+.panel.contained {
+    position: absolute;
+    z-index: initial;
+}
+
+.panel:focus {
+    outline: none;
+}
+
+.panel.top {
+    top: var(--topnav-height);
+    inset-inline-end: auto;
+    bottom: auto;
+    inset-inline-start: 0;
+    width: 100%;
+    height: var(--size);
+}
+
+.panel.end {
+    top: var(--topnav-height);
+    inset-inline-end: 0;
+    bottom: auto;
+    inset-inline-start: auto;
+    width: var(--size);
+    height: 100%;
+}
+
+.panel.bottom {
+    top: auto;
+    inset-inline-end: auto;
+    bottom: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: var(--size);
+}
+
+.panel.start {
+    top: var(--topnav-height);
+    inset-inline-end: auto;
+    bottom: auto;
+    inset-inline-start: 0;
+    width: var(--size);
+    height: 100%;
+}
+
+.sidebar__overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: tokens.$sd-color-overlay;
+    pointer-events: all;
+}
+
+:host([contained]) .sidebar__overlay {
+    display: none;
+}

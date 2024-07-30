@@ -1,0 +1,13 @@
+{
+    "divider": {
+        "color": {
+            "value": "{color.border}"
+        },
+        "width": {
+            "value": "{width.025}"
+        },
+        "spacing": {
+            "value": "{spacing.050}"
+        }
+    }
+}

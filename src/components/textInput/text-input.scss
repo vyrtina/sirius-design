@@ -20,7 +20,7 @@
     align-self: stretch;
     align-items: stretch;
     border-radius: $sd-border-radius-large;
-    outline: $sd-border-width-s solid $sd-color-border;
+    outline: $sd-border-width-small solid $sd-color-border;
     transition: background $sd-motion-duration-100 $sd-motion-easing-linear;
     &:enabled {
         @include state-render-overlay($sd-color-primary);
@@ -60,18 +60,18 @@ input {
 }
 
 .help-text {
-    color: tokens.$sd-color-neutral-700;
+    color: tokens.$sd-color-help-text;
 }
 
 input::placeholder {
-    color: $sd-color-text-placeholder;
+    color: $sd-color-placeholder-text;
 }
 
 .leading-icon,
 .trailing-icon {
     display: inline-flex;
     flex: 0 0 auto;
-    color: $sd-color-neutral-600;
+    color: $sd-color-placeholder-text;
 }
 .leading-icon::slotted(*) {
     margin: 0 0.75rem;
@@ -82,11 +82,10 @@ input::placeholder {
 
 .field.error {
     outline: 2px solid $sd-color-error;
-    background-color: $sd-color-surface-error;
-    @include state-render($sd-color-surface-error);
+    background-color: $sd-color-error-container;
     & .leading-icon,
     .trailing-icon {
-        color: $sd-color-icon-error;
+        color: $sd-color-error;
     }
     & + .error-label {
         visibility: visible;
@@ -117,11 +116,11 @@ input:disabled {
 .error-text {
     display: inline-flex;
     align-items: center;
-    gap: $sd-space-025;
-    margin-top: $sd-space-025;
-    color: $sd-color-text-error;
+    gap: $sd-spacing-025;
+    margin-top: $sd-spacing-025;
+    color: $sd-color-error;
     & sd-icon {
-        color: $sd-color-icon-error;
+        color: $sd-color-error;
     }
 }
 
@@ -134,9 +133,6 @@ input:disabled {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: tokens.$sd-color-text-placeholder;
+    color: tokens.$sd-color-placeholder-text;
     cursor: pointer;
-    &:hover {
-        color: tokens.$sd-color-neutral-600;
-    }
 }

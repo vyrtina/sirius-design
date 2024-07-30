@@ -1,589 +1,456 @@
 
-/**
- * Do not edit directly
- * Generated on Mon, 15 Jul 2024 20:00:02 GMT
- */
+// Do not edit directly
+// Generated on Thu, 25 Jul 2024 00:58:48 GMT
 
-$sd-typography-label-small-letter-spacing: normal !default;
-$sd-typography-label-small-line-height: 150% !default;
-$sd-typography-label-small-style: normal !default;
-$sd-typography-label-small-size: 0.625rem !default;
-$sd-typography-body-small-letter-spacing: normal !default;
-$sd-typography-body-small-line-height: 150% !default;
-$sd-typography-body-small-style: normal !default;
-$sd-typography-body-small-size: 0.8125rem !default;
-$sd-typography-body-letter-spacing: normal !default;
-$sd-typography-body-line-height: 140% !default;
-$sd-typography-body-style: normal !default;
-$sd-typography-body-size: 1rem !default;
-$sd-typography-body-large-letter-spacing: normal !default;
-$sd-typography-body-large-line-height: 130% !default;
-$sd-typography-body-large-style: normal !default;
-$sd-typography-body-large-size: 1.25rem !default;
-$sd-typography-headline-letter-spacing: -0.00781rem !default;
-$sd-typography-headline-line-height: 130% !default;
-$sd-typography-headline-style: normal !default;
-$sd-typography-headline-size: 1.5625rem !default;
-$sd-typography-headline-large-letter-spacing: -0.02906rem !default;
-$sd-typography-headline-large-line-height: 130% !default;
-$sd-typography-headline-large-style: normal !default;
-$sd-typography-headline-large-size: 1.9375rem !default;
-$sd-typography-display-small-letter-spacing: -0.03656rem !default;
-$sd-typography-display-small-line-height: 120% !default;
-$sd-typography-display-small-style: normal !default;
-$sd-typography-display-small-size: 2.4375rem !default;
-$sd-typography-display-letter-spacing: -0.06125rem !default;
-$sd-typography-display-line-height: 120% !default;
-$sd-typography-display-style: normal !default;
-$sd-typography-display-size: 3.0625rem !default;
-$sd-typography-display-large-letter-spacing: -0.07625rem !default;
-$sd-typography-display-large-line-height: 110% !default;
-$sd-typography-display-large-style: normal !default;
-$sd-typography-display-large-size: 3.8125rem !default;
-$sd-typography-weight-bold: 700 !default;
-$sd-typography-weight-semibold: 600 !default;
-$sd-typography-weight-medium: 500 !default;
-$sd-typography-weight-regular: 400 !default;
-$sd-typography-font-body: 'Roboto', Arial, Helvetica, sans-serif !default;
-$sd-typography-font-headlines: 'Playfair Display', 'Times New Roman', Times, serif !default;
-$sd-width-005: 2px !default;
-$sd-width-025: 1px !default;
-$sd-width-3200: 128px !default;
-$sd-width-2800: 112px !default;
-$sd-width-2400: 96px !default;
-$sd-width-2000: 80px !default;
-$sd-width-1600: 64px !default;
-$sd-width-1200: 48px !default;
-$sd-width-1000: 40px !default;
-$sd-width-800: 32px !default;
-$sd-width-600: 24px !default;
-$sd-width-500: 20px !default;
-$sd-width-400: 16px !default;
-$sd-width-300: 12px !default;
-$sd-width-200: 8px !default;
-$sd-width-150: 6px !default;
-$sd-width-100: 4px !default;
-$sd-width-0: 0px !default;
-$sd-space-075: 0.75rem !default;
-$sd-space-050: 0.5rem !default;
-$sd-space-037: 0.375rem !default;
-$sd-space-025: 0.25rem !default;
-$sd-space-012: 0.125rem !default;
-$sd-space-800: 8rem !default;
-$sd-space-700: 7rem !default;
-$sd-space-600: 6rem !default;
-$sd-space-500: 5rem !default;
-$sd-space-400: 4rem !default;
-$sd-space-300: 3rem !default;
-$sd-space-250: 2.5rem !default;
-$sd-space-200: 2rem !default;
-$sd-space-150: 1.5rem !default;
-$sd-space-125: 1.25rem !default;
-$sd-space-100: 1rem !default;
-$sd-space-0: 0 !default;
-$sd-shadow-level-6: 0px 32px 64px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.20) !default;
-$sd-shadow-level-5: 0px 14px 28px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.20) !default;
-$sd-shadow-level-4: 0px 8px 16px rgba(0, 0, 0, 0.14), 0px 8px 16px rgba(0, 0, 0, 0.14) !default;
-$sd-shadow-level-3: 0px 4px 8px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.14) !default;
-$sd-shadow-level-2: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 2px 4px rgba(0, 0, 0, 0.14) !default;
-$sd-shadow-level-1: 0px 1px 2px rgba(0, 0, 0, 0.14), 0px 1px 2px rgba(0, 0, 0, 0.14) !default;
-$sd-motion-duration-050: 50ms !default;
-$sd-motion-duration-1000: 1000ms !default;
-$sd-motion-duration-900: 900ms !default;
-$sd-motion-duration-800: 800ms !default;
-$sd-motion-duration-700: 700ms !default;
-$sd-motion-duration-600: 600ms !default;
-$sd-motion-duration-550: 550ms !default;
-$sd-motion-duration-500: 500ms !default;
-$sd-motion-duration-450: 450ms !default;
-$sd-motion-duration-400: 400ms !default;
-$sd-motion-duration-350: 350ms !default;
-$sd-motion-duration-300: 300ms !default;
-$sd-motion-duration-250: 250ms !default;
-$sd-motion-duration-200: 200ms !default;
-$sd-motion-duration-150: 150ms !default;
-$sd-motion-duration-100: 100ms !default;
-$sd-motion-easing-linear: cubic-bezier(0, 0, 1, 1) !default;
-$sd-motion-easing-ease-in-out: cubic-bezier(0.86, 0, 0.07, 1) !default;
-$sd-motion-easing-ease-in: cubic-bezier(0.755, 0.05, 0.855, 0.06) !default;
-$sd-motion-easing-ease-out: cubic-bezier(0.23, 1, 0.32, 1) !default;
-$sd-columns-xl: 12 !default;
-$sd-columns-l: 12 !default;
-$sd-columns-m: 8 !default;
-$sd-columns-s: 4 !default;
-$sd-columns-xs: 4 !default;
-$sd-gutter-xl: 32px !default;
-$sd-gutter-l: 32px !default;
-$sd-gutter-m: 24px !default;
-$sd-gutter-s: 16px !default;
-$sd-gutter-xs: 16px !default;
-$sd-margin-xl: 64px !default;
-$sd-margin-l: 64px !default;
-$sd-margin-m: 32px !default;
-$sd-margin-s: 16px !default;
-$sd-margin-xs: 16px !default;
-$sd-breakpoint-xl: 1440px !default;
-$sd-breakpoint-l: 1024px !default;
-$sd-breakpoint-m: 768px !default;
-$sd-breakpoint-s: 320px !default;
-$sd-breakpoint-xs: 0px !default;
-$sd-state-drag-layer-opacity: 0.16 !default;
-$sd-state-click-layer-opacity: 0.12 !default;
-$sd-state-focus-layer-opacity: 0.12 !default;
-$sd-state-hover-layer-opacity: 0.08 !default;
-$sd-opacity-disabled: 0.38 !default;
-$sd-opacity-placeholder: 0.5 !default;
-$sd-opacity-scrim: 0.32 !default;
-$sd-opacity-glass: 0.8 !default;
-$sd-color-palette-cyan-1300: #002a46 !default;
-$sd-color-palette-cyan-1200: #00395d !default;
-$sd-color-palette-cyan-1100: #004a73 !default;
-$sd-color-palette-cyan-1000: #005d89 !default;
-$sd-color-palette-cyan-900: #00719f !default;
-$sd-color-palette-cyan-800: #0086b4 !default;
-$sd-color-palette-cyan-700: #019cc8 !default;
-$sd-color-palette-cyan-600: #12b0da !default;
-$sd-color-palette-cyan-500: #33c5e8 !default;
-$sd-color-palette-cyan-400: #60d8f3 !default;
-$sd-color-palette-cyan-300: #88e7fa !default;
-$sd-color-palette-cyan-200: #a4f0ff !default;
-$sd-color-palette-cyan-100: #c5f8ff !default;
-$sd-color-palette-red-1300: #590000 !default;
-$sd-color-palette-red-1200: #740000 !default;
-$sd-color-palette-red-1100: #b40000 !default;
-$sd-color-palette-red-1000: #b40000 !default;
-$sd-color-palette-red-900: #d31510 !default;
-$sd-color-palette-red-800: #ea3829 !default;
-$sd-color-palette-red-700: #f75c46 !default;
-$sd-color-palette-red-600: #ff7c65 !default;
-$sd-color-palette-red-500: #ff9b88 !default;
-$sd-color-palette-red-400: #ffb7a9 !default;
-$sd-color-palette-red-300: #ffcdc3 !default;
-$sd-color-palette-red-200: #ffddd6 !default;
-$sd-color-palette-red-100: #ffebe7 !default;
-$sd-color-palette-orange-1300: #491901 !default;
-$sd-color-palette-orange-1200: #612300 !default;
-$sd-color-palette-orange-1100: #7a2f00 !default;
-$sd-color-palette-orange-1000: #953d00 !default;
-$sd-color-palette-orange-900: #b14c00 !default;
-$sd-color-palette-orange-800: #cb5d00 !default;
-$sd-color-palette-orange-700: #e46f00 !default;
-$sd-color-palette-orange-600: #f68511 !default;
-$sd-color-palette-orange-500: #ffa037 !default;
-$sd-color-palette-orange-400: #ffbb63 !default;
-$sd-color-palette-orange-300: #fdd291 !default;
-$sd-color-palette-orange-200: #ffdfad !default;
-$sd-color-palette-orange-100: #ffeccc !default;
-$sd-color-palette-green-1300: #0a2e1d !default;
-$sd-color-palette-green-1200: #053f27 !default;
-$sd-color-palette-green-1100: #005132 !default;
-$sd-color-palette-green-1000: #00653e !default;
-$sd-color-palette-green-900: #007a4d !default;
-$sd-color-palette-green-800: #008f5d !default;
-$sd-color-palette-green-700: #15a46e !default;
-$sd-color-palette-green-600: #2fb880 !default;
-$sd-color-palette-green-500: #49cc93 !default;
-$sd-color-palette-green-400: #67dea8 !default;
-$sd-color-palette-green-300: #89ecbc !default;
-$sd-color-palette-green-200: #adf4ce !default;
-$sd-color-palette-green-100: #cef8e0 !default;
-$sd-color-palette-blue-1300: #002754 !default;
-$sd-color-palette-blue-1200: #003571 !default;
-$sd-color-palette-blue-1100: #004491 !default;
-$sd-color-palette-blue-1000: #0054b6 !default;
-$sd-color-palette-blue-900: #0265dc !default;
-$sd-color-palette-blue-800: #147af3 !default;
-$sd-color-palette-blue-700: #3892f3 !default;
-$sd-color-palette-blue-600: #59a7f6 !default;
-$sd-color-palette-blue-500: #78bbfa !default;
-$sd-color-palette-blue-400: #96cefd !default;
-$sd-color-palette-blue-300: #b5deff !default;
-$sd-color-palette-blue-200: #cae8ff !default;
-$sd-color-palette-blue-100: #e0f2ff !default;
-$sd-color-neutral-1000: #000000 !default;
-$sd-color-neutral-900: #141415 !default;
-$sd-color-neutral-800: #1c1d1f !default;
-$sd-color-neutral-700: #27292a !default;
-$sd-color-neutral-600: #5d5f64 !default;
-$sd-color-neutral-500: #b1b5b7 !default;
-$sd-color-neutral-400: #cccccc !default;
-$sd-color-neutral-300: #e1e3e6 !default;
-$sd-color-neutral-200: #edeef0 !default;
-$sd-color-neutral-100: #ffffff !default;
-$sd-border-width-l: 4px !default;
-$sd-border-width-m: 2px !default;
-$sd-border-width-s: 1px !default;
-$sd-border-width-0: 0px !default;
-$sd-border-radius-medium: 0.25rem !default;
-$sd-border-radius-large: 0.5rem !default;
-$sd-border-radius-circle: 999999rem !default;
-$sd-typography-label-small-weight: $sd-typography-weight-regular !default;
-$sd-typography-label-small-font: $sd-typography-font-body !default;
-$sd-typography-body-small-weight: $sd-typography-weight-regular !default;
-$sd-typography-body-small-font: $sd-typography-font-body !default;
-$sd-typography-body-weight: $sd-typography-weight-regular !default;
-$sd-typography-body-font: $sd-typography-font-body !default;
-$sd-typography-body-large-weight: $sd-typography-weight-regular !default;
-$sd-typography-body-large-font: $sd-typography-font-body !default;
-$sd-typography-headline-weight: $sd-typography-weight-regular !default;
-$sd-typography-headline-font: $sd-typography-font-headlines !default;
-$sd-typography-headline-large-weight: $sd-typography-weight-regular !default;
-$sd-typography-headline-large-font: $sd-typography-font-headlines !default;
-$sd-typography-display-small-weight: $sd-typography-weight-regular !default;
-$sd-typography-display-small-font: $sd-typography-font-headlines !default;
-$sd-typography-display-weight: $sd-typography-weight-regular !default;
-$sd-typography-display-font: $sd-typography-font-headlines !default;
-$sd-typography-display-large-weight: $sd-typography-weight-regular !default;
-$sd-typography-display-large-font: $sd-typography-font-headlines !default;
-$sd-color-text-placeholder: $sd-color-neutral-500 !default;
-$sd-color-border: $sd-color-neutral-400 !default;
-$sd-color-disabled: $sd-color-neutral-800 !default;
-$sd-color-on-surface: $sd-color-neutral-800 !default;
-$sd-color-surface: $sd-color-neutral-200 !default;
-$sd-color-background: $sd-color-neutral-100 !default;
-$sd-color-accent: $sd-color-palette-blue-900 !default;
-$sd-color-on-primary: $sd-color-neutral-100 !default;
-$sd-color-primary: $sd-color-neutral-700 !default;
-$sd-color-on-error: $sd-color-neutral-900 !default;
-$sd-color-icon-error: $sd-color-palette-red-1100 !default;
-$sd-color-text-error: $sd-color-palette-red-1100 !default;
-$sd-color-surface-error: $sd-color-palette-red-100 !default;
-$sd-color-error: $sd-color-palette-red-800 !default;
-
-$tokens: (
-  'border': (
-    'radius': (
-      'circle': $sd-border-radius-circle,
-      'large': $sd-border-radius-large,
-      'medium': $sd-border-radius-medium
-    ),
-    'width': (
-      '0': $sd-border-width-0,
-      's': $sd-border-width-s,
-      'm': $sd-border-width-m,
-      'l': $sd-border-width-l
-    )
-  ),
-  'color': (
-    'error': $sd-color-error,
-    'surface-error': $sd-color-surface-error,
-    'text-error': $sd-color-text-error,
-    'icon-error': $sd-color-icon-error,
-    'on-error': $sd-color-on-error,
-    'primary': $sd-color-primary,
-    'on-primary': $sd-color-on-primary,
-    'accent': $sd-color-accent,
-    'background': $sd-color-background,
-    'surface': $sd-color-surface,
-    'on-surface': $sd-color-on-surface,
-    'disabled': $sd-color-disabled,
-    'border': $sd-color-border,
-    'neutral': (
-      '100': $sd-color-neutral-100,
-      '200': $sd-color-neutral-200,
-      '300': $sd-color-neutral-300,
-      '400': $sd-color-neutral-400,
-      '500': $sd-color-neutral-500,
-      '600': $sd-color-neutral-600,
-      '700': $sd-color-neutral-700,
-      '800': $sd-color-neutral-800,
-      '900': $sd-color-neutral-900,
-      '1000': $sd-color-neutral-1000
-    ),
-    'palette': (
-      'blue': (
-        '100': $sd-color-palette-blue-100,
-        '200': $sd-color-palette-blue-200,
-        '300': $sd-color-palette-blue-300,
-        '400': $sd-color-palette-blue-400,
-        '500': $sd-color-palette-blue-500,
-        '600': $sd-color-palette-blue-600,
-        '700': $sd-color-palette-blue-700,
-        '800': $sd-color-palette-blue-800,
-        '900': $sd-color-palette-blue-900,
-        '1000': $sd-color-palette-blue-1000,
-        '1100': $sd-color-palette-blue-1100,
-        '1200': $sd-color-palette-blue-1200,
-        '1300': $sd-color-palette-blue-1300
-      ),
-      'green': (
-        '100': $sd-color-palette-green-100,
-        '200': $sd-color-palette-green-200,
-        '300': $sd-color-palette-green-300,
-        '400': $sd-color-palette-green-400,
-        '500': $sd-color-palette-green-500,
-        '600': $sd-color-palette-green-600,
-        '700': $sd-color-palette-green-700,
-        '800': $sd-color-palette-green-800,
-        '900': $sd-color-palette-green-900,
-        '1000': $sd-color-palette-green-1000,
-        '1100': $sd-color-palette-green-1100,
-        '1200': $sd-color-palette-green-1200,
-        '1300': $sd-color-palette-green-1300
-      ),
-      'orange': (
-        '100': $sd-color-palette-orange-100,
-        '200': $sd-color-palette-orange-200,
-        '300': $sd-color-palette-orange-300,
-        '400': $sd-color-palette-orange-400,
-        '500': $sd-color-palette-orange-500,
-        '600': $sd-color-palette-orange-600,
-        '700': $sd-color-palette-orange-700,
-        '800': $sd-color-palette-orange-800,
-        '900': $sd-color-palette-orange-900,
-        '1000': $sd-color-palette-orange-1000,
-        '1100': $sd-color-palette-orange-1100,
-        '1200': $sd-color-palette-orange-1200,
-        '1300': $sd-color-palette-orange-1300
-      ),
-      'red': (
-        '100': $sd-color-palette-red-100,
-        '200': $sd-color-palette-red-200,
-        '300': $sd-color-palette-red-300,
-        '400': $sd-color-palette-red-400,
-        '500': $sd-color-palette-red-500,
-        '600': $sd-color-palette-red-600,
-        '700': $sd-color-palette-red-700,
-        '800': $sd-color-palette-red-800,
-        '900': $sd-color-palette-red-900,
-        '1000': $sd-color-palette-red-1000,
-        '1100': $sd-color-palette-red-1100,
-        '1200': $sd-color-palette-red-1200,
-        '1300': $sd-color-palette-red-1300
-      ),
-      'cyan': (
-        '100': $sd-color-palette-cyan-100,
-        '200': $sd-color-palette-cyan-200,
-        '300': $sd-color-palette-cyan-300,
-        '400': $sd-color-palette-cyan-400,
-        '500': $sd-color-palette-cyan-500,
-        '600': $sd-color-palette-cyan-600,
-        '700': $sd-color-palette-cyan-700,
-        '800': $sd-color-palette-cyan-800,
-        '900': $sd-color-palette-cyan-900,
-        '1000': $sd-color-palette-cyan-1000,
-        '1100': $sd-color-palette-cyan-1100,
-        '1200': $sd-color-palette-cyan-1200,
-        '1300': $sd-color-palette-cyan-1300
-      )
-    ),
-    'text': (
-      'placeholder': $sd-color-text-placeholder
-    )
-  ),
-  'opacity': (
-    'glass': $sd-opacity-glass,
-    'scrim': $sd-opacity-scrim,
-    'placeholder': $sd-opacity-placeholder,
-    'disabled': $sd-opacity-disabled
-  ),
-  'state': (
-    'hover': (
-      'layer-opacity': $sd-state-hover-layer-opacity
-    ),
-    'focus': (
-      'layer-opacity': $sd-state-focus-layer-opacity
-    ),
-    'click': (
-      'layer-opacity': $sd-state-click-layer-opacity
-    ),
-    'drag': (
-      'layer-opacity': $sd-state-drag-layer-opacity
-    )
-  ),
-  'breakpoint': (
-    'xs': $sd-breakpoint-xs,
-    's': $sd-breakpoint-s,
-    'm': $sd-breakpoint-m,
-    'l': $sd-breakpoint-l,
-    'xl': $sd-breakpoint-xl
-  ),
-  'margin': (
-    'xs': $sd-margin-xs,
-    's': $sd-margin-s,
-    'm': $sd-margin-m,
-    'l': $sd-margin-l,
-    'xl': $sd-margin-xl
-  ),
-  'gutter': (
-    'xs': $sd-gutter-xs,
-    's': $sd-gutter-s,
-    'm': $sd-gutter-m,
-    'l': $sd-gutter-l,
-    'xl': $sd-gutter-xl
-  ),
-  'columns': (
-    'xs': $sd-columns-xs,
-    's': $sd-columns-s,
-    'm': $sd-columns-m,
-    'l': $sd-columns-l,
-    'xl': $sd-columns-xl
-  ),
-  'motion': (
-    'easing': (
-      'ease-out': $sd-motion-easing-ease-out,
-      'ease-in': $sd-motion-easing-ease-in,
-      'ease-in-out': $sd-motion-easing-ease-in-out,
-      'linear': $sd-motion-easing-linear
-    ),
-    'duration': (
-      '100': $sd-motion-duration-100,
-      '150': $sd-motion-duration-150,
-      '200': $sd-motion-duration-200,
-      '250': $sd-motion-duration-250,
-      '300': $sd-motion-duration-300,
-      '350': $sd-motion-duration-350,
-      '400': $sd-motion-duration-400,
-      '450': $sd-motion-duration-450,
-      '500': $sd-motion-duration-500,
-      '550': $sd-motion-duration-550,
-      '600': $sd-motion-duration-600,
-      '700': $sd-motion-duration-700,
-      '800': $sd-motion-duration-800,
-      '900': $sd-motion-duration-900,
-      '1000': $sd-motion-duration-1000,
-      '050': $sd-motion-duration-050
-    )
-  ),
-  'shadow': (
-    'level-1': $sd-shadow-level-1,
-    'level-2': $sd-shadow-level-2,
-    'level-3': $sd-shadow-level-3,
-    'level-4': $sd-shadow-level-4,
-    'level-5': $sd-shadow-level-5,
-    'level-6': $sd-shadow-level-6
-  ),
-  'space': (
-    '0': $sd-space-0,
-    '100': $sd-space-100,
-    '125': $sd-space-125,
-    '150': $sd-space-150,
-    '200': $sd-space-200,
-    '250': $sd-space-250,
-    '300': $sd-space-300,
-    '400': $sd-space-400,
-    '500': $sd-space-500,
-    '600': $sd-space-600,
-    '700': $sd-space-700,
-    '800': $sd-space-800,
-    '012': $sd-space-012,
-    '025': $sd-space-025,
-    '037': $sd-space-037,
-    '050': $sd-space-050,
-    '075': $sd-space-075
-  ),
-  'width': (
-    '0': $sd-width-0,
-    '100': $sd-width-100,
-    '150': $sd-width-150,
-    '200': $sd-width-200,
-    '300': $sd-width-300,
-    '400': $sd-width-400,
-    '500': $sd-width-500,
-    '600': $sd-width-600,
-    '800': $sd-width-800,
-    '1000': $sd-width-1000,
-    '1200': $sd-width-1200,
-    '1600': $sd-width-1600,
-    '2000': $sd-width-2000,
-    '2400': $sd-width-2400,
-    '2800': $sd-width-2800,
-    '3200': $sd-width-3200,
-    '025': $sd-width-025,
-    '005': $sd-width-005
-  ),
-  'typography': (
-    'font': (
-      'headlines': $sd-typography-font-headlines,
-      'body': $sd-typography-font-body
-    ),
-    'weight': (
-      'regular': $sd-typography-weight-regular,
-      'medium': $sd-typography-weight-medium,
-      'semibold': $sd-typography-weight-semibold,
-      'bold': $sd-typography-weight-bold
-    ),
-    ' ': (
-      'display': (
-        'Large': (
-          'font': $sd-typography-display-large-font,
-          'size': $sd-typography-display-large-size,
-          'style': $sd-typography-display-large-style,
-          'weight': $sd-typography-display-large-weight,
-          'line-height': $sd-typography-display-large-line-height,
-          'letter-spacing': $sd-typography-display-large-letter-spacing
-        ),
-        ' ': (
-          'font': $sd-typography-display-font,
-          'size': $sd-typography-display-size,
-          'style': $sd-typography-display-style,
-          'weight': $sd-typography-display-weight,
-          'line-height': $sd-typography-display-line-height,
-          'letter-spacing': $sd-typography-display-letter-spacing
-        ),
-        'small': (
-          'font': $sd-typography-display-small-font,
-          'size': $sd-typography-display-small-size,
-          'style': $sd-typography-display-small-style,
-          'weight': $sd-typography-display-small-weight,
-          'line-height': $sd-typography-display-small-line-height,
-          'letter-spacing': $sd-typography-display-small-letter-spacing
-        )
-      ),
-      'headline': (
-        'large': (
-          'font': $sd-typography-headline-large-font,
-          'size': $sd-typography-headline-large-size,
-          'style': $sd-typography-headline-large-style,
-          'weight': $sd-typography-headline-large-weight,
-          'line-height': $sd-typography-headline-large-line-height,
-          'letter-spacing': $sd-typography-headline-large-letter-spacing
-        ),
-        ' ': (
-          'font': $sd-typography-headline-font,
-          'size': $sd-typography-headline-size,
-          'style': $sd-typography-headline-style,
-          'weight': $sd-typography-headline-weight,
-          'line-height': $sd-typography-headline-line-height,
-          'letter-spacing': $sd-typography-headline-letter-spacing
-        )
-      ),
-      'body': (
-        'large': (
-          'font': $sd-typography-body-large-font,
-          'size': $sd-typography-body-large-size,
-          'style': $sd-typography-body-large-style,
-          'weight': $sd-typography-body-large-weight,
-          'line-height': $sd-typography-body-large-line-height,
-          'letter-spacing': $sd-typography-body-large-letter-spacing
-        ),
-        ' ': (
-          'font': $sd-typography-body-font,
-          'size': $sd-typography-body-size,
-          'style': $sd-typography-body-style,
-          'weight': $sd-typography-body-weight,
-          'line-height': $sd-typography-body-line-height,
-          'letter-spacing': $sd-typography-body-letter-spacing
-        ),
-        'small': (
-          'font': $sd-typography-body-small-font,
-          'size': $sd-typography-body-small-size,
-          'style': $sd-typography-body-small-style,
-          'weight': $sd-typography-body-small-weight,
-          'line-height': $sd-typography-body-small-line-height,
-          'letter-spacing': $sd-typography-body-small-letter-spacing
-        )
-      ),
-      'label': (
-        'small': (
-          'font': $sd-typography-label-small-font,
-          'size': $sd-typography-label-small-size,
-          'style': $sd-typography-label-small-style,
-          'weight': $sd-typography-label-small-weight,
-          'line-height': $sd-typography-label-small-line-height,
-          'letter-spacing': $sd-typography-label-small-letter-spacing
-        )
-      )
-    )
-  )
-);
+$sd-z-index-toast: 10000;
+$sd-z-index-sticky: 100;
+$sd-z-index-spinner: 9050;
+$sd-z-index-reminder: 8500;
+$sd-z-index-popup: 5000;
+$sd-z-index-overlay: 8000;
+$sd-z-index-modal: 9000;
+$sd-z-index-dropdown: 7000;
+$sd-z-index-docked: 4;
+$sd-z-index-dialog: 6000;
+$sd-z-index-default: 1;
+$sd-z-index-deepdive: -99999;
+$sd-typography-label-small-letter-spacing: normal;
+$sd-typography-label-small-line-height: 150%;
+$sd-typography-label-small-style: normal;
+$sd-typography-label-small-size: 0.625rem;
+$sd-typography-body-small-letter-spacing: normal;
+$sd-typography-body-small-line-height: 150%;
+$sd-typography-body-small-style: normal;
+$sd-typography-body-small-size: 0.8125rem;
+$sd-typography-body-letter-spacing: normal;
+$sd-typography-body-line-height: 140%;
+$sd-typography-body-style: normal;
+$sd-typography-body-size: 1rem;
+$sd-typography-body-large-letter-spacing: normal;
+$sd-typography-body-large-line-height: 130%;
+$sd-typography-body-large-style: normal;
+$sd-typography-body-large-size: 1.25rem;
+$sd-typography-headline-letter-spacing: -0.00781rem;
+$sd-typography-headline-line-height: 130%;
+$sd-typography-headline-style: normal;
+$sd-typography-headline-size: 1.5625rem;
+$sd-typography-headline-large-letter-spacing: -0.02906rem;
+$sd-typography-headline-large-line-height: 130%;
+$sd-typography-headline-large-style: normal;
+$sd-typography-headline-large-size: 1.9375rem;
+$sd-typography-display-small-letter-spacing: -0.03656rem;
+$sd-typography-display-small-line-height: 120%;
+$sd-typography-display-small-style: normal;
+$sd-typography-display-small-size: 2.4375rem;
+$sd-typography-display-letter-spacing: -0.06125rem;
+$sd-typography-display-line-height: 120%;
+$sd-typography-display-style: normal;
+$sd-typography-display-size: 3.0625rem;
+$sd-typography-display-large-letter-spacing: -0.07625rem;
+$sd-typography-display-large-line-height: 110%;
+$sd-typography-display-large-style: normal;
+$sd-typography-display-large-size: 3.8125rem;
+$sd-typography-weight-bold: 700;
+$sd-typography-weight-semibold: 600;
+$sd-typography-weight-medium: 500;
+$sd-typography-weight-regular: 400;
+$sd-typography-font-body: 'Roboto', Arial, Helvetica, sans-serif;
+$sd-typography-font-headlines: 'Playfair Display', 'Times New Roman', Times, serif;
+$sd-width-005: 2px;
+$sd-width-025: 1px;
+$sd-width-3200: 128px;
+$sd-width-2800: 112px;
+$sd-width-2400: 96px;
+$sd-width-2000: 80px;
+$sd-width-1600: 64px;
+$sd-width-1200: 48px;
+$sd-width-1000: 40px;
+$sd-width-800: 32px;
+$sd-width-600: 24px;
+$sd-width-500: 20px;
+$sd-width-400: 16px;
+$sd-width-300: 12px;
+$sd-width-200: 8px;
+$sd-width-150: 6px;
+$sd-width-100: 4px;
+$sd-width-0: 0px;
+$sd-spacing-075: 0.75rem;
+$sd-spacing-050: 0.5rem;
+$sd-spacing-037: 0.375rem;
+$sd-spacing-025: 0.25rem;
+$sd-spacing-012: 0.125rem;
+$sd-spacing-800: 8rem;
+$sd-spacing-700: 7rem;
+$sd-spacing-600: 6rem;
+$sd-spacing-500: 5rem;
+$sd-spacing-400: 4rem;
+$sd-spacing-300: 3rem;
+$sd-spacing-250: 2.5rem;
+$sd-spacing-200: 2rem;
+$sd-spacing-150: 1.5rem;
+$sd-spacing-125: 1.25rem;
+$sd-spacing-100: 1rem;
+$sd-spacing-0: 0;
+$sd-shadow-level-6: 0px 32px 64px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.20);
+$sd-shadow-level-5: 0px 14px 28px rgba(0, 0, 0, 0.24), 0px 0px 8px rgba(0, 0, 0, 0.20);
+$sd-shadow-level-4: 0px 8px 16px rgba(0, 0, 0, 0.14), 0px 8px 16px rgba(0, 0, 0, 0.14);
+$sd-shadow-level-3: 0px 4px 8px rgba(0, 0, 0, 0.14), 0px 4px 8px rgba(0, 0, 0, 0.14);
+$sd-shadow-level-2: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 2px 4px rgba(0, 0, 0, 0.14);
+$sd-shadow-level-1: 0px 1px 2px rgba(0, 0, 0, 0.14), 0px 1px 2px rgba(0, 0, 0, 0.14);
+$sd-opacity-disabled-background: 0.2;
+$sd-opacity-disabled: 0.38;
+$sd-opacity-placeholder: 0.5;
+$sd-opacity-scrim: 0.32;
+$sd-opacity-glass: 0.8;
+$sd-opacity-state-layer-drag: 0.16;
+$sd-opacity-state-layer-click: 0.12;
+$sd-opacity-state-layer-focus: 0.12;
+$sd-opacity-state-layer-hover: 0.08;
+$sd-motion-duration-050: 50ms;
+$sd-motion-duration-1000: 1000ms;
+$sd-motion-duration-900: 900ms;
+$sd-motion-duration-800: 800ms;
+$sd-motion-duration-700: 700ms;
+$sd-motion-duration-600: 600ms;
+$sd-motion-duration-550: 550ms;
+$sd-motion-duration-500: 500ms;
+$sd-motion-duration-450: 450ms;
+$sd-motion-duration-400: 400ms;
+$sd-motion-duration-350: 350ms;
+$sd-motion-duration-300: 300ms;
+$sd-motion-duration-250: 250ms;
+$sd-motion-duration-200: 200ms;
+$sd-motion-duration-150: 150ms;
+$sd-motion-duration-100: 100ms;
+$sd-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+$sd-motion-easing-ease-in-out: cubic-bezier(0.86, 0, 0.07, 1);
+$sd-motion-easing-ease-in: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$sd-motion-easing-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+$sd-columns-xl: 12;
+$sd-columns-l: 12;
+$sd-columns-m: 8;
+$sd-columns-s: 4;
+$sd-columns-xs: 4;
+$sd-gutter-xl: 32px;
+$sd-gutter-l: 32px;
+$sd-gutter-m: 24px;
+$sd-gutter-s: 16px;
+$sd-gutter-xs: 16px;
+$sd-margin-xl: 64px;
+$sd-margin-l: 64px;
+$sd-margin-m: 32px;
+$sd-margin-s: 16px;
+$sd-margin-xs: 16px;
+$sd-breakpoint-xl: 1440px;
+$sd-breakpoint-l: 1024px;
+$sd-breakpoint-m: 768px;
+$sd-breakpoint-s: 320px;
+$sd-breakpoint-xs: 0px;
+$sd-color-palette-rose-050: #fff1f2;
+$sd-color-palette-rose-950: #4c0519;
+$sd-color-palette-rose-900: #881337;
+$sd-color-palette-rose-800: #9f1239;
+$sd-color-palette-rose-700: #be123c;
+$sd-color-palette-rose-600: #e11d48;
+$sd-color-palette-rose-500: #f43f5e;
+$sd-color-palette-rose-400: #fb7185;
+$sd-color-palette-rose-300: #fda4af;
+$sd-color-palette-rose-200: #fecdd3;
+$sd-color-palette-rose-100: #ffe4e6;
+$sd-color-palette-pink-050: #fdf2f8;
+$sd-color-palette-pink-950: #500724;
+$sd-color-palette-pink-900: #831843;
+$sd-color-palette-pink-800: #9d174d;
+$sd-color-palette-pink-700: #be185d;
+$sd-color-palette-pink-600: #db2777;
+$sd-color-palette-pink-500: #ec4899;
+$sd-color-palette-pink-400: #f472b6;
+$sd-color-palette-pink-300: #f9a8d4;
+$sd-color-palette-pink-200: #fbcfe8;
+$sd-color-palette-pink-100: #fce7f3;
+$sd-color-palette-fuchsia-050: #fdf4ff;
+$sd-color-palette-fuchsia-950: #4a044e;
+$sd-color-palette-fuchsia-900: #701a75;
+$sd-color-palette-fuchsia-800: #86198f;
+$sd-color-palette-fuchsia-700: #a21caf;
+$sd-color-palette-fuchsia-600: #c026d3;
+$sd-color-palette-fuchsia-500: #d946ef;
+$sd-color-palette-fuchsia-400: #e879f9;
+$sd-color-palette-fuchsia-300: #f0abfc;
+$sd-color-palette-fuchsia-200: #f5d0fe;
+$sd-color-palette-fuchsia-100: #fae8ff;
+$sd-color-palette-purple-050: #faf5ff;
+$sd-color-palette-purple-950: #3b0764;
+$sd-color-palette-purple-900: #581c87;
+$sd-color-palette-purple-800: #6b21a8;
+$sd-color-palette-purple-700: #7e22ce;
+$sd-color-palette-purple-600: #9333ea;
+$sd-color-palette-purple-500: #a855f7;
+$sd-color-palette-purple-400: #c084fc;
+$sd-color-palette-purple-300: #d8b4fe;
+$sd-color-palette-purple-200: #e9d5ff;
+$sd-color-palette-purple-100: #f3e8ff;
+$sd-color-palette-violet-050: #f5f3ff;
+$sd-color-palette-violet-950: #2e1065;
+$sd-color-palette-violet-900: #4c1d95;
+$sd-color-palette-violet-800: #5b21b6;
+$sd-color-palette-violet-700: #6d28d9;
+$sd-color-palette-violet-600: #7c3aed;
+$sd-color-palette-violet-500: #8b5cf6;
+$sd-color-palette-violet-400: #a78bfa;
+$sd-color-palette-violet-300: #c4b5fd;
+$sd-color-palette-violet-200: #ddd6fe;
+$sd-color-palette-violet-100: #ede9fe;
+$sd-color-palette-indigo-050: #eef2ff;
+$sd-color-palette-indigo-950: #1e1b4b;
+$sd-color-palette-indigo-900: #312e81;
+$sd-color-palette-indigo-800: #3730a3;
+$sd-color-palette-indigo-700: #4338ca;
+$sd-color-palette-indigo-600: #4f46e5;
+$sd-color-palette-indigo-500: #6366f1;
+$sd-color-palette-indigo-400: #818cf8;
+$sd-color-palette-indigo-300: #a5b4fc;
+$sd-color-palette-indigo-200: #c7d2fe;
+$sd-color-palette-indigo-100: #e0e7ff;
+$sd-color-palette-blue-050: #eff6ff;
+$sd-color-palette-blue-950: #172554;
+$sd-color-palette-blue-900: #1e3a8a;
+$sd-color-palette-blue-800: #1e40af;
+$sd-color-palette-blue-700: #1d4ed8;
+$sd-color-palette-blue-600: #2563eb;
+$sd-color-palette-blue-500: #3b82f6;
+$sd-color-palette-blue-400: #60a5fa;
+$sd-color-palette-blue-300: #93c5fd;
+$sd-color-palette-blue-200: #bfdbfe;
+$sd-color-palette-blue-100: #dbeafe;
+$sd-color-palette-sky-050: #f0f9ff;
+$sd-color-palette-sky-950: #082f49;
+$sd-color-palette-sky-900: #0c4a6e;
+$sd-color-palette-sky-800: #075985;
+$sd-color-palette-sky-700: #0369a1;
+$sd-color-palette-sky-600: #0284c7;
+$sd-color-palette-sky-500: #0ea5e9;
+$sd-color-palette-sky-400: #38bdf8;
+$sd-color-palette-sky-300: #7dd3fc;
+$sd-color-palette-sky-200: #bae6fd;
+$sd-color-palette-sky-100: #e0f2fe;
+$sd-color-palette-cyan-050: #ecfeff;
+$sd-color-palette-cyan-950: #083344;
+$sd-color-palette-cyan-900: #164e63;
+$sd-color-palette-cyan-800: #155e75;
+$sd-color-palette-cyan-700: #0e7490;
+$sd-color-palette-cyan-600: #0891b2;
+$sd-color-palette-cyan-500: #06b6d4;
+$sd-color-palette-cyan-400: #22d3ee;
+$sd-color-palette-cyan-300: #67e8f9;
+$sd-color-palette-cyan-200: #a5f3fc;
+$sd-color-palette-cyan-100: #cffafe;
+$sd-color-palette-teal-050: #f0fdfa;
+$sd-color-palette-teal-950: #042f2e;
+$sd-color-palette-teal-900: #134e4a;
+$sd-color-palette-teal-800: #115e59;
+$sd-color-palette-teal-700: #0f766e;
+$sd-color-palette-teal-600: #0d9488;
+$sd-color-palette-teal-500: #14b8a6;
+$sd-color-palette-teal-400: #2dd4bf;
+$sd-color-palette-teal-300: #5eead4;
+$sd-color-palette-teal-200: #99f6e4;
+$sd-color-palette-teal-100: #ccfbf1;
+$sd-color-palette-emerald-050: #ecfdf5;
+$sd-color-palette-emerald-950: #022c22;
+$sd-color-palette-emerald-900: #064e3b;
+$sd-color-palette-emerald-800: #065f46;
+$sd-color-palette-emerald-700: #047857;
+$sd-color-palette-emerald-600: #059669;
+$sd-color-palette-emerald-500: #10b981;
+$sd-color-palette-emerald-400: #34d399;
+$sd-color-palette-emerald-300: #6ee7b7;
+$sd-color-palette-emerald-200: #a7f3d0;
+$sd-color-palette-emerald-100: #d1fae5;
+$sd-color-palette-green-050: #f0fdf4;
+$sd-color-palette-green-950: #052e16;
+$sd-color-palette-green-900: #14532d;
+$sd-color-palette-green-800: #166534;
+$sd-color-palette-green-700: #15803d;
+$sd-color-palette-green-600: #16a34a;
+$sd-color-palette-green-500: #22c55e;
+$sd-color-palette-green-400: #4ade80;
+$sd-color-palette-green-300: #86efac;
+$sd-color-palette-green-200: #bbf7d0;
+$sd-color-palette-green-100: #dcfce7;
+$sd-color-palette-lime-050: #f7fee7;
+$sd-color-palette-lime-950: #1a2e05;
+$sd-color-palette-lime-900: #365314;
+$sd-color-palette-lime-800: #3f6212;
+$sd-color-palette-lime-700: #4d7c0f;
+$sd-color-palette-lime-600: #65a30d;
+$sd-color-palette-lime-500: #84cc16;
+$sd-color-palette-lime-400: #a3e635;
+$sd-color-palette-lime-300: #bef264;
+$sd-color-palette-lime-200: #d9f99d;
+$sd-color-palette-lime-100: #ecfccb;
+$sd-color-palette-yellow-050: #fefce8;
+$sd-color-palette-yellow-950: #422006;
+$sd-color-palette-yellow-900: #713f12;
+$sd-color-palette-yellow-800: #854d0e;
+$sd-color-palette-yellow-700: #a16207;
+$sd-color-palette-yellow-600: #ca8a04;
+$sd-color-palette-yellow-500: #eab308;
+$sd-color-palette-yellow-400: #facc15;
+$sd-color-palette-yellow-300: #fde047;
+$sd-color-palette-yellow-200: #fef08a;
+$sd-color-palette-yellow-100: #fef9c3;
+$sd-color-palette-amber-050: #fffbeb;
+$sd-color-palette-amber-950: #451a03;
+$sd-color-palette-amber-900: #78350f;
+$sd-color-palette-amber-800: #92400e;
+$sd-color-palette-amber-700: #b45309;
+$sd-color-palette-amber-600: #d97706;
+$sd-color-palette-amber-500: #f59e0b;
+$sd-color-palette-amber-400: #fbbf24;
+$sd-color-palette-amber-300: #fcd34d;
+$sd-color-palette-amber-200: #fde68a;
+$sd-color-palette-amber-100: #fef3c7;
+$sd-color-palette-orange-050: #fff7ed;
+$sd-color-palette-orange-950: #431407;
+$sd-color-palette-orange-900: #7c2d12;
+$sd-color-palette-orange-800: #9a3412;
+$sd-color-palette-orange-700: #c2410c;
+$sd-color-palette-orange-600: #ea580c;
+$sd-color-palette-orange-500: #f97316;
+$sd-color-palette-orange-400: #fb923c;
+$sd-color-palette-orange-300: #fdba74;
+$sd-color-palette-orange-200: #fed7aa;
+$sd-color-palette-orange-100: #ffedd5;
+$sd-color-palette-red-050: #fef2f2;
+$sd-color-palette-red-950: #450a0a;
+$sd-color-palette-red-900: #7f1d1d;
+$sd-color-palette-red-800: #991b1b;
+$sd-color-palette-red-700: #b91c1c;
+$sd-color-palette-red-600: #dc2626;
+$sd-color-palette-red-500: #ef4444;
+$sd-color-palette-red-400: #f87171;
+$sd-color-palette-red-300: #fca5a5;
+$sd-color-palette-red-200: #fecaca;
+$sd-color-palette-red-100: #fee2e2;
+$sd-color-palette-neutral-050: #fafafa;
+$sd-color-palette-neutral-1000: #000000;
+$sd-color-palette-neutral-950: #0a0a0a;
+$sd-color-palette-neutral-900: #171717;
+$sd-color-palette-neutral-800: #262626;
+$sd-color-palette-neutral-700: #404040;
+$sd-color-palette-neutral-600: #525252;
+$sd-color-palette-neutral-500: #737373;
+$sd-color-palette-neutral-400: #a3a3a3;
+$sd-color-palette-neutral-300: #d4d4d4;
+$sd-color-palette-neutral-200: #e5e5e5;
+$sd-color-palette-neutral-100: #f5f5f5;
+$sd-color-palette-neutral-0: #ffffff;
+$sd-color-primary-050: #e9e9e9;
+$sd-color-primary-950: #030404;
+$sd-color-primary-900: #0b0c0c;
+$sd-color-primary-800: #131415;
+$sd-color-primary-700: #1b1c1d;
+$sd-color-primary-600: #232425;
+$sd-color-primary-500: #27292a;
+$sd-color-primary-400: #3c3e3f;
+$sd-color-primary-300: #676969;
+$sd-color-primary-200: #939494;
+$sd-color-primary-100: #bebebf;
+$sd-border-width-large: 4px;
+$sd-border-width-medium: 2px;
+$sd-border-width-small: 1px;
+$sd-border-width-0: 0px;
+$sd-border-radius-exra-large: 1.75rem;
+$sd-border-radius-large: 1rem;
+$sd-border-radius-medium: 0.75rem;
+$sd-border-radius-small: 0.5rem;
+$sd-border-radius-extra-small: 0.25rem;
+$sd-border-radius-circle: 999999rem;
+$sd-typography-label-small-weight: $sd-typography-weight-regular;
+$sd-typography-label-small-font: $sd-typography-font-body;
+$sd-typography-body-small-weight: $sd-typography-weight-regular;
+$sd-typography-body-small-font: $sd-typography-font-body;
+$sd-typography-body-weight: $sd-typography-weight-regular;
+$sd-typography-body-font: $sd-typography-font-body;
+$sd-typography-body-large-weight: $sd-typography-weight-regular;
+$sd-typography-body-large-font: $sd-typography-font-body;
+$sd-typography-headline-weight: $sd-typography-weight-regular;
+$sd-typography-headline-font: $sd-typography-font-headlines;
+$sd-typography-headline-large-weight: $sd-typography-weight-regular;
+$sd-typography-headline-large-font: $sd-typography-font-headlines;
+$sd-typography-display-small-weight: $sd-typography-weight-regular;
+$sd-typography-display-small-font: $sd-typography-font-headlines;
+$sd-typography-display-weight: $sd-typography-weight-regular;
+$sd-typography-display-font: $sd-typography-font-headlines;
+$sd-typography-display-large-weight: $sd-typography-weight-regular;
+$sd-typography-display-large-font: $sd-typography-font-headlines;
+$sd-divider-spacing: $sd-spacing-050;
+$sd-divider-width: $sd-width-025;
+$sd-color-overlay: rgba($sd-color-palette-neutral-900, 0.5);
+$sd-color-placeholder-text: $sd-color-palette-neutral-500;
+$sd-color-help-text: $sd-color-palette-neutral-600;
+$sd-color-border: $sd-color-palette-neutral-300;
+$sd-color-on-surface: $sd-color-palette-neutral-1000;
+$sd-color-surface: $sd-color-palette-neutral-100;
+$sd-color-background: $sd-color-palette-neutral-050;
+$sd-color-on-error: $sd-color-palette-neutral-0;
+$sd-color-error-050: $sd-color-palette-red-050;
+$sd-color-error-950: $sd-color-palette-red-950;
+$sd-color-error-900: $sd-color-palette-red-900;
+$sd-color-error-800: $sd-color-palette-red-800;
+$sd-color-error-700: $sd-color-palette-red-700;
+$sd-color-error-600: $sd-color-palette-red-600;
+$sd-color-error-500: $sd-color-palette-red-500;
+$sd-color-error-400: $sd-color-palette-red-400;
+$sd-color-error-300: $sd-color-palette-red-300;
+$sd-color-error-200: $sd-color-palette-red-200;
+$sd-color-error-100: $sd-color-palette-red-100;
+$sd-color-on-warning: $sd-color-palette-neutral-0;
+$sd-color-warning-050: $sd-color-palette-amber-050;
+$sd-color-warning-950: $sd-color-palette-amber-950;
+$sd-color-warning-900: $sd-color-palette-amber-900;
+$sd-color-warning-800: $sd-color-palette-amber-800;
+$sd-color-warning-700: $sd-color-palette-amber-700;
+$sd-color-warning-600: $sd-color-palette-amber-600;
+$sd-color-warning-500: $sd-color-palette-amber-500;
+$sd-color-warning-400: $sd-color-palette-amber-400;
+$sd-color-warning-300: $sd-color-palette-amber-300;
+$sd-color-warning-200: $sd-color-palette-amber-200;
+$sd-color-warning-100: $sd-color-palette-amber-100;
+$sd-color-on-success: $sd-color-palette-neutral-0;
+$sd-color-success-050: $sd-color-palette-green-050;
+$sd-color-success-950: $sd-color-palette-green-950;
+$sd-color-success-900: $sd-color-palette-green-900;
+$sd-color-success-800: $sd-color-palette-green-800;
+$sd-color-success-700: $sd-color-palette-green-700;
+$sd-color-success-600: $sd-color-palette-green-600;
+$sd-color-success-500: $sd-color-palette-green-500;
+$sd-color-success-400: $sd-color-palette-green-400;
+$sd-color-success-300: $sd-color-palette-green-300;
+$sd-color-success-200: $sd-color-palette-green-200;
+$sd-color-success-100: $sd-color-palette-green-100;
+$sd-color-on-accent: $sd-color-palette-neutral-0;
+$sd-color-accent-050: $sd-color-palette-blue-050;
+$sd-color-accent-950: $sd-color-palette-blue-950;
+$sd-color-accent-900: $sd-color-palette-blue-900;
+$sd-color-accent-800: $sd-color-palette-blue-800;
+$sd-color-accent-700: $sd-color-palette-blue-700;
+$sd-color-accent-600: $sd-color-palette-blue-600;
+$sd-color-accent-500: $sd-color-palette-blue-500;
+$sd-color-accent-400: $sd-color-palette-blue-400;
+$sd-color-accent-300: $sd-color-palette-blue-300;
+$sd-color-accent-200: $sd-color-palette-blue-200;
+$sd-color-accent-100: $sd-color-palette-blue-100;
+$sd-color-primary-container: $sd-color-primary-200;
+$sd-color-on-primary: $sd-color-palette-neutral-0;
+$sd-color-primary: $sd-color-primary-500;
+$sd-divider-color: $sd-color-border;
+$sd-color-error-container: $sd-color-error-100;
+$sd-color-error: $sd-color-error-800;
+$sd-color-warning-container: $sd-color-warning-100;
+$sd-color-warning: $sd-color-warning-800;
+$sd-color-success-container: $sd-color-success-100;
+$sd-color-success: $sd-color-success-800;
+$sd-color-accent-container: $sd-color-accent-200;
+$sd-color-accent: $sd-color-accent-700;

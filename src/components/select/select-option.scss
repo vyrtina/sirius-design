@@ -58,6 +58,7 @@
     cursor: pointer;
     height: 100%;
     width: 100%;
+    background-color: tokens.$sd-color-background;
 }
 
 .state-layer {
@@ -68,11 +69,11 @@
 }
 
 :host(:hover) .state-layer {
-    opacity: tokens.$sd-state-hover-layer-opacity;
+    opacity: tokens.$sd-opacity-state-layer-hover;
 }
 
 :host(:active) .state-layer {
-    opacity: tokens.$sd-state-click-layer-opacity;
+    opacity: tokens.$sd-opacity-state-layer-click;
 }
 
 :host(:focus) {
@@ -80,7 +81,7 @@
         @include base.outline-focus();
     }
     & .state-layer {
-        opacity: tokens.$sd-state-focus-layer-opacity;
+        opacity: tokens.$sd-opacity-state-layer-focus;
     }
 }
 

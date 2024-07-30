@@ -10,8 +10,11 @@ const meta: Meta = {
         checked: true,
         label: "label",
     },
-    render: ({ label, checked, indeterminate }) => html`
-        <sd-checkbox ?checked=${checked} ?indeterminate=${indeterminate}>
+    render: ({ label, checked, indeterminate, disabled }) => html`
+        <sd-checkbox
+            ?checked=${checked}
+            ?indeterminate=${indeterminate}
+            ?disabled=${disabled}>
             <p slot="label">${label}</p>
         </sd-checkbox>
     `,

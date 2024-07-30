@@ -1,0 +1,37 @@
+{
+    "opacity": {
+        "state-layer": {
+            "hover": {
+                "value": "0.08",
+                "type": "opacity"
+            },
+            "focus": {
+                "value": "0.12",
+                "type": "opacity"
+            },
+            "click": {
+                "value": "0.12",
+                "type": "opacity"
+            },
+            "drag": {
+                "value": "0.16",
+                "type": "opacity"
+            }
+        },
+        "glass": {
+            "value": "0.8"
+        },
+        "scrim": {
+            "value": "0.32"
+        },
+        "placeholder": {
+            "value": "0.5"
+        },
+        "disabled": {
+            "value": "0.38"
+        },
+        "disabled-background": {
+            "value": "0.2"
+        }
+    }
+}

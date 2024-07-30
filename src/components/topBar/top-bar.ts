@@ -4,7 +4,7 @@ import styles from "./top-bar.scss?inline";
 import "../../icons/src/menu";
 
 @customElement("sd-top-bar")
-export class SdTopBar extends LitElement {
+export default class SdTopBar extends LitElement {
     static styles = unsafeCSS(styles);
 
     @state()

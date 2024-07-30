@@ -1,0 +1,43 @@
+@use "./tokens.scss";
+@use "sass:color";
+
+$sd-color-surface-1: mix(
+    tokens.$sd-color-surface,
+    tokens.$sd-color-primary,
+    92%
+) !default;
+$sd-color-surface-2: mix(
+    tokens.$sd-color-surface,
+    tokens.$sd-color-primary,
+    91%
+) !default;
+$sd-color-surface-3: mix(
+    tokens.$sd-color-surface,
+    tokens.$sd-color-primary,
+    88%
+) !default;
+$sd-color-surface-4: mix(
+    tokens.$sd-color-surface,
+    tokens.$sd-color-primary,
+    86%
+) !default;
+
+@mixin surface-1() {
+    background-color: $sd-color-surface-1;
+    box-shadow: tokens.$sd-shadow-level-1;
+}
+
+@mixin surface-2() {
+    background-color: $sd-color-surface-2;
+    box-shadow: tokens.$sd-shadow-level-2;
+}
+
+@mixin surface-3() {
+    background-color: $sd-color-surface-3;
+    box-shadow: tokens.$sd-shadow-level-3;
+}
+
+@mixin surface-4() {
+    background-color: $sd-color-surface-4;
+    box-shadow: tokens.$sd-shadow-level-4;
+}

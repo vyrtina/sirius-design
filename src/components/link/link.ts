@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import styles from "./link.scss?inline";
 
 @customElement("sd-link")
-export class SdLink extends LitElement {
+export default class SdLink extends LitElement {
     static styles = unsafeCSS(styles);
 
     @property({ type: String }) size: "s" | "m" | "l" | "xl" = "m";

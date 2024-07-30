@@ -4,10 +4,11 @@ import { watch } from "../../utils/watch.js";
 import SdElement, { SdFormControl } from "../../utils/sd-element.js";
 import { FormControlController, validValidityState } from "../../utils/form.js";
 import styles from "./button.scss?inline";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 @customElement("sd-button")
 export default class SdButton extends SdElement implements SdFormControl {
-    static override styles = unsafeCSS(styles);
+    static styles = unsafeCSS(styles);
 
     private readonly formControlController = new FormControlController(this, {
         assumeInteractionOn: ["click"],
@@ -19,11 +20,11 @@ export default class SdButton extends SdElement implements SdFormControl {
     /** The button’s size. */
     @property({ type: String }) size: "small" | "medium" | "large" = "medium";
 
-    /** render the button as an icon button */
-    @property({ type: Boolean }) iconOnly = false;
-
     /* Whether or not the button is disabled. */
     @property({ type: Boolean, reflect: true }) disabled = false;
+
+    /** the label of the button. can be used as a replacement for the slot. for icon buttons, this field is required */
+    @property() label?: string;
 
     /* The type of button. */
     @property() type: "button" | "submit" | "reset" = "button";
@@ -95,9 +96,7 @@ export default class SdButton extends SdElement implements SdFormControl {
      */
     @property({ reflect: true }) value = "";
 
-    //@state() private hasFocus = false;
-
-    @query(".button") private readonly button?: HTMLButtonElement | HTMLLinkElement;
+    @query(".button") readonly button?: HTMLButtonElement | HTMLLinkElement;
 
     private getButton() {
         if (!this.button) {
@@ -221,7 +220,11 @@ export default class SdButton extends SdElement implements SdFormControl {
 
     render() {
         const buttonOrLink = this.href ? this.renderLink() : this.renderButton();
-        return html` ${buttonOrLink} `;
+        return html`<div class="container ${this.variant} ${this.size}">
+            <div class="state-layer"></div>
+            <div class="background"></div>
+            ${buttonOrLink}
+        </div> `;
     }
 
     private renderButton() {
@@ -229,11 +232,9 @@ export default class SdButton extends SdElement implements SdFormControl {
         //const { ariaLabel, ariaHasPopup, ariaExpanded } = this as ARIAMixinStrict;
         return html`<button
             id="button"
-            class="button ${this.variant} ${this.size} ${this.iconOnly
-                ? "icon-only"
-                : ""}"
+            class="button"
             ?disabled=${this.disabled}
-            aria-label="${/*ariaLabel || */ nothing}"
+            aria-label="${ifDefined(this.label)}"
             @blur=${this.handleBlur}
             @focus=${this.handleFocus}
             @invalid=${this.handleInvalid}
@@ -247,10 +248,8 @@ export default class SdButton extends SdElement implements SdFormControl {
         //const { ariaLabel, ariaHasPopup, ariaExpanded } = this as ARIAMixinStrict;
         return html`<a
             id="link"
-            class="button ${this.variant} ${this.size} ${this.iconOnly
-                ? "icon-only"
-                : ""}"
-            aria-label="${/*ariaLabel ||*/ nothing}"
+            class="button ${this.variant} ${this.size}"
+            aria-label="${ifDefined(this.label)}"
             href=${this.href}
             target=${this.target || nothing}
             @blur=${this.handleBlur}
@@ -260,20 +259,12 @@ export default class SdButton extends SdElement implements SdFormControl {
         </a>`;
     }
 
-    private renderContent() {
+    renderContent() {
         const icon = html`<slot name="icon"></slot>`;
 
-        if (this.iconOnly) {
-            return html`
-                <span class="touch"></span>
-                <slot name="icon"><slot></slot></slot>
-            `;
-        }
-
         return html`
-            <span class="touch"></span>
             ${this.trailingIcon ? nothing : icon}
-            <span class="label"><slot></slot></span>
+            <span class="label"><slot>${this.label}</slot></span>
             ${this.trailingIcon ? icon : nothing}
         `;
     }

@@ -1,6 +1,6 @@
 import { LitElement, html, unsafeCSS, CSSResultGroup } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
-import {classMap} from 'lit/directives/class-map.js';
+import { classMap } from "lit/directives/class-map.js";
 
 import styles from "./radio.scss?inline";
 import { isActivationClick } from "../../utils/events/form-label-activation.js";
@@ -30,7 +30,7 @@ const radioBaseClass = mixinConstraintValidation(
 );
 
 @customElement("sd-radio")
-export class SdRadio extends radioBaseClass {
+export default class SdRadio extends radioBaseClass {
     static styles = unsafeCSS(styles) as CSSResultGroup;
 
     /**
@@ -73,9 +73,9 @@ export class SdRadio extends radioBaseClass {
     }
 
     protected override render() {
-    const classes = {'checked': this.checked};
-    return html`
-      <div class="container ${classMap(classes)}" aria-hidden="true">
+        const classes = { checked: this.checked };
+        return html`
+            <div class="container ${classMap(classes)}" aria-hidden="true">
                 <input
                     id="input"
                     type="radio"

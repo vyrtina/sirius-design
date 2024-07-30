@@ -1,7 +1,23 @@
 @use "../../styles/tokens.scss";
+@use "../../styles/typography.scss";
 
 :host {
     display: block;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.label {
+    @include typography.sd-body();
+}
+
+.help-text {
+    @include typography.sd-body-small();
+    color: tokens.$sd-color-help-text;
 }
 
 /** The popup */
@@ -13,10 +29,6 @@
     vertical-align: middle;
 }
 
-.select::part(popup) {
-    z-index: 900;
-}
-
 .select[data-current-placement^="top"]::part(popup) {
     transform-origin: bottom;
 }
@@ -25,8 +37,12 @@
     transform-origin: top;
 }
 
+.select[active] .combobox {
+    border-color: tokens.$sd-color-primary;
+}
+
 /* Combobox */
-.select__combobox {
+.combobox {
     flex: 1;
     display: flex;
     width: 100%;
@@ -40,7 +56,7 @@
 
     //
     padding: 0.5rem 0.75rem;
-    border-radius: tokens.$sd-border-radius-medium;
+    border-radius: tokens.$sd-border-radius-small;
     border: 1px solid tokens.$sd-color-border;
 }
 
@@ -154,13 +170,13 @@
 }
 
 /* Listbox */
-.select__listbox {
+.listbox {
     display: block;
     position: relative;
     box-shadow: var(--sl-shadow-large);
     background: var(--sl-panel-background-color);
     border: 1px solid tokens.$sd-color-primary;
-    border-radius: tokens.$sd-border-radius-medium;
+    border-radius: tokens.$sd-border-radius-small;
     padding-block: var(--sl-spacing-x-small);
     padding-inline: 0;
     overflow: auto;
@@ -169,17 +185,4 @@
     /* Make sure it adheres to the popup's auto size */
     max-width: var(--auto-size-available-width);
     max-height: var(--auto-size-available-height);
-}
-
-.select__listbox ::slotted(sl-divider) {
-    --spacing: var(--sl-spacing-x-small);
-}
-
-.select__listbox ::slotted(small) {
-    display: block;
-    font-size: var(--sl-font-size-small);
-    font-weight: var(--sl-font-weight-semibold);
-    color: var(--sl-color-neutral-500);
-    padding-block: var(--sl-spacing-2x-small);
-    padding-inline: var(--sl-spacing-x-large);
 }

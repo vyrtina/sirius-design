@@ -1,5 +1,5 @@
 //const StyleDictionary = require('style-dictionary');
-import StyleDictionary from 'style-dictionary';
+import StyleDictionary from "style-dictionary";
 
 /*import tinycolor from 'tinycolor2';
 
@@ -30,24 +30,24 @@ StyleDictionary.registerTransform({
 });*/
 
 const myStyleDictionary = StyleDictionary.extend({
-  source: ["**/*.tokens.json"],
-  platforms: {
-    scss: {
-      //transforms: ["shadow/scss"],
-      transformGroup: "scss",
-      prefix: "sd",
-      buildPath: "src/styles/",
-      files: [
-        {
-          destination: "tokens.scss",
-          format: "scss/map-deep",
-          options: {
-            outputReferences: true,
-          },
+    source: ["**/*.tokens.json"],
+    platforms: {
+        scss: {
+            //transforms: ["shadow/scss"],
+            transformGroup: "scss",
+            prefix: "sd",
+            buildPath: "src/styles/",
+            files: [
+                {
+                    destination: "tokens.scss",
+                    format: "scss/variables",
+                    options: {
+                        outputReferences: true,
+                    },
+                },
+            ],
         },
-      ],
     },
-  },
 });
 
 myStyleDictionary.buildAllPlatforms();

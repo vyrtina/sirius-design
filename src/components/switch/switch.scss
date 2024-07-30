@@ -16,7 +16,7 @@ input {
 label {
     display: flex;
     flex-direction: column;
-    gap: $sd-space-050;
+    gap: $sd-spacing-050;
     width: min-content;
     height: min-content;
     cursor: pointer;
@@ -50,7 +50,7 @@ input:checked + label > .visual {
         transform: translateX(-100%);
     }
 }
-
+/*
 input:not(:disabled) + label:active > .visual::after {
     width: calc(50% + 0.1875rem);
 }
@@ -68,7 +68,7 @@ input:disabled + label > .visual {
         opacity: 0.38;
     }
 }
-
+*/
 input:focus-visible + label > .visual {
     @include base-outline-focus();
 }

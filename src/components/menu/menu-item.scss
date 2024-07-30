@@ -1,0 +1,164 @@
+@use "../../styles/tokens.scss";
+
+:host {
+    --submenu-offset: -2px;
+
+    display: block;
+}
+
+:host([inert]) {
+    display: none;
+}
+
+.container {
+    position: relative;
+    height: 3rem;
+}
+
+.menu-item {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    padding: 0 0.75rem;
+    transition: var(--sl-transition-fast) fill;
+    user-select: none;
+    -webkit-user-select: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.menu-item.menu-item--loading {
+    outline: none;
+    cursor: wait;
+}
+
+.loading *:not(sd-spinner) {
+    opacity: tokens.$sd-opacity-disabled;
+}
+
+.loading sd-spinner {
+    --indicator-color: currentColor;
+    --track-width: 1px;
+    position: absolute;
+    font-size: 0.75em;
+    top: calc(50% - 0.5em);
+    left: 0.65rem;
+    opacity: 1;
+}
+
+.label {
+    flex: 1 1 auto;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    align-content: center;
+}
+
+.prefix {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.prefix::slotted(*) {
+    margin-inline-end: var(--sl-spacing-x-small);
+}
+
+.suffix {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.suffix::slotted(*) {
+    margin-inline-start: var(--sl-spacing-x-small);
+}
+
+/* Safe triangle */
+.submenu-expanded::after {
+    content: "";
+    position: fixed;
+    z-index: calc(var(--sl-z-index-dropdown) - 1);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    clip-path: polygon(
+        var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
+        var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
+        var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
+    );
+}
+
+:host(:focus-visible) {
+    outline: none;
+}
+
+:host(:hover:not([aria-disabled="true"], :focus-visible)) .menu-item,
+.submenu-expanded {
+    background-color: var(--sl-color-neutral-100);
+    color: var(--sl-color-neutral-1000);
+}
+
+:host(:focus-visible) .menu-item {
+    outline: none;
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
+    opacity: 1;
+}
+
+.check,
+.chevron {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    visibility: hidden;
+}
+
+.check:has(*[aria-hidden="true"]),
+.chevron:has(*[aria-hidden="true"]) {
+    display: none;
+}
+
+.menu-item.checked .check,
+.menu-item.has-submenu .chevron {
+    visibility: visible;
+}
+
+/* Add elevation and z-index to submenus */
+sd-popup::part(popup) {
+    //box-shadow: var(--sl-shadow-large);
+    //TODO: add surface 2 to sub menu part
+    z-index: tokens.$sd-z-index-dropdown;
+    margin-left: var(--submenu-offset);
+}
+
+::slotted(sd-menu) {
+    max-width: var(--auto-size-available-width) !important;
+    max-height: var(--auto-size-available-height) !important;
+}
+
+.state-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-color: tokens.$sd-color-primary;
+}
+
+:host(:hover) .state-layer {
+    opacity: tokens.$sd-opacity-state-layer-hover;
+}
+
+:host([disabled]) {
+    .menu-item {
+        opacity: tokens.$sd-opacity-disabled;
+        outline: none;
+        cursor: not-allowed;
+    }
+    .state-layer {
+        opacity: 0;
+    }
+}

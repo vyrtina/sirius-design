@@ -1,0 +1,40 @@
+{
+    "z-index": {
+        "deepdive": {
+            "value": "-99999"
+        },
+        "default": {
+            "value": "1"
+        },
+        "dialog": {
+            "value": "6000"
+        },
+        "docked": {
+            "value": "4"
+        },
+        "dropdown": {
+            "value": "7000"
+        },
+        "modal": {
+            "value": "9000"
+        },
+        "overlay": {
+            "value": "8000"
+        },
+        "popup": {
+            "value": "5000"
+        },
+        "reminder": {
+            "value": "8500"
+        },
+        "spinner": {
+            "value": "9050"
+        },
+        "sticky": {
+            "value": "100"
+        },
+        "toast": {
+            "value": "10000"
+        }
+    }
+}

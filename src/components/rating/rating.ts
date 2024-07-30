@@ -6,7 +6,7 @@ import "../../icons/src/star";
 import "../../icons/src/star_half";
 
 @customElement("sd-rating")
-export class SdRating extends LitElement {
+export default class SdRating extends LitElement {
     /**
      * The name attribute of the radio `input` elements.
      * This input `name` should be unique within the page.

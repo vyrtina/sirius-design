@@ -5,7 +5,7 @@ import "../../icons/src/chevron_left";
 import "../../icons/src/chevron_right";
 
 @customElement("sd-carousel")
-export class Carousel extends LitElement {
+export default class SdCarousel extends LitElement {
     static styles = unsafeCSS(styles);
 
     @property({ type: Boolean }) autoTransition = true;
@@ -95,6 +95,6 @@ export class Carousel extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "sd-carousel": Carousel;
+        "sd-carousel": SdCarousel;
     }
 }

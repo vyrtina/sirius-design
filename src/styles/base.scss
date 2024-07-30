@@ -1,12 +1,15 @@
 @use "./typography";
 @use "./tokens.scss";
 
-@mixin outline-focus($width: tokens.$sd-border-width-m) {
+@mixin outline-focus($width: tokens.$sd-border-width-medium) {
     outline: $width auto tokens.$sd-color-accent;
-    outline-offset: tokens.$sd-space-012;
+    outline-offset: tokens.$sd-spacing-012;
 }
 
-@mixin sd-border($color: tokens.$sd-color-primary, $width: tokens.$sd-border-width-m) {
+@mixin sd-border(
+    $color: tokens.$sd-color-primary,
+    $width: tokens.$sd-border-width-medium
+) {
     border: $width solid $color;
 }
 

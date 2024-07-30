@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import styles from "./switch.scss?inline";
 
 @customElement("sd-switch")
-export class Switch extends LitElement {
+export default class Switch extends LitElement {
     static styles = unsafeCSS(styles);
 
     @property({ type: Boolean }) disabled = false;
@@ -12,17 +12,12 @@ export class Switch extends LitElement {
     render() {
         return html`
             <input
-                id=${"sw-" + this.id}
+                id="switch"
                 type="checkbox"
-                aria-labelledby=${"sw-label-" + this.id}
+                aria-labelledby="label"
                 ?checked=${this.checked}
-                ?disabled=${this.disabled}
-            />
-            <label
-                id=${"sw-label-" + this.id}
-                for=${"sw-" + this.id}
-                class="body-small"
-            >
+                ?disabled=${this.disabled} />
+            <label id="label" for="switch" class="body-small">
                 <slot name="label"></slot>
                 <div class="visual"></div>
             </label>

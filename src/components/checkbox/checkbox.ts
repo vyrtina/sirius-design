@@ -8,7 +8,7 @@ import { FormControlController } from "../../utils/form.js";
 import styles from "./checkbox.scss?inline";
 
 @customElement("sd-checkbox")
-export class SdCheckbox extends SdElement implements SdFormControl {
+export default class SdCheckbox extends SdElement implements SdFormControl {
     static styles = unsafeCSS(styles);
     private readonly formControlController = new FormControlController(this, {
         value: (control: SdCheckbox) =>
@@ -59,10 +59,6 @@ export class SdCheckbox extends SdElement implements SdFormControl {
             this.scheduleUpdate();
         }
 
-        if (this.isUpdatePending) {
-            this.scheduleUpdate();
-        }
-
         return this.input!;
     }
 
@@ -83,6 +79,7 @@ export class SdCheckbox extends SdElement implements SdFormControl {
     private handleClick() {
         this.checked = !this.checked;
         this.indeterminate = false;
+        console.log("CLICK");
         this.emit("sd-change");
     }
 
@@ -159,21 +156,24 @@ export class SdCheckbox extends SdElement implements SdFormControl {
 
     render() {
         return html`
-            <input
-                id="input"
-                type="checkbox"
-                name=${this.name}
-                ?disabled=${this.disabled}
-                ?checked=${live(this.checked)}
-                ?indeterminate=${live(this.indeterminate)}
-                ?required=${this.required}
-                aria-describedby="help-text"
-                aria-checked=${this.checked ? "true" : "false"}
-                @click=${this.handleClick}
-                @input=${this.handleInput}
-                @invalid=${this.handleInvalid}
-                @blur=${this.handleBlur}
-                @focus=${this.handleFocus} />
+            <div class="checkbox">
+                <div class="state-layer"></div>
+                <input
+                    id="input"
+                    type="checkbox"
+                    name=${this.name}
+                    ?disabled=${this.disabled}
+                    ?checked=${live(this.checked)}
+                    ?indeterminate=${live(this.indeterminate)}
+                    ?required=${this.required}
+                    aria-describedby="help-text"
+                    aria-checked=${this.checked ? "true" : "false"}
+                    @click=${this.handleClick}
+                    @input=${this.handleInput}
+                    @invalid=${this.handleInvalid}
+                    @blur=${this.handleBlur}
+                    @focus=${this.handleFocus} />
+            </div>
             <label for="input" class="label"><slot name="label"></slot></label>
             <span class="help-text" id="help-text"
                 ><slot name="help-text">${this.helpText}</slot></span

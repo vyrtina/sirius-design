@@ -13,7 +13,9 @@ const meta: Meta = {
             <sd-select
                 ?multiple=${args["multiple"]}
                 placeholder=${ifDefined(args["placeholder"])}
-                label=${ifDefined(args["label"])}>
+                label=${ifDefined(args["label"])}
+                help-text=${ifDefined(args["help-text"])}
+                ?hoist=${args["hoist"]}>
                 <sd-select-option value="option-1">Option 1</sd-select-option>
                 <sd-select-option value="option-2">Option 2</sd-select-option>
                 <sd-select-option value="option-3">Option 3</sd-select-option>
@@ -32,5 +34,6 @@ export const Primary: Story = {
     args: {
         placeholder: "--option--",
         label: "label",
+        "help-text": "help text",
     },
 };
