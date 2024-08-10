@@ -1,0 +1,20 @@
+{
+    "recommendations": [
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "aaron-bond.better-comments",
+        "pranaygp.vscode-css-peek",
+        "Tobermory.es6-string-html",
+        "GitHub.vscode-pull-request-github",
+        "GitHub.remotehub",
+        "ecmel.vscode-html-css",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "VisualStudioExptTeam.intellicode-api-usage-examples",
+        "runem.lit-plugin",
+        "unifiedjs.vscode-mdx",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        "ms-vscode.remote-repositories",
+        "antfu.vite",
+    ]
+}
