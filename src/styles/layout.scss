@@ -7,7 +7,9 @@ $sd-header-with-search-height-m: 56px;
 $navigation-region-collapsed: 72px;
 
 .sd-body-max-width {
-    max-width: 1400px; //! make a token
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 var(--sd-margin);
     margin: 0 auto;
 }
 
@@ -16,6 +18,7 @@ $navigation-region-collapsed: 72px;
     --sd-margin: #{tokens.$sd-margin-xs};
     --sd-cols: #{tokens.$sd-columns-xs};
     --sd-gutter: #{tokens.$sd-gutter-xs};
+    --sd-topbar-height: #{tokens.$sd-topbar-height-small};
 }
 
 @media only screen and (min-width: tokens.$sd-breakpoint-s) {
@@ -31,6 +34,7 @@ $navigation-region-collapsed: 72px;
         --sd-margin: #{tokens.$sd-margin-m};
         --sd-cols: #{tokens.$sd-columns-m};
         --sd-gutter: #{tokens.$sd-gutter-m};
+        --sd-topbar-height: #{tokens.$sd-topbar-height-large};
     }
 }
 

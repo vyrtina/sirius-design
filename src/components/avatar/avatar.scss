@@ -1,0 +1,109 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/typography.scss";
+
+:host {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: tokens.$sd-color-palette-neutral-300;
+    border-radius: tokens.$sd-border-radius-circle;
+}
+
+.initials {
+    @include typography.sd-body-large();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+
+    &.red {
+        background-color: tokens.$sd-color-palette-red-100;
+        color: tokens.$sd-color-palette-red-700;
+    }
+    &.orange {
+        background-color: tokens.$sd-color-palette-orange-100;
+        color: tokens.$sd-color-palette-orange-700;
+    }
+    &.amber {
+        background-color: tokens.$sd-color-palette-amber-100;
+        color: tokens.$sd-color-palette-amber-700;
+    }
+    &.yellow {
+        background-color: tokens.$sd-color-palette-yellow-100;
+        color: tokens.$sd-color-palette-yellow-700;
+    }
+    &.lime {
+        background-color: tokens.$sd-color-palette-lime-100;
+        color: tokens.$sd-color-palette-lime-700;
+    }
+    &.green {
+        background-color: tokens.$sd-color-palette-green-100;
+        color: tokens.$sd-color-palette-green-700;
+    }
+    &.emerald {
+        background-color: tokens.$sd-color-palette-emerald-100;
+        color: tokens.$sd-color-palette-emerald-700;
+    }
+    &.teal {
+        background-color: tokens.$sd-color-palette-teal-100;
+        color: tokens.$sd-color-palette-teal-700;
+    }
+    &.cyan {
+        background-color: tokens.$sd-color-palette-cyan-100;
+        color: tokens.$sd-color-palette-cyan-700;
+    }
+    &.sky {
+        background-color: tokens.$sd-color-palette-sky-100;
+        color: tokens.$sd-color-palette-sky-700;
+    }
+    &.blue {
+        background-color: tokens.$sd-color-palette-blue-100;
+        color: tokens.$sd-color-palette-blue-700;
+    }
+    &.indigo {
+        background-color: tokens.$sd-color-palette-indigo-100;
+        color: tokens.$sd-color-palette-indigo-700;
+    }
+    &.violet {
+        background-color: tokens.$sd-color-palette-violet-100;
+        color: tokens.$sd-color-palette-violet-700;
+    }
+    &.purple {
+        background-color: tokens.$sd-color-palette-purple-100;
+        color: tokens.$sd-color-palette-purple-700;
+    }
+    &.fuchsia {
+        background-color: tokens.$sd-color-palette-fuchsia-100;
+        color: tokens.$sd-color-palette-fuchsia-700;
+    }
+    &.pink {
+        background-color: tokens.$sd-color-palette-pink-100;
+        color: tokens.$sd-color-palette-pink-700;
+    }
+    &.rose {
+        background-color: tokens.$sd-color-palette-rose-100;
+        color: tokens.$sd-color-palette-rose-700;
+    }
+}
+
+.icon {
+    display: inline-flex;
+    color: tokens.$sd-color-palette-neutral-600;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}

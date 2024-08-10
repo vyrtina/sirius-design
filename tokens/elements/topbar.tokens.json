@@ -1,0 +1,13 @@
+{
+    "topbar": {
+        "height": {
+            "type": "size",
+            "large": {
+                "value": "64px"
+            },
+            "small": {
+                "value": "104px"
+            }
+        }
+    }
+}

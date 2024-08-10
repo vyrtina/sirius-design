@@ -1,12 +1,12 @@
 import { html, nothing, unsafeCSS } from "lit";
 import { property, customElement } from "lit/decorators.js";
-//import styles from "./sidebar-item.scss?inline";
+import styles from "./sidebar-item.scss?inline";
 import SdSelectOption from "../select/select-option.js";
 import { classMap } from "lit/directives/class-map.js";
 
 @customElement("sd-sidebar-item")
 export default class SdSidebarItem extends SdSelectOption {
-    //static styles = unsafeCSS(styles);
+    static styles = unsafeCSS(styles);
 
     /** whether the sidebar is expanded or not */
     @property({ type: Boolean, reflect: true }) collapsed = false;

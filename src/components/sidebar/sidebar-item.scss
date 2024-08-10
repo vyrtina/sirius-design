@@ -1,0 +1,11 @@
+@use "../../styles/tokens.scss";
+@forward "../select/select-option.scss";
+
+.option {
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.container {
+    background-color: transparent;
+}

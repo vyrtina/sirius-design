@@ -1,58 +1,55 @@
-import { LitElement, html, unsafeCSS, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { html, unsafeCSS } from "lit";
+import { customElement, property, state, query, eventOptions } from "lit/decorators.js";
+import { watch } from "../../utils/watch.js";
+import SdElement from "../../utils/sd-element.js";
 import styles from "./rating.scss?inline";
-import "../../icons/src/star_border";
 import "../../icons/src/star";
-import "../../icons/src/star_half";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { classMap } from "lit/directives/class-map.js";
+import { styleMap } from "lit/directives/style-map.js";
+
+function clamp(value: number, min: number, max: number) {
+    const noNegativeZero = (n: number) => (Object.is(n, -0) ? 0 : n);
+
+    if (value < min) {
+        return noNegativeZero(min);
+    }
+
+    if (value > max) {
+        return noNegativeZero(max);
+    }
+
+    return noNegativeZero(value);
+}
 
 @customElement("sd-rating")
-export default class SdRating extends LitElement {
-    /**
-     * The name attribute of the radio `input` elements.
-     * This input `name` should be unique within the page.
-     * Being unique within a form is insufficient since the `name` is used to generated IDs.
-     */
-    @property({ type: String }) name = "";
+export default class SdRating extends SdElement {
+    static styles = unsafeCSS(styles);
 
-    /**
-     * Removes all hover effects and pointer events.
-     * @default false
-     */
+    @query(".rating") rating!: HTMLElement;
+
+    @state() private hoverValue = 0;
+    @state() private isHovering = false;
+
+    /* Removes all hover effects and pointer events.*/
     @property({ type: Boolean }) readonly = false;
 
-    /**
-     * The label to display beside the rating.
-     * @default ""
-     */
-    @property({ type: String }) label = "";
+    /** A label for accesibility. */
+    @property() label = "";
 
-    /**
-     * The size of the component.
-     * @default 'medium'
-     */
-    @property({ type: String }) size: "small" | "medium" = "medium";
-
-    /**
-     * If `true`, the component is disabled.
-     * @default false
-     */
+    /** Disables the rating. */
     @property({ type: Boolean }) disabled = false;
 
-    /**
-     * The default value. Use when the component is not controlled.
-     * @default null
-     */
-    @property({ type: Number }) defaultvalue = 0;
+    /** The current rating. */
+    @property({ type: Number }) value = 0;
 
     /**
      * Maximum rating.
-     * @default 5
      */
     @property({ type: Number }) max = 5;
 
     /**
      * define the minimum increment value change allowed.
-     * @default 1
      */
     @property({
         type: Number,
@@ -69,75 +66,249 @@ export default class SdRating extends LitElement {
     precision = 1;
 
     /**
-     * Callback fired when the value changes.
-     * @param {React.SyntheticEvent} event The event source of the callback.
-     * @param {number|null} value The new value.
+     * A function that customizes the symbol to be rendered. The first and only argument is the rating's current value.
+     * The function should return a string containing trusted HTML of the symbol to render at the specified value.
      */
-    @property() onChange = () => {};
+    @property() getSymbol: (value: number) => string = () =>
+        "<sd-icon-star></sd-icon-star>";
 
-    /**
-     * Callback function that is fired when the hover state changes.
-     * @param {React.SyntheticEvent} event The event source of the callback.
-     * @param {number} value The new value.
-     */
-    @property() onHoverChange = () => {};
+    private getValueFromMousePosition(event: MouseEvent) {
+        return this.getValueFromXCoordinate(event.clientX);
+    }
 
-    /**
-     * The rating value.
-     */
-    @state({})
-    protected value: number = 0;
+    private getValueFromTouchPosition(event: TouchEvent) {
+        return this.getValueFromXCoordinate(event.touches[0].clientX);
+    }
 
-    static styles = unsafeCSS(styles);
+    private getValueFromXCoordinate(coordinate: number) {
+        const isRtl = this.matches(":dir(rtl)");
+        const { left, right, width } = this.rating.getBoundingClientRect();
+        const value = isRtl
+            ? this.roundToPrecision(
+                  ((right - coordinate) / width) * this.max,
+                  this.precision
+              )
+            : this.roundToPrecision(
+                  ((coordinate - left) / width) * this.max,
+                  this.precision
+              );
 
-    connectedCallback() {
-        super.connectedCallback();
-        this.value = this.defaultvalue;
+        return clamp(value, 0, this.max);
+    }
+
+    private handleClick(event: MouseEvent) {
+        if (this.disabled) {
+            return;
+        }
+
+        this.setValue(this.getValueFromMousePosition(event));
+        this.emit("sd-change");
+    }
+
+    private setValue(newValue: number) {
+        if (this.disabled || this.readonly) {
+            return;
+        }
+
+        this.value = newValue === this.value ? 0 : newValue;
+        this.isHovering = false;
+    }
+
+    private handleKeyDown(event: KeyboardEvent) {
+        const isLtr = this.matches(":dir(ltr)");
+        const isRtl = this.matches(":dir(rtl)");
+        const oldValue = this.value;
+
+        if (this.disabled || this.readonly) {
+            return;
+        }
+
+        if (
+            event.key === "ArrowDown" ||
+            (isLtr && event.key === "ArrowLeft") ||
+            (isRtl && event.key === "ArrowRight")
+        ) {
+            const decrement = event.shiftKey ? 1 : this.precision;
+            this.value = Math.max(0, this.value - decrement);
+            event.preventDefault();
+        }
+
+        if (
+            event.key === "ArrowUp" ||
+            (isLtr && event.key === "ArrowRight") ||
+            (isRtl && event.key === "ArrowLeft")
+        ) {
+            const increment = event.shiftKey ? 1 : this.precision;
+            this.value = Math.min(this.max, this.value + increment);
+            event.preventDefault();
+        }
+
+        if (event.key === "Home") {
+            this.value = 0;
+            event.preventDefault();
+        }
+
+        if (event.key === "End") {
+            this.value = this.max;
+            event.preventDefault();
+        }
+
+        if (this.value !== oldValue) {
+            this.emit("sd-change");
+        }
+    }
+
+    private handleMouseEnter(event: MouseEvent) {
+        this.isHovering = true;
+        this.hoverValue = this.getValueFromMousePosition(event);
+    }
+
+    private handleMouseMove(event: MouseEvent) {
+        this.hoverValue = this.getValueFromMousePosition(event);
+    }
+
+    private handleMouseLeave() {
+        this.isHovering = false;
+    }
+
+    private handleTouchStart(event: TouchEvent) {
+        this.isHovering = true;
+        this.hoverValue = this.getValueFromTouchPosition(event);
+
+        // Prevent scrolling when touch is initiated
+        event.preventDefault();
+    }
+
+    @eventOptions({ passive: true })
+    private handleTouchMove(event: TouchEvent) {
+        this.hoverValue = this.getValueFromTouchPosition(event);
+    }
+
+    private handleTouchEnd(event: TouchEvent) {
+        this.isHovering = false;
+        this.setValue(this.hoverValue);
+        this.emit("sd-change");
+
+        // Prevent click on mobile devices
+        event.preventDefault();
+    }
+
+    private roundToPrecision(numberToRound: number, precision = 0.5) {
+        const multiplier = 1 / precision;
+        return Math.ceil(numberToRound * multiplier) / multiplier;
+    }
+
+    @watch("hoverValue")
+    handleHoverValueChange() {
+        this.emit("sd-hover", {
+            detail: {
+                phase: "move",
+                value: this.hoverValue,
+            },
+        });
+    }
+
+    @watch("isHovering")
+    handleIsHoveringChange() {
+        this.emit("sd-hover", {
+            detail: {
+                phase: this.isHovering ? "start" : "end",
+                value: this.hoverValue,
+            },
+        });
+    }
+
+    /** Sets focus on the rating. */
+    focus(options?: FocusOptions) {
+        this.rating.focus(options);
+    }
+
+    /** Removes focus from the rating. */
+    blur() {
+        this.rating.blur();
     }
 
     render() {
+        const isRtl = this.matches(":dir(rtl)");
+        let displayValue = 0;
+
+        if (this.disabled || this.readonly) {
+            displayValue = this.value;
+        } else {
+            displayValue = this.isHovering ? this.hoverValue : this.value;
+        }
+
+        const classes = {
+            rating: true,
+            readonly: this.readonly,
+            disabled: this.disabled,
+        };
         const itemTemplates = [];
 
-        for (let i: number = this.max; i >= 1; i--) {
-            itemTemplates.push(html`
-                <input
-                    type="radio"
-                    @click=${this.readonly ? nothing : this._renderRatingChange}
-                    id=${i}
-                    name=${this.name}
-                    value=${i}
-                    ?disabled=${this.disabled} />
-                <label for=${i} title="text" id=${"icon-label-" + i} class=${this.size}
-                    >${this._renderIcons(i)}</label
-                >
-            `);
+        for (let i: number = 0; i < this.max; i++) {
+            if (displayValue > i && displayValue < i + 1) {
+                itemTemplates.push(
+                    html` <span
+                        class=${classMap({
+                            rating__symbol: true,
+                            "rating__partial-symbol-container": true,
+                            hover: this.isHovering && Math.ceil(displayValue) === i + 1,
+                        })}
+                        role="presentation">
+                        <div
+                            style=${styleMap({
+                                clipPath: isRtl
+                                    ? `inset(0 ${(displayValue - i) * 100}% 0 0)`
+                                    : `inset(0 0 0 ${(displayValue - i) * 100}%)`,
+                            })}>
+                            ${unsafeHTML(this.getSymbol(i + 1))}
+                        </div>
+                        <div
+                            class="rating__partial--filled"
+                            style=${styleMap({
+                                clipPath: isRtl
+                                    ? `inset(0 0 0 ${100 - (displayValue - i) * 100}%)`
+                                    : `inset(0 ${100 - (displayValue - i) * 100}% 0 0)`,
+                            })}>
+                            ${unsafeHTML(this.getSymbol(i + 1))}
+                        </div>
+                    </span>`
+                );
+            } else {
+                itemTemplates.push(html`
+                    <span
+                        class="${classMap({
+                            rating__symbol: true,
+                            hover: this.isHovering && Math.ceil(displayValue) === i + 1,
+                            active: displayValue >= i + 1,
+                        })}"
+                        >${unsafeHTML(this.getSymbol(i + 1))}</span
+                    >
+                `);
+            }
         }
         return html`
-            ${this.label
-                ? html` <p
-                      class=${"rate-count " +
-                      (this.size === "small" ? "sd-label-small" : "sd-body-small")}>
-                      ${this.label}
-                  </p>`
-                : nothing}
-            ${itemTemplates}
+            <span
+                class=${classMap(classes)}
+                role="slider"
+                aria-label=${this.label}
+                aria-disabled=${this.disabled ? "true" : "false"}
+                aria-readonly=${this.readonly ? "true" : "false"}
+                aria-valuenow=${this.value}
+                aria-valuemin=${0}
+                aria-valuemax=${this.max}
+                tabindex=${this.disabled ? "-1" : "0"}
+                @click=${this.handleClick}
+                @keydown=${this.handleKeyDown}
+                @mouseenter=${this.handleMouseEnter}
+                @touchstart=${this.handleTouchStart}
+                @mouseleave=${this.handleMouseLeave}
+                @touchend=${this.handleTouchEnd}
+                @mousemove=${this.handleMouseMove}
+                @touchmove=${this.handleTouchMove}>
+                ${itemTemplates}
+            </span>
         `;
-    }
-
-    _renderRatingChange(e: Event) {
-        const selectedStar = <HTMLElement>e.target;
-        this.value = Number(selectedStar.id);
-    }
-
-    _renderIcons(index: number) {
-        const selected = this.value >= index;
-        if (selected) {
-            return html` <sd-icon-star
-                size=${this.size === "small" ? "s" : "m"}></sd-icon-star>`;
-        } else {
-            return html` <sd-icon-star-border
-                size=${this.size === "small" ? "s" : "m"}></sd-icon-star-border>`;
-        }
     }
 }
 

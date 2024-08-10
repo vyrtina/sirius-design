@@ -2,7 +2,13 @@ import { classMap } from "lit/directives/class-map.js";
 import { html, nothing, unsafeCSS } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
-import { property, query, customElement, queryAssignedElements } from "lit/decorators.js";
+import {
+    property,
+    query,
+    customElement,
+    queryAssignedElements,
+    state,
+} from "lit/decorators.js";
 import { waitForEvent } from "../../utils/event.js";
 import { watch } from "../../utils/watch.js";
 import Modal from "../../utils/modal.js";
@@ -17,8 +23,6 @@ export default class SdSidebar extends SdElement {
     private originalTrigger!: HTMLElement | null;
     public modal = new Modal(this);
     private closeWatcher!: CloseWatcher | null;
-
-    private mainContentEl?: HTMLElement | null;
 
     @query(".panel") panel!: HTMLElement;
     @query(".overlay") overlay!: HTMLElement;
@@ -64,6 +68,17 @@ If true, the backdrop is not rendered. */
     /** the main content of the page, used with push variant for repositionning. if undefined, the next sibling element is chosen instead */
     @property() mainContent?: Element | string;
 
+    @state()
+    private responsiveMode: "overlay" | "push" | "none" = "none";
+
+    get isOverlay(): boolean {
+        return this.variant === "overlay" || this.responsiveMode === "overlay";
+    }
+
+    get isPush(): boolean {
+        return this.variant === "push" || this.responsiveMode === "push";
+    }
+
     firstUpdated() {
         this.hidden = !this.visible;
 
@@ -75,9 +90,12 @@ If true, the backdrop is not rendered. */
                 lockBodyScrolling(this);
             }
         }
-        if (this.variant == "push") {
-            this.handleMainContentMargin();
+        if (this.variant === "push") {
             this.handleChildrenexpansion();
+        } else if (this.variant === "responsive") {
+            const mediaQuery = window.matchMedia("(min-width: 1024px)"); //TODO: hardcoded value. try to take the value from the sass token file
+            mediaQuery.onchange = (e) => this.handleResponsiveChange(e);
+            this.handleResponsiveChange(mediaQuery);
         }
     }
 
@@ -87,57 +105,16 @@ If true, the backdrop is not rendered. */
         this.closeWatcher?.destroy();
     }
 
-    handleMainContent() {
-        this.connectedCallback();
-        if (this.mainContent && typeof this.mainContent === "string") {
-            // Locate the content by id
-            const root = this.getRootNode() as Document | ShadowRoot;
-            this.mainContentEl = root.getElementById(this.mainContent);
-        } else if (this.mainContent instanceof HTMLElement) {
-            // Use the anchor's reference
-            this.mainContentEl = this.mainContent;
+    private handleResponsiveChange(mediaQuery: MediaQueryListEvent | MediaQueryList) {
+        if (mediaQuery.matches) {
+            this.responsiveMode = "push";
+            this.visible = true; //push always start as visible
         } else {
-            var nextSibling = this.nextSibling;
-            while (nextSibling && nextSibling.nodeType != 1) {
-                nextSibling = nextSibling.nextSibling;
-            }
-            this.mainContentEl = nextSibling as HTMLElement;
+            this.responsiveMode = "overlay";
+            this.collapsed = false; //overlay cannot be collapsed
+            this.visible = false;
         }
-        if (!this.mainContentEl) {
-            throw "could not find main content";
-        }
-    }
-
-    handleMainContentMargin() {
-        switch (this.placement) {
-            case "start":
-                this.getMainContent().style.marginLeft = getComputedStyle(
-                    this.panel
-                ).width;
-                break;
-            case "top":
-                this.getMainContent().style.marginTop = getComputedStyle(
-                    this.panel
-                ).height;
-                break;
-            case "end":
-                this.getMainContent().style.marginRight = getComputedStyle(
-                    this.panel
-                ).width;
-                break;
-            case "bottom":
-                this.getMainContent().style.marginBottom = getComputedStyle(
-                    this.panel
-                ).height;
-                break;
-        }
-    }
-
-    getMainContent() {
-        if (!this.mainContentEl) {
-            this.handleMainContent();
-        }
-        return this.mainContentEl!;
+        this.handleChildrenexpansion();
     }
 
     private requestClose(source: "close-button" | "keyboard" | "overlay") {
@@ -219,7 +196,9 @@ If true, the backdrop is not rendered. */
             this.hidden = true;
 
             // Now that the dialog is hidden, restore the overlay and panel for next time
-            this.overlay.hidden = false;
+            if (this.overlay) {
+                this.overlay.hidden = false;
+            }
             this.panel.hidden = false;
 
             // Restore focus to the original trigger
@@ -234,7 +213,7 @@ If true, the backdrop is not rendered. */
 
     @watch("collapsed", { waitUntilFirstUpdate: true })
     async handleExpantionChange() {
-        if (this.variant === "overlay") {
+        if (this.isOverlay) {
             // overlay cannot be collapsed
             this.collapsed = false;
             return;
@@ -246,7 +225,6 @@ If true, the backdrop is not rendered. */
         }
         await this.updateComplete;
         this.handleChildrenexpansion();
-        this.handleMainContentMargin();
     }
 
     handleChildrenexpansion() {
@@ -322,33 +300,36 @@ If true, the backdrop is not rendered. */
 
     render() {
         const classes = {
-            panel: true,
+            container: true,
             collapsed: this.collapsed,
             visible: this.visible,
             top: this.placement === "top",
             end: this.placement === "end",
             bottom: this.placement === "bottom",
             start: this.placement === "start",
-            "variant--push": this.variant === "push",
-            "variant--overlay": this.variant === "overlay",
+            "variant--push": this.isPush,
+            "variant--overlay": this.isOverlay,
             contained: this.contained,
         };
         return html`
-            ${this.renderOverlay()}
-            <div
-                class="${classMap(classes)}"
-                part="panel"
-                role=${this.variant === "overlay" ? "dialog" : "complementary"}
-                aria-hidden=${this.visible ? "false" : "true"}
-                aria-label=${ifDefined(this.label)}
-                tabindex="0">
-                <slot></slot>
+            <div class="${classMap(classes)}">
+                ${this.renderOverlay()}
+                <div
+                    class="panel"
+                    part="panel"
+                    role=${this.variant === "overlay" ? "dialog" : "complementary"}
+                    aria-hidden=${this.visible ? "false" : "true"}
+                    aria-label=${ifDefined(this.label)}
+                    tabindex="0">
+                    <div class="top-margin"></div>
+                    <slot></slot>
+                </div>
             </div>
         `;
     }
 
     private renderOverlay() {
-        if (this.variant === "overlay" && !this.noBackdrop) {
+        if (this.isOverlay && !this.noBackdrop) {
             return html`
                 <div
                     part="overlay"

@@ -1,6 +1,12 @@
+@use "../../styles/tokens.scss";
 @import "../../styles/_index";
 
 :host {
+    --symbol-color: #{tokens.$sd-color-palette-neutral-300}; //TODO: change
+    --symbol-color-active: #{tokens.$sd-color-accent};
+    --symbol-size: 1.2rem;
+    --symbol-spacing: 0px;
+
     display: inline-flex;
     align-items: center;
     flex-direction: row-reverse;
@@ -8,30 +14,40 @@
     position: relative;
 }
 
-input {
-    display: none;
-}
-
-label {
-    height: 24px;
-    width: 24px;
+.rating {
+    display: inline-flex;
+    position: relative;
+    font-size: var(--symbol-size);
+    line-height: 0;
+    color: var(--symbol-color);
+    white-space: nowrap;
     cursor: pointer;
-    color: var(--color-accent);
-    &.small {
-        height: 20px;
-        width: 20px;
-    }
 }
 
-input:enabled + label:hover *,
-input:enabled + label:hover ~ label * {
-    color: state-color($sd-color-primary, "hover");
+.rating > * {
+    padding: var(--symbol-spacing);
 }
 
-.rate-count {
-    margin-left: 0.5rem;
+.rating__partial-symbol-container {
+    position: relative;
 }
 
-label * {
-    color: $sd-color-primary;
+.rating__partial--filled {
+    position: absolute;
+    top: var(--symbol-spacing);
+    left: var(--symbol-spacing);
+}
+
+.rating__symbol {
+    transition: tokens.$sd-motion-duration-050 scale;
+    pointer-events: none;
+}
+
+.rating__symbol.active,
+.rating__partial--filled {
+    color: var(--symbol-color-active);
+}
+
+.rating__symbol.hover {
+    scale: 1.2;
 }

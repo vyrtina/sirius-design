@@ -6,30 +6,7 @@ import "./rating";
 const meta: Meta = {
     title: "components/rating",
     component: "sd-rating",
-    argTypes: {
-        disabled: {
-            type: "boolean",
-        },
-        readonly: {
-            type: "boolean",
-        },
-        label: {
-            type: "string",
-        },
-        size: {
-            options: ["small", "default"],
-            control: "select",
-        },
-        defaultvalue: {
-            type: "number",
-        },
-    },
-    render: ({}) =>
-        html`
-            <sd-rating>
-                <sd-icon-edit></sd-icon-edit>
-            </sd-rating>
-        `,
+    tags: ["autodocs"],
 };
 
 export default meta;
@@ -40,17 +17,7 @@ export const Default: Story = {
         disabled: false,
         readonly: false,
         defaultvalue: 3,
-        label: "(1,699)",
-        size: "default",
-    },
-};
-
-export const Custom: Story = {
-    args: {
-        disabled: false,
-        readonly: true,
-        defaultvalue: 4,
-        label: "Very Good",
-        size: "small",
+        label: "rating",
+        precision: 0.5,
     },
 };

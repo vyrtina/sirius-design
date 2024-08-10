@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Thu, 25 Jul 2024 00:58:48 GMT
+// Generated on Tue, 06 Aug 2024 01:41:12 GMT
 
 $sd-z-index-toast: 10000;
 $sd-z-index-sticky: 100;
@@ -146,6 +146,8 @@ $sd-breakpoint-l: 1024px;
 $sd-breakpoint-m: 768px;
 $sd-breakpoint-s: 320px;
 $sd-breakpoint-xs: 0px;
+$sd-topbar-height-small: 104px;
+$sd-topbar-height-large: 64px;
 $sd-color-palette-rose-050: #fff1f2;
 $sd-color-palette-rose-950: #4c0519;
 $sd-color-palette-rose-900: #881337;
@@ -430,6 +432,7 @@ $sd-color-success-400: $sd-color-palette-green-400;
 $sd-color-success-300: $sd-color-palette-green-300;
 $sd-color-success-200: $sd-color-palette-green-200;
 $sd-color-success-100: $sd-color-palette-green-100;
+$sd-color-on-accent-container: $sd-color-palette-neutral-1000;
 $sd-color-on-accent: $sd-color-palette-neutral-0;
 $sd-color-accent-050: $sd-color-palette-blue-050;
 $sd-color-accent-950: $sd-color-palette-blue-950;

@@ -116,6 +116,10 @@
             "value": "{color.accent.200}",
             "type": "color"
         },
+        "on-accent-container": {
+            "value": "{color.palette.neutral.1000}",
+            "type": "color"
+        },
         "success": {
             "050": {
                 "value": "{color.palette.green.050}",

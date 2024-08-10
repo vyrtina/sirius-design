@@ -3,39 +3,56 @@
 
 :host {
     --size: 25rem;
-    --size-collapsed: 5rem;
-    --topnav-height: 0px;
-    display: contents;
+    --size-collapsed: 3.5rem;
+    --topbar-height: 0px;
+    flex: 0 0 auto;
 }
 
-.panel {
-    inset-inline-start: 0;
+.container .panel {
     box-sizing: border-box;
     position: fixed;
-    width: 100%;
-    height: 100%;
     display: flex;
     padding: 2rem 0;
     overflow: hidden;
     flex-direction: column;
     overflow: auto;
     pointer-events: all;
+    top: inherit;
+    inset-inline-end: inherit;
+    bottom: inherit;
+    inset-inline-start: inherit;
+    width: inherit;
+    height: inherit;
+}
 
-    &.variant--overlay {
+.panel .top-margin {
+    display: block;
+    width: 100%;
+    height: var(--topbar-height);
+}
+
+.container.variant--overlay {
+    position: absolute;
+    & .panel {
         z-index: tokens.$sd-z-index-modal;
         @include layer.surface-3();
     }
+}
 
-    &.variant--push {
+.container.variant--push {
+    position: relative;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    & .panel {
         @include layer.surface-1();
         z-index: 1;
-        &.collapsed {
-            --size: var(--size-collapsed);
-        }
+    }
+    &.collapsed {
+        --size: var(--size-collapsed);
     }
 }
 
-.panel.contained {
+.container.contained .panel {
     position: absolute;
     z-index: initial;
 }
@@ -44,8 +61,8 @@
     outline: none;
 }
 
-.panel.top {
-    top: var(--topnav-height);
+.container.top {
+    top: 0;
     inset-inline-end: auto;
     bottom: auto;
     inset-inline-start: 0;
@@ -53,8 +70,8 @@
     height: var(--size);
 }
 
-.panel.end {
-    top: var(--topnav-height);
+.container.end {
+    top: 0;
     inset-inline-end: 0;
     bottom: auto;
     inset-inline-start: auto;
@@ -62,7 +79,7 @@
     height: 100%;
 }
 
-.panel.bottom {
+.container.bottom {
     top: auto;
     inset-inline-end: auto;
     bottom: 0;
@@ -71,8 +88,8 @@
     height: var(--size);
 }
 
-.panel.start {
-    top: var(--topnav-height);
+.container.start {
+    top: 0;
     inset-inline-end: auto;
     bottom: auto;
     inset-inline-start: 0;
@@ -91,6 +108,6 @@
     pointer-events: all;
 }
 
-:host([contained]) .sidebar__overlay {
+.container.contained .sidebar__overlay {
     display: none;
 }

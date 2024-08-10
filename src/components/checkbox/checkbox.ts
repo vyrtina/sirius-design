@@ -46,12 +46,13 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
     /** Makes the checkbox a required field. */
     @property({ type: Boolean, reflect: true }) required = false;
 
+    /** The checkbox's lable. If you need to display HTML, use the `label` slot instead. */
+    @property({ attribute: "label-text" }) labelText = "";
+
     /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
     @query('input[type="checkbox"]') input?: HTMLInputElement;
-
-    @state() private hasFocus = false;
 
     private getInput() {
         if (!this.input) {
@@ -84,7 +85,6 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
     }
 
     private handleBlur() {
-        this.hasFocus = false;
         this.emit("sd-blur");
     }
 
@@ -98,7 +98,6 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
     }
 
     private handleFocus() {
-        this.hasFocus = true;
         this.emit("sd-focus");
     }
 
@@ -174,7 +173,7 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
                     @blur=${this.handleBlur}
                     @focus=${this.handleFocus} />
             </div>
-            <label for="input" class="label"><slot name="label"></slot></label>
+            <label for="input" class="label"><slot name="label"><p>${this.labelText}</p></p></slot></label>
             <span class="help-text" id="help-text"
                 ><slot name="help-text">${this.helpText}</slot></span
             >

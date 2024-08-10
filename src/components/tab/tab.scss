@@ -1,0 +1,54 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/base.scss";
+
+:host {
+    display: inline-block;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    color: tokens.$sd-color-palette-neutral-500;
+    white-space: nowrap;
+    user-select: none;
+    padding: 0.5rem;
+    -webkit-user-select: none;
+    cursor: pointer;
+    transition:
+        tokens.$sd-motion-duration-200 box-shadow,
+        tokens.$sd-motion-duration-200 color;
+}
+
+.tab:hover:not(.tab--disabled) {
+    color: tokens.$sd-color-primary;
+}
+
+:host(:focus) {
+    outline: transparent;
+}
+
+:host(:focus-visible):not([disabled]) {
+    color: tokens.$sd-color-primary;
+}
+
+:host(:focus-visible) {
+    @include base.outline-focus();
+}
+
+.tab.tab--active:not(.tab--disabled) {
+    color: tokens.$sd-color-primary;
+}
+
+.tab.tab--closable {
+    padding-inline-end: 0.75rem;
+}
+
+.tab.tab--disabled {
+    opacity: tokens.$sd-opacity-disabled;
+    cursor: not-allowed;
+}
+
+.tab__close-button {
+    font-size: 0.875rem;
+    margin-inline-start: 0.75rem;
+}
