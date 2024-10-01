@@ -12,7 +12,14 @@ const meta: Meta = {
     },
     render: ({ textLabel, variant, disabled }) => {
         return html`
-            <sd-button variant=${variant} ?disabled=${disabled}>${textLabel}</sd-button>
+            <sd-button
+                variant=${variant}
+                ?disabled=${disabled}
+                @click=${() => {
+                    console.log("button clicked");
+                }}
+                >${textLabel}
+            </sd-button>
         `;
     },
 };

@@ -17,7 +17,7 @@ export class IconHorizontalSplit extends Icon {
 
     protected override renderSVG() {
         return html `
-                <svg fill="currentColor" height=${sizes.get(this.size)} width=${sizes.get(this.size)} viewBox="0 0 24 24"><path d="M19 15v2H5v-2h14m2-10H3v2h18V5zm0 4H3v2h18V9zm0 4H3v6h18v-6z"/></svg>
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><path d="M19 15v2H5v-2h14m2-10H3v2h18V5zm0 4H3v2h18V9zm0 4H3v6h18v-6z"/></svg>
         `
       }
 }

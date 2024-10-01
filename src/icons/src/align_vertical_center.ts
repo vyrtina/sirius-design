@@ -17,7 +17,7 @@ export class IconAlignVerticalCenter extends Icon {
 
     protected override renderSVG() {
         return html `
-                <svg fill="currentColor" height=${sizes.get(this.size)} width=${sizes.get(this.size)} viewBox="0 0 24 24"><path d="M22 11h-5V6h-3v5h-4V3H7v8H1.84v2H7v8h3v-8h4v5h3v-5h5z"/></svg>
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><path d="M22 11h-5V6h-3v5h-4V3H7v8H1.84v2H7v8h3v-8h4v5h3v-5h5z"/></svg>
         `
       }
 }

@@ -17,7 +17,7 @@ export class IconDehaze extends Icon {
 
     protected override renderSVG() {
         return html `
-                <svg fill="currentColor" height=${sizes.get(this.size)} width=${sizes.get(this.size)} viewBox="0 0 24 24"><path d="M2 16v2h20v-2H2zm0-5v2h20v-2H2zm0-5v2h20V6H2z"/></svg>
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><path d="M2 16v2h20v-2H2zm0-5v2h20v-2H2zm0-5v2h20V6H2z"/></svg>
         `
       }
 }

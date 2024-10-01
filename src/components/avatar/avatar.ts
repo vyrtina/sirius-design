@@ -1,5 +1,6 @@
 import { html, unsafeCSS } from "lit";
 import { property, state, customElement } from "lit/decorators.js";
+import { styleMap } from "lit-html/directives/style-map.js";
 import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./avatar.scss?inline";
@@ -42,13 +43,19 @@ export default class SdAvatar extends SdElement {
     @property() initials = ""; //TODO: add hasChanged to see if more than 2 caracters
 
     /** the full name of the user */
-    @property({ attribute: "full-name" }) fullname = "";
+    @property({ attribute: "username" }) fullname = "";
 
     /** Indicates how the browser should load the image. */
     @property() loading: "eager" | "lazy" = "eager";
 
     /** the background color of the avatar, if initials are shown */
     @property() color: avatarPossibleColors | undefined;
+
+    /** the size of the component. apply to both height and width */
+    @property() size = "";
+
+    /** render a link */
+    @property() href = "";
 
     private getRandomColor(str: String) {
         //use a hash function
@@ -84,14 +91,48 @@ export default class SdAvatar extends SdElement {
     }
 
     render() {
+        return html` ${this.href ? this.renderLink() : this.renderAvatar()} `;
+    }
+
+    private renderAvatar() {
+        let style = {};
+        if (this.size) {
+            style = {
+                height: this.size,
+                width: this.size,
+            };
+        }
         return html`
             <div
                 part="base"
                 class="avatar"
                 role="img"
+                style="${styleMap(style)}"
                 aria-label=${this.label ? this.label : this.fullname}>
                 ${this.renderContent()}
             </div>
+        `;
+    }
+
+    private renderLink() {
+        let style = {};
+        if (this.size) {
+            style = {
+                height: this.size,
+                width: this.size,
+            };
+        }
+        return html`
+            <a
+                href="${this.href}"
+                part="base"
+                class="avatar"
+                role="img"
+                style="${styleMap(style)}"
+                aria-label=${this.label ? this.label : this.fullname}>
+                <div class="state-layer"></div>
+                ${this.renderContent()}
+            </a>
         `;
     }
 

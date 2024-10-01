@@ -17,7 +17,7 @@ export class IconUpgrade extends Icon {
 
     protected override renderSVG() {
         return html `
-                <svg fill="currentColor" height=${sizes.get(this.size)} width=${sizes.get(this.size)} viewBox="0 0 24 24"><path d="M16 18v2H8v-2h8zM11 7.99V16h2V7.99h3L12 4 8 7.99h3z"/></svg>
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><path d="M16 18v2H8v-2h8zM11 7.99V16h2V7.99h3L12 4 8 7.99h3z"/></svg>
         `
       }
 }

@@ -1,19 +1,29 @@
 @use "../../styles/tokens.scss";
+@use "../../styles/layer.scss";
+@use "../../styles/typography.scss";
 @import "../../styles/_index";
 
 :host {
     display: block;
     position: sticky;
+    top: 0;
     box-sizing: border-box;
     width: 100%;
-    color: $sd-color-surface;
     height: var(--sd-topbar-height);
-    z-index: tokens.$sd-z-index-sticky;
     @include base-frosted-glass();
+    z-index: tokens.$sd-z-index-sticky;
+}
+
+.background {
+    position: absolute;
+    background-color: layer.$sd-color-surface-3;
+    opacity: tokens.$sd-opacity-glass;
+    inset: 0;
 }
 
 .content {
     box-sizing: border-box;
+    color: $sd-color-on-surface;
     display: flex;
     padding: 0 var(--sd-margin);
     justify-content: space-between;
@@ -26,14 +36,14 @@
 
 .headline.logo {
     font-weight: 600;
+    @include typography.sd-headline();
     height: 3.5rem;
     display: flex;
     align-items: center;
-}
-
-::slotted(sd-search-bar) {
-    width: 100%;
-    padding: $sd-spacing-050 0;
+    &::slotted(a) {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
 .links {

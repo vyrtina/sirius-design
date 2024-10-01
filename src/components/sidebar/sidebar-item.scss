@@ -9,3 +9,18 @@
 .container {
     background-color: transparent;
 }
+
+.container.selected .background {
+    background-color: tokens.$sd-color-accent;
+}
+
+a.container {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.container .background {
+    position: absolute;
+    inset: 0;
+    background-color: transparent;
+}

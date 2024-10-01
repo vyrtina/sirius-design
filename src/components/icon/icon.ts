@@ -2,18 +2,10 @@ import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./icon.scss?inline";
 
-export const sizes = new Map<String, Number>([
-    ["s", 20],
-    ["m", 24],
-    ["l", 40],
-    ["xl", 48],
-]);
-
 @customElement("sd-icon")
 export class Icon extends LitElement {
     @property({ type: Boolean }) fill = false;
-    @property({ type: String }) name = "edit";
-    @property({ type: String }) size: "s" | "m" | "l" | "xl" = "m";
+    @property({ type: String }) size: "small" | "medium" | "large" = "medium";
 
     static styles = unsafeCSS(styles);
 

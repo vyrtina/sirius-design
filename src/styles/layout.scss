@@ -58,6 +58,9 @@ $navigation-region-collapsed: 72px;
     display: grid;
     grid-template-columns: repeat(var(--sd-cols), 1fr);
     gap: var(--sd-gutter);
+    & > * {
+        grid-column: 1 / -1;
+    }
 }
 
 .sd-grid {

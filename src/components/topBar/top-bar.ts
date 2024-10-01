@@ -12,6 +12,7 @@ export default class SdTopBar extends LitElement {
 
     render() {
         return html`
+            <div class="background"></div>
             <div class="content sd-body-max-width">
                 <slot name="logo" class="logo headline"></slot>
                 <slot name="search-bar" class="search-bar"></slot>

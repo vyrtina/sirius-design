@@ -15,7 +15,7 @@ type Story = StoryObj;
 export const Default: Story = {
     args: {
         initials: "",
-        "full-name": "Ali Oueslati",
+        username: "Ali Oueslati",
     },
 };
 

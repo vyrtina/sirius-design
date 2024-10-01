@@ -228,11 +228,10 @@ export default class SdButton extends SdElement implements SdFormControl {
     }
 
     private renderButton() {
-        // Needed for closure conformance
-        //const { ariaLabel, ariaHasPopup, ariaExpanded } = this as ARIAMixinStrict;
         return html`<button
             id="button"
             class="button"
+            part="button"
             ?disabled=${this.disabled}
             aria-label="${ifDefined(this.label)}"
             @blur=${this.handleBlur}
@@ -244,11 +243,10 @@ export default class SdButton extends SdElement implements SdFormControl {
     }
 
     private renderLink() {
-        // Needed for closure conformance
-        //const { ariaLabel, ariaHasPopup, ariaExpanded } = this as ARIAMixinStrict;
         return html`<a
             id="link"
             class="button ${this.variant} ${this.size}"
+            part="button"
             aria-label="${ifDefined(this.label)}"
             href=${this.href}
             target=${this.target || nothing}

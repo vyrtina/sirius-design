@@ -81,11 +81,11 @@ input::placeholder {
 }
 
 .field.error {
-    outline: 2px solid $sd-color-error;
-    background-color: $sd-color-error-container;
+    outline: 2px solid $sd-color-critical;
+    background-color: $sd-color-critical-container;
     & .leading-icon,
     .trailing-icon {
-        color: $sd-color-error;
+        color: $sd-color-critical;
     }
     & + .error-label {
         visibility: visible;
@@ -110,7 +110,7 @@ input:disabled {
 
 //error styling
 .error .field {
-    outline: 2px solid $sd-color-error;
+    outline: 2px solid $sd-color-critical;
 }
 
 .error-text {
@@ -118,9 +118,9 @@ input:disabled {
     align-items: center;
     gap: $sd-spacing-025;
     margin-top: $sd-spacing-025;
-    color: $sd-color-error;
+    color: $sd-color-critical;
     & sd-icon {
-        color: $sd-color-error;
+        color: $sd-color-critical;
     }
 }
 

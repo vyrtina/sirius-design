@@ -17,7 +17,7 @@ export class <%= icon_class %> extends Icon {
 
     protected override renderSVG() {
         return html `
-                <svg fill="currentColor" height=<%= sizes %> width=<%= sizes %> viewBox="0 0 24 24"><%= contents %></svg>
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><%= contents %></svg>
         `
       }
 }

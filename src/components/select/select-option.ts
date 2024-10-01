@@ -5,8 +5,8 @@ import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./select-option.scss?inline";
 
-@customElement("sd-select-option")
-export default class SdSelectOption extends SdElement {
+@customElement("sd-option")
+export default class SdOption extends SdElement {
     static override styles = unsafeCSS(styles);
 
     /**
@@ -119,6 +119,6 @@ export default class SdSelectOption extends SdElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "sd-select-option": SdSelectOption;
+        "sd-option": SdOption;
     }
 }

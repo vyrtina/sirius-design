@@ -1,0 +1,76 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/layer.scss";
+@use "../../styles/typography.scss";
+
+.table-wrapper {
+    background-color: tokens.$sd-color-surface;
+}
+
+.table {
+    display: grid;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: tokens.$sd-border-radius-small;
+}
+
+.table-row.header-row {
+    background-color: layer.$sd-color-surface-1;
+    color: tokens.$sd-color-palette-neutral-600;
+    padding: 0 0.5rem;
+    @include typography.sd-body();
+    & .header-cell {
+        pointer-events: unset;
+        display: flex;
+        font-weight: inherit;
+        padding: 0.5rem;
+        &:not(:first-child) {
+            border-left: 1px solid tokens.$sd-color-border;
+        }
+        & .header-cell__content {
+            width: 100%;
+        }
+    }
+}
+
+.table-row {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    padding: 0 0.5rem;
+    &:not(:last-child) {
+        border-bottom: 1px solid tokens.$sd-color-border;
+    }
+    & .table-cell {
+        box-sizing: border-box;
+        padding: 0.5rem;
+    }
+}
+
+.table-cell,
+.table-cell * {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.resizer {
+    position: relative;
+    box-sizing: border-box;
+    cursor: col-resize;
+    width: 8px;
+    border-right: 1px solid tokens.$sd-color-primary;
+    right: -8px;
+}
+
+.cell-right-align {
+    text-align: right;
+}
+
+.table-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid tokens.$sd-color-border;
+}

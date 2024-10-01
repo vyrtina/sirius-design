@@ -1,19 +1,11 @@
-/**
- * @license
- * Copyright 2021 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { html, nothing, unsafeCSS } from "lit";
 import { property, query, state, customElement } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
-import { ARIAMixinStrict } from "../../utils/aria/aria.js";
-import { stringConverter } from "../../utils/controller/string-converter.js";
 import { watch } from "../../utils/watch.js";
-import styles from "./text-input.scss?inline";
-import "../../icons/src/error";
+import styles from "./input.scss?inline";
+import "../../icons/src/error.js";
 import SdElement, { SdFormControl } from "../../utils/sd-element.js";
 import { FormControlController } from "../../utils/form.js";
 import "../../icons/src/cancel.js";
@@ -51,7 +43,7 @@ export type InvalidTextFieldType =
     | "submit";
 
 @customElement("sd-input")
-export abstract class SdInput extends SdElement implements SdFormControl {
+export default class SdInput extends SdElement implements SdFormControl {
     static override styles = unsafeCSS(styles);
 
     private readonly formControlController = new FormControlController(this, {
@@ -158,7 +150,7 @@ export abstract class SdInput extends SdElement implements SdFormControl {
     @property() pattern?: string;
 
     /** Placeholder text to show as a hint when the input is empty. */
-    @property({ reflect: true, converter: stringConverter }) placeholder?: string;
+    @property({ reflect: true /*//!converter: stringConverter */ }) placeholder?: string;
 
     /** Makes the input readonly. */
     @property({ type: Boolean, reflect: true }) readOnly = false;
@@ -253,7 +245,6 @@ export abstract class SdInput extends SdElement implements SdFormControl {
      * validation errors only display in response to user interactions.
      */
     @state() private dirty = false;
-    @state() private hasFocus = false;
     /**
      * Whether or not a native error has been reported via `reportValidity()`.
      */
@@ -369,7 +360,6 @@ export abstract class SdInput extends SdElement implements SdFormControl {
     }
 
     private handleBlur() {
-        this.hasFocus = false;
         this.emit("sd-blur");
     }
 
@@ -392,7 +382,6 @@ export abstract class SdInput extends SdElement implements SdFormControl {
     }
 
     private handleFocus() {
-        this.hasFocus = true;
         this.emit("sd-focus");
     }
 
@@ -627,7 +616,7 @@ export abstract class SdInput extends SdElement implements SdFormControl {
     }
 
     private renderInput() {
-        const ariaLabel = (this as ARIAMixinStrict).ariaLabel || this.label || nothing;
+        const ariaLabel = this.label || nothing;
 
         return html`
             <div class="input-wrapper">

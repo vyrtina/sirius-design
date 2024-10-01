@@ -1,0 +1,47 @@
+@use "../../styles/tokens.scss";
+
+:host {
+    display: inline-block;
+}
+
+.tag {
+    display: flex;
+    padding: 0.125rem 0.5rem 0.125rem 0.5rem;
+    border-radius: tokens.$sd-border-radius-small;
+    align-items: center;
+    &.primary {
+        background-color: tokens.$sd-color-primary;
+        color: tokens.$sd-color-on-primary;
+    }
+    &.success {
+        background-color: tokens.$sd-color-success-container;
+        color: tokens.$sd-color-success;
+    }
+    &.warning {
+        background-color: tokens.$sd-color-warning-container;
+        color: tokens.$sd-color-warning;
+    }
+    &.critical {
+        background-color: tokens.$sd-color-critical-container;
+        color: tokens.$sd-color-critical;
+    }
+    &.neutral {
+        background-color: tokens.$sd-color-palette-neutral-100;
+        color: tokens.$sd-color-palette-neutral-700;
+    }
+    &.accent {
+        background-color: tokens.$sd-color-accent-container;
+        color: tokens.$sd-color-accent;
+    }
+}
+
+.remove {
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-left: 0.375rem;
+    margin-right: -0.375rem;
+    & sd-icon-clear {
+        width: 0.75rem;
+        height: 0.75rem;
+    }
+}

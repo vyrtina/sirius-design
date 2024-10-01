@@ -21,7 +21,7 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["./src"],
+    "include": ["./src", "./src/**/**/*"],
     "exclude": ["node_modules", "**/__tests__/*", "src/**/**/*.stories.ts"],
     "overrides": [
         {

@@ -1,0 +1,32 @@
+.container {
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+ul {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    box-sizing: border-box;
+    display: flex;
+}
+
+.ellipsis {
+    height: max-content;
+    align-items: baseline;
+}
+
+.pagination-button {
+    width: 3rem;
+    &::part(button) {
+        padding: 0px;
+    }
+}

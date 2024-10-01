@@ -1,0 +1,10 @@
+@use "../select/select.scss";
+
+.select--multiple.select .select__display-input {
+    position: relative;
+    z-index: 0;
+    opacity: 1;
+    width: 0;
+    min-width: 30px;
+    flex-grow: 1;
+}

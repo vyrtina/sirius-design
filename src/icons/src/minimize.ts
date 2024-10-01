@@ -17,7 +17,7 @@ export class IconMinimize extends Icon {
 
     protected override renderSVG() {
         return html `
-                <svg fill="currentColor" height=${sizes.get(this.size)} width=${sizes.get(this.size)} viewBox="0 0 24 24"><path d="M6 19h12v2H6v-2z"/></svg>
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><path d="M6 19h12v2H6v-2z"/></svg>
         `
       }
 }

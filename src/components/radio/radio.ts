@@ -3,39 +3,14 @@ import { customElement, property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 
 import styles from "./radio.scss?inline";
-import { isActivationClick } from "../../utils/events/form-label-activation.js";
-import {
-    createValidator,
-    getValidityAnchor,
-    mixinConstraintValidation,
-} from "../../utils/behaviors/constraint-validation.js";
-import {
-    internals,
-    mixinElementInternals,
-} from "../../utils/behaviors/element-internals.js";
-import { mixinFocusable } from "../../utils/behaviors/focusable.js";
-import {
-    getFormState,
-    getFormValue,
-    mixinFormAssociated,
-} from "../../utils/behaviors/form-associated.js";
-import { SingleSelectionController } from "./single-selection-controller.js";
-import { RadioValidator } from "../../utils/behaviors/validators/radio-validator.js";
 
 const CHECKED = Symbol("checked");
 
-// Separate variable needed for closure.
-const radioBaseClass = mixinConstraintValidation(
-    mixinFormAssociated(mixinElementInternals(mixinFocusable(LitElement)))
-);
-
 @customElement("sd-radio")
-export default class SdRadio extends radioBaseClass {
+export default class SdRadio extends LitElement {
     static styles = unsafeCSS(styles) as CSSResultGroup;
 
-    /**
-     * Whether or not the radio is selected.
-     */
+    /*
     @property({ type: Boolean })
     get checked() {
         return this[CHECKED];
@@ -53,20 +28,15 @@ export default class SdRadio extends radioBaseClass {
 
     [CHECKED] = false;
 
-    /**
-     * Whether or not the radio is required. If any radio is required in a group,
-     * all radios are implicitly required.
-     */
+    
     @property({ type: Boolean }) required = false;
 
     @property({ type: String }) value = "default";
 
     @query(".container") private readonly container!: HTMLElement;
-    private readonly selectionController = new SingleSelectionController(this);
 
     constructor() {
         super();
-        this.addController(this.selectionController);
         this[internals].role = "radio";
         this.addEventListener("click", this.handleClick.bind(this));
         this.addEventListener("keydown", this.handleKeydown.bind(this));
@@ -89,7 +59,6 @@ export default class SdRadio extends radioBaseClass {
     }
 
     protected override updated() {
-        this[internals].ariaChecked = String(this.checked);
     }
 
     private async handleClick(event: Event) {
@@ -135,16 +104,6 @@ export default class SdRadio extends radioBaseClass {
         return String(this.checked);
     }
 
-    override formResetCallback() {
-        // The checked property does not reflect, so the original attribute set by
-        // the user is used to determine the default value.
-        this.checked = this.hasAttribute("checked");
-    }
-
-    override formStateRestoreCallback(state: string) {
-        this.checked = state === "true";
-    }
-
     [createValidator]() {
         return new RadioValidator(() => {
             if (!this.selectionController) {
@@ -159,7 +118,7 @@ export default class SdRadio extends radioBaseClass {
 
     [getValidityAnchor]() {
         return this.container;
-    }
+    }*/
 }
 
 declare global {

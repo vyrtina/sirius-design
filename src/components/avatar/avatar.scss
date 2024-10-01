@@ -11,10 +11,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: tokens.$sd-color-palette-neutral-300;
     border-radius: tokens.$sd-border-radius-circle;
+}
+
+a.avatar {
+    text-decoration: none;
+    color: inherit;
 }
 
 .initials {
@@ -106,4 +112,30 @@
     height: 100%;
     object-fit: cover;
     border-radius: inherit;
+}
+
+.state-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    background-color: tokens.$sd-color-primary;
+}
+
+:host(:hover) {
+    & .state-layer {
+        opacity: tokens.$sd-opacity-state-layer-hover;
+    }
+}
+
+:host(:active) {
+    & .state-layer {
+        opacity: tokens.$sd-opacity-state-layer-click;
+    }
+}
+
+:host(:focus) {
+    & .state-layer {
+        opacity: tokens.$sd-opacity-state-layer-focus;
+    }
 }

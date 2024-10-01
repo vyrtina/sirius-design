@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Tue, 06 Aug 2024 01:41:12 GMT
+// Generated on Sat, 24 Aug 2024 18:19:37 GMT
 
 $sd-z-index-toast: 10000;
 $sd-z-index-sticky: 100;
@@ -396,18 +396,18 @@ $sd-color-border: $sd-color-palette-neutral-300;
 $sd-color-on-surface: $sd-color-palette-neutral-1000;
 $sd-color-surface: $sd-color-palette-neutral-100;
 $sd-color-background: $sd-color-palette-neutral-050;
-$sd-color-on-error: $sd-color-palette-neutral-0;
-$sd-color-error-050: $sd-color-palette-red-050;
-$sd-color-error-950: $sd-color-palette-red-950;
-$sd-color-error-900: $sd-color-palette-red-900;
-$sd-color-error-800: $sd-color-palette-red-800;
-$sd-color-error-700: $sd-color-palette-red-700;
-$sd-color-error-600: $sd-color-palette-red-600;
-$sd-color-error-500: $sd-color-palette-red-500;
-$sd-color-error-400: $sd-color-palette-red-400;
-$sd-color-error-300: $sd-color-palette-red-300;
-$sd-color-error-200: $sd-color-palette-red-200;
-$sd-color-error-100: $sd-color-palette-red-100;
+$sd-color-on-critical: $sd-color-palette-neutral-0;
+$sd-color-critical-050: $sd-color-palette-red-050;
+$sd-color-critical-950: $sd-color-palette-red-950;
+$sd-color-critical-900: $sd-color-palette-red-900;
+$sd-color-critical-800: $sd-color-palette-red-800;
+$sd-color-critical-700: $sd-color-palette-red-700;
+$sd-color-critical-600: $sd-color-palette-red-600;
+$sd-color-critical-500: $sd-color-palette-red-500;
+$sd-color-critical-400: $sd-color-palette-red-400;
+$sd-color-critical-300: $sd-color-palette-red-300;
+$sd-color-critical-200: $sd-color-palette-red-200;
+$sd-color-critical-100: $sd-color-palette-red-100;
 $sd-color-on-warning: $sd-color-palette-neutral-0;
 $sd-color-warning-050: $sd-color-palette-amber-050;
 $sd-color-warning-950: $sd-color-palette-amber-950;
@@ -445,12 +445,12 @@ $sd-color-accent-400: $sd-color-palette-blue-400;
 $sd-color-accent-300: $sd-color-palette-blue-300;
 $sd-color-accent-200: $sd-color-palette-blue-200;
 $sd-color-accent-100: $sd-color-palette-blue-100;
-$sd-color-primary-container: $sd-color-primary-200;
+$sd-color-primary-container: $sd-color-primary-050;
 $sd-color-on-primary: $sd-color-palette-neutral-0;
 $sd-color-primary: $sd-color-primary-500;
 $sd-divider-color: $sd-color-border;
-$sd-color-error-container: $sd-color-error-100;
-$sd-color-error: $sd-color-error-800;
+$sd-color-critical-container: $sd-color-critical-100;
+$sd-color-critical: $sd-color-critical-800;
 $sd-color-warning-container: $sd-color-warning-100;
 $sd-color-warning: $sd-color-warning-800;
 $sd-color-success-container: $sd-color-success-100;

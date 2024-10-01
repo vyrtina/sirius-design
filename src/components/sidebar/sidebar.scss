@@ -2,9 +2,9 @@
 @use "../../styles/layer.scss";
 
 :host {
-    --size: 25rem;
+    --size: 256px;
     --size-collapsed: 3.5rem;
-    --topbar-height: 0px;
+    --topbar-height: var(--sd-topbar-height);
     flex: 0 0 auto;
 }
 

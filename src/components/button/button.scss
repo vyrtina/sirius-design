@@ -9,12 +9,16 @@
     --button-border-radius: #{tokens.$sd-border-radius-circle};
 
     display: block;
-    width: min-content;
-    height: min-content;
+    width: 100%;
+    height: 3rem;
 }
 
 .button:focus-visible {
     @include base-outline-focus;
+}
+
+:host([variant="plain"]) {
+    --button-color: inherit;
 }
 
 .container {
@@ -23,12 +27,13 @@
     border-radius: var(--button-border-radius);
     color: var(--button-color);
     box-sizing: border-box;
-    width: fit-content;
-    height: 3rem;
+    width: 100%;
+    height: 100%;
 }
 
 .button {
     all: unset;
+    box-sizing: border-box;
     display: inline-flex;
     padding: 0 $sd-spacing-100;
     align-items: center;
@@ -38,6 +43,7 @@
     color: inherit;
     position: relative;
     z-index: 5;
+    width: 100%;
     height: 100%;
 
     & .label {
@@ -57,7 +63,7 @@
 }
 
 .state-layer {
-    background-color: var(--button-color);
+    background-color: currentColor;
     transition: opacity tokens.$sd-motion-duration-250 tokens.$sd-motion-easing-ease-out;
     opacity: 0;
     z-index: 2;

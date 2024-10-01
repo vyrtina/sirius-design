@@ -77,7 +77,6 @@ gulp.task("icons_outlined_components", function () {
                 return {
                     component_name: component_name,
                     icon_class: icon_class,
-                    sizes: "${sizes.get(this.size)}",
                 };
             })
         )
@@ -148,7 +147,6 @@ gulp.task("icons_filled_components", function () {
                 return {
                     component_name: component_name,
                     icon_class: icon_class,
-                    sizes: "${sizes.get(this.size)}",
                 };
             })
         )

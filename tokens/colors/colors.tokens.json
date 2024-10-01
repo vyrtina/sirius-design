@@ -55,7 +55,7 @@
             "type": "color"
         },
         "primary-container": {
-            "value": "{color.primary.200}",
+            "value": "{color.primary.050}",
             "type": "color"
         },
         "accent": {
@@ -236,7 +236,7 @@
             "value": "{color.warning.100}",
             "type": "color"
         },
-        "error": {
+        "critical": {
             "050": {
                 "value": "{color.palette.red.050}",
                 "type": "color"
@@ -282,16 +282,16 @@
                 "type": "color"
             }
         },
-        "error ": {
-            "value": "{color.error.800}",
+        "critical ": {
+            "value": "{color.critical.800}",
             "type": "color"
         },
-        "on-error": {
+        "on-critical": {
             "value": "{color.palette.neutral.0}",
             "type": "color"
         },
-        "error-container": {
-            "value": "{color.error.100}",
+        "critical-container": {
+            "value": "{color.critical.100}",
             "type": "color"
         },
 

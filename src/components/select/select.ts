@@ -13,68 +13,27 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { waitForEvent } from "../../utils/event.js";
 import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
-import SdPopup from "../popup/popup.js";
+import "../popup/popup.js";
+import type SdPopup from "../popup/popup.js";
 import { TemplateResult, unsafeCSS } from "lit";
 import type { SdFormControl } from "../../utils/sd-element.js";
-import type SdSelectOption from "./select-option.js";
+import type SdOption from "./select-option.js";
+import "../../icons/src/expand_more.js";
 import styles from "./select.scss?inline";
+import type { SdRemoveEvent } from "../../events/sd-remove.js";
+import "../tag/tag.js";
 
-/**
- * @summary Selects allow you to choose items from a menu of predefined options.
- * @documentation https://shoelace.style/components/select
- * @status stable
- * @since 2.0
- *
- * @dependency sl-icon
- * @dependency sl-popup
- * @dependency sl-tag
- *
- * @slot - The listbox options. Must be `<sl-option>` elements. You can use `<sl-divider>` to group items visually.
- * @slot label - The input's label. Alternatively, you can use the `label` attribute.
- * @slot prefix - Used to prepend a presentational icon or similar element to the combobox.
- * @slot clear-icon - An icon to use in lieu of the default clear icon.
- * @slot expand-icon - The icon to show when the control is expanded and collapsed. Rotates on open and close.
- * @slot help-text - Text that describes how to use the input. Alternatively, you can use the `help-text` attribute.
- *
- * @event sl-change - Emitted when the control's value changes.
- * @event sl-clear - Emitted when the control's value is cleared.
- * @event sl-input - Emitted when the control receives input.
- * @event sl-focus - Emitted when the control gains focus.
- * @event sl-blur - Emitted when the control loses focus.
- * @event sl-show - Emitted when the select's menu opens.
- * @event sl-after-show - Emitted after the select's menu opens and all animations are complete.
- * @event sl-hide - Emitted when the select's menu closes.
- * @event sl-after-hide - Emitted after the select's menu closes and all animations are complete.
- * @event sl-invalid - Emitted when the form control has been checked for validity and its constraints aren't satisfied.
- *
- * @csspart form-control - The form control that wraps the label, input, and help text.
- * @csspart form-control-label - The label's wrapper.
- * @csspart form-control-input - The select's wrapper.
- * @csspart form-control-help-text - The help text's wrapper.
- * @csspart combobox - The container the wraps the prefix, combobox, clear icon, and expand button.
- * @csspart prefix - The container that wraps the prefix slot.
- * @csspart display-input - The element that displays the selected option's label, an `<input>` element.
- * @csspart listbox - The listbox container where options are slotted.
- * @csspart tags - The container that houses option tags when `multiselect` is used.
- * @csspart tag - The individual tags that represent each multiselect option.
- * @csspart tag__base - The tag's base part.
- * @csspart tag__content - The tag's content part.
- * @csspart tag__remove-button - The tag's remove button.
- * @csspart tag__remove-button__base - The tag's remove button base part.
- * @csspart clear-button - The clear button.
- * @csspart expand-icon - The container that wraps the expand icon.
- */
 @customElement("sd-select")
 export default class SdSelect extends SdElement implements SdFormControl {
     static override styles = unsafeCSS(styles);
 
-    private readonly formControlController = new FormControlController(this, {
+    protected readonly formControlController = new FormControlController(this, {
         assumeInteractionOn: ["sl-blur", "sl-input"],
     });
 
-    private typeToSelectString = "";
+    protected typeToSelectString = "";
     private typeToSelectTimeout?: number;
-    private closeWatcher?: CloseWatcher | null;
+    protected closeWatcher?: CloseWatcher | null;
 
     @query(".select") popup?: SdPopup;
     @query(".combobox") combobox?: HTMLSlotElement;
@@ -84,10 +43,10 @@ export default class SdSelect extends SdElement implements SdFormControl {
     @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
     @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
 
-    @state() private hasFocus = false;
+    @state() protected hasFocus = false;
     @state() displayLabel = "";
-    @state() currentOption?: SdSelectOption;
-    @state() selectedOptions: SdSelectOption[] = [];
+    @state() currentOption?: SdOption;
+    @state() selectedOptions: SdOption[] = [];
 
     /** The name of the select, submitted as a name/value pair with form data. */
     @property() name = "";
@@ -163,11 +122,11 @@ export default class SdSelect extends SdElement implements SdFormControl {
      * the specified value.
      */
     @property() getTag: (
-        option: SdSelectOption,
+        option: SdOption,
         index: number
     ) => TemplateResult | string | HTMLElement = (option) => {
         return html`
-            <sl-tag
+            <sd-tag
                 part="tag"
                 exportparts="
               base:tag__base,
@@ -175,13 +134,15 @@ export default class SdSelect extends SdElement implements SdFormControl {
               remove-button:tag__remove-button,
               remove-button__base:tag__remove-button__base
             "
-                removable>
+                clearable
+                @sd-remove=${(event: SdRemoveEvent) =>
+                    this.handleTagRemove(event, option)}>
                 ${option.getTextLabel()}
-            </sl-tag>
+            </sd-tag>
         `;
     };
 
-    private getPopup() {
+    protected getPopup() {
         if (!this.popup) {
             this.connectedCallback();
             this.scheduleUpdate();
@@ -199,7 +160,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         return this.combobox!;
     }*/
 
-    private getDisplayInput() {
+    protected getDisplayInput() {
         if (!this.displayInput) {
             this.connectedCallback();
             this.scheduleUpdate();
@@ -225,7 +186,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         return this.valueInput!;
     }
 
-    private getListbox() {
+    protected getListbox() {
         if (!this.listbox) {
             this.connectedCallback();
             this.scheduleUpdate();
@@ -251,7 +212,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         this.open = false;
     }
 
-    private addOpenListeners() {
+    protected addOpenListeners() {
         //
         // Listen on the root node instead of the document in case the elements are inside a shadow root
         //
@@ -284,7 +245,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         }
     }
 
-    private removeOpenListeners() {
+    protected removeOpenListeners() {
         document.removeEventListener(
             "focusin",
             this.handleDocumentFocusIn as EventListenerOrEventListenerObject
@@ -302,13 +263,13 @@ export default class SdSelect extends SdElement implements SdFormControl {
         this.closeWatcher?.destroy();
     }
 
-    private handleFocus() {
+    protected handleFocus() {
         this.hasFocus = true;
         this.getDisplayInput().setSelectionRange(0, 0);
-        this.emit("sl-focus");
+        this.emit("sd-focus");
     }
 
-    private handleBlur() {
+    protected handleBlur() {
         this.hasFocus = false;
         this.emit("sl-blur");
     }
@@ -321,12 +282,12 @@ export default class SdSelect extends SdElement implements SdFormControl {
         }
     };
 
-    private handleDocumentKeyDown = (event: KeyboardEvent) => {
+    protected handleDocumentKeyDown = (event: KeyboardEvent) => {
         const target = event.target as HTMLElement;
         const isClearButton = target.closest(".select__clear") !== null;
         const isIconButton = target.closest("sd-icon-button") !== null;
 
-        // Ignore presses when the target is an icon button (e.g. the remove button in <sl-tag>)
+        // Ignore presses when the target is an icon button (e.g. the remove button in <sd-tag>)
         if (isClearButton || isIconButton) {
             return;
         }
@@ -456,7 +417,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         }
     };
 
-    private handleDocumentMouseDown = (event: MouseEvent) => {
+    protected handleDocumentMouseDown = (event: MouseEvent) => {
         // Close when clicking outside of the select
         const path = event.composedPath();
         if (this && !path.includes(this)) {
@@ -468,7 +429,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         this.getDisplayInput().focus();
     }
 
-    private handleComboboxMouseDown(event: MouseEvent) {
+    protected handleComboboxMouseDown(event: MouseEvent) {
         const path = event.composedPath();
         const isIconButton = path.some(
             (el) => el instanceof Element && el.tagName.toLowerCase() === "sd-icon-button"
@@ -484,7 +445,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         this.open = !this.open;
     }
 
-    private handleComboboxKeyDown(event: KeyboardEvent) {
+    protected handleComboboxKeyDown(event: KeyboardEvent) {
         if (event.key === "Tab") {
             return;
         }
@@ -515,9 +476,9 @@ export default class SdSelect extends SdElement implements SdFormControl {
         event.preventDefault();
     }
 
-    private handleOptionClick(event: MouseEvent) {
+    protected handleOptionClick(event: MouseEvent) {
         const target = event.target as HTMLElement;
-        const option = target.closest("sd-select-option");
+        const option = target.closest("sd-option");
         const oldValue = this.value;
 
         if (option && !option.disabled) {
@@ -547,13 +508,13 @@ export default class SdSelect extends SdElement implements SdFormControl {
         }
     }
 
-    private handleDefaultSlotChange() {
+    protected handleDefaultSlotChange() {
         const allOptions = this.getAllOptions();
         const value = Array.isArray(this.value) ? this.value : [this.value];
         const values: string[] = [];
 
         // Check for duplicate values in menu items
-        if (customElements.get("sd-select-option")) {
+        if (customElements.get("sd-option")) {
             allOptions.forEach((option) => values.push(option.value));
 
             // Select only the options that match the new value
@@ -561,12 +522,12 @@ export default class SdSelect extends SdElement implements SdFormControl {
         } else {
             // Rerun this handler when <sl-option> is registered
             customElements
-                .whenDefined("sd-select-option")
+                .whenDefined("sd-option")
                 .then(() => this.handleDefaultSlotChange());
         }
     }
 
-    /*private handleTagRemove(event: SlRemoveEvent, option: SdSelectOption) {
+    private handleTagRemove(event: SdRemoveEvent, option: SdOption) {
         event.stopPropagation();
 
         if (!this.disabled) {
@@ -574,25 +535,25 @@ export default class SdSelect extends SdElement implements SdFormControl {
 
             // Emit after updating
             this.updateComplete.then(() => {
-                this.emit("sl-input");
-                this.emit("sl-change");
+                this.emit("sd-input");
+                this.emit("sd-change");
             });
         }
-    }*/
-
-    // Gets an array of all <sl-option> elements
-    private getAllOptions() {
-        return [...this.querySelectorAll<SdSelectOption>("sd-select-option")];
     }
 
-    // Gets the first <sl-option> element
-    private getFirstOption() {
-        return this.querySelector<SdSelectOption>("sd-select-option");
+    // Gets an array of all <sd-option> elements
+    protected getAllOptions() {
+        return [...this.querySelectorAll<SdOption>("sd-option")];
+    }
+
+    // Gets the first <sd-option> element
+    protected getFirstOption() {
+        return this.querySelector<SdOption>("sd-option");
     }
 
     // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
     // option may be "current" at a time.
-    private setCurrentOption(option: SdSelectOption | null) {
+    protected setCurrentOption(option: SdOption | null) {
         const allOptions = this.getAllOptions();
 
         // Clear selection
@@ -611,7 +572,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
     }
 
     // Sets the selected option(s)
-    private setSelectedOptions(option: SdSelectOption | SdSelectOption[]) {
+    protected setSelectedOptions(option: SdOption | SdOption[]) {
         const allOptions = this.getAllOptions();
         const newSelectedOptions = Array.isArray(option) ? option : [option];
 
@@ -628,7 +589,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
     }
 
     // Toggles an option's selected state
-    private toggleOptionSelection(option: SdSelectOption, force?: boolean) {
+    protected toggleOptionSelection(option: SdOption, force?: boolean) {
         if (force === true || force === false) {
             option.selected = force;
         } else {
@@ -640,7 +601,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
 
     // This method must be called whenever the selection changes. It will update the selected options cache, the current
     // value, and the display value
-    private selectionChanged() {
+    protected selectionChanged() {
         // Update selected options cache
         this.selectedOptions = this.getAllOptions().filter((el) => el.selected);
 
@@ -656,7 +617,6 @@ export default class SdSelect extends SdElement implements SdFormControl {
             }
         } else {
             this.value = this.selectedOptions[0]?.value ?? "";
-            console.log(this.selectedOptions[0].getTextLabel());
             this.displayLabel = this.selectedOptions[0]?.getTextLabel() ?? "";
         }
 
@@ -670,12 +630,13 @@ export default class SdSelect extends SdElement implements SdFormControl {
             if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                 const tag = this.getTag(option, index);
                 // Wrap so we can handle the remove
-                return html`<div>
+                return html`<div
+                    @sd-remove=${(e: SdRemoveEvent) => this.handleTagRemove(e, option)}>
                     ${typeof tag === "string" ? unsafeHTML(tag) : tag}
                 </div>`;
             } else if (index === this.maxOptionsVisible) {
                 // Hit tag limit
-                return html`<sl-tag>+${this.selectedOptions.length - index}</sl-tag>`;
+                return html`<sd-tag>+${this.selectedOptions.length - index}</sd-tag>`;
             }
             return html``;
         });
@@ -705,7 +666,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
     }
 
     @watch("open", { waitUntilFirstUpdate: true })
-    async handleOpenChange() {
+    handleOpenChange() {
         if (this.open && !this.disabled) {
             // Reset the current option
             this.setCurrentOption(this.selectedOptions[0] || this.getFirstOption());
@@ -788,8 +749,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
         this.getDisplayInput().blur();
     }
 
-    render() {
-        const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+    protected render() {
         const isPlaceholderVisible = this.placeholder && this.value.length === 0;
 
         return html`
@@ -816,100 +776,93 @@ export default class SdSelect extends SdElement implements SdFormControl {
                     auto-size="vertical"
                     auto-size-padding="10"
                     distance="2">
-                    <div
-                        part="combobox"
-                        class="combobox"
-                        slot="anchor"
-                        @keydown=${this.handleComboboxKeyDown}
-                        @mousedown=${this.handleComboboxMouseDown}>
-                        <slot part="prefix" name="prefix" class="select__prefix"></slot>
-
-                        <input
-                            part="display-input"
-                            class="select__display-input"
-                            type="text"
-                            placeholder=${this.placeholder}
-                            .disabled=${this.disabled}
-                            .value=${this.displayLabel}
-                            autocomplete="off"
-                            spellcheck="false"
-                            autocapitalize="off"
-                            readonly
-                            aria-controls="listbox"
-                            aria-expanded=${this.open ? "true" : "false"}
-                            aria-haspopup="listbox"
-                            aria-labelledby="label"
-                            aria-disabled=${this.disabled ? "true" : "false"}
-                            aria-describedby="help-text"
-                            role="combobox"
-                            tabindex="0"
-                            @focus=${this.handleFocus}
-                            @blur=${this.handleBlur} />
-
-                        ${this.multiple
-                            ? html`<div part="tags" class="select__tags">
-                                  ${this.tags}
-                              </div>`
-                            : nothing}
-
-                        <input
-                            class="select__value-input"
-                            type="text"
-                            ?disabled=${this.disabled}
-                            ?required=${this.required}
-                            .value=${Array.isArray(this.value)
-                                ? this.value.join(", ")
-                                : this.value}
-                            tabindex="-1"
-                            aria-hidden="true"
-                            @focus=${() => this.focus()}
-                            @invalid=${this.handleInvalid} />
-
-                        ${hasClearIcon
-                            ? html`
-                                  <button
-                                      part="clear-button"
-                                      class="select__clear"
-                                      type="button"
-                                      aria-label="clearEntry"
-                                      @mousedown=${this.handleClearMouseDown}
-                                      @click=${this.handleClearClick}
-                                      tabindex="-1">
-                                      <slot name="clear-icon">
-                                          <sl-icon
-                                              name="x-circle-fill"
-                                              library="system"></sl-icon>
-                                      </slot>
-                                  </button>
-                              `
-                            : ""}
-
-                        <slot
-                            name="expand-icon"
-                            part="expand-icon"
-                            class="select__expand-icon">
-                            <sl-icon library="system" name="chevron-down"></sl-icon>
-                        </slot>
-                    </div>
-
-                    <div
-                        id="listbox"
-                        role="listbox"
-                        aria-expanded=${this.open ? "true" : "false"}
-                        aria-multiselectable=${this.multiple ? "true" : "false"}
-                        aria-labelledby="label"
-                        part="listbox"
-                        class="listbox"
-                        tabindex="-1"
-                        @mouseup=${this.handleOptionClick}
-                        @slotchange=${this.handleDefaultSlotChange}>
-                        <slot></slot>
-                    </div>
+                    ${this.renderCombobox()} ${this.renderListbox()}
                 </sd-popup>
 
                 ${this.renderHelpText()}
             </div>
         `;
+    }
+
+    protected renderCombobox() {
+        const hasClearIcon = this.clearable && !this.disabled && this.value.length > 0;
+
+        return html`
+            <div
+                part="combobox"
+                class="combobox"
+                slot="anchor"
+                @keydown=${this.handleComboboxKeyDown}
+                @mousedown=${this.handleComboboxMouseDown}>
+                <slot part="prefix" name="prefix" class="select__prefix"></slot>
+
+                ${this.renderInput()}
+
+                <input
+                    class="select__value-input"
+                    type="text"
+                    ?disabled=${this.disabled}
+                    ?required=${this.required}
+                    .value=${Array.isArray(this.value)
+                        ? this.value.join(", ")
+                        : this.value}
+                    tabindex="-1"
+                    aria-hidden="true"
+                    @focus=${() => this.focus()}
+                    @invalid=${this.handleInvalid} />
+
+                ${hasClearIcon
+                    ? html`
+                          <button
+                              part="clear-button"
+                              class="select__clear"
+                              type="button"
+                              aria-label="clearEntry"
+                              @mousedown=${this.handleClearMouseDown}
+                              @click=${this.handleClearClick}
+                              tabindex="-1">
+                              <slot name="clear-icon">
+                                  <sl-icon
+                                      name="x-circle-fill"
+                                      library="system"></sl-icon>
+                              </slot>
+                          </button>
+                      `
+                    : ""}
+
+                <slot name="expand-icon" part="expand-icon" class="select__expand-icon">
+                    <sd-icon-expand-more></sd-icon-expand-more>
+                </slot>
+            </div>
+        `;
+    }
+
+    /** render the display input. to impelement the search, use the autocomplete component */
+    protected renderInput() {
+        return html` ${this.multiple
+                ? html`<div part="tags" class="select__tags">${this.tags}</div>`
+                : nothing}
+            <input
+                part="display-input"
+                class="select__display-input"
+                type="text"
+                placeholder=${this.placeholder}
+                .disabled=${this.disabled}
+                .value=${this.displayLabel}
+                autocomplete="off"
+                spellcheck="false"
+                autocapitalize="off"
+                readonly
+                aria-controls="listbox"
+                aria-expanded=${this.open ? "true" : "false"}
+                aria-haspopup="listbox"
+                aria-labelledby="label"
+                aria-disabled=${this.disabled ? "true" : "false"}
+                aria-describedby="help-text"
+                role="combobox"
+                tabindex="0"
+                @focus=${this.handleFocus}
+                @blur=${this.handleBlur} />`;
     }
 
     private renderLabel() {
@@ -936,6 +889,24 @@ export default class SdSelect extends SdElement implements SdFormControl {
             `;
         }
         return html` <slot name="help-text">${this.helpText}</slot> `;
+    }
+
+    protected renderListbox() {
+        return html`
+            <div
+                id="listbox"
+                role="listbox"
+                aria-expanded=${this.open ? "true" : "false"}
+                aria-multiselectable=${this.multiple ? "true" : "false"}
+                aria-labelledby="label"
+                part="listbox"
+                class="listbox"
+                tabindex="-1"
+                @mouseup=${this.handleOptionClick}
+                @slotchange=${this.handleDefaultSlotChange}>
+                <slot></slot>
+            </div>
+        `;
     }
 }
 

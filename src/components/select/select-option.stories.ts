@@ -7,7 +7,7 @@ import "../../icons/src/edit";
 
 const meta: Meta = {
     title: "components/select-option",
-    component: "sd-select-option",
+    component: "sd-option",
     tags: ["autodocs"],
     render: function Render(args) {
         return html`
@@ -28,12 +28,10 @@ export const Primary: Story = {};
 export const WithIcons: Story = {
     render: (args) => {
         return html`
-            <sd-select-option
-                ?disabled=${args["disabled"]}
-                value=${ifDefined(args["value"])}
+            <sd-option ?disabled=${args["disabled"]} value=${ifDefined(args["value"])}
                 ><sd-icon-grid-view slot="prefix"></sd-icon-grid-view>Option
                 1<sd-icon-edit slot="suffix"></sd-icon-edit
-            ></sd-select-option>
+            ></sd-option>
         `;
     },
 };

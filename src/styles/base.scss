@@ -6,15 +6,11 @@
     outline-offset: tokens.$sd-spacing-012;
 }
 
-@mixin sd-border(
-    $color: tokens.$sd-color-primary,
-    $width: tokens.$sd-border-width-medium
-) {
+@mixin sd-border($color: tokens.$sd-color-border, $width: tokens.$sd-border-width-small) {
     border: $width solid $color;
 }
 
 @mixin frosted-glass() {
-    background: rgba(0, 0, 0, tokens.$sd-opacity-glass);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }

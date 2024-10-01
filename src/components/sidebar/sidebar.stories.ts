@@ -17,11 +17,13 @@ const meta: Meta = {
                     label="sidebar"
                     class="sidebar-overview"
                     visible>
-                    <sd-sidebar-item
+                    <sd-sidebar-item href="https://www.google.co.uk/" selected
                         ><sd-icon-browse-gallery slot="prefix"></sd-icon-browse-gallery
                         >Text</sd-sidebar-item
                     >
-                    <sd-sidebar-item>Menu</sd-sidebar-item>
+                    <sd-sidebar-item href="https://www.google.co.uk/"
+                        >Menu</sd-sidebar-item
+                    >
                     <sd-sidebar-item>Help</sd-sidebar-item>
                 </sd-sidebar>
                 <div class="content">

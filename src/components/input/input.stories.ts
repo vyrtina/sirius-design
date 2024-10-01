@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
-import "./text-input";
+import "./input";
 import "../../icons/src/agriculture";
 import "../../icons/src/photo_camera";
 import { error } from "console";
