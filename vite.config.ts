@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { extname, relative, resolve } from "path";
 import { fileURLToPath } from "node:url";
 import { glob } from "glob";
@@ -16,6 +18,9 @@ export default defineConfig({
         watch: {
             usePolling: true,
             disableGlobbing: false,
+        },
+        fs: {
+            cachedChecks: false,
         },
     },
     resolve: {
@@ -53,6 +58,16 @@ export default defineConfig({
                 entryFileNames: "[name].js",
             },
             external: /^lit/,
+        },
+    },
+    test: {
+        globals: true,
+        // Lit recommends using browser environment for testing
+        // https://lit.dev/docs/tools/testing/#testing-in-the-browser
+        browser: {
+            enabled: true,
+            name: "chromium",
+            provider: "playwright",
         },
     },
 });

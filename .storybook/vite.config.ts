@@ -1,7 +1,7 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import VitePluginCustomElementsManifest from "vite-plugin-cem";
-
+/*
 export default defineConfig({
     plugins: [VitePluginCustomElementsManifest()],
     assetsInclude: ["/sb-preview/runtime.js"],
@@ -41,3 +41,4 @@ export default defineConfig({
         },
     },
 });
+*/

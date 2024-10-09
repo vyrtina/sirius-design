@@ -255,7 +255,7 @@ export default class SdPopup extends SdElement {
         }
 
         // If the anchor is valid, start it up
-        if (this.anchorEl) {
+        if (this.anchorEl && this.active) {
             this.start();
         }
     }

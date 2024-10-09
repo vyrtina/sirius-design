@@ -1,11 +1,9 @@
-import { html, unsafeCSS } from "lit";
+import { html, TemplateResult, unsafeCSS } from "lit";
 import SdSelect from "../select/select";
 import { watch } from "../../utils/watch.js";
 import { scrollIntoView } from "../../utils/scroll.js";
-import { customElement, query, state } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { removeDiacritics } from "../../utils/string.js";
-import SdOption from "../select/select-option.js";
-import SdInput from "../input/input.js";
 import styles from "./autocomplete.scss?inline";
 
 @customElement("sd-autocomplete")
@@ -14,6 +12,9 @@ export default class SdAutocomplete extends SdSelect {
     @query(".select__display-input") searchInput?: HTMLInputElement;
     /** override displayInput */
     //@query(".select__search-input") displayInput?: HTMLInputElement;
+
+    @property({ type: Boolean }) loading = false;
+    @property({ attribute: "loading-text", type: String }) loadingText = "Loading...";
 
     protected getSearchInput() {
         if (!this.searchInput) {
@@ -245,6 +246,26 @@ export default class SdAutocomplete extends SdSelect {
         return this.multiple
             ? html`<div part="tags" class="select__tags">${this.tags}${input}</div>`
             : input;
+    }
+
+    protected override renderListbox() {
+        return html`
+            <div
+                id="listbox"
+                role="listbox"
+                aria-expanded=${this.open ? "true" : "false"}
+                aria-multiselectable=${this.multiple ? "true" : "false"}
+                aria-labelledby="label"
+                part="listbox"
+                class="listbox"
+                tabindex="-1"
+                @mouseup=${this.handleOptionClick}
+                @slotchange=${this.handleDefaultSlotChange}>
+                ${this.loading
+                    ? html`<div class="loading-label">${this.loadingText}</div>`
+                    : html`<slot></slot>`}
+            </div>
+        `;
     }
 
     handleInput(e: InputEvent) {

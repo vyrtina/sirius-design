@@ -1,0 +1,75 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/typography.scss";
+@use "../../styles/state-render.scss";
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.textarea {
+    display: flex;
+    align-self: stretch;
+    border-radius: tokens.$sd-border-radius-large;
+    border-end-end-radius: 0; //! design men mo55i. salla7 el design 3al Figma
+    outline: tokens.$sd-border-width-small solid tokens.$sd-color-border;
+    transition: background tokens.$sd-motion-duration-100 tokens.$sd-motion-easing-linear;
+    width: 100%;
+    &:enabled {
+        @include state-render.state-render-overlay(tokens.$sd-color-primary);
+    }
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.textarea__input {
+    box-sizing: border-box;
+    padding: 0.75rem;
+    resize: none;
+    border: none;
+    outline: none;
+    background: rgba($color: tokens.$sd-color-primary, $alpha: 0);
+    color: tokens.$sd-color-on-surface;
+    width: 100%;
+    height: 100%;
+    @include typography.sd-body();
+}
+
+.textarea.textarea--resize-none .textarea__input {
+    resize: none;
+}
+.textarea.textarea--resize-vertical .textarea__input {
+    resize: vertical;
+}
+.textarea.textarea--resize-both .textarea__input {
+    resize: both;
+}
+
+/** label */
+.textarea-label {
+    width: fit-content;
+    @include typography.sd-body();
+    &.drawAsterisk::after {
+        content: "*";
+    }
+}
+
+.error-text,
+.help-text {
+    @include typography.sd-body-small();
+}
+
+input::placeholder {
+    color: tokens.$sd-color-placeholder-text;
+}
+
+.textarea--focused {
+    outline: 2px solid tokens.$sd-color-primary;
+}
+
+.textarea__size-adjuster {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+}

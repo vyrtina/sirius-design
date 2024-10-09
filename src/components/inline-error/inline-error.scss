@@ -1,0 +1,15 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/typography.scss";
+
+.inline-error {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: tokens.$sd-color-critical;
+    @include typography.sd-body-small();
+}
+
+.error-icon {
+    height: 1rem;
+    width: 1rem;
+}

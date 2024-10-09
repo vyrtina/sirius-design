@@ -51,3 +51,42 @@ export const Invalid: Story = {
         required: true,
     },
 };
+
+export const Form: Story = {
+    render: ({ label, placeholder, type, clearable }) => html`
+        <form>
+            <sd-input
+                label=${label}
+                placeholder=${placeholder}
+                type=${type}
+                ?clearable=${clearable}>
+            </sd-input>
+            <button type="submit">Submit</button>
+        </form>
+
+        <output></output>
+
+        <script>
+            /** Get a reference to the form */
+            const form = document.querySelector("form");
+
+            /** Get the output element to display form data in */
+            const output = document.querySelector("output");
+
+            /** Prevent default on form submissions */
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                console.log(document.querySelector("sd-input").internals);
+
+                const form = event.target;
+
+                /** Get all of the form data */
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => (data[key] = value));
+                output.innerHTML = JSON.stringify(data, null, 2);
+            });
+        </script>
+    `,
+};

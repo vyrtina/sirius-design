@@ -1,47 +1,32 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { watch } from "../../utils/watch.js";
 import { live } from "lit/directives/live.js";
 import SdElement from "../../utils/sd-element.js";
 import type SdFormControl from "../../utils/sd-element.js";
-import { FormControlController } from "../../utils/form.js";
+import { FormValue, MixinFormAssociated } from "../../utils/form.js";
 import styles from "./checkbox.scss?inline";
 
-@customElement("sd-checkbox")
-export default class SdCheckbox extends SdElement implements SdFormControl {
-    static styles = unsafeCSS(styles);
-    private readonly formControlController = new FormControlController(this, {
-        value: (control: SdCheckbox) =>
-            control.checked ? control.value || "on" : undefined,
-    });
+const CheckboxBaseClass = MixinFormAssociated(SdElement);
 
-    /** The name of the checkbox, submitted as a name/value pair with form data. */
-    @property() name = "";
+@customElement("sd-checkbox")
+export default class SdCheckbox extends CheckboxBaseClass {
+    static styles = unsafeCSS(styles);
 
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
-    @property() value: String = "";
+    @property() value = "on";
 
     /** The checkbox's size. */
     @property({ reflect: true }) size: "small" | "medium" = "medium";
 
-    /** Disables the checkbox. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
     /** Draws the checkbox in a checked state. */
-    @property({ type: Boolean, reflect: true }) checked = false;
+    @property({ type: Boolean }) checked = false;
 
     /**
      * Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a "select
      * all/none" behavior when associated checkboxes have a mix of checked and unchecked states.
      */
     @property({ type: Boolean, reflect: true }) indeterminate = false;
-
-    /**
-     * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
-     * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
-     * the same document or shadow root for this to work.
-     */
-    @property({ reflect: true }) form = "";
 
     /** Makes the checkbox a required field. */
     @property({ type: Boolean, reflect: true }) required = false;
@@ -52,7 +37,7 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
     /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
-    @query('input[type="checkbox"]') input?: HTMLInputElement;
+    @query('input[type="checkbox"]') input!: HTMLInputElement;
 
     private getInput() {
         if (!this.input) {
@@ -73,10 +58,6 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
         return this.getInput().validationMessage;
     }
 
-    firstUpdated() {
-        this.formControlController.updateValidity();
-    }
-
     private handleClick() {
         this.checked = !this.checked;
         this.indeterminate = false;
@@ -93,8 +74,8 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
     }
 
     private handleInvalid(event: Event) {
-        this.formControlController.setValidity(false);
-        this.formControlController.emitInvalidEvent(event);
+        this.internals.setValidity(this.input.validity);
+        this.internals.reportValidity();
     }
 
     private handleFocus() {
@@ -104,14 +85,15 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
     @watch("disabled", { waitUntilFirstUpdate: true })
     handleDisabledChange() {
         // Disabled form controls are always valid
-        this.formControlController.setValidity(this.disabled);
+        this.internals.setValidity({});
     }
 
     @watch(["checked", "indeterminate"], { waitUntilFirstUpdate: true })
     handleStateChange() {
         this.getInput().checked = this.checked; // force a sync update
         this.getInput().indeterminate = this.indeterminate; // force a sync update
-        this.formControlController.updateValidity();
+        this.internals.setValidity(this.input.validity);
+        //this.internals.setFormValue(this.value ?? "off");
     }
 
     /** Simulates a click on the checkbox. */
@@ -136,7 +118,7 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
 
     /** Gets the associated form, if one exists. */
     getForm(): HTMLFormElement | null {
-        return this.formControlController.getForm();
+        return this.form;
     }
 
     /** Checks for validity and shows the browser's validation message if the control is invalid. */
@@ -150,7 +132,29 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
      */
     setCustomValidity(message: string) {
         this.getInput().setCustomValidity(message);
-        this.formControlController.updateValidity();
+        this.internals.setValidity(this.input.validity);
+    }
+
+    override getFormValue() {
+        if (!this.checked || this.indeterminate) {
+            return null;
+        }
+
+        return this.value;
+    }
+
+    override getFormState() {
+        return String(this.checked);
+    }
+
+    override formResetCallback() {
+        // The checked property does not reflect, so the original attribute set by
+        // the user is used to determine the default value.
+        this.checked = this.hasAttribute("checked");
+    }
+
+    override formStateRestoreCallback(state: string) {
+        this.checked = state === "true";
     }
 
     render() {
@@ -173,7 +177,7 @@ export default class SdCheckbox extends SdElement implements SdFormControl {
                     @blur=${this.handleBlur}
                     @focus=${this.handleFocus} />
             </div>
-            <label for="input" class="label"><slot name="label"><p>${this.labelText}</p></p></slot></label>
+            <label for="input" class="label"><slot name="label"><slot><p>${this.labelText}</p></p></slot></slot></label>
             <span class="help-text" id="help-text"
                 ><slot name="help-text">${this.helpText}</slot></span
             >

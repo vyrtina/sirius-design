@@ -10,13 +10,42 @@ const meta: Meta = {
         checked: true,
         label: "label",
     },
-    render: ({ label, checked, indeterminate, disabled }) => html`
-        <sd-checkbox
-            ?checked=${checked}
-            ?indeterminate=${indeterminate}
-            ?disabled=${disabled}>
-            <p slot="label">${label}</p>
-        </sd-checkbox>
+    render: (args) => html`
+        <form>
+            <sd-checkbox
+                ?checked=${args["checked"]}
+                ?indeterminate=${args["indeterminate"]}
+                ?disabled=${args["disabled"]}
+                name=${args["name"]}>
+                <p slot="label">${args["label"]}</p>
+            </sd-checkbox>
+            <button type="submit">Submit</button>
+        </form>
+
+        <output></output>
+
+        <script>
+            /** Get a reference to the form */
+            const form = document.querySelector("form");
+
+            /** Get the output element to display form data in */
+            const output = document.querySelector("output");
+
+            /** Prevent default on form submissions */
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                console.log(document.querySelector("sd-checkbox").value);
+
+                const form = event.target;
+
+                /** Get all of the form data */
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => (data[key] = value));
+                output.innerHTML = JSON.stringify(data, null, 2);
+            });
+        </script>
     `,
 };
 
@@ -25,7 +54,8 @@ type Story = StoryObj;
 
 export const Checked: Story = {
     args: {
-        indeterminate: true,
+        name: "checkbox name",
+        checked: false
     },
 };
 

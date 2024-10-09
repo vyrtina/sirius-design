@@ -258,6 +258,10 @@ export default class SdInput extends SdElement implements SdFormControl {
     @query(".input")
     private readonly input?: HTMLInputElement;
 
+    static get formAssociated() {
+        return true;
+    }
+
     private getInput() {
         if (!this.input) {
             // If the input is not yet defined, synchronously render.

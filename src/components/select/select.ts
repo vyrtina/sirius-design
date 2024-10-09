@@ -28,7 +28,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
     static override styles = unsafeCSS(styles);
 
     protected readonly formControlController = new FormControlController(this, {
-        assumeInteractionOn: ["sl-blur", "sl-input"],
+        assumeInteractionOn: ["sd-blur", "sd-input"],
     });
 
     protected typeToSelectString = "";
@@ -124,7 +124,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
     @property() getTag: (
         option: SdOption,
         index: number
-    ) => TemplateResult | string | HTMLElement = (option) => {
+    ) => TemplateResult | string | HTMLElement = (option, index) => {
         return html`
             <sd-tag
                 part="tag"
@@ -135,6 +135,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
               remove-button__base:tag__remove-button__base
             "
                 clearable
+                data-tag-index="${index}"
                 @sd-remove=${(event: SdRemoveEvent) =>
                     this.handleTagRemove(event, option)}>
                 ${option.getTextLabel()}
@@ -150,15 +151,6 @@ export default class SdSelect extends SdElement implements SdFormControl {
 
         return this.popup!;
     }
-
-    /*private getCombobox() {
-        if (!this.combobox) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        return this.combobox!;
-    }*/
 
     protected getDisplayInput() {
         if (!this.displayInput) {
@@ -625,12 +617,15 @@ export default class SdSelect extends SdElement implements SdFormControl {
             this.formControlController.updateValidity();
         });
     }
+
     protected get tags() {
         return this.selectedOptions.map((option, index) => {
             if (index < this.maxOptionsVisible || this.maxOptionsVisible <= 0) {
                 const tag = this.getTag(option, index);
                 // Wrap so we can handle the remove
                 return html`<div
+                    class="select__tag"
+                    data-tag-index=${index}
                     @sd-remove=${(e: SdRemoveEvent) => this.handleTagRemove(e, option)}>
                     ${typeof tag === "string" ? unsafeHTML(tag) : tag}
                 </div>`;

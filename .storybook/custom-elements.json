@@ -19,10 +19,24 @@
               }
             },
             {
+              "kind": "field",
+              "name": "loading",
+              "type": "boolean",
+              "default": false,
+              "description": "override displayInput",
+              "attribute": "loading"
+            },
+            {
+              "kind": "field",
+              "name": "loadingText",
+              "type": "string",
+              "default": "Loading...",
+              "attribute": "loadingText"
+            },
+            {
               "kind": "method",
               "name": "getSearchInput",
-              "privacy": "protected",
-              "description": "override displayInput"
+              "privacy": "protected"
             },
             {
               "kind": "method",
@@ -103,6 +117,15 @@
             },
             {
               "kind": "method",
+              "name": "renderListbox",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
               "name": "handleInput",
               "parameters": [
                 {
@@ -131,7 +154,7 @@
               "name": "formControlController",
               "privacy": "protected",
               "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sl-blur\", \"sl-input\"],\r\n    })",
+              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sd-blur\", \"sd-input\"],\r\n    })",
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -815,7 +838,7 @@
               }
             },
             {
-              "kind": "field",
+              "kind": "method",
               "name": "getTag",
               "type": "object",
               "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
@@ -1039,6 +1062,29 @@
               "kind": "method",
               "name": "handleDefaultSlotChange",
               "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleTagRemove",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "SdRemoveEvent"
+                  }
+                },
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdOption"
+                  }
+                }
+              ],
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -1285,24 +1331,22 @@
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
               }
-            },
-            {
-              "kind": "method",
-              "name": "renderListbox",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
             }
           ],
-          "superclass": {
-            "name": "SdSelect",
-            "module": "/src/components/select/select"
-          },
-          "tagName": "sd-autocomplete",
-          "customElement": true,
           "attributes": [
+            {
+              "name": "loading",
+              "type": "boolean",
+              "default": false,
+              "description": "override displayInput",
+              "fieldName": "loading"
+            },
+            {
+              "name": "loadingText",
+              "type": "string",
+              "default": "Loading...",
+              "fieldName": "loadingText"
+            },
             {
               "name": "name",
               "type": "string",
@@ -1483,9 +1527,16 @@
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
               },
+              "kind": "method",
               "additionalProperties": false
             }
-          ]
+          ],
+          "superclass": {
+            "name": "SdSelect",
+            "module": "/src/components/select/select"
+          },
+          "tagName": "sd-autocomplete",
+          "customElement": true
         }
       ],
       "exports": [
@@ -1775,72 +1826,191 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card/card-filled.ts",
+      "path": "src/components/breadcrumb/breadcrumb-item.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdCardFilled",
-          "members": [],
+          "name": "SdBreadcrumbItem",
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": "string",
+              "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
+              "attribute": "href"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": "string",
+              "description": "Tells the browser where to open the link. Only used when `href` is set.",
+              "attribute": "target",
+              "enum": [
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "rel",
+              "type": "string",
+              "default": "noreferrer noopener",
+              "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
+              "attribute": "rel"
+            },
+            {
+              "kind": "field",
+              "name": "separatorRight",
+              "type": "boolean",
+              "default": false,
+              "attribute": "separator-right"
+            },
+            {
+              "kind": "method",
+              "name": "renderSeparator",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "type": "string",
+              "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
+              "fieldName": "href"
+            },
+            {
+              "name": "target",
+              "type": "string",
+              "description": "Tells the browser where to open the link. Only used when `href` is set.",
+              "fieldName": "target",
+              "enum": [
+                "_blank",
+                "_parent",
+                "_self",
+                "_top"
+              ]
+            },
+            {
+              "name": "rel",
+              "type": "string",
+              "default": "noreferrer noopener",
+              "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
+              "fieldName": "rel"
+            },
+            {
+              "name": "separator-right",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "separatorRight"
+            }
+          ],
           "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
           },
-          "tagName": "sd-card-filled",
+          "tagName": "sd-breadcrumb-item",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SdCardFilled",
+          "name": "default",
           "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
+            "name": "SdBreadcrumbItem",
+            "module": "src/components/breadcrumb/breadcrumb-item.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-card-filled",
+          "name": "sd-breadcrumb-item",
           "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
+            "name": "SdBreadcrumbItem",
+            "module": "src/components/breadcrumb/breadcrumb-item.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card/card-outlined.ts",
+      "path": "src/components/breadcrumb/breadcrumb.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdCardOutlined",
-          "members": [],
+          "name": "SdBreadcrumb",
+          "cssParts": [
+            {
+              "description": "The component's base wrapper.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "One or more breadcrumb items to display.",
+              "name": ""
+            },
+            {
+              "description": "The separator to use between breadcrumb items. Works best with `<sl-icon>`.",
+              "name": "separator"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "defaultSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "handleSlotChange",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
+              "fieldName": "label"
+            }
+          ],
           "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
           },
-          "tagName": "sd-card-outlined",
+          "summary": "Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.",
+          "tagName": "sd-breadcrumb",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SdCardOutlined",
+          "name": "default",
           "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
+            "name": "SdBreadcrumb",
+            "module": "src/components/breadcrumb/breadcrumb.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-card-outlined",
+          "name": "sd-breadcrumb",
           "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
+            "name": "SdBreadcrumb",
+            "module": "src/components/breadcrumb/breadcrumb.ts"
           }
         }
       ]
@@ -2590,191 +2760,72 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/breadcrumb/breadcrumb-item.ts",
+      "path": "src/components/card/card-filled.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdBreadcrumbItem",
-          "members": [
-            {
-              "kind": "field",
-              "name": "href",
-              "type": "string",
-              "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
-              "attribute": "href"
-            },
-            {
-              "kind": "field",
-              "name": "target",
-              "type": "string",
-              "description": "Tells the browser where to open the link. Only used when `href` is set.",
-              "attribute": "target",
-              "enum": [
-                "_blank",
-                "_parent",
-                "_self",
-                "_top"
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "rel",
-              "type": "string",
-              "default": "noreferrer noopener",
-              "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
-              "attribute": "rel"
-            },
-            {
-              "kind": "field",
-              "name": "separatorRight",
-              "type": "boolean",
-              "default": false,
-              "attribute": "separator-right"
-            },
-            {
-              "kind": "method",
-              "name": "renderSeparator",
-              "privacy": "private"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "href",
-              "type": "string",
-              "description": "Optional URL to direct the user to when the breadcrumb item is activated. When set, a link will be rendered\ninternally. When unset, a button will be rendered instead.",
-              "fieldName": "href"
-            },
-            {
-              "name": "target",
-              "type": "string",
-              "description": "Tells the browser where to open the link. Only used when `href` is set.",
-              "fieldName": "target",
-              "enum": [
-                "_blank",
-                "_parent",
-                "_self",
-                "_top"
-              ]
-            },
-            {
-              "name": "rel",
-              "type": "string",
-              "default": "noreferrer noopener",
-              "description": "The `rel` attribute to use on the link. Only used when `href` is set.",
-              "fieldName": "rel"
-            },
-            {
-              "name": "separator-right",
-              "type": "boolean",
-              "default": false,
-              "fieldName": "separatorRight"
-            }
-          ],
+          "name": "SdCardFilled",
+          "members": [],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
           },
-          "tagName": "sd-breadcrumb-item",
+          "tagName": "sd-card-filled",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "default",
+          "name": "SdCardFilled",
           "declaration": {
-            "name": "SdBreadcrumbItem",
-            "module": "src/components/breadcrumb/breadcrumb-item.ts"
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-breadcrumb-item",
+          "name": "sd-card-filled",
           "declaration": {
-            "name": "SdBreadcrumbItem",
-            "module": "src/components/breadcrumb/breadcrumb-item.ts"
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/breadcrumb/breadcrumb.ts",
+      "path": "src/components/card/card-outlined.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "SdBreadcrumb",
-          "cssParts": [
-            {
-              "description": "The component's base wrapper.",
-              "name": "base"
-            }
-          ],
-          "slots": [
-            {
-              "description": "One or more breadcrumb items to display.",
-              "name": ""
-            },
-            {
-              "description": "The separator to use between breadcrumb items. Works best with `<sl-icon>`.",
-              "name": "separator"
-            }
-          ],
-          "members": [
-            {
-              "kind": "field",
-              "name": "defaultSlot",
-              "type": "array"
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": "string",
-              "default": "",
-              "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
-              "attribute": "label"
-            },
-            {
-              "kind": "method",
-              "name": "handleSlotChange",
-              "privacy": "private"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": "string",
-              "default": "",
-              "description": "The label to use for the breadcrumb control. This will not be shown on the screen, but it will be announced by\nscreen readers and other assistive devices to provide more context for users.",
-              "fieldName": "label"
-            }
-          ],
+          "name": "SdCardOutlined",
+          "members": [],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
           },
-          "summary": "Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.",
-          "tagName": "sd-breadcrumb",
+          "tagName": "sd-card-outlined",
           "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "default",
+          "name": "SdCardOutlined",
           "declaration": {
-            "name": "SdBreadcrumb",
-            "module": "src/components/breadcrumb/breadcrumb.ts"
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "sd-breadcrumb",
+          "name": "sd-card-outlined",
           "declaration": {
-            "name": "SdBreadcrumb",
-            "module": "src/components/breadcrumb/breadcrumb.ts"
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
           }
         }
       ]
@@ -10234,7 +10285,7 @@
               "name": "formControlController",
               "privacy": "protected",
               "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sl-blur\", \"sl-input\"],\r\n    })",
+              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sd-blur\", \"sd-input\"],\r\n    })",
               "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
               "type": "object",
               "properties": {
@@ -10802,7 +10853,7 @@
               "reflects": true
             },
             {
-              "kind": "field",
+              "kind": "method",
               "name": "getTag",
               "type": "object",
               "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
@@ -10994,6 +11045,25 @@
               "kind": "method",
               "name": "handleDefaultSlotChange",
               "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "handleTagRemove",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "SdRemoveEvent"
+                  }
+                },
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "SdOption"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
@@ -11299,6 +11369,7 @@
               "type": "object",
               "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
               "fieldName": "getTag",
+              "kind": "method",
               "additionalProperties": false
             }
           ],

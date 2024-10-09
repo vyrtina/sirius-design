@@ -116,12 +116,12 @@
     flex-wrap: wrap;
 }
 
-.select__tags::slotted(sl-tag) {
+.select__tags::slotted(sd-tag) {
     cursor: pointer !important;
 }
 
 .select--disabled .select__tags,
-.select--disabled .select__tags::slotted(sl-tag) {
+.select--disabled .select__tags::slotted(sd-tag) {
     cursor: not-allowed !important;
 }
 
@@ -173,11 +173,9 @@
 .listbox {
     display: block;
     position: relative;
-    box-shadow: var(--sl-shadow-large);
-    background: var(--sl-panel-background-color);
+    background: tokens.$sd-color-background;
     border: 1px solid tokens.$sd-color-primary;
     border-radius: tokens.$sd-border-radius-small;
-    padding-block: var(--sl-spacing-x-small);
     padding-inline: 0;
     overflow: auto;
     overscroll-behavior: none;
