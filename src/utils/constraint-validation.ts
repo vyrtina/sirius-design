@@ -40,5 +40,5 @@ export interface ConstraintValidation {
      *
      * @param error The error message to display, or an empty string.
      */
-    //setCustomValidity(error: string): void;
+    setCustomValidity(error: string): void;
 }

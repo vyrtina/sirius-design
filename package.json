@@ -66,6 +66,7 @@
         "eslint-plugin-promise": "^6.1.1",
         "glob": "^10.3.10",
         "gulp": "^5.0.0",
+        "playwright": "^1.48.0",
         "sass": "^1.69.5",
         "storybook": "^8.0.5",
         "storybook-addon-pseudo-states": "^3.1.1",
@@ -88,8 +89,10 @@
         "url": "https://github.com/vyrtina/sirius-design.git"
     },
     "dependencies": {
+        "@blockquote/rollup-plugin-externalize-source-dependencies": "^1.0.0",
         "@floating-ui/dom": "^1.6.7",
         "@material-design-icons/svg": "^0.14.13",
+        "chai-a11y-axe": "^1.5.0",
         "composed-offset-position": "^0.0.4",
         "dompurify": "^3.1.6",
         "gulp-data": "^1.3.1",

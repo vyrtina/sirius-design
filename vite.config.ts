@@ -6,9 +6,19 @@ import { glob } from "glob";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
+import externalizeSourceDependencies from "@blockquote/rollup-plugin-externalize-source-dependencies";
 
 export default defineConfig({
-    plugins: [libInjectCss(), dts({})],
+    plugins: [
+        libInjectCss(),
+        dts({}),
+        externalizeSourceDependencies([
+            /* @web/test-runner-commands needs to establish a web-socket
+             * connection. It expects a file to be served from the
+             * @web/dev-server. So it should be ignored by Vite */
+            "/__web-dev-server__web-socket.js",
+        ]),
+    ],
     //root: resolve('./static/'),
     //base: '/static/',
     server: {
@@ -61,7 +71,6 @@ export default defineConfig({
         },
     },
     test: {
-        globals: true,
         // Lit recommends using browser environment for testing
         // https://lit.dev/docs/tools/testing/#testing-in-the-browser
         browser: {
