@@ -7,11 +7,13 @@ import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
 import externalizeSourceDependencies from "@blockquote/rollup-plugin-externalize-source-dependencies";
+import VitePluginCustomElementsManifest from "vite-plugin-cem";
 
 export default defineConfig({
     plugins: [
         libInjectCss(),
         dts({}),
+        VitePluginCustomElementsManifest(),
         externalizeSourceDependencies([
             /* @web/test-runner-commands needs to establish a web-socket
              * connection. It expects a file to be served from the
@@ -19,6 +21,7 @@ export default defineConfig({
             "/__web-dev-server__web-socket.js",
         ]),
     ],
+    assetsInclude: ["/sb-preview/runtime.js"],
     //root: resolve('./static/'),
     //base: '/static/',
     server: {
@@ -34,7 +37,7 @@ export default defineConfig({
         },
     },
     resolve: {
-        extensions: [".ts", ".css", ".scss", ".mdx", ".json"],
+        extensions: [".ts", ".js", ".css", ".scss", ".mdx", ".json"],
     },
     build: {
         assetsDir: resolve("./src/assets/"),
@@ -66,8 +69,9 @@ export default defineConfig({
             output: {
                 assetFileNames: "assets/[name][extname]",
                 entryFileNames: "[name].js",
+                chunkFileNames: undefined,
             },
-            external: /^lit/,
+            external: ["./sb-preview/runtime.js", /^lit/],
         },
     },
     test: {
