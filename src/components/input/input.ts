@@ -1,4 +1,4 @@
-import { html, nothing, unsafeCSS } from "lit";
+import { html, nothing, PropertyValues, unsafeCSS } from "lit";
 import { property, query, state, customElement } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -6,11 +6,12 @@ import { live } from "lit/directives/live.js";
 import { watch } from "../../utils/watch.js";
 import styles from "./input.scss?inline";
 import "../../icons/src/error.js";
+import { MixinFormAssociated } from "../../utils/form.js";
 import SdElement, { SdFormControl } from "../../utils/sd-element.js";
-import { FormControlController } from "../../utils/form.js";
 import "../../icons/src/cancel.js";
 import "../../icons/src/visibility.js";
 import "../../icons/src/visibility_off.js";
+import { InputValidator } from "../../utils/validators/input-validator.js";
 
 /**
  * Input types that are compatible with the text field.
@@ -22,6 +23,7 @@ export type TextFieldType =
     | "search"
     | "tel"
     | "text"
+    | "date"
     | "url";
 
 /**
@@ -42,13 +44,14 @@ export type InvalidTextFieldType =
     | "reset"
     | "submit";
 
+const InputBaseClass = MixinFormAssociated(SdElement);
+
 @customElement("sd-input")
-export default class SdInput extends SdElement implements SdFormControl {
+export default class SdInput extends InputBaseClass implements SdFormControl {
     static override styles = unsafeCSS(styles);
 
-    private readonly formControlController = new FormControlController(this, {
-        assumeInteractionOn: ["sd-blur", "sd-input"],
-    });
+    @query(".input")
+    private readonly input!: HTMLInputElement;
 
     /**
      * The `<input>` type to use, defaults to "text". The type greatly changes how
@@ -70,9 +73,6 @@ export default class SdInput extends SdElement implements SdFormControl {
      */
     @property({ reflect: true })
     type: TextFieldType | UnsupportedTextFieldType = "text";
-
-    /** The name of the input, submitted as a name/value pair with form data. */
-    @property() name = "";
 
     /**
      * Gets or sets whether or not the text field is in a visually invalid state.
@@ -104,21 +104,21 @@ export default class SdInput extends SdElement implements SdFormControl {
     /** The current value of the input, submitted as a name/value pair with form data. */
     @property() value = "";
 
+    /** the default value of the field. used to reset the input field to an initial value. */
+    @property({ attribute: false }) defaultValue = "";
+
     /** The input's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
     /** Adds a clear button when the input is not empty. */
     @property({ type: Boolean }) clearable = false;
 
-    /** Disables the input. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
     /**
      * Defines the greatest value in the range of permitted values.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
      */
-    @property() max?: string;
+    @property() max = "";
 
     /**
      * The maximum number of characters a user can enter into the text field. Set
@@ -126,14 +126,14 @@ export default class SdInput extends SdElement implements SdFormControl {
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength
      */
-    @property({ type: Number }) maxLength?: number;
+    @property({ type: Number }) maxlength = -1;
 
     /**
      * Defines the most negative value in the range of permitted values.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
      */
-    @property() min?: string;
+    @property() min = "";
 
     /**
      * The minimum number of characters a user can enter into the text field. Set
@@ -141,19 +141,19 @@ export default class SdInput extends SdElement implements SdFormControl {
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength
      */
-    @property({ type: Number }) minLength?: number;
+    @property({ type: Number }) minlength = -1;
 
     /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
     @property({ type: Boolean, attribute: "no-spinner" }) noSpinner = false;
 
     /** A regular expression pattern to validate input against. */
-    @property() pattern?: string;
+    @property() pattern = "";
 
     /** Placeholder text to show as a hint when the input is empty. */
     @property({ reflect: true /*//!converter: stringConverter */ }) placeholder?: string;
 
     /** Makes the input readonly. */
-    @property({ type: Boolean, reflect: true }) readOnly = false;
+    @property({ type: Boolean, reflect: true }) readonly = false;
 
     /** Adds a button to toggle the password's visibility. Only applies to password types. */
     @property({ attribute: "password-toggle", type: Boolean }) passwordToggle = false;
@@ -171,7 +171,7 @@ export default class SdInput extends SdElement implements SdFormControl {
         | "characters";
 
     /** Indicates whether the browser's autocorrect feature is on or off. */
-    @property() autoCorrect?: "off" | "on";
+    @property() autocorrect?: "off" | "on";
 
     /** Indicates that the input should receive focus on page load. */
     @property({ type: Boolean }) autoFocus: boolean = false;
@@ -255,11 +255,9 @@ export default class SdInput extends SdElement implements SdFormControl {
      */
     @state() private nativeErrorText = "";
 
-    @query(".input")
-    private readonly input?: HTMLInputElement;
-
-    static get formAssociated() {
-        return true;
+    firstUpdated(val: PropertyValues) {
+        super.firstUpdated(val);
+        this.defaultValue = this.value;
     }
 
     private getInput() {
@@ -355,10 +353,6 @@ export default class SdInput extends SdElement implements SdFormControl {
         return this.getInput().validationMessage;
     }
 
-    firstUpdated() {
-        this.formControlController.updateValidity();
-    }
-
     private get hasError() {
         return this.error || this.nativeError;
     }
@@ -392,13 +386,8 @@ export default class SdInput extends SdElement implements SdFormControl {
     private handleInput(event: InputEvent) {
         this.dirty = true;
         this.value = (event.target as HTMLInputElement).value;
-        this.formControlController.updateValidity();
+        //this.updateValidity();
         this.emit("sd-input");
-    }
-
-    private handleInvalid(event: Event) {
-        this.formControlController.setValidity(false);
-        this.formControlController.emitInvalidEvent(event);
     }
 
     private handleKeyDown(event: KeyboardEvent) {
@@ -415,8 +404,8 @@ export default class SdInput extends SdElement implements SdFormControl {
                 //
                 // See https://github.com/shoelace-style/shoelace/pull/988
                 //
-                if (!event.defaultPrevented && !event.isComposing) {
-                    this.formControlController.submit();
+                if (!event.defaultPrevented && !event.isComposing && this.form) {
+                    this.form.requestSubmit();
                 }
             });
         }
@@ -442,7 +431,7 @@ export default class SdInput extends SdElement implements SdFormControl {
      * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select
      */
     select() {
-        this.getInput().select();
+        this.input.select();
     }
 
     private getErrorText() {
@@ -520,64 +509,39 @@ export default class SdInput extends SdElement implements SdFormControl {
      */
     reset() {
         this.dirty = false;
-        this.value = this.getAttribute("value") ?? "";
+        this.value = this.defaultValue;
         this.nativeError = false;
         this.nativeErrorText = "";
-    }
-
-    /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
-    checkValidity() {
-        return this.getInput().checkValidity();
-    }
-
-    /** Gets the associated form, if one exists. */
-    getForm(): HTMLFormElement | null {
-        return this.formControlController.getForm();
-    }
-
-    /** Checks for validity and shows the browser's validation message if the control is invalid. */
-    reportValidity() {
-        return this.getInput().reportValidity();
-    }
-
-    /** Sets a custom validation message. Pass an empty string to restore validity. */
-    setCustomValidity(message: string) {
-        this.getInput().setCustomValidity(message);
-        this.formControlController.updateValidity();
-    }
-
-    override attributeChangedCallback(
-        attribute: string,
-        newValue: string | null,
-        oldValue: string | null
-    ) {
-        if (attribute === "value" && this.dirty) {
-            // After user input, changing the value attribute no longer updates the
-            // text field's value (until reset). This matches native <input> behavior.
-            return;
-        }
-
-        super.attributeChangedCallback(attribute, newValue, oldValue);
-    }
-
-    @watch("disabled", { waitUntilFirstUpdate: true })
-    handleDisabledChange() {
-        // Disabled form controls are always valid
-        this.formControlController.setValidity(this.disabled);
     }
 
     @watch("step", { waitUntilFirstUpdate: true })
     handleStepChange() {
         // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
         // imperatively so we don't have to wait for the next render to report the updated validity.
-        this.getInput().step = String(this.step);
-        this.formControlController.updateValidity();
+        this.input.step = String(this.step);
     }
 
-    @watch("value", { waitUntilFirstUpdate: true })
-    async handleValueChange() {
-        await this.updateComplete;
-        this.formControlController.updateValidity();
+    override getFormValue() {
+        return this.value;
+    }
+
+    override formResetCallback() {
+        this.reset();
+    }
+
+    override formStateRestoreCallback(state: string) {
+        this.value = state;
+    }
+
+    override createValidator() {
+        return new InputValidator(() => ({
+            state: this,
+            renderedControl: this.input,
+        }));
+    }
+
+    override getValidityAnchor(): HTMLElement | null {
+        return this.input;
     }
 
     protected override render() {
@@ -640,23 +604,22 @@ export default class SdInput extends SdElement implements SdFormControl {
                     ?disabled=${this.disabled}
                     inputmode=${ifDefined(this.inputMode)}
                     max=${ifDefined(this.max)}
-                    maxlength=${ifDefined(this.maxLength)}
+                    maxlength=${ifDefined(this.maxlength)}
                     min=${ifDefined(this.min)}
-                    minlength=${ifDefined(this.minLength)}
+                    minlength=${ifDefined(this.minlength)}
                     pattern=${ifDefined(this.pattern)}
                     placeholder=${ifDefined(this.placeholder)}
-                    ?readonly=${this.readOnly}
+                    ?readonly=${this.readonly}
                     ?required=${this.required}
                     ?multiple=${this.multiple}
                     step=${ifDefined(this.step as number)}
                     .value=${live(this.value)}
                     autocapitalize=${ifDefined(this.autoCapitalize)}
-                    autocorrect=${ifDefined(this.autoCorrect)}
+                    autocorrect=${ifDefined(this.autocorrect)}
                     ?autofocus=${this.autoFocus}
                     enterkeyhint=${ifDefined(this.enterkeyhint)}
                     spellcheck=${this.spellcheck}
                     @keydown=${this.handleKeyDown}
-                    @invalid=${this.handleInvalid}
                     @change=${this.handleChange}
                     @focus=${this.handleFocus}
                     @blur=${this.handleBlur}
@@ -667,7 +630,7 @@ export default class SdInput extends SdElement implements SdFormControl {
     }
 
     private renderClearIcon() {
-        const hasClearIcon = this.clearable && !this.disabled && !this.readOnly;
+        const hasClearIcon = this.clearable && !this.disabled && !this.readonly;
         if (hasClearIcon && (typeof this.value === "number" || this.value.length > 0)) {
             return html`
                 <button

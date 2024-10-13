@@ -1,5 +1,6 @@
 import { LitElement } from "lit";
 import { property } from "lit/decorators.js";
+import { FormAssociated } from "./form";
 
 export default class SdElement extends LitElement {
     //TODO: make a generic element for every component
@@ -23,14 +24,12 @@ export default class SdElement extends LitElement {
     }
 }
 
-export interface SdFormControl extends SdElement {
+export interface SdFormControl extends SdElement, FormAssociated {
     // Form attributes
     name: string;
     value: unknown;
-    disabled?: boolean;
     defaultValue?: unknown;
     defaultChecked?: boolean;
-    form?: string;
 
     // Constraint validation attributes
     pattern?: string;
@@ -47,7 +46,6 @@ export interface SdFormControl extends SdElement {
 
     // Form validation methods
     checkValidity: () => boolean;
-    getForm: () => HTMLFormElement | null;
     reportValidity: () => boolean;
     setCustomValidity: (message: string) => void;
 }

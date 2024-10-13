@@ -83,4 +83,11 @@ export default defineConfig({
             provider: "playwright",
         },
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: "modern-compiler",
+            },
+        },
+    },
 });

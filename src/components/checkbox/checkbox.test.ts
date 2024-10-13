@@ -5,7 +5,7 @@ import { userEvent } from "@vitest/browser/context";
 import { runFormValidityTests } from "../../utils/form_tests.js";
 
 import "./checkbox.js";
-import SdCheckbox from "./checkbox.js";
+import type SdCheckbox from "./checkbox.js";
 /*
 import "../button/button.js";
 import SdButton from "../button/button.js";*/
@@ -239,7 +239,7 @@ describe("Checkbox", async () => {
             await el.updateComplete;
 
             expect(clickSpy.mock.calls[0]).toBeDefined();
-            expect(el.checked).toEqual(true);
+            expect(el.checked).toBeTruthy();
         });
     });
 
@@ -327,7 +327,7 @@ describe("Checkbox", async () => {
             await el.updateComplete;
 
             expect(blurSpy.mock.calls[0]).toBeDefined();
-            expect(el.shadowRoot!.activeElement).toEqual(null);
+            expect(el.shadowRoot!.activeElement).toBeNull();
         });
     });
 
