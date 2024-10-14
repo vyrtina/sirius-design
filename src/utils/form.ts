@@ -3,6 +3,7 @@ import { property } from "lit/decorators.js";
 import { MixinElementInternals } from "./element-internals.js";
 import { ConstraintValidation } from "./constraint-validation.js";
 import { Validator } from "./validators/validator.js";
+import { watch } from "./watch.js";
 
 /** A value that can be provided for form submission and state. */
 export type FormValue = File | string | FormData;
@@ -109,12 +110,12 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             this.setAttribute("name", name);
         }
 
-        @property({ type: Boolean })
-        get disabled() {
-            return this.hasAttribute("disabled");
-        }
-        set disabled(disabled: boolean) {
-            this.toggleAttribute("disabled", disabled);
+        @property({ type: Boolean, reflect: true }) disabled = false;
+
+        /** if disabled has changed, recheck the element validity */
+        @watch("disabled", { waitUntilFirstUpdate: true })
+        handleDisabled() {
+            this[privateSyncValidity]();
         }
 
         override attributeChangedCallback(
@@ -248,7 +249,12 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             }
 
             if (this.disabled) {
-                // Disabled form controls are always valid
+                /** Disabled form controls are always valid */
+                this.internals.setValidity({});
+                return;
+            }
+
+            if (this.form && this.form.noValidate) {
                 this.internals.setValidity({});
                 return;
             }
