@@ -1,32 +1,52 @@
-import { LitElement, html, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { html, unsafeCSS } from "lit";
+import { customElement } from "lit/decorators.js";
+import { live } from "lit/directives/live.js";
 import styles from "./switch.scss?inline";
+import SdCheckbox from "../checkbox/checkbox";
+import { classMap } from "lit/directives/class-map.js";
 
 @customElement("sd-switch")
-export default class Switch extends LitElement {
+export default class SdSwitch extends SdCheckbox {
     static styles = unsafeCSS(styles);
 
-    @property({ type: Boolean }) disabled = false;
-    @property({ type: Boolean }) checked = false;
-
-    render() {
+    override render() {
+        const classes = {
+            switch: true,
+            "switch--checked": this.checked,
+        };
         return html`
-            <input
-                id="switch"
-                type="checkbox"
-                aria-labelledby="label"
-                ?checked=${this.checked}
-                ?disabled=${this.disabled} />
-            <label id="label" for="switch" class="body-small">
-                <slot name="label"></slot>
-                <div class="visual"></div>
-            </label>
+            <div class=${classMap(classes)}>
+                <input
+                    id="switch"
+                    class="switch__input"
+                    type="checkbox"
+                    title=${this.title}
+                    name=${this.name}
+                    ?disabled=${this.disabled}
+                    ?checked=${live(this.checked)}
+                    ?required=${this.required}
+                    aria-describedby="help-text"
+                    aria-checked=${this.checked ? "true" : "false"}
+                    @click=${this.handleClick}
+                    @input=${this.handleInput}
+                    @blur=${this.handleBlur}
+                    @focus=${this.handleFocus} />
+                <label id="label" for="switch" class="label">
+                    <span class="label-text">
+                        <slot><p>${this.labelText}</p></slot></span
+                    >
+                    <div class="visual"></div>
+                </label>
+                <span class="help-text" id="help-text"
+                    ><slot name="help-text">${this.helpText}</slot></span
+                >
+            </div>
         `;
     }
 }
 
 declare global {
     interface HTMLElementTagNameMap {
-        "sd-switch": Switch;
+        "sd-switch": SdSwitch;
     }
 }

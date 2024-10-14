@@ -5,22 +5,7 @@ import "./switch";
 const meta: Meta = {
     title: "components/switch",
     component: "sd-switch",
-    argTypes: {
-        disabled: {
-            type: "boolean",
-        },
-        checked: {
-            type: "boolean",
-        },
-        label: {
-            type: "string",
-        },
-    },
-    render: ({ label, disabled, checked }) => html`
-        <sd-switch ?checked=${checked} ?disabled=${disabled}>
-            <p slot="label">${label}</p>
-        </sd-switch>
-    `,
+    tags: ["autodocs"],
 };
 
 export default meta;
@@ -30,14 +15,6 @@ export const ToggleOn: Story = {
     args: {
         disabled: false,
         checked: true,
-        label: "switch",
-    },
-};
-
-export const ToggleOff: Story = {
-    args: {
-        disabled: false,
-        checked: false,
-        label: "switch",
+        "label-text": "switch",
     },
 };
