@@ -67,21 +67,21 @@ export default class SdCheckbox
         return this.input!;
     }
 
-    private handleClick() {
+    protected handleClick() {
         this.checked = !this.checked;
         this.indeterminate = false;
         this.emit("sd-change");
     }
 
-    private handleBlur() {
+    protected handleBlur() {
         this.emit("sd-blur");
     }
 
-    private handleInput() {
+    protected handleInput() {
         this.emit("sd-input");
     }
 
-    private handleFocus() {
+    protected handleFocus() {
         this.emit("sd-focus");
     }
 
@@ -157,9 +157,9 @@ export default class SdCheckbox
                     @blur=${this.handleBlur}
                     @focus=${this.handleFocus} />
             </div>
-            <label for="input" class="label"><slot name="label"><slot><p>${
-                this.labelText
-            }</p></p></slot></slot></label>
+            <label for="input" class="label"
+                ><slot><p>${this.labelText}</p></slot></label
+            >
             <span class="help-text" id="help-text"
                 ><slot name="help-text">${this.helpText}</slot></span
             >

@@ -1,4 +1,6 @@
-@import "../../styles/_index";
+@use "../../styles/tokens.scss";
+@use "../../styles/typography.scss";
+@use "../../styles/base.scss";
 
 :host {
     width: min-content;
@@ -6,17 +8,14 @@
     display: block;
 }
 
-input {
-    height: 0;
-    width: 0;
-    appearance: none;
-    position: absolute;
+.switch__input {
+    display: none;
 }
 
-label {
+.label {
     display: flex;
     flex-direction: column;
-    gap: $sd-spacing-050;
+    gap: tokens.$sd-spacing-050;
     width: min-content;
     height: min-content;
     cursor: pointer;
@@ -26,9 +25,9 @@ label {
     width: 3rem;
     height: 1.5rem;
     position: relative;
-    background: $sd-color-surface;
+    background: tokens.$sd-color-surface;
     display: block;
-    border-radius: $sd-border-radius-circle;
+    border-radius: tokens.$sd-border-radius-circle;
 }
 
 .visual::after {
@@ -38,18 +37,11 @@ label {
     left: 0.1875rem;
     width: 1.125rem;
     height: 1.125rem;
-    background-color: $sd-color-on-primary;
-    border-radius: $sd-border-radius-circle;
+    background-color: tokens.$sd-color-on-primary;
+    border-radius: tokens.$sd-border-radius-circle;
     transition: 0.3s;
 }
 
-input:checked + label > .visual {
-    background: $sd-color-primary;
-    &::after {
-        left: calc(100% - 0.1875rem);
-        transform: translateX(-100%);
-    }
-}
 /*
 input:not(:disabled) + label:active > .visual::after {
     width: calc(50% + 0.1875rem);
@@ -69,6 +61,15 @@ input:disabled + label > .visual {
     }
 }
 */
+
+.switch.switch--checked label > .visual {
+    background: tokens.$sd-color-primary;
+    &::after {
+        left: calc(100% - 0.1875rem);
+        transform: translateX(-100%);
+    }
+}
+
 input:focus-visible + label > .visual {
-    @include base-outline-focus();
+    @include base.outline-focus();
 }
