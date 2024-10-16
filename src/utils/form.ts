@@ -320,7 +320,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             this.dispatchEvent(sdInvalidEvent);
         }
 
-        getValidityAnchor(): HTMLInputElement | null {
+        getValidityAnchor(): HTMLInputElement | HTMLTextAreaElement | undefined {
             throw new Error("Implement getValidityAnchor");
         }
     }

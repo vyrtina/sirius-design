@@ -1,5 +1,5 @@
 import { classMap } from "lit/directives/class-map.js";
-import { FormControlController, MixinFormAssociated } from "../../utils/form.js";
+import { MixinFormAssociated } from "../../utils/form.js";
 import { html, nothing } from "lit";
 import {
     property,
@@ -22,7 +22,6 @@ import "../../icons/src/expand_more.js";
 import styles from "./select.scss?inline";
 import type { SdRemoveEvent } from "../../events/sd-remove.js";
 import "../tag/tag.js";
-import { SelectValidator } from "../../utils/validators/select-validator.js";
 
 const BaseSelectClass = MixinFormAssociated(SdElement);
 
@@ -34,11 +33,11 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     private typeToSelectTimeout?: number;
     protected closeWatcher?: CloseWatcher | null;
 
-    @query(".select") popup?: SdPopup;
-    @query(".combobox") combobox?: HTMLSlotElement;
-    @query(".select__display-input") displayInput?: HTMLInputElement;
-    @query(".select__value-input") valueInput?: HTMLInputElement;
-    @query(".listbox") listbox?: HTMLSlotElement;
+    @query(".select") popup!: SdPopup;
+    @query(".combobox") combobox!: HTMLSlotElement;
+    @query(".select__display-input") displayInput!: HTMLInputElement;
+    @query(".select__value-input") valueInput!: HTMLInputElement;
+    @query(".listbox") listbox!: HTMLSlotElement;
     @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
     @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
 
@@ -59,6 +58,9 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         },
     })
     value: string | string[] = "";
+
+    /** The default value of the select component. used to reset the value. */
+    @property() defaultValue: string | string[] = "";
 
     /** Placeholder text to show as a hint when the select is empty. */
     @property() placeholder = "";
@@ -154,19 +156,6 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         return this.displayInput!;
     }
 
-    private getValueInput() {
-        if (!this.valueInput) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        if (this.isUpdatePending) {
-            this.scheduleUpdate();
-        }
-
-        return this.valueInput!;
-    }
-
     protected getListbox() {
         if (!this.listbox) {
             this.connectedCallback();
@@ -176,19 +165,10 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         return this.listbox!;
     }
 
-    /** Gets the validity state object */
-    get validity() {
-        return this.getValueInput().validity;
-    }
-
-    /** Gets the validation message */
-    get validationMessage() {
-        return this.getValueInput().validationMessage;
-    }
-
     connectedCallback() {
         super.connectedCallback();
 
+        this.defaultValue = this.value;
         // Because this is a form control, it shouldn't be opened initially
         this.open = false;
     }
@@ -246,13 +226,13 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
 
     protected handleFocus() {
         this.focused = true;
-        this.getDisplayInput().setSelectionRange(0, 0);
+        this.displayInput.setSelectionRange(0, 0);
         this.emit("sd-focus");
     }
 
     protected handleBlur() {
         this.focused = false;
-        this.emit("sl-blur");
+        this.emit("sd-blur");
     }
 
     private handleDocumentFocusIn = (event: KeyboardEvent) => {
@@ -407,7 +387,8 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     };
 
     private handleLabelClick() {
-        this.getDisplayInput().focus();
+        console.log("clicked");
+        this.displayInput.focus();
     }
 
     protected handleComboboxMouseDown(event: MouseEvent) {
@@ -532,16 +513,22 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         return this.querySelector<SdOption>("sd-option");
     }
 
-    // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
-    // option may be "current" at a time.
-    protected setCurrentOption(option: SdOption | null) {
+    //unselect all options
+    protected clearAllOptions() {
         const allOptions = this.getAllOptions();
 
-        // Clear selection
         allOptions.forEach((el) => {
             el.current = false;
             el.tabIndex = -1;
         });
+
+        this.currentOption = undefined;
+    }
+
+    // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
+    // option may be "current" at a time.
+    protected setCurrentOption(option: SdOption | null) {
+        this.clearAllOptions();
 
         // Select the target option
         if (option) {
@@ -552,6 +539,10 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         }
     }
 
+    //reset the select component to its initial value
+    protected reset() {
+        this.value = this.defaultValue;
+    }
     // Sets the selected option(s)
     protected setSelectedOptions(option: SdOption | SdOption[]) {
         const allOptions = this.getAllOptions();
@@ -603,7 +594,7 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
 
         // Update validity
         this.updateComplete.then(() => {
-            this.formControlController.updateValidity();
+            this.updateValidity(); //TODO: try to clear this
         });
     }
 
@@ -697,16 +688,6 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         return waitForEvent(this, "sd-after-hide");
     }
 
-    /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
-    checkValidity() {
-        return this.getValueInput().checkValidity();
-    }
-
-    /** Checks for validity and shows the browser's validation message if the control is invalid. */
-    reportValidity() {
-        return this.getValueInput().reportValidity();
-    }
-
     /** Sets focus on the control. */
     focus(options?: FocusOptions) {
         this.getDisplayInput().focus(options);
@@ -717,12 +698,24 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
         this.getDisplayInput().blur();
     }
 
-    override createValidator() {
-        return new SelectValidator(() => this);
-    }
-
     override getValidityAnchor() {
         return this.valueInput;
+    }
+
+    override formResetCallback(): void {
+        this.value = this.defaultValue;
+    }
+
+    override formStateRestoreCallback(state: string) {
+        this.value = state;
+    }
+
+    override getFormValue() {
+        return this.value;
+    }
+
+    override getState() {
+        return { value: this.value };
     }
 
     protected render() {
@@ -841,18 +834,15 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     }
 
     private renderLabel() {
-        if (this.label || this.labelSlot.length > 0) {
-            return html`
-                <label
-                    id="label"
-                    part="label"
-                    class="label"
-                    @click=${this.handleLabelClick}>
-                    <slot name="label">${this.label}</slot>
-                </label>
-            `;
-        }
-        return html` <slot name="label">${this.label}</slot> `;
+        const hasLabel = !this.label || this.labelSlot.length > 0;
+        return html`<label
+            id="label"
+            part="label"
+            class="label"
+            aria-hidden=${hasLabel}
+            @click=${this.handleLabelClick}>
+            <slot name="label"><p>${this.label}</p></slot>
+        </label> `;
     }
 
     private renderHelpText() {

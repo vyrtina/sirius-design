@@ -1,4 +1,4 @@
-import { html, TemplateResult, unsafeCSS } from "lit";
+import { html, unsafeCSS } from "lit";
 import SdSelect from "../select/select";
 import { watch } from "../../utils/watch.js";
 import { scrollIntoView } from "../../utils/scroll.js";
@@ -177,12 +177,12 @@ export default class SdAutocomplete extends SdSelect {
 
         // Update validity
         this.updateComplete.then(() => {
-            this.formControlController.updateValidity();
+            this.updateValidity();
         });
     }
 
     protected override handleFocus() {
-        this.hasFocus = true;
+        this.focused = true;
         const displayInput = this.getDisplayInput();
         const displayInputLength = displayInput.value.length;
         displayInput.setSelectionRange(displayInputLength, displayInputLength);

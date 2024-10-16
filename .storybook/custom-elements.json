@@ -31,7 +31,7 @@
               "name": "loadingText",
               "type": "string",
               "default": "Loading...",
-              "attribute": "loadingText"
+              "attribute": "loading-text"
             },
             {
               "kind": "method",
@@ -148,66 +148,6 @@
                   }
                 }
               ]
-            },
-            {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "protected",
-              "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sd-blur\", \"sd-input\"],\r\n    })",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false
             },
             {
               "kind": "field",
@@ -527,7 +467,7 @@
             },
             {
               "kind": "field",
-              "name": "hasFocus",
+              "name": "focused",
               "type": "boolean",
               "privacy": "protected",
               "default": false,
@@ -648,18 +588,6 @@
             },
             {
               "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the select, submitted as a name/value pair with form data.",
-              "attribute": "name",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "value",
               "type": {
                 "text": "string | string[]"
@@ -667,6 +595,31 @@
               "default": "",
               "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
               "attribute": "value",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              },
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The default value of the select component. used to reset the value.",
+              "attribute": "defaultValue",
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -806,19 +759,6 @@
               "default": "",
               "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
               "attribute": "help-text",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "form",
-              "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "attribute": "form",
-              "reflects": true,
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -1110,6 +1050,15 @@
             },
             {
               "kind": "method",
+              "name": "clearAllOptions",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
               "name": "setCurrentOption",
               "privacy": "protected",
               "parameters": [
@@ -1120,6 +1069,15 @@
                   }
                 }
               ],
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reset",
+              "privacy": "protected",
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -1180,23 +1138,6 @@
             },
             {
               "kind": "method",
-              "name": "handleInvalid",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
               "name": "handleDisabledChange",
               "inheritedFrom": {
                 "name": "SdSelect",
@@ -1231,55 +1172,6 @@
             },
             {
               "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "setCustomValidity",
-              "parameters": [
-                {
-                  "name": "message",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Sets a custom validation message. Pass an empty string to restore validity.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
               "name": "focus",
               "parameters": [
                 {
@@ -1300,6 +1192,43 @@
               "kind": "method",
               "name": "blur",
               "description": "Removes focus from the control.",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -1342,21 +1271,10 @@
               "fieldName": "loading"
             },
             {
-              "name": "loadingText",
+              "name": "loading-text",
               "type": "string",
               "default": "Loading...",
               "fieldName": "loadingText"
-            },
-            {
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the select, submitted as a name/value pair with form data.",
-              "fieldName": "name",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
             },
             {
               "name": "value",
@@ -1366,6 +1284,30 @@
               "default": "",
               "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
               "fieldName": "value",
+              "inheritedFrom": {
+                "name": "SdSelect",
+                "module": "src/components/select/select.ts"
+              },
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "defaultValue",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The default value of the select component. used to reset the value.",
+              "fieldName": "defaultValue",
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -1491,17 +1433,6 @@
               "default": "",
               "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
               "fieldName": "helpText",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "name": "form",
-              "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "fieldName": "form",
               "inheritedFrom": {
                 "name": "SdSelect",
                 "module": "src/components/select/select.ts"
@@ -2025,60 +1956,20 @@
           "name": "SdButton",
           "members": [
             {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"click\"],\r\n    })",
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
+              "kind": "field",
+              "name": "button",
+              "type": {
+                "text": "HTMLButtonElement | HTMLLinkElement | undefined"
               },
-              "additionalProperties": false
+              "readonly": true,
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/HTMLButtonElement"
+                },
+                {
+                  "$ref": "#/definitions/HTMLLinkElement"
+                }
+              ]
             },
             {
               "kind": "field",
@@ -2135,14 +2026,6 @@
             },
             {
               "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
-              "attribute": "name"
-            },
-            {
-              "kind": "field",
               "name": "href",
               "type": "string",
               "default": "",
@@ -2177,13 +2060,6 @@
               "type": "string",
               "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
               "attribute": "download"
-            },
-            {
-              "kind": "field",
-              "name": "form",
-              "type": "string",
-              "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
-              "attribute": "form"
             },
             {
               "kind": "field",
@@ -2249,19 +2125,9 @@
             },
             {
               "kind": "field",
-              "name": "button",
-              "type": {
-                "text": "HTMLButtonElement | HTMLLinkElement | undefined"
-              },
-              "readonly": true,
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/HTMLButtonElement"
-                },
-                {
-                  "$ref": "#/definitions/HTMLLinkElement"
-                }
-              ]
+              "name": "focused",
+              "type": "boolean",
+              "default": false
             },
             {
               "kind": "method",
@@ -2269,59 +2135,10 @@
               "privacy": "private"
             },
             {
-              "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "type": "string"
-            },
-            {
               "kind": "method",
               "name": "handleBlur",
-              "privacy": "private"
+              "privacy": "private",
+              "description": "Gets the validation message"
             },
             {
               "kind": "method",
@@ -2332,28 +2149,6 @@
               "kind": "method",
               "name": "handleClick",
               "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleInvalid",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isButton",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleDisabledChange"
             },
             {
               "kind": "method",
@@ -2378,39 +2173,6 @@
               "kind": "method",
               "name": "blur",
               "description": "Removes focus from the button."
-            },
-            {
-              "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
-            },
-            {
-              "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists."
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
-            },
-            {
-              "kind": "method",
-              "name": "setCustomValidity",
-              "parameters": [
-                {
-                  "name": "message",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Sets a custom validation message. Pass an empty string to restore validity."
             },
             {
               "kind": "method",
@@ -2476,13 +2238,6 @@
               ]
             },
             {
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
-              "fieldName": "name"
-            },
-            {
               "name": "href",
               "type": "string",
               "default": "",
@@ -2514,12 +2269,6 @@
               "type": "string",
               "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
               "fieldName": "download"
-            },
-            {
-              "name": "form",
-              "type": "string",
-              "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
-              "fieldName": "form"
             },
             {
               "name": "formaction",
@@ -2576,8 +2325,8 @@
             }
           ],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "BaseButtonClass",
+            "module": "src/components/button/button.ts"
           },
           "tagName": "sd-button",
           "customElement": true
@@ -2598,6 +2347,78 @@
           "declaration": {
             "name": "SdButton",
             "module": "src/components/button/button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-filled.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardFilled",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-filled",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardFilled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-filled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-outlined.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardOutlined",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-outlined",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardOutlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-outlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
           }
         }
       ]
@@ -2760,78 +2581,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card/card-filled.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCardFilled",
-          "members": [],
-          "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
-          },
-          "tagName": "sd-card-filled",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdCardFilled",
-          "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-card-filled",
-          "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/card/card-outlined.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCardOutlined",
-          "members": [],
-          "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
-          },
-          "tagName": "sd-card-outlined",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdCardOutlined",
-          "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-card-outlined",
-          "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/checkbox/checkbox.ts",
       "declarations": [
         {
@@ -2840,82 +2589,19 @@
           "name": "SdCheckbox",
           "members": [
             {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new FormControlController(this, {\r\n        value: (control: SdCheckbox) =>\r\n            control.checked ? control.value || \"on\" : undefined,\r\n    })",
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the checkbox, submitted as a name/value pair with form data.",
-              "attribute": "name"
-            },
-            {
               "kind": "field",
               "name": "value",
-              "type": "object",
-              "default": "",
+              "type": "string",
+              "default": "on",
               "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
-              "attribute": "value",
-              "additionalProperties": false,
-              "patternProperties": {
-                "^[0-9]+$": {
-                  "type": "string"
-                }
-              }
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": "string",
+              "default": "",
+              "attribute": "title"
             },
             {
               "kind": "field",
@@ -2932,21 +2618,11 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "description": "Disables the checkbox.",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
               "name": "checked",
               "type": "boolean",
               "default": false,
               "description": "Draws the checkbox in a checked state.",
-              "attribute": "checked",
-              "reflects": true
+              "attribute": "checked"
             },
             {
               "kind": "field",
@@ -2955,15 +2631,6 @@
               "default": false,
               "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
               "attribute": "indeterminate",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "form",
-              "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "attribute": "form",
               "reflects": true
             },
             {
@@ -2995,7 +2662,7 @@
               "kind": "field",
               "name": "input",
               "type": {
-                "text": "HTMLInputElement | undefined"
+                "text": "HTMLInputElement"
               }
             },
             {
@@ -3004,91 +2671,24 @@
               "privacy": "private"
             },
             {
-              "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "type": "string"
-            },
-            {
               "kind": "method",
               "name": "handleClick",
-              "privacy": "private"
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleBlur",
-              "privacy": "private"
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleInput",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleInvalid",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleFocus",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "handleDisabledChange"
+              "privacy": "protected"
             },
             {
               "kind": "method",
@@ -3120,58 +2720,55 @@
             },
             {
               "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
+              "name": "getFormValue"
             },
             {
               "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists."
+              "name": "getFormState"
             },
             {
               "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
+              "name": "formResetCallback"
             },
             {
               "kind": "method",
-              "name": "setCustomValidity",
+              "name": "formStateRestoreCallback",
               "parameters": [
                 {
-                  "name": "message",
+                  "name": "state",
                   "type": {
                     "text": "string"
                   }
                 }
-              ],
-              "description": "Sets a custom validation message. The value provided will be shown to the user when the form is submitted. To clear\r\nthe custom validation message, call this method with an empty string."
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor"
+            },
+            {
+              "kind": "method",
+              "name": "getState",
+              "return": {
+                "type": {
+                  "text": "CheckboxState"
+                }
+              }
             }
           ],
           "attributes": [
             {
-              "name": "name",
+              "name": "value",
               "type": "string",
-              "default": "",
-              "description": "The name of the checkbox, submitted as a name/value pair with form data.",
-              "fieldName": "name"
+              "default": "on",
+              "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
+              "fieldName": "value"
             },
             {
-              "name": "value",
-              "type": "object",
+              "name": "title",
+              "type": "string",
               "default": "",
-              "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
-              "fieldName": "value",
-              "additionalProperties": false,
-              "patternProperties": {
-                "^[0-9]+$": {
-                  "type": "string"
-                }
-              }
+              "fieldName": "title"
             },
             {
               "name": "size",
@@ -3183,13 +2780,6 @@
                 "medium",
                 "small"
               ]
-            },
-            {
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "description": "Disables the checkbox.",
-              "fieldName": "disabled"
             },
             {
               "name": "checked",
@@ -3204,13 +2794,6 @@
               "default": false,
               "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
               "fieldName": "indeterminate"
-            },
-            {
-              "name": "form",
-              "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "fieldName": "form"
             },
             {
               "name": "required",
@@ -3235,8 +2818,8 @@
             }
           ],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "CheckboxBaseClass",
+            "module": "src/components/checkbox/checkbox.ts"
           },
           "tagName": "sd-checkbox",
           "customElement": true
@@ -4513,64 +4096,24 @@
               }
             },
             {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "private",
+              "kind": "field",
+              "name": "button",
+              "type": {
+                "text": "HTMLButtonElement | HTMLLinkElement | undefined"
+              },
               "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"click\"],\r\n    })",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
               },
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/HTMLButtonElement"
                 },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
+                {
+                  "$ref": "#/definitions/HTMLLinkElement"
                 }
-              },
-              "additionalProperties": false
+              ]
             },
             {
               "kind": "field",
@@ -4647,18 +4190,6 @@
             },
             {
               "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
-              "attribute": "name",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "href",
               "type": "string",
               "default": "",
@@ -4705,17 +4236,6 @@
               "type": "string",
               "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
               "attribute": "download",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "form",
-              "type": "string",
-              "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
-              "attribute": "form",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
@@ -4813,23 +4333,13 @@
             },
             {
               "kind": "field",
-              "name": "button",
-              "type": {
-                "text": "HTMLButtonElement | HTMLLinkElement | undefined"
-              },
-              "readonly": true,
+              "name": "focused",
+              "type": "boolean",
+              "default": false,
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
-              },
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/HTMLButtonElement"
-                },
-                {
-                  "$ref": "#/definitions/HTMLLinkElement"
-                }
-              ]
+              }
             },
             {
               "kind": "method",
@@ -4841,67 +4351,10 @@
               }
             },
             {
-              "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              },
-              "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              },
-              "type": "string"
-            },
-            {
               "kind": "method",
               "name": "handleBlur",
               "privacy": "private",
+              "description": "Gets the validation message",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
@@ -4920,40 +4373,6 @@
               "kind": "method",
               "name": "handleClick",
               "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleInvalid",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "isButton",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleDisabledChange",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
@@ -4990,55 +4409,6 @@
               "kind": "method",
               "name": "blur",
               "description": "Removes focus from the button.",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid.",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists.",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid.",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "setCustomValidity",
-              "parameters": [
-                {
-                  "name": "message",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Sets a custom validation message. Pass an empty string to restore validity.",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
@@ -5138,17 +4508,6 @@
               ]
             },
             {
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.\nThis attribute is ignored when `href` is present.",
-              "fieldName": "name",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
               "name": "href",
               "type": "string",
               "default": "",
@@ -5192,16 +4551,6 @@
               "type": "string",
               "description": "Tells the browser to download the linked file as this filename. Only used when `href` is present.",
               "fieldName": "download",
-              "inheritedFrom": {
-                "name": "SdButton",
-                "module": "src/components/button/button.ts"
-              }
-            },
-            {
-              "name": "form",
-              "type": "string",
-              "description": "The \"form owner\" to associate the button with. If omitted, the closest containing form will be used instead. The\nvalue of this attribute must be an id of a form in the same document or shadow root as the button.",
-              "fieldName": "form",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
@@ -5312,6 +4661,60 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/inline-error/inline-error.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdInlineError",
+          "members": [
+            {
+              "kind": "field",
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "description": "help text to explain the error.",
+              "attribute": "message"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "description": "help text to explain the error.",
+              "fieldName": "message"
+            }
+          ],
+          "superclass": {
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
+          },
+          "tagName": "sd-inline-error",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdInlineError",
+            "module": "src/components/inline-error/inline-error.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-inline-error",
+          "declaration": {
+            "name": "SdInlineError",
+            "module": "src/components/inline-error/inline-error.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/input/input.ts",
       "declarations": [
         {
@@ -5320,60 +4723,13 @@
           "name": "SdInput",
           "members": [
             {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "private",
-              "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sd-blur\", \"sd-input\"],\r\n    })",
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
               },
-              "additionalProperties": false
+              "privacy": "private",
+              "readonly": true
             },
             {
               "kind": "field",
@@ -5385,6 +4741,7 @@
               "reflects": true,
               "enum": [
                 "color",
+                "date",
                 "email",
                 "file",
                 "month",
@@ -5399,11 +4756,11 @@
             },
             {
               "kind": "field",
-              "name": "name",
+              "name": "title",
               "type": "string",
               "default": "",
-              "description": "The name of the input, submitted as a name/value pair with form data.",
-              "attribute": "name"
+              "description": "the title of the input element",
+              "attribute": "title"
             },
             {
               "kind": "field",
@@ -5457,6 +4814,13 @@
             },
             {
               "kind": "field",
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "description": "the default value of the field. used to reset the input field to an initial value."
+            },
+            {
+              "kind": "field",
               "name": "helpText",
               "type": "string",
               "default": "",
@@ -5473,15 +4837,6 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "description": "Disables the input.",
-              "attribute": "disabled",
-              "reflects": true
-            },
-            {
-              "kind": "field",
               "name": "max",
               "type": "string",
               "description": "Defines the greatest value in the range of permitted values.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max",
@@ -5489,10 +4844,10 @@
             },
             {
               "kind": "field",
-              "name": "maxLength",
+              "name": "maxlength",
               "type": "number",
               "description": "The maximum number of characters a user can enter into the text field. Set\nto -1 for none.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength",
-              "attribute": "maxLength"
+              "attribute": "maxlength"
             },
             {
               "kind": "field",
@@ -5503,10 +4858,10 @@
             },
             {
               "kind": "field",
-              "name": "minLength",
+              "name": "minlength",
               "type": "number",
               "description": "The minimum number of characters a user can enter into the text field. Set\nto -1 for none.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength",
-              "attribute": "minLength"
+              "attribute": "minlength"
             },
             {
               "kind": "field",
@@ -5527,17 +4882,18 @@
               "kind": "field",
               "name": "placeholder",
               "type": "string",
+              "default": "",
               "description": "Placeholder text to show as a hint when the input is empty.",
               "attribute": "placeholder",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "readOnly",
+              "name": "readonly",
               "type": "boolean",
               "default": false,
               "description": "Makes the input readonly.",
-              "attribute": "readOnly",
+              "attribute": "readonly",
               "reflects": true
             },
             {
@@ -5558,25 +4914,10 @@
             },
             {
               "kind": "field",
-              "name": "autoCapitalize",
-              "type": "string",
-              "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
-              "attribute": "autoCapitalize",
-              "enum": [
-                "characters",
-                "none",
-                "off",
-                "on",
-                "sentences",
-                "words"
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "autoCorrect",
+              "name": "autocorrect",
               "type": "string",
               "description": "Indicates whether the browser's autocorrect feature is on or off.",
-              "attribute": "autoCorrect",
+              "attribute": "autocorrect",
               "enum": [
                 "off",
                 "on"
@@ -5678,14 +5019,6 @@
             },
             {
               "kind": "field",
-              "name": "dirty",
-              "type": "boolean",
-              "privacy": "private",
-              "default": false,
-              "description": "Returns true when the text field has been interacted with. Native\nvalidation errors only display in response to user interactions."
-            },
-            {
-              "kind": "field",
               "name": "nativeError",
               "type": "boolean",
               "privacy": "private",
@@ -5699,15 +5032,6 @@
               "privacy": "private",
               "default": "",
               "description": "The validation message displayed from a native error via\n`reportValidity()`."
-            },
-            {
-              "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement | undefined"
-              },
-              "privacy": "private",
-              "readonly": true
             },
             {
               "kind": "method",
@@ -5772,49 +5096,6 @@
             },
             {
               "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
               "name": "validationMessage",
               "description": "Gets the validation message",
               "readonly": true,
@@ -5864,19 +5145,6 @@
                   "name": "event",
                   "type": {
                     "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "handleInvalid",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
                   }
                 }
               ]
@@ -6065,48 +5333,35 @@
             },
             {
               "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
-            },
-            {
-              "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists."
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
-            },
-            {
-              "kind": "method",
-              "name": "setCustomValidity",
-              "parameters": [
-                {
-                  "name": "message",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Sets a custom validation message. Pass an empty string to restore validity."
-            },
-            {
-              "kind": "method",
-              "name": "handleDisabledChange"
-            },
-            {
-              "kind": "method",
               "name": "handleStepChange"
             },
             {
               "kind": "method",
-              "name": "handleValueChange"
+              "name": "getFormValue"
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback"
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor"
+            },
+            {
+              "kind": "method",
+              "name": "getState"
             },
             {
               "kind": "method",
@@ -6148,6 +5403,7 @@
               "fieldName": "type",
               "enum": [
                 "color",
+                "date",
                 "email",
                 "file",
                 "month",
@@ -6161,11 +5417,11 @@
               ]
             },
             {
-              "name": "name",
+              "name": "title",
               "type": "string",
               "default": "",
-              "description": "The name of the input, submitted as a name/value pair with form data.",
-              "fieldName": "name"
+              "description": "the title of the input element",
+              "fieldName": "title"
             },
             {
               "name": "error",
@@ -6224,23 +5480,16 @@
               "fieldName": "clearable"
             },
             {
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "description": "Disables the input.",
-              "fieldName": "disabled"
-            },
-            {
               "name": "max",
               "type": "string",
               "description": "Defines the greatest value in the range of permitted values.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max",
               "fieldName": "max"
             },
             {
-              "name": "maxLength",
+              "name": "maxlength",
               "type": "number",
               "description": "The maximum number of characters a user can enter into the text field. Set\nto -1 for none.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength",
-              "fieldName": "maxLength"
+              "fieldName": "maxlength"
             },
             {
               "name": "min",
@@ -6249,10 +5498,10 @@
               "fieldName": "min"
             },
             {
-              "name": "minLength",
+              "name": "minlength",
               "type": "number",
               "description": "The minimum number of characters a user can enter into the text field. Set\nto -1 for none.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength",
-              "fieldName": "minLength"
+              "fieldName": "minlength"
             },
             {
               "name": "no-spinner",
@@ -6270,15 +5519,16 @@
             {
               "name": "placeholder",
               "type": "string",
+              "default": "",
               "description": "Placeholder text to show as a hint when the input is empty.",
               "fieldName": "placeholder"
             },
             {
-              "name": "readOnly",
+              "name": "readonly",
               "type": "boolean",
               "default": false,
               "description": "Makes the input readonly.",
-              "fieldName": "readOnly"
+              "fieldName": "readonly"
             },
             {
               "name": "password-toggle",
@@ -6295,24 +5545,10 @@
               "fieldName": "passwordVisible"
             },
             {
-              "name": "autoCapitalize",
-              "type": "string",
-              "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
-              "fieldName": "autoCapitalize",
-              "enum": [
-                "characters",
-                "none",
-                "off",
-                "on",
-                "sentences",
-                "words"
-              ]
-            },
-            {
-              "name": "autoCorrect",
+              "name": "autocorrect",
               "type": "string",
               "description": "Indicates whether the browser's autocorrect feature is on or off.",
-              "fieldName": "autoCorrect",
+              "fieldName": "autocorrect",
               "enum": [
                 "off",
                 "on"
@@ -6403,8 +5639,8 @@
             }
           ],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "InputBaseClass",
+            "module": "src/components/input/input.ts"
           },
           "tagName": "sd-input",
           "customElement": true
@@ -10281,62 +9517,6 @@
           "name": "SdSelect",
           "members": [
             {
-              "kind": "method",
-              "name": "formControlController",
-              "privacy": "protected",
-              "readonly": true,
-              "default": "new FormControlController(this, {\r\n        assumeInteractionOn: [\"sd-blur\", \"sd-input\"],\r\n    })",
-              "description": "A reactive controller to allow form controls to participate in form submission, validation, etc.",
-              "type": "object",
-              "properties": {
-                "host": {},
-                "form": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": false,
-                      "patternProperties": {
-                        "^[0-9]+$": {
-                          "$ref": "#/definitions/Element"
-                        }
-                      }
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "options": {
-                  "$ref": "#/definitions/FormControlControllerOptions"
-                },
-                "handleFormData": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormSubmit": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleFormReset": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "handleInteraction": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "checkFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                },
-                "reportFormValidity": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false
-            },
-            {
               "kind": "field",
               "name": "typeToSelectString",
               "type": "string",
@@ -10614,7 +9794,7 @@
             },
             {
               "kind": "field",
-              "name": "hasFocus",
+              "name": "focused",
               "type": "boolean",
               "privacy": "protected",
               "default": false
@@ -10719,14 +9899,6 @@
             },
             {
               "kind": "field",
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the select, submitted as a name/value pair with form data.",
-              "attribute": "name"
-            },
-            {
-              "kind": "field",
               "name": "value",
               "type": {
                 "text": "string | string[]"
@@ -10734,6 +9906,27 @@
               "default": "",
               "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
               "attribute": "value",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The default value of the select component. used to reset the value.",
+              "attribute": "defaultValue",
               "anyOf": [
                 {
                   "type": "array",
@@ -10833,15 +10026,6 @@
               "default": "",
               "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
               "attribute": "help-text"
-            },
-            {
-              "kind": "field",
-              "name": "form",
-              "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "attribute": "form",
-              "reflects": true
             },
             {
               "kind": "field",
@@ -11077,6 +10261,11 @@
             },
             {
               "kind": "method",
+              "name": "clearAllOptions",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
               "name": "setCurrentOption",
               "privacy": "protected",
               "parameters": [
@@ -11087,6 +10276,11 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "reset",
+              "privacy": "protected"
             },
             {
               "kind": "method",
@@ -11136,19 +10330,6 @@
             },
             {
               "kind": "method",
-              "name": "handleInvalid",
-              "privacy": "private",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
               "name": "handleDisabledChange"
             },
             {
@@ -11171,39 +10352,6 @@
             },
             {
               "kind": "method",
-              "name": "checkValidity",
-              "description": "Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid."
-            },
-            {
-              "kind": "method",
-              "name": "getForm",
-              "return": {
-                "type": {
-                  "text": "HTMLFormElement | null"
-                }
-              },
-              "description": "Gets the associated form, if one exists."
-            },
-            {
-              "kind": "method",
-              "name": "reportValidity",
-              "description": "Checks for validity and shows the browser's validation message if the control is invalid."
-            },
-            {
-              "kind": "method",
-              "name": "setCustomValidity",
-              "parameters": [
-                {
-                  "name": "message",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Sets a custom validation message. Pass an empty string to restore validity."
-            },
-            {
-              "kind": "method",
               "name": "focus",
               "parameters": [
                 {
@@ -11220,6 +10368,31 @@
               "kind": "method",
               "name": "blur",
               "description": "Removes focus from the control."
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor"
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
@@ -11250,13 +10423,6 @@
           ],
           "attributes": [
             {
-              "name": "name",
-              "type": "string",
-              "default": "",
-              "description": "The name of the select, submitted as a name/value pair with form data.",
-              "fieldName": "name"
-            },
-            {
               "name": "value",
               "type": {
                 "text": "string | string[]"
@@ -11264,6 +10430,26 @@
               "default": "",
               "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
               "fieldName": "value",
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "name": "defaultValue",
+              "type": {
+                "text": "string | string[]"
+              },
+              "default": "",
+              "description": "The default value of the select component. used to reset the value.",
+              "fieldName": "defaultValue",
               "anyOf": [
                 {
                   "type": "array",
@@ -11351,13 +10537,6 @@
               "fieldName": "helpText"
             },
             {
-              "name": "form",
-              "type": "string",
-              "default": "",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "fieldName": "form"
-            },
-            {
               "name": "required",
               "type": "boolean",
               "default": false,
@@ -11374,8 +10553,8 @@
             }
           ],
           "superclass": {
-            "name": "SdElement",
-            "module": "/src/utils/sd-element.js"
+            "name": "BaseSelectClass",
+            "module": "src/components/select/select.ts"
           },
           "tagName": "sd-select",
           "customElement": true
@@ -11877,47 +11056,18 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/switch/switch.ts",
+      "path": "src/components/spinner/spinner.ts",
       "declarations": [
         {
           "kind": "class",
           "description": "",
-          "name": "Switch",
-          "members": [
-            {
-              "kind": "field",
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "attribute": "disabled"
-            },
-            {
-              "kind": "field",
-              "name": "checked",
-              "type": "boolean",
-              "default": false,
-              "attribute": "checked"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "disabled",
-              "type": "boolean",
-              "default": false,
-              "fieldName": "disabled"
-            },
-            {
-              "name": "checked",
-              "type": "boolean",
-              "default": false,
-              "fieldName": "checked"
-            }
-          ],
+          "name": "SdSpinner",
+          "members": [],
           "superclass": {
-            "name": "LitElement",
-            "package": "lit"
+            "name": "SdElement",
+            "module": "/src/utils/sd-element.js"
           },
-          "tagName": "sd-switch",
+          "tagName": "sd-spinner",
           "customElement": true
         }
       ],
@@ -11926,7 +11076,400 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "Switch",
+            "name": "SdSpinner",
+            "module": "src/components/spinner/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-spinner",
+          "declaration": {
+            "name": "SdSpinner",
+            "module": "src/components/spinner/spinner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/switch/switch.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdSwitch",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "on",
+              "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
+              "attribute": "value",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": "string",
+              "default": "",
+              "attribute": "title",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The checkbox's size.",
+              "attribute": "size",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              },
+              "enum": [
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the checkbox in a checked state.",
+              "attribute": "checked",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
+              "attribute": "indeterminate",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the checkbox a required field.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelText",
+              "type": "string",
+              "default": "",
+              "description": "The checkbox's lable. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label-text",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "helpText",
+              "type": "string",
+              "default": "",
+              "description": "The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "attribute": "help-text",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getInput",
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleBlur",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleFocus",
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "handleStateChange",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "click",
+              "description": "Simulates a click on the checkbox.",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "FocusOptions"
+                  }
+                }
+              ],
+              "description": "Sets focus on the checkbox.",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "description": "Removes focus from the checkbox.",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getFormState",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getState",
+              "return": {
+                "type": {
+                  "text": "CheckboxState"
+                }
+              },
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "SdCheckbox",
+            "module": "/src/components/checkbox/checkbox"
+          },
+          "tagName": "sd-switch",
+          "customElement": true,
+          "attributes": [
+            {
+              "name": "value",
+              "type": "string",
+              "default": "on",
+              "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
+              "fieldName": "value",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "name": "title",
+              "type": "string",
+              "default": "",
+              "fieldName": "title",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The checkbox's size.",
+              "fieldName": "size",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              },
+              "enum": [
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "name": "checked",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the checkbox in a checked state.",
+              "fieldName": "checked",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "name": "indeterminate",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
+              "fieldName": "indeterminate",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the checkbox a required field.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "name": "label-text",
+              "type": "string",
+              "default": "",
+              "description": "The checkbox's lable. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "labelText",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            },
+            {
+              "name": "help-text",
+              "type": "string",
+              "default": "",
+              "description": "The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "fieldName": "helpText",
+              "inheritedFrom": {
+                "name": "SdCheckbox",
+                "module": "src/components/checkbox/checkbox.ts"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdSwitch",
             "module": "src/components/switch/switch.ts"
           }
         },
@@ -11934,7 +11477,7 @@
           "kind": "custom-element-definition",
           "name": "sd-switch",
           "declaration": {
-            "name": "Switch",
+            "name": "SdSwitch",
             "module": "src/components/switch/switch.ts"
           }
         }
@@ -12769,6 +12312,695 @@
           "declaration": {
             "name": "SdTag",
             "module": "src/components/tag/tag.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/textarea/textarea.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdTextarea",
+          "members": [
+            {
+              "kind": "field",
+              "name": "resizeObserver",
+              "type": "object",
+              "privacy": "private",
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLTextAreaElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "sizeAdjuster",
+              "type": {
+                "text": "HTMLTextAreaElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlotEl",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlotEl",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "hasFocus",
+              "type": "boolean",
+              "privacy": "private",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": "string",
+              "default": "",
+              "attribute": "title"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The current value of the textarea, submitted as a name/value pair with form data.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "description": "the initial value of the textarea component. used to reset the value",
+              "attribute": "defaultValue"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The textarea's size.",
+              "attribute": "size",
+              "reflects": true,
+              "enum": [
+                "large",
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "filled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws a filled textarea.",
+              "attribute": "filled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The textarea's label. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "helpText",
+              "type": "string",
+              "default": "",
+              "description": "The textarea's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "attribute": "help-text"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": "string",
+              "default": "",
+              "description": "Placeholder text to show as a hint when the input is empty.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": "number",
+              "default": 4,
+              "description": "The number of rows to display by default.",
+              "attribute": "rows"
+            },
+            {
+              "kind": "field",
+              "name": "resize",
+              "type": "string",
+              "default": "vertical",
+              "description": "Controls how the textarea can be resized.",
+              "attribute": "resize",
+              "enum": [
+                "auto",
+                "none",
+                "vertical"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the textarea.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the textarea readonly.",
+              "attribute": "readonly",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the textarea a required field.",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "minlength",
+              "type": "number",
+              "description": "The minimum length of input that will be considered valid.",
+              "attribute": "minlength"
+            },
+            {
+              "kind": "field",
+              "name": "maxlength",
+              "type": "number",
+              "description": "The maximum length of input that will be considered valid.",
+              "attribute": "maxlength"
+            },
+            {
+              "kind": "field",
+              "name": "autocapitalize",
+              "type": "string",
+              "default": "off",
+              "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
+              "attribute": "autocapitalize",
+              "enum": [
+                "characters",
+                "none",
+                "off",
+                "on",
+                "sentences",
+                "words"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "autocorrect",
+              "type": "string",
+              "description": "Indicates whether the browser's autocorrect feature is on or off.",
+              "attribute": "autocorrect"
+            },
+            {
+              "kind": "field",
+              "name": "autocomplete",
+              "type": "string",
+              "description": "Specifies what permission the browser has to provide assistance in filling out form field values. Refer to\n[this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.",
+              "attribute": "autocomplete"
+            },
+            {
+              "kind": "field",
+              "name": "autofocus",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates that the input should receive focus on page load.",
+              "attribute": "autofocus"
+            },
+            {
+              "kind": "field",
+              "name": "enterkeyhint",
+              "type": "string",
+              "description": "Used to customize the label or icon of the Enter key on virtual keyboards.",
+              "attribute": "enterkeyhint",
+              "enum": [
+                "done",
+                "enter",
+                "go",
+                "next",
+                "previous",
+                "search",
+                "send"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "spellcheck",
+              "type": "boolean",
+              "default": true,
+              "description": "Enables spell checking on the textarea.",
+              "attribute": "spellcheck"
+            },
+            {
+              "kind": "field",
+              "name": "inputmode",
+              "type": "string",
+              "description": "Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual\nkeyboard on supportive devices.",
+              "attribute": "inputmode",
+              "enum": [
+                "decimal",
+                "email",
+                "none",
+                "numeric",
+                "search",
+                "tel",
+                "text",
+                "url"
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "description": "Gets the validity state object",
+              "readonly": true,
+              "type": "object",
+              "properties": {
+                "badInput": {
+                  "type": "boolean"
+                },
+                "customError": {
+                  "type": "boolean"
+                },
+                "patternMismatch": {
+                  "type": "boolean"
+                },
+                "rangeOverflow": {
+                  "type": "boolean"
+                },
+                "rangeUnderflow": {
+                  "type": "boolean"
+                },
+                "stepMismatch": {
+                  "type": "boolean"
+                },
+                "tooLong": {
+                  "type": "boolean"
+                },
+                "tooShort": {
+                  "type": "boolean"
+                },
+                "typeMismatch": {
+                  "type": "boolean"
+                },
+                "valid": {
+                  "type": "boolean"
+                },
+                "valueMissing": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "description": "Gets the validation message",
+              "readonly": true,
+              "type": "string"
+            },
+            {
+              "kind": "method",
+              "name": "handleBlur",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleFocus",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "setTextareaHeight",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleRowsChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleValueChange"
+            },
+            {
+              "kind": "method",
+              "name": "focus",
+              "parameters": [
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "FocusOptions"
+                  }
+                }
+              ],
+              "description": "Sets focus on the textarea."
+            },
+            {
+              "kind": "method",
+              "name": "blur",
+              "description": "Removes focus from the textarea."
+            },
+            {
+              "kind": "method",
+              "name": "select",
+              "description": "Selects all the text in the textarea."
+            },
+            {
+              "kind": "method",
+              "name": "scrollPosition",
+              "return": {
+                "type": {
+                  "text": "{ top: number; left: number } | undefined"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "position",
+                  "optional": true,
+                  "type": {
+                    "text": "{\r\n        top?: number;\r\n        left?: number;\r\n    }"
+                  }
+                }
+              ],
+              "description": "Gets or sets the textarea's scroll position."
+            },
+            {
+              "kind": "method",
+              "name": "setSelectionRange",
+              "parameters": [
+                {
+                  "name": "selectionStart",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "selectionEnd",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "selectionDirection",
+                  "default": "\"none\"",
+                  "type": {
+                    "text": "\"forward\" | \"backward\" | \"none\""
+                  }
+                }
+              ],
+              "description": "Sets the start and end positions of the text selection (0-based)."
+            },
+            {
+              "kind": "method",
+              "name": "setRangeText",
+              "parameters": [
+                {
+                  "name": "replacement",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "start",
+                  "optional": true,
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "end",
+                  "optional": true,
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "selectMode",
+                  "default": "\"preserve\"",
+                  "type": {
+                    "text": "\"select\" | \"start\" | \"end\" | \"preserve\""
+                  }
+                }
+              ],
+              "description": "Replaces a range of text with a new string."
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderHelpText",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "title",
+              "type": "string",
+              "default": "",
+              "fieldName": "title"
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The current value of the textarea, submitted as a name/value pair with form data.",
+              "fieldName": "value"
+            },
+            {
+              "name": "defaultValue",
+              "type": "string",
+              "default": "",
+              "description": "the initial value of the textarea component. used to reset the value",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "size",
+              "type": "string",
+              "default": "medium",
+              "description": "The textarea's size.",
+              "fieldName": "size",
+              "enum": [
+                "large",
+                "medium",
+                "small"
+              ]
+            },
+            {
+              "name": "filled",
+              "type": "boolean",
+              "default": false,
+              "description": "Draws a filled textarea.",
+              "fieldName": "filled"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The textarea's label. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
+            },
+            {
+              "name": "help-text",
+              "type": "string",
+              "default": "",
+              "description": "The textarea's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "fieldName": "helpText"
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "default": "",
+              "description": "Placeholder text to show as a hint when the input is empty.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "rows",
+              "type": "number",
+              "default": 4,
+              "description": "The number of rows to display by default.",
+              "fieldName": "rows"
+            },
+            {
+              "name": "resize",
+              "type": "string",
+              "default": "vertical",
+              "description": "Controls how the textarea can be resized.",
+              "fieldName": "resize",
+              "enum": [
+                "auto",
+                "none",
+                "vertical"
+              ]
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the textarea.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "readonly",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the textarea readonly.",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the textarea a required field.",
+              "fieldName": "required"
+            },
+            {
+              "name": "minlength",
+              "type": "number",
+              "description": "The minimum length of input that will be considered valid.",
+              "fieldName": "minlength"
+            },
+            {
+              "name": "maxlength",
+              "type": "number",
+              "description": "The maximum length of input that will be considered valid.",
+              "fieldName": "maxlength"
+            },
+            {
+              "name": "autocapitalize",
+              "type": "string",
+              "default": "off",
+              "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
+              "fieldName": "autocapitalize",
+              "enum": [
+                "characters",
+                "none",
+                "off",
+                "on",
+                "sentences",
+                "words"
+              ]
+            },
+            {
+              "name": "autocorrect",
+              "type": "string",
+              "description": "Indicates whether the browser's autocorrect feature is on or off.",
+              "fieldName": "autocorrect"
+            },
+            {
+              "name": "autocomplete",
+              "type": "string",
+              "description": "Specifies what permission the browser has to provide assistance in filling out form field values. Refer to\n[this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.",
+              "fieldName": "autocomplete"
+            },
+            {
+              "name": "autofocus",
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates that the input should receive focus on page load.",
+              "fieldName": "autofocus"
+            },
+            {
+              "name": "enterkeyhint",
+              "type": "string",
+              "description": "Used to customize the label or icon of the Enter key on virtual keyboards.",
+              "fieldName": "enterkeyhint",
+              "enum": [
+                "done",
+                "enter",
+                "go",
+                "next",
+                "previous",
+                "search",
+                "send"
+              ]
+            },
+            {
+              "name": "spellcheck",
+              "type": "boolean",
+              "default": true,
+              "description": "Enables spell checking on the textarea.",
+              "fieldName": "spellcheck"
+            },
+            {
+              "name": "inputmode",
+              "type": "string",
+              "description": "Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual\nkeyboard on supportive devices.",
+              "fieldName": "inputmode",
+              "enum": [
+                "decimal",
+                "email",
+                "none",
+                "numeric",
+                "search",
+                "tel",
+                "text",
+                "url"
+              ]
+            }
+          ],
+          "superclass": {
+            "name": "BaseTextareaClass",
+            "module": "src/components/textarea/textarea.ts"
+          },
+          "tagName": "sd-textarea",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdTextarea",
+            "module": "src/components/textarea/textarea.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-textarea",
+          "declaration": {
+            "name": "SdTextarea",
+            "module": "src/components/textarea/textarea.ts"
           }
         }
       ]
