@@ -1,17 +1,33 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { watch } from "../../utils/watch.js";
-import { live } from "lit/directives/live.js";
 import SdElement from "../../utils/sd-element.js";
 import type SdFormControl from "../../utils/sd-element.js";
 import { MixinFormAssociated } from "../../utils/form.js";
 import styles from "./checkbox.scss?inline";
-import { CheckboxValidator } from "../../utils/validators/checkbox-validator.js";
 
 const CheckboxBaseClass = MixinFormAssociated(SdElement);
 
+/**
+ * Constraint validation properties for a checkbox.
+ */
+export interface CheckboxState {
+    /**
+     * Whether the checkbox is checked.
+     */
+    readonly checked: boolean;
+
+    /**
+     * Whether the checkbox is required.
+     */
+    readonly required: boolean;
+}
+
 @customElement("sd-checkbox")
-export default class SdCheckbox extends CheckboxBaseClass implements SdFormControl {
+export default class SdCheckbox
+    extends CheckboxBaseClass
+    implements SdFormControl, CheckboxState
+{
     static styles = unsafeCSS(styles);
 
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
@@ -112,12 +128,12 @@ export default class SdCheckbox extends CheckboxBaseClass implements SdFormContr
         this.checked = state === "true";
     }
 
-    override createValidator() {
-        return new CheckboxValidator(() => this);
-    }
-
     override getValidityAnchor() {
         return this.input;
+    }
+
+    override getState(): CheckboxState {
+        return { checked: this.checked, required: this.required };
     }
 
     render() {
@@ -131,8 +147,8 @@ export default class SdCheckbox extends CheckboxBaseClass implements SdFormContr
                     title=${this.title}
                     name=${this.name}
                     ?disabled=${this.disabled}
-                    ?checked=${live(this.checked)}
-                    ?indeterminate=${live(this.indeterminate)}
+                    ?checked=${this.checked}
+                    ?indeterminate=${this.indeterminate}
                     ?required=${this.required}
                     aria-describedby="help-text"
                     aria-checked=${this.checked ? "true" : "false"}

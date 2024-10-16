@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValues, unsafeCSS } from "lit";
+import { html, nothing, unsafeCSS } from "lit";
 import { property, query, state, customElement } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -11,7 +11,6 @@ import SdElement, { SdFormControl } from "../../utils/sd-element.js";
 import "../../icons/src/cancel.js";
 import "../../icons/src/visibility.js";
 import "../../icons/src/visibility_off.js";
-import { InputValidator } from "../../utils/validators/input-validator.js";
 
 /**
  * Input types that are compatible with the text field.
@@ -74,6 +73,9 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     @property({ reflect: true })
     type: TextFieldType | UnsupportedTextFieldType = "text";
 
+    /** the title of the input element */
+    @property() title = "";
+
     /**
      * Gets or sets whether or not the text field is in a visually invalid state.
      *
@@ -118,7 +120,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
      */
-    @property() max = "";
+    @property() max?: string;
 
     /**
      * The maximum number of characters a user can enter into the text field. Set
@@ -126,14 +128,14 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength
      */
-    @property({ type: Number }) maxlength = -1;
+    @property({ type: Number }) maxlength?: number;
 
     /**
      * Defines the most negative value in the range of permitted values.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
      */
-    @property() min = "";
+    @property() min?: string;
 
     /**
      * The minimum number of characters a user can enter into the text field. Set
@@ -141,16 +143,16 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength
      */
-    @property({ type: Number }) minlength = -1;
+    @property({ type: Number }) minlength?: number;
 
     /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
     @property({ type: Boolean, attribute: "no-spinner" }) noSpinner = false;
 
     /** A regular expression pattern to validate input against. */
-    @property() pattern = "";
+    @property() pattern?: string;
 
     /** Placeholder text to show as a hint when the input is empty. */
-    @property({ reflect: true /*//!converter: stringConverter */ }) placeholder?: string;
+    @property({ reflect: true }) placeholder = "";
 
     /** Makes the input readonly. */
     @property({ type: Boolean, reflect: true }) readonly = false;
@@ -161,15 +163,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     /** Determines whether or not the password is currently visible. Only applies to password input types. */
     @property({ attribute: "password-visible", type: Boolean }) passwordVisible = false;
 
-    /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-    @property() autoCapitalize?:
-        | "off"
-        | "none"
-        | "on"
-        | "sentences"
-        | "words"
-        | "characters";
-
     /** Indicates whether the browser's autocorrect feature is on or off. */
     @property() autocorrect?: "off" | "on";
 
@@ -177,15 +170,14 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     @property({ type: Boolean }) autoFocus: boolean = false;
 
     /** Used to customize the label or icon of the Enter key on virtual keyboards. */
-    @property() enterkeyhint:
+    @property() enterkeyhint?:
         | "enter"
         | "done"
         | "go"
         | "next"
         | "previous"
         | "search"
-        | "send"
-        | undefined;
+        | "send";
 
     /** Enables spell checking on the input. */
     @property({
@@ -241,11 +233,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     @property({ reflect: true }) autocomplete?: string;
 
     /**
-     * Returns true when the text field has been interacted with. Native
-     * validation errors only display in response to user interactions.
-     */
-    @state() private dirty = false;
-    /**
      * Whether or not a native error has been reported via `reportValidity()`.
      */
     @state() private nativeError = false;
@@ -255,26 +242,18 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      */
     @state() private nativeErrorText = "";
 
-    firstUpdated(val: PropertyValues) {
-        super.firstUpdated(val);
+    connectedCallback() {
+        super.connectedCallback();
         this.defaultValue = this.value;
     }
 
     private getInput() {
         if (!this.input) {
-            // If the input is not yet defined, synchronously render.
-            // e.g.
-            // const textField = document.createElement('md-outlined-text-field');
-            // document.body.appendChild(textField);
-            // textField.focus(); // synchronously render
             this.connectedCallback();
             this.scheduleUpdate();
         }
 
         if (this.isUpdatePending) {
-            // If there are pending updates, synchronously perform them. This ensures
-            // that constraint validation properties (like `required`) are synced
-            // before interacting with input APIs that depend on them.
             this.scheduleUpdate();
         }
 
@@ -343,11 +322,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         this.value = input.value;
     }
 
-    /** Gets the validity state object */
-    get validity() {
-        return this.getInput().validity;
-    }
-
     /** Gets the validation message */
     get validationMessage() {
         return this.getInput().validationMessage;
@@ -384,7 +358,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     }
 
     private handleInput(event: InputEvent) {
-        this.dirty = true;
         this.value = (event.target as HTMLInputElement).value;
         //this.updateValidity();
         this.emit("sd-input");
@@ -431,7 +404,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/select
      */
     select() {
-        this.input.select();
+        this.getInput().select();
     }
 
     private getErrorText() {
@@ -508,7 +481,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * Reset the text field to its default value.
      */
     reset() {
-        this.dirty = false;
         this.value = this.defaultValue;
         this.nativeError = false;
         this.nativeErrorText = "";
@@ -533,15 +505,12 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         this.value = state;
     }
 
-    override createValidator() {
-        return new InputValidator(() => ({
-            state: this,
-            renderedControl: this.input,
-        }));
+    override getValidityAnchor() {
+        return this.input;
     }
 
-    override getValidityAnchor(): HTMLElement | null {
-        return this.input;
+    override getState() {
+        return { value: this.value, required: this.required };
     }
 
     protected override render() {
@@ -596,13 +565,12 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
                         ? "text"
                         : this.type}
                     title=${this.title}
-                    name=${ifDefined(this.name)}
+                    name=${this.name}
                     aria-invalid=${this.hasError}
                     aria-label=${ariaLabel}
                     aria-describedby="help-text"
                     autocomplete=${ifDefined(this.autocomplete)}
                     ?disabled=${this.disabled}
-                    inputmode=${ifDefined(this.inputMode)}
                     max=${ifDefined(this.max)}
                     maxlength=${ifDefined(this.maxlength)}
                     min=${ifDefined(this.min)}
@@ -614,7 +582,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
                     ?multiple=${this.multiple}
                     step=${ifDefined(this.step as number)}
                     .value=${live(this.value)}
-                    autocapitalize=${ifDefined(this.autoCapitalize)}
+                    autocapitalize=${this.autocapitalize ? this.autocapitalize : nothing}
                     autocorrect=${ifDefined(this.autocorrect)}
                     ?autofocus=${this.autoFocus}
                     enterkeyhint=${ifDefined(this.enterkeyhint)}
@@ -623,7 +591,8 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
                     @change=${this.handleChange}
                     @focus=${this.handleFocus}
                     @blur=${this.handleBlur}
-                    @input=${this.handleInput} />
+                    @input=${this.handleInput}
+                    inputmode=${ifDefined(this.inputmode)} />
                 ${this.renderClearIcon()} ${this.renderPasswordToggle()}
             </div>
         `;

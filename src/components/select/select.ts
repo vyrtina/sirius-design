@@ -1,5 +1,5 @@
 import { classMap } from "lit/directives/class-map.js";
-import { FormControlController } from "../../utils/form.js";
+import { FormControlController, MixinFormAssociated } from "../../utils/form.js";
 import { html, nothing } from "lit";
 import {
     property,
@@ -22,14 +22,13 @@ import "../../icons/src/expand_more.js";
 import styles from "./select.scss?inline";
 import type { SdRemoveEvent } from "../../events/sd-remove.js";
 import "../tag/tag.js";
+import { SelectValidator } from "../../utils/validators/select-validator.js";
+
+const BaseSelectClass = MixinFormAssociated(SdElement);
 
 @customElement("sd-select")
-export default class SdSelect extends SdElement implements SdFormControl {
+export default class SdSelect extends BaseSelectClass implements SdFormControl {
     static override styles = unsafeCSS(styles);
-
-    protected readonly formControlController = new FormControlController(this, {
-        assumeInteractionOn: ["sd-blur", "sd-input"],
-    });
 
     protected typeToSelectString = "";
     private typeToSelectTimeout?: number;
@@ -43,13 +42,10 @@ export default class SdSelect extends SdElement implements SdFormControl {
     @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
     @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
 
-    @state() protected hasFocus = false;
+    @state() protected focused = false;
     @state() displayLabel = "";
     @state() currentOption?: SdOption;
     @state() selectedOptions: SdOption[] = [];
-
-    /** The name of the select, submitted as a name/value pair with form data. */
-    @property() name = "";
 
     /**
      * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
@@ -105,13 +101,6 @@ export default class SdSelect extends SdElement implements SdFormControl {
 
     /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
-
-    /**
-     * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
-     * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
-     * the same document or shadow root for this to work.
-     */
-    @property({ reflect: true }) form = "";
 
     /** The select's required attribute. */
     @property({ type: Boolean, reflect: true }) required = false;
@@ -256,13 +245,13 @@ export default class SdSelect extends SdElement implements SdFormControl {
     }
 
     protected handleFocus() {
-        this.hasFocus = true;
+        this.focused = true;
         this.getDisplayInput().setSelectionRange(0, 0);
         this.emit("sd-focus");
     }
 
     protected handleBlur() {
-        this.hasFocus = false;
+        this.focused = false;
         this.emit("sl-blur");
     }
 
@@ -637,11 +626,6 @@ export default class SdSelect extends SdElement implements SdFormControl {
         });
     }
 
-    private handleInvalid(event: Event) {
-        this.formControlController.setValidity(false);
-        this.formControlController.emitInvalidEvent(event);
-    }
-
     @watch("disabled", { waitUntilFirstUpdate: true })
     handleDisabledChange() {
         // Close the listbox when the control is disabled
@@ -718,20 +702,9 @@ export default class SdSelect extends SdElement implements SdFormControl {
         return this.getValueInput().checkValidity();
     }
 
-    /** Gets the associated form, if one exists. */
-    getForm(): HTMLFormElement | null {
-        return this.formControlController.getForm();
-    }
-
     /** Checks for validity and shows the browser's validation message if the control is invalid. */
     reportValidity() {
         return this.getValueInput().reportValidity();
-    }
-
-    /** Sets a custom validation message. Pass an empty string to restore validity. */
-    setCustomValidity(message: string) {
-        this.getValueInput().setCustomValidity(message);
-        this.formControlController.updateValidity();
     }
 
     /** Sets focus on the control. */
@@ -742,6 +715,14 @@ export default class SdSelect extends SdElement implements SdFormControl {
     /** Removes focus from the control. */
     blur() {
         this.getDisplayInput().blur();
+    }
+
+    override createValidator() {
+        return new SelectValidator(() => this);
+    }
+
+    override getValidityAnchor() {
+        return this.valueInput;
     }
 
     protected render() {
@@ -758,7 +739,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
                         "select--open": this.open,
                         "select--disabled": this.disabled,
                         "select--multiple": this.multiple,
-                        "select--focused": this.hasFocus,
+                        "select--focused": this.focused,
                         "select--placeholder-visible": isPlaceholderVisible,
                         "select--top": this.placement === "top",
                         "select--bottom": this.placement === "bottom",
@@ -803,8 +784,7 @@ export default class SdSelect extends SdElement implements SdFormControl {
                         : this.value}
                     tabindex="-1"
                     aria-hidden="true"
-                    @focus=${() => this.focus()}
-                    @invalid=${this.handleInvalid} />
+                    @focus=${() => this.focus()} />
 
                 ${hasClearIcon
                     ? html`
