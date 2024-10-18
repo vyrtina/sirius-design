@@ -42,3 +42,20 @@ export interface ConstraintValidation {
      */
     setCustomValidity(error: string): void;
 }
+
+/**
+ * An object containing `ValidityStateFlags` and a corresponding validation
+ * message.
+ */
+export interface ValidityAndMessage {
+    /**
+     * Validity flags.
+     */
+    validity: ValidityStateFlags;
+
+    /**
+     * The validation message for the associated flags. It may not be an empty
+     * string if any of the validity flags are `true`.
+     */
+    validationMessage: string;
+}

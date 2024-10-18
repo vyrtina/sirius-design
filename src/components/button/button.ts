@@ -1,18 +1,17 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { property, query, customElement } from "lit/decorators.js";
-import { watch } from "../../utils/watch.js";
-import SdElement, { SdFormControl } from "../../utils/sd-element.js";
-import { FormControlController, validValidityState } from "../../utils/form.js";
+import { property, query, customElement, state } from "lit/decorators.js";
+import SdElement from "../../utils/sd-element.js";
 import styles from "./button.scss?inline";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { MixinElementInternals } from "../../utils/element-internals.js";
+
+const BaseButtonClass = MixinElementInternals(SdElement);
 
 @customElement("sd-button")
-export default class SdButton extends SdElement implements SdFormControl {
+export default class SdButton extends BaseButtonClass {
     static styles = unsafeCSS(styles);
 
-    private readonly formControlController = new FormControlController(this, {
-        assumeInteractionOn: ["click"],
-    });
+    @query(".button") readonly button?: HTMLButtonElement | HTMLLinkElement;
 
     /** choose the style of the button. */
     @property() variant: "filled" | "outlined" | "plain" = "filled";
@@ -28,12 +27,6 @@ export default class SdButton extends SdElement implements SdFormControl {
 
     /* The type of button. */
     @property() type: "button" | "submit" | "reset" = "button";
-
-    /**
-     * The name of the button, submitted as a name/value pair with form data, but only when this button is the submitter.
-     * This attribute is ignored when `href` is present.
-     */
-    @property() name = "";
 
     /* The URL that the link button points to. */
     @property() href = "";
@@ -51,12 +44,6 @@ export default class SdButton extends SdElement implements SdFormControl {
 
     /** Tells the browser to download the linked file as this filename. Only used when `href` is present. */
     @property() download?: string;
-
-    /**
-     * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
-     * value of this attribute must be an id of a form in the same document or shadow root as the button.
-     */
-    @property() form?: string;
 
     /** Used to override the form owner's `action` attribute. */
     @property({ attribute: "formaction" }) formAction?: string;
@@ -96,7 +83,7 @@ export default class SdButton extends SdElement implements SdFormControl {
      */
     @property({ reflect: true }) value = "";
 
-    @query(".button") readonly button?: HTMLButtonElement | HTMLLinkElement;
+    @state() focused = false;
 
     private getButton() {
         if (!this.button) {
@@ -112,65 +99,65 @@ export default class SdButton extends SdElement implements SdFormControl {
     }
 
     /** Gets the validity state object */
-    get validity() {
+    /*get validity() {
         if (this.isButton()) {
             return (this.button as HTMLButtonElement).validity;
         }
 
         return validValidityState;
-    }
+    }*/
 
     /** Gets the validation message */
-    get validationMessage() {
+    /*get validationMessage() {
         if (this.isButton()) {
             return (this.button as HTMLButtonElement).validationMessage;
         }
 
         return "";
-    }
+    }*/
 
-    firstUpdated() {
+    /*firstUpdated() {
         if (this.isButton()) {
-            this.formControlController.updateValidity();
+            this.updateValidity();
         }
-    }
+    }*/
 
     private handleBlur() {
-        //this.hasFocus = false;
+        this.focused = false;
         this.emit("sd-blur");
     }
 
     private handleFocus() {
-        //this.hasFocus = true;
+        this.focused = true;
         this.emit("sd-focus");
     }
 
     private handleClick() {
         if (this.type === "submit") {
-            this.formControlController.submit(this);
+            this.internals.form?.requestSubmit(this);
         }
 
         if (this.type === "reset") {
-            this.formControlController.reset(this);
+            this.internals.form?.reset();
         }
     }
 
-    private handleInvalid(event: Event) {
+    /*private handleInvalid(event: Event) {
         this.formControlController.setValidity(false);
         this.formControlController.emitInvalidEvent(event);
-    }
+    }*/
 
-    private isButton() {
+    /*private isButton() {
         return this.href ? false : true;
-    }
+    }*/
 
-    @watch("disabled", { waitUntilFirstUpdate: true })
+    /*@watch("disabled", { waitUntilFirstUpdate: true })
     handleDisabledChange() {
         if (this.isButton()) {
             // Disabled form controls are always valid
             this.formControlController.setValidity(this.disabled);
         }
-    }
+    }*/
 
     /** Simulates a click on the button. */
     click() {
@@ -188,35 +175,22 @@ export default class SdButton extends SdElement implements SdFormControl {
     }
 
     /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
-    checkValidity() {
+    /*checkValidity() {
         if (this.isButton()) {
             return (this.button as HTMLButtonElement).checkValidity();
         }
 
         return true;
-    }
-
-    /** Gets the associated form, if one exists. */
-    getForm(): HTMLFormElement | null {
-        return this.formControlController.getForm();
-    }
+    }*/
 
     /** Checks for validity and shows the browser's validation message if the control is invalid. */
-    reportValidity() {
+    /*reportValidity() {
         if (this.isButton()) {
             return (this.button as HTMLButtonElement).reportValidity();
         }
 
         return true;
-    }
-
-    /** Sets a custom validation message. Pass an empty string to restore validity. */
-    setCustomValidity(message: string) {
-        if (this.isButton()) {
-            (this.button as HTMLButtonElement).setCustomValidity(message);
-            this.formControlController.updateValidity();
-        }
-    }
+    }*/
 
     render() {
         const buttonOrLink = this.href ? this.renderLink() : this.renderButton();
@@ -236,7 +210,6 @@ export default class SdButton extends SdElement implements SdFormControl {
             aria-label="${ifDefined(this.label)}"
             @blur=${this.handleBlur}
             @focus=${this.handleFocus}
-            @invalid=${this.handleInvalid}
             @click=${this.handleClick}>
             ${this.renderContent()}
         </button>`;

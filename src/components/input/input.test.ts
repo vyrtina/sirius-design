@@ -34,10 +34,10 @@ describe("Input", async () => {
         expect(el.step).toBeUndefined();
         expect(el.pattern).toBeUndefined();
         expect(el.required).toBeFalsy();
-        expect(el.autocapitalize).toBeUndefined();
+        expect(el.autocapitalize).toEqual("");
         expect(el.autocorrect).toBeUndefined();
         expect(el.autocomplete).toBeUndefined();
-        expect(el.autofocus).toBeUndefined();
+        expect(el.autofocus).toBeFalsy();
         expect(el.enterkeyhint).toBeUndefined();
         expect(el.spellcheck).toBeTruthy();
         expect(el.inputmode).toBeUndefined();

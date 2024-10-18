@@ -1,8 +1,8 @@
 import type { LitElement, PropertyDeclaration, PropertyValues } from "lit";
 import { property } from "lit/decorators.js";
 import { MixinElementInternals } from "./element-internals.js";
-import { ConstraintValidation } from "./constraint-validation.js";
-import { Validator } from "./validators/validator.js";
+import { ConstraintValidation, ValidityAndMessage } from "./constraint-validation.js";
+//import { Validator } from "./validators/validator.js";
 import { watch } from "./watch.js";
 
 /** A value that can be provided for form submission and state. */
@@ -78,9 +78,9 @@ export interface FormAssociated {
     formAssociatedCallback?(form: HTMLFormElement | null): void;
 }
 
-const privateValidator = Symbol("privateValidator");
-const privateSyncValidity = Symbol("privateSyncValidity");
+//const privateValidator = Symbol("privateValidator");
 const privateCustomValidationMessage = Symbol("privateCustomValidationMessage");
+const privateCustomError = Symbol("privateCustomError");
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 
@@ -115,7 +115,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
         /** if disabled has changed, recheck the element validity */
         @watch("disabled", { waitUntilFirstUpdate: true })
         handleDisabled() {
-            this[privateSyncValidity]();
+            this.updateValidity();
         }
 
         override attributeChangedCallback(
@@ -154,12 +154,12 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             // `update()` or `updated()`, which are async. This is necessary to ensure
             // that form data is updated in time for synchronous event listeners.
             this.internals.setFormValue(this.getFormValue(), this.getFormState());
-            this[privateSyncValidity]();
+            this.updateValidity();
         }
 
         override firstUpdated(val: PropertyValues) {
             super.firstUpdated(val);
-            this[privateSyncValidity]();
+            this.updateValidity();
         }
 
         getFormValue(): FormValue | null {
@@ -181,46 +181,123 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             reason: FormRestoreReason
         ): void;
 
-        //constraint validation
-        get validity() {
-            this[privateSyncValidity]();
-            return this.internals.validity;
-        }
-
-        get validationMessage() {
-            this[privateSyncValidity]();
-            return this.internals.validationMessage;
-        }
-
-        get willValidate() {
-            this[privateSyncValidity]();
-            return this.internals.willValidate;
-        }
-
-        /**
-         * A validator instance created from `[createValidator]()`.
-         */
-        [privateValidator]?: Validator<unknown>;
-
         /**
          * Needed for Safari, see https://bugs.webkit.org/show_bug.cgi?id=261432
          * Replace with this[internals].validity.customError when resolved.
          */
         [privateCustomValidationMessage] = "";
+        [privateCustomError] = false;
+
+        //constraint validation
+        get validity() {
+            this.updateValidity();
+            return this.internals.validity;
+        }
+
+        get validationMessage() {
+            this.updateValidity();
+            return this.internals.validationMessage;
+        }
+
+        get willValidate() {
+            this.updateValidity();
+            return this.internals.willValidate;
+        }
 
         checkValidity() {
-            this[privateSyncValidity]();
+            this.updateValidity();
             return this.internals.checkValidity();
         }
 
         reportValidity() {
-            this[privateSyncValidity]();
+            this.updateValidity();
             return this.internals.reportValidity();
         }
 
         setCustomValidity(error: string) {
-            this[privateCustomValidationMessage] = error;
-            this[privateSyncValidity]();
+            //this.internals.setValidity({customError: true}, error);
+            this.internals.setValidity({ customError: true }, error);
+            //this[privateCustomValidationMessage] = error;
+            this.updateValidity();
+        }
+
+        /**  The last (current) state, used to determine if the state has changed */
+        private lastState?: ReturnType<typeof this.getState>;
+
+        /** current validity computed. */
+        private currentValidity: ValidityAndMessage = {
+            validity: {},
+            validationMessage: "",
+        };
+
+        getState() {
+            throw new Error("Implement getState()");
+        }
+
+        protected fieldValidator(
+            _state: ReturnType<typeof this.getState>
+        ): ValidityAndMessage | undefined {
+            const anchor = this.getValidityAnchor();
+            if (!anchor) {
+                return { validity: {}, validationMessage: "" };
+            }
+            return {
+                validity: anchor.validity,
+                validationMessage: anchor.validationMessage!,
+            };
+        }
+
+        protected hasChanged(state: ReturnType<typeof this.getState>) {
+            return state !== this.lastState;
+        }
+
+        updateValidity() {
+            if (this.disabled || (this.form && this.form.noValidate)) {
+                /** Disabled form controls are always valid */
+                this.internals.setValidity({});
+                return;
+            }
+
+            const state = this.getState();
+            if (!this.lastState && !this.hasChanged(state)) {
+                return; //! check for no error
+            }
+            //update last state, since the state has changed
+            this.lastState = state;
+            const fieldValidity = this.fieldValidator(state);
+            this.currentValidity = fieldValidity ?? this.currentValidity;
+
+            const { validity, validationMessage: nativeValidationMessage } =
+                this.currentValidity;
+
+            const customError = this.internals.validity.customError; //* !!this[privateCustomValidationMessage];
+            /*const validationMessage =
+                this[privateCustomValidationMessage] || nativeValidationMessage;*/
+            const validationMessage = customError
+                ? this.internals.validationMessage
+                : nativeValidationMessage;
+
+            this.internals.setValidity(
+                {
+                    badInput: validity.badInput,
+                    customError: validity.customError || customError,
+                    patternMismatch: validity.patternMismatch,
+                    rangeOverflow: validity.rangeOverflow,
+                    rangeUnderflow: validity.rangeUnderflow,
+                    stepMismatch: validity.stepMismatch,
+                    tooLong: validity.tooLong,
+                    tooShort: validity.tooShort,
+                    typeMismatch: validity.typeMismatch,
+                    valueMissing: validity.valueMissing,
+                },
+                validationMessage,
+                this.getValidityAnchor() ?? undefined
+            );
+
+            //check validity. if invalid, emit sd-invalid event
+            if (!this.internals.validity.valid) {
+                this.emitInvalidEvent();
+            }
         }
 
         /**
@@ -243,47 +320,8 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             this.dispatchEvent(sdInvalidEvent);
         }
 
-        [privateSyncValidity]() {
-            if (!this[privateValidator]) {
-                this[privateValidator] = this.createValidator();
-            }
-
-            if (this.disabled) {
-                /** Disabled form controls are always valid */
-                this.internals.setValidity({});
-                return;
-            }
-
-            if (this.form && this.form.noValidate) {
-                this.internals.setValidity({});
-                return;
-            }
-
-            const { validity, validationMessage: nonCustomValidationMessage } =
-                this[privateValidator].getValidity();
-
-            const customError = !!this[privateCustomValidationMessage];
-            const validationMessage =
-                this[privateCustomValidationMessage] || nonCustomValidationMessage;
-
-            this.internals.setValidity(
-                { ...validity, customError },
-                validationMessage,
-                this.getValidityAnchor() ?? undefined
-            );
-
-            //check validity. if invalid, emit sd-invalid event
-            if (!this.internals.validity.valid) {
-                this.emitInvalidEvent();
-            }
-        }
-
-        createValidator(): Validator<unknown> {
-            throw new Error("Implement [createValidator]");
-        }
-
-        getValidityAnchor(): HTMLElement | null {
-            throw new Error("Implement [getValidityAnchor]");
+        getValidityAnchor(): HTMLInputElement | HTMLTextAreaElement | undefined {
+            throw new Error("Implement getValidityAnchor");
         }
     }
     return Mixin;

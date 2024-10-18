@@ -13,7 +13,6 @@ import SdButton from "../button/button.js";*/
 describe("Checkbox", async () => {
     it("should pass accessibility tests", async () => {
         const el = await fixture<SdCheckbox>(html` <sd-checkbox>Checkbox</sd-checkbox> `);
-        console.log(el);
         await expectWc(el).to.be.accessible();
     });
 
