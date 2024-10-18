@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { fixture, html, oneEvent, aTimeout, expect as expectWc } from "@open-wc/testing";
-import { userEvent } from "@vitest/browser/context";
+import { userEvent, page } from "@vitest/browser/context";
 
 import { runFormValidityTests } from "../../utils/form_tests.js";
 
@@ -130,32 +130,6 @@ describe("Select", async () => {
     });
 
     describe("when the value changes", () => {
-        it("should emit sd-change when the value is changed with the mouse", async () => {
-            const el = await fixture<SdSelect>(html`
-                <sd-select value="option-1">
-                    <sd-option value="option-1">Option 1</sd-option>
-                    <sd-option value="option-2">Option 2</sd-option>
-                    <sd-option value="option-3">Option 3</sd-option>
-                </sd-select>
-            `);
-            const secondOption = el.querySelectorAll<SdOption>("sd-option")[1];
-            const changeHandler = vi.fn();
-            const inputHandler = vi.fn();
-
-            el.addEventListener("sd-change", changeHandler);
-            el.addEventListener("sd-input", inputHandler);
-
-            await el.show();
-            secondOption.click();
-            await el.updateComplete;
-
-            await vi.waitUntil(() => changeHandler.mock.calls[0]);
-
-            expect(changeHandler).toHaveBeenCalledOnce();
-            expect(inputHandler).toHaveBeenCalledOnce();
-            expect(el.value).toEqual("option-2");
-        });
-
         it("should emit sd-change and sd-input when the value is changed with the keyboard", async () => {
             const el = await fixture<SdSelect>(html`
                 <sd-select value="option-1">

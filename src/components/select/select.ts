@@ -53,7 +53,8 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
      */
     @property({
         converter: {
-            fromAttribute: (value: string) => value.split(" "),
+            fromAttribute: (value: string) =>
+                value.includes(" ") ? value.split(" ") : value,
             toAttribute: (value: string[]) => value.join(" "),
         },
     })
@@ -387,7 +388,6 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     };
 
     private handleLabelClick() {
-        console.log("clicked");
         this.displayInput.focus();
     }
 
@@ -711,6 +711,13 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     }
 
     override getFormValue() {
+        if (Array.isArray(this.value)) {
+            const formData = new FormData();
+            this.value.forEach((val: string) => {
+                formData.append(this.name, val);
+            });
+            return formData;
+        }
         return this.value;
     }
 
