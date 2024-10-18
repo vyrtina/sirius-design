@@ -1,49 +1,85 @@
-import { LitElement, html, unsafeCSS, CSSResultGroup } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { html, unsafeCSS } from "lit";
+import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 
 import styles from "./radio.scss?inline";
-
-const CHECKED = Symbol("checked");
+import SdElement from "../../utils/sd-element";
+import { MixinElementInternals } from "../../utils/element-internals";
+import { watch } from "../../utils/watch";
 
 @customElement("sd-radio")
-export default class SdRadio extends LitElement {
-    static styles = unsafeCSS(styles) as CSSResultGroup;
+export default class SdRadio extends MixinElementInternals(SdElement) {
+    static styles = unsafeCSS(styles);
 
-    /*
-    @property({ type: Boolean })
-    get checked() {
-        return this[CHECKED];
-    }
-    set checked(checked: boolean) {
-        const wasChecked = this.checked;
-        if (wasChecked === checked) {
-            return;
-        }
+    /** When selected, the radio group return this value. */
+    @property() value?: string;
 
-        this[CHECKED] = checked;
-        this.requestUpdate("checked", wasChecked);
-        this.selectionController.handleCheckedChange();
-    }
+    /** Make the radio disabled */
+    @property({ type: Boolean }) disabled = false;
 
-    [CHECKED] = false;
-
-    
-    @property({ type: Boolean }) required = false;
-
-    @property({ type: String }) value = "default";
-
-    @query(".container") private readonly container!: HTMLElement;
+    @state() checked = false;
+    @state() focused = false;
 
     constructor() {
         super();
-        this[internals].role = "radio";
-        this.addEventListener("click", this.handleClick.bind(this));
-        this.addEventListener("keydown", this.handleKeydown.bind(this));
+        this.internals.role = "radio";
+        this.addEventListener("blur", this.handleBlur);
+        this.addEventListener("focus", this.handleFocus);
+        this.addEventListener("click", this.handleClick);
+        this.addEventListener("keydown", this.handleKeydown);
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.setAttribute("tabindex", "-1");
+        this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
+    }
+
+    private handleBlur = () => {
+        this.focused = false;
+        this.emit("sd-blur");
+    };
+
+    private handleFocus = () => {
+        this.focused = true;
+        this.emit("sd-focus");
+    };
+
+    private handleClick() {
+        if (this.disabled) {
+            return;
+        }
+
+        this.checked = true;
+        this.emit("sd-change");
+        this.emit("sd-input");
+    }
+
+    private async handleKeydown(event: KeyboardEvent) {
+        if (event.key !== " " || event.defaultPrevented) {
+            return;
+        }
+
+        this.click();
+    }
+
+    @watch("checked")
+    handleCheckedChange() {
+        this.setAttribute("aria-checked", this.checked ? "true" : "false");
+        this.setAttribute("tabindex", this.checked ? "0" : "-1");
+    }
+
+    @watch("disabled", { waitUntilFirstUpdate: true })
+    handleDisabledChange() {
+        this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
     }
 
     protected override render() {
-        const classes = { checked: this.checked };
+        const classes = {
+            "radio--checked": this.checked,
+            "radio--disabled": this.disabled,
+            "radio--focused": this.focused,
+        };
         return html`
             <div class="container ${classMap(classes)}" aria-hidden="true">
                 <input
@@ -57,68 +93,6 @@ export default class SdRadio extends LitElement {
             </div>
         `;
     }
-
-    protected override updated() {
-    }
-
-    private async handleClick(event: Event) {
-        if (this.disabled) {
-            return;
-        }
-
-        // allow event to propagate to user code after a microtask.
-        await 0;
-        if (event.defaultPrevented) {
-            return;
-        }
-
-        if (isActivationClick(event)) {
-            this.focus();
-        }
-
-        // Per spec, clicking on a radio input always selects it.
-        this.checked = true;
-        this.dispatchEvent(new Event("change", { bubbles: true }));
-        this.dispatchEvent(new InputEvent("input", { bubbles: true, composed: true }));
-    }
-
-    private async handleKeydown(event: KeyboardEvent) {
-        // allow event to propagate to user code after a microtask.
-        await 0;
-        if (event.key !== " " || event.defaultPrevented) {
-            return;
-        }
-
-        this.click();
-    }
-
-    // Writable mixin properties for lit-html binding, needed for lit-analyzer
-    declare disabled: boolean;
-    declare name: string;
-
-    override [getFormValue]() {
-        return this.checked ? this.value : null;
-    }
-
-    override [getFormState]() {
-        return String(this.checked);
-    }
-
-    [createValidator]() {
-        return new RadioValidator(() => {
-            if (!this.selectionController) {
-                // Validation runs on superclass construction, so selection controller
-                // might not actually be ready until this class constructs.
-                return [this];
-            }
-
-            return this.selectionController.controls as [SdRadio, ...SdRadio[]];
-        });
-    }
-
-    [getValidityAnchor]() {
-        return this.container;
-    }*/
 }
 
 declare global {
