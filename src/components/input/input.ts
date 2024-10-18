@@ -1,5 +1,5 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { property, query, state, customElement } from "lit/decorators.js";
+import { property, query, customElement } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
@@ -8,6 +8,7 @@ import styles from "./input.scss?inline";
 import "../../icons/src/error.js";
 import { MixinFormAssociated } from "../../utils/form.js";
 import SdElement, { SdFormControl } from "../../utils/sd-element.js";
+import "../inline-error/inline-error.js";
 import "../../icons/src/cancel.js";
 import "../../icons/src/visibility.js";
 import "../../icons/src/visibility_off.js";
@@ -92,7 +93,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * This error message overrides the error message displayed by
      * `reportValidity()`.
      */
-    @property({ attribute: "error-text" }) errorText = "";
+    @property({ attribute: "error-message" }) errorMessage = "";
 
     /** The input's label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
@@ -205,13 +206,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         | "url";
 
     /**
-     * By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you
-     * to place the form control outside of a form and associate it with the form that has this `id`. The form must be in
-     * the same document or shadow root for this to work.
-     */
-    @property({ reflect: true }) form_id?: string;
-
-    /**
      * Indicates that input accepts multiple email addresses.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#multiple
@@ -231,16 +225,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
      */
     @property({ reflect: true }) autocomplete?: string;
-
-    /**
-     * Whether or not a native error has been reported via `reportValidity()`.
-     */
-    @state() private nativeError = false;
-    /**
-     * The validation message displayed from a native error via
-     * `reportValidity()`.
-     */
-    @state() private nativeErrorText = "";
 
     connectedCallback() {
         super.connectedCallback();
@@ -322,13 +306,8 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         this.value = input.value;
     }
 
-    /** Gets the validation message */
-    get validationMessage() {
-        return this.getInput().validationMessage;
-    }
-
     private get hasError() {
-        return this.error || this.nativeError;
+        return this.error || !this.checkValidity();
     }
 
     private handleBlur() {
@@ -408,7 +387,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     }
 
     private getErrorText() {
-        return this.error ? this.errorText : this.nativeErrorText;
+        return this.validationMessage;
     }
 
     /** Replaces a range of text with a new string. */
@@ -482,8 +461,13 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      */
     reset() {
         this.value = this.defaultValue;
-        this.nativeError = false;
-        this.nativeErrorText = "";
+    }
+
+    @watch("error-message")
+    handleErrorMessageChange() {
+        if (this.hasError) {
+            this.setCustomValidity(this.errorMessage);
+        }
     }
 
     @watch("step", { waitUntilFirstUpdate: true })
@@ -510,7 +494,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     }
 
     override getState() {
-        return { value: this.value, required: this.required };
+        return { "has-value": this.value, required: this.required };
     }
 
     protected override render() {
@@ -646,13 +630,8 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     }
 
     private renderErrorText() {
-        if (this.error) {
-            return html`
-                <span class="error-text">
-                    <sd-icon-error class="error-text__icon"></sd-icon-error>
-                    <p>${this.getErrorText()}</p>
-                </span>
-            `;
+        if (this.hasError && !this.disabled) {
+            return html` <sd-inline-error> ${this.getErrorText()} </sd-inline-error> `;
         }
         return nothing;
     }

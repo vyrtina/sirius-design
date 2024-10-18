@@ -15,7 +15,7 @@ export default class SdInlineError extends SdElement {
         return html`
             <div class="inline-error">
                 <sd-icon-error-outline class="error-icon"></sd-icon-error-outline>
-                <span class="error-text">${this.message}</span>
+                <span class="error-text"><slot>${this.message}</slot></span>
             </div>
         `;
     }

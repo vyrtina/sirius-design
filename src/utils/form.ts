@@ -1,5 +1,5 @@
 import type { LitElement, PropertyDeclaration, PropertyValues } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { MixinElementInternals } from "./element-internals.js";
 import { ConstraintValidation, ValidityAndMessage } from "./constraint-validation.js";
 //import { Validator } from "./validators/validator.js";
@@ -78,10 +78,6 @@ export interface FormAssociated {
     formAssociatedCallback?(form: HTMLFormElement | null): void;
 }
 
-//const privateValidator = Symbol("privateValidator");
-const privateCustomValidationMessage = Symbol("privateCustomValidationMessage");
-const privateCustomError = Symbol("privateCustomError");
-
 type Constructor<T = {}> = new (...args: any[]) => T;
 
 export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base: TBase) {
@@ -112,10 +108,43 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
 
         @property({ type: Boolean, reflect: true }) disabled = false;
 
+        /** wait for these events to fire to consider the user interacted with the component */
+        @state() waitUserInteraction: string[] = ["sd-input"];
+
+        @state() emittedEvents: string[] = [];
+
+        @state() userInteracted = false;
+
         /** if disabled has changed, recheck the element validity */
         @watch("disabled", { waitUntilFirstUpdate: true })
         handleDisabled() {
             this.updateValidity();
+        }
+
+        handleInteraction(e: Event) {
+            if (this.emittedEvents.includes(e.type)) {
+                return;
+            }
+            this.emittedEvents.push(e.type);
+
+            /** check if all events have fired */
+            if (this.emittedEvents.length === this.waitUserInteraction.length) {
+                this.userInteracted = true;
+            }
+        }
+
+        connectedCallback(): void {
+            super.connectedCallback();
+            this.waitUserInteraction.forEach((eventName: string) => {
+                this.addEventListener(eventName, this.handleInteraction);
+            });
+        }
+
+        disconnectedCallback(): void {
+            super.disconnectedCallback();
+            this.waitUserInteraction.forEach((eventName: string) => {
+                this.removeEventListener(eventName, this.handleInteraction);
+            });
         }
 
         override attributeChangedCallback(
@@ -181,13 +210,6 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             reason: FormRestoreReason
         ): void;
 
-        /**
-         * Needed for Safari, see https://bugs.webkit.org/show_bug.cgi?id=261432
-         * Replace with this[internals].validity.customError when resolved.
-         */
-        [privateCustomValidationMessage] = "";
-        [privateCustomError] = false;
-
         //constraint validation
         get validity() {
             this.updateValidity();
@@ -215,9 +237,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
         }
 
         setCustomValidity(error: string) {
-            //this.internals.setValidity({customError: true}, error);
             this.internals.setValidity({ customError: true }, error);
-            //this[privateCustomValidationMessage] = error;
             this.updateValidity();
         }
 
@@ -230,7 +250,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             validationMessage: "",
         };
 
-        getState() {
+        getState(): Object {
             throw new Error("Implement getState()");
         }
 
@@ -270,9 +290,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             const { validity, validationMessage: nativeValidationMessage } =
                 this.currentValidity;
 
-            const customError = this.internals.validity.customError; //* !!this[privateCustomValidationMessage];
-            /*const validationMessage =
-                this[privateCustomValidationMessage] || nativeValidationMessage;*/
+            const customError = this.internals.validity.customError;
             const validationMessage = customError
                 ? this.internals.validationMessage
                 : nativeValidationMessage;
@@ -294,9 +312,37 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
                 this.getValidityAnchor() ?? undefined
             );
 
+            //set states
+            this.setStates();
+            if (this.internals.validity.valid) {
+                this.internals.states.delete("invalid");
+                this.internals.states.add("valid");
+                if (this.userInteracted) {
+                    this.internals.states.delete("user-invalid");
+                    this.internals.states.add("user-valid");
+                }
+            } else {
+                this.internals.states.delete("valid");
+                this.internals.states.add("invalid");
+                if (this.userInteracted) {
+                    this.internals.states.delete("user-valid");
+                    this.internals.states.add("user-invalid");
+                }
+            }
+
             //check validity. if invalid, emit sd-invalid event
             if (!this.internals.validity.valid) {
                 this.emitInvalidEvent();
+            }
+        }
+
+        setStates() {
+            const states = this.getState();
+            this.internals.states.clear();
+            for (const [key, val] of Object.entries(states)) {
+                if (val) {
+                    this.internals.states.add(key);
+                }
             }
         }
 

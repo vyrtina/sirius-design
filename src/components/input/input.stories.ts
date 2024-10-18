@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import "./input";
 import "../../icons/src/agriculture";
 import "../../icons/src/photo_camera";
@@ -53,13 +54,23 @@ export const Invalid: Story = {
 };
 
 export const Form: Story = {
-    render: ({ label, placeholder, type, clearable }) => html`
+    args: {
+        required: false,
+        title: "",
+        minlength: 2
+    },
+
+    render: (args) => html`
         <form>
             <sd-input
-                label=${label}
-                placeholder=${placeholder}
-                type=${type}
-                ?clearable=${clearable}>
+                label=${ifDefined(args["label"])}
+                placeholder=${ifDefined(args["placeholder"])}
+                title="${ifDefined(args["title"])}"
+                ?required=${args["required"]}
+                minlength=${ifDefined(args["minlength"])}
+                maxlength=${ifDefined(args["maxlength"])}
+                type=${ifDefined(args["type"])}
+                ?clearable=${args["clearable"]}>
             </sd-input>
             <button type="submit">Submit</button>
         </form>
@@ -70,6 +81,8 @@ export const Form: Story = {
             /** Get a reference to the form */
             const form = document.querySelector("form");
 
+            const input = document.querySelector("sd-input");
+
             /** Get the output element to display form data in */
             const output = document.querySelector("output");
 
@@ -77,7 +90,9 @@ export const Form: Story = {
             form.addEventListener("submit", (event) => {
                 event.preventDefault();
 
-                console.log(document.querySelector("sd-input").internals);
+                input.internals.states.forEach((val) => {
+                    console.log(val);
+                });
 
                 const form = event.target;
 

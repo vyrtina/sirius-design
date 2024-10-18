@@ -79,21 +79,19 @@ input:focus-visible {
     box-sizing: border-box;
 }
 
-:host(:hover) .state-layer {
+.checkbox:hover .state-layer {
     opacity: $sd-opacity-state-layer-hover;
 }
 
-:host(:active) .state-layer {
+.checkkbox:active .state-layer {
     opacity: $sd-opacity-state-layer-click;
 }
 
-:host(:focus) .state-layer {
+.checkbox.checkbox--focused .state-layer {
     opacity: $sd-opacity-state-layer-focus;
 }
 
-:host([disabled]) {
+.checkbox.checkbox--dissabled {
     cursor: not-allowed;
-    & .checkbox {
-        opacity: $sd-opacity-disabled;
-    }
+    opacity: $sd-opacity-disabled;
 }

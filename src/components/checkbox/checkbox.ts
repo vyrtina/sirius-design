@@ -1,10 +1,11 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import type SdFormControl from "../../utils/sd-element.js";
 import { MixinFormAssociated } from "../../utils/form.js";
 import styles from "./checkbox.scss?inline";
+import { classMap } from "lit/directives/class-map.js";
 
 const CheckboxBaseClass = MixinFormAssociated(SdElement);
 
@@ -30,6 +31,8 @@ export default class SdCheckbox
 {
     static styles = unsafeCSS(styles);
 
+    @query('input[type="checkbox"]') input!: HTMLInputElement;
+
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
     @property() value = "on";
 
@@ -39,7 +42,9 @@ export default class SdCheckbox
     @property({ reflect: true }) size: "small" | "medium" = "medium";
 
     /** Draws the checkbox in a checked state. */
-    @property({ type: Boolean }) checked = false;
+    @property({ type: Boolean, reflect: true }) checked = false;
+
+    @property({ type: Boolean }) defalutChecked = false;
 
     /**
      * Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a "select
@@ -56,7 +61,12 @@ export default class SdCheckbox
     /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
-    @query('input[type="checkbox"]') input!: HTMLInputElement;
+    @state() hasFocus = false;
+
+    connectedCallback(): void {
+        super.connectedCallback();
+        this.defalutChecked = this.checked;
+    }
 
     private getInput() {
         if (!this.input) {
@@ -73,16 +83,18 @@ export default class SdCheckbox
         this.emit("sd-change");
     }
 
+    protected handleFocus() {
+        this.hasFocus = true;
+        this.emit("sd-focus");
+    }
+
     protected handleBlur() {
+        this.hasFocus = false;
         this.emit("sd-blur");
     }
 
     protected handleInput() {
         this.emit("sd-input");
-    }
-
-    protected handleFocus() {
-        this.emit("sd-focus");
     }
 
     @watch(["checked", "indeterminate"], { waitUntilFirstUpdate: true })
@@ -119,9 +131,7 @@ export default class SdCheckbox
     }
 
     override formResetCallback() {
-        // The checked property does not reflect, so the original attribute set by
-        // the user is used to determine the default value.
-        this.checked = this.hasAttribute("checked");
+        this.checked = this.defalutChecked;
     }
 
     override formStateRestoreCallback(state: string) {
@@ -137,8 +147,14 @@ export default class SdCheckbox
     }
 
     render() {
+        const classes = {
+            checkbox: true,
+            "checkbox--checked": this.checked,
+            "checkbox--focused": this.hasFocus,
+            "checkbox--disabled": this.disabled,
+        };
         return html`
-            <div class="checkbox">
+            <div class=${classMap(classes)}>
                 <div class="state-layer"></div>
                 <input
                     id="input"
