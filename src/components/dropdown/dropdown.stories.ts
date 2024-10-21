@@ -35,6 +35,7 @@ const meta: Meta = {
                     </sd-menu-item>
                 </sd-menu>
             </sd-dropdown>
+            <div><span>Lorem Ipsum Dolores Imput</span></div>
         `;
     },
 };
