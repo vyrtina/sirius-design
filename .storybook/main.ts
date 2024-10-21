@@ -21,7 +21,7 @@ const config: StorybookConfig = {
     core: {
         builder: "@storybook/builder-vite",
     },
-    staticDirs: ["../src/assets/"], //use "logo.png" if path is "../src/assets/logo.png"
+    //staticDirs: ["../src/assets/"], //use "logo.png" if path is "../src/assets/logo.png"
     async viteFinal(config) {
         return {
             ...config,
