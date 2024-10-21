@@ -110,7 +110,7 @@
     "gulp-wrap": "^0.15.0",
     "interactjs": "^1.10.27",
     "json-concat": "^0.0.1",
-    "json-merger": "^1.1.5",
+    "json-merger": "^2.0.0",
     "react": "^18.2.0"
   },
   "bugs": {

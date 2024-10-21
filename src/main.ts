@@ -1,3 +1,4 @@
+export { default as SdAutocomplete } from "./components/autocomplete/autocomplete";
 export { default as SdAvatar } from "./components/avatar/avatar";
 export { default as SdBreadcrumb } from "./components/breadcrumb/breadcrumb";
 export { default as SdBreadcrumbItem } from "./components/breadcrumb/breadcrumb-item";
