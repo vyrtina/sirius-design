@@ -1,11 +1,10 @@
 import { html, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-
-import styles from "./radio.scss?inline";
 import SdElement from "../../utils/sd-element";
 import { MixinElementInternals } from "../../utils/element-internals";
 import { watch } from "../../utils/watch";
+import styles from "./radio.scss?inline";
 
 @customElement("sd-radio")
 export default class SdRadio extends MixinElementInternals(SdElement) {

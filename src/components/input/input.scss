@@ -96,11 +96,11 @@ input::placeholder {
     outline: 2px solid $sd-color-primary;
 }
 
-.label:has(+ .sd-text-field input:disabled) {
+.input--disabled .label {
     @include state-render-disabled-element();
 }
 
-.field:has(input:disabled) {
+.input--disabled .field {
     @include state-render-disabled(false);
 }
 
@@ -109,7 +109,7 @@ input:disabled {
 }
 
 //error styling
-.error .field {
+.input--user-invalid .field {
     outline: 2px solid $sd-color-critical;
 }
 

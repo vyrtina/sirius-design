@@ -1,5 +1,11 @@
 import { html, unsafeCSS } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import {
+    customElement,
+    property,
+    query,
+    queryAssignedElements,
+    state,
+} from "lit/decorators.js";
 import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import type SdFormControl from "../../utils/sd-element.js";
@@ -32,6 +38,8 @@ export default class SdCheckbox
     static styles = unsafeCSS(styles);
 
     @query('input[type="checkbox"]') input!: HTMLInputElement;
+    @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
+    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
 
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
     @property() value = "on";
@@ -55,13 +63,17 @@ export default class SdCheckbox
     /** Makes the checkbox a required field. */
     @property({ type: Boolean, reflect: true }) required = false;
 
+    /** Disables the asterisk on the label, when the field is required. */
+    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
+
     /** The checkbox's lable. If you need to display HTML, use the `label` slot instead. */
-    @property({ attribute: "label-text" }) labelText = "";
+    @property({ attribute: "label" }) label = "";
 
     /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
     @state() hasFocus = false;
+    @state() override readonly waitUserInteraction = ["sd-blur"];
 
     connectedCallback(): void {
         super.connectedCallback();
@@ -152,6 +164,7 @@ export default class SdCheckbox
             "checkbox--checked": this.checked,
             "checkbox--focused": this.hasFocus,
             "checkbox--disabled": this.disabled,
+            "checkbox--user-invalid": this.internals.states.has("user-invalid"),
         };
         return html`
             <div class=${classMap(classes)}>
@@ -173,12 +186,28 @@ export default class SdCheckbox
                     @blur=${this.handleBlur}
                     @focus=${this.handleFocus} />
             </div>
-            <label for="input" class="label"
-                ><slot><p>${this.labelText}</p></slot></label
-            >
+            ${this.renderLabel()}
             <span class="help-text" id="help-text"
                 ><slot name="help-text">${this.helpText}</slot></span
             >
+        `;
+    }
+
+    private renderLabel() {
+        const hasLabel = this.label || this.labelSlot.length > 0;
+        const classes = {
+            label: true,
+            drawAsterisk: this.required && !this.noAsterisk,
+        };
+
+        return html`
+            <label
+                for="input"
+                part="label"
+                class=${classMap(classes)}
+                aria-hidden=${hasLabel ? "false" : "true"}
+                ><slot name="label">${this.label}</slot>
+            </label>
         `;
     }
 }

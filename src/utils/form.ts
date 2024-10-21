@@ -109,11 +109,11 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
         @property({ type: Boolean, reflect: true }) disabled = false;
 
         /** wait for these events to fire to consider the user interacted with the component */
-        @state() waitUserInteraction: string[] = ["sd-input"];
+        @state() readonly waitUserInteraction: string[] = ["sd-input"];
 
-        @state() emittedEvents: string[] = [];
+        @state() private emittedEvents: string[] = [];
 
-        @state() userInteracted = false;
+        @state() protected userInteracted = false;
 
         /** if disabled has changed, recheck the element validity */
         @watch("disabled", { waitUntilFirstUpdate: true })

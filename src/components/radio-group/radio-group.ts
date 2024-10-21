@@ -1,13 +1,10 @@
-import { html, unsafeCSS } from "lit";
-import { customElement, property, queryAssignedElements, state } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
-
-import styles from "./radio.scss?inline";
+import { unsafeCSS } from "lit";
+import { customElement, property, queryAssignedElements } from "lit/decorators.js";
 import SdElement from "../../utils/sd-element";
 import { MixinElementInternals } from "../../utils/element-internals";
-import { watch } from "../../utils/watch";
 import { MixinFormAssociated } from "../../utils/form";
 import SdRadio from "../radio/radio";
+import styles from "./radio-group.scss?inline";
 
 const BaseRadioGroupClass = MixinFormAssociated(MixinElementInternals(SdElement));
 
@@ -55,7 +52,15 @@ export default class SdRadioGroup extends BaseRadioGroupClass {
         }
     }
 
-    render() {
+    formResetCallback() {
+        return; //TODO
+    }
+
+    formStateRestoreCallback() {
+        return; //TODO
+    }
+
+    /*render() {
         const hasLabelSlot = this.labelSlot.length > 0;
         const hasHelpTextSlot = this.helpTextSlot.length > 0;
         const hasLabel = this.label ? true : !!hasLabelSlot;
@@ -114,7 +119,7 @@ export default class SdRadioGroup extends BaseRadioGroupClass {
                 </div>
             </fieldset>
         `;
-    }
+    }*/
 }
 
 declare global {

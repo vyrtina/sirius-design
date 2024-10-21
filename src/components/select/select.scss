@@ -2,7 +2,12 @@
 @use "../../styles/typography.scss";
 
 :host {
+    box-sizing: border-box;
     display: block;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .container {
@@ -13,6 +18,9 @@
 
 .label {
     @include typography.sd-body();
+    &.drawAsterisk::after {
+        content: "*";
+    }
 }
 
 .help-text {
@@ -183,4 +191,9 @@
     /* Make sure it adheres to the popup's auto size */
     max-width: var(--auto-size-available-width);
     max-height: var(--auto-size-available-height);
+}
+
+/** error styling */
+.select--user-invalid .combobox {
+    border-color: tokens.$sd-color-critical;
 }

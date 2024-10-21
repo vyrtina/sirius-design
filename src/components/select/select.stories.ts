@@ -13,8 +13,8 @@ const meta: Meta = {
             <form>
                 <sd-select
                     name="select"
-                    value="option-4"
                     ?multiple=${args["multiple"]}
+                    ?required=${args["required"]}
                     placeholder=${ifDefined(args["placeholder"])}
                     label=${ifDefined(args["label"])}
                     help-text=${ifDefined(args["help-text"])}
@@ -59,5 +59,6 @@ export const Primary: Story = {
         label: "label",
         "help-text": "help text",
         multiple: false,
+        required: true,
     },
 };

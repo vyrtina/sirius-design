@@ -16,6 +16,9 @@ export default class SdOption extends SdElement {
      */
     @property({ reflect: true }) value = "";
 
+    /** the option's label. This will be shown to the user. */
+    @property() label = "";
+
     /** Draws the option in a disabled state, preventing selection. */
     @property({ type: Boolean, reflect: true }) disabled = false;
 
@@ -89,6 +92,8 @@ export default class SdOption extends SdElement {
                     label += node.textContent;
                 }
             });
+        } else {
+            return this.label;
         }
 
         return label.trim();
@@ -109,7 +114,9 @@ export default class SdOption extends SdElement {
                     <slot
                         part="label"
                         class="option__label"
-                        @slotchange=${this.handleDefaultSlotChange}></slot>
+                        @slotchange=${this.handleDefaultSlotChange}
+                        >${this.label}</slot
+                    >
                     <slot part="suffix" name="suffix" class="option__suffix"></slot>
                 </div>
             </div>

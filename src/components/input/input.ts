@@ -1,5 +1,5 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { property, query, customElement } from "lit/decorators.js";
+import { property, query, customElement, queryAssignedElements } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
@@ -52,6 +52,8 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
 
     @query(".input")
     private readonly input!: HTMLInputElement;
+    @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
+    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
 
     /**
      * The `<input>` type to use, defaults to "text". The type greatly changes how
@@ -499,13 +501,15 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
 
     protected override render() {
         const classes = {
-            disabled: this.disabled,
-            error: !this.disabled && this.hasError,
-            "no-spinner": this.noSpinner,
+            "text-field": true,
+            "input--disabled": this.disabled,
+            "input--error": !this.disabled && this.hasError,
+            "input--no-spinner": this.noSpinner,
+            "input--user-invalid": this.internals.states.has("user-invalid"),
         };
 
         return html`
-            <div class="text-field ${classMap(classes)}">
+            <div class=${classMap(classes)}>
                 ${this.renderLabel()}
                 <div class="field">
                     <span class="leading-icon"
@@ -520,8 +524,9 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     }
 
     private renderLabel() {
-        const hasLabel = this.label ? true : false; /*!!hasLabelSlot;*/
+        const hasLabel = this.label || this.labelSlot.length > 0;
         const classes = {
+            label: true,
             drawAsterisk: this.required && !this.noAsterisk,
         };
 
@@ -529,7 +534,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
             <label
                 for="input"
                 part="label"
-                class="label ${classMap(classes)}"
+                class=${classMap(classes)}
                 aria-hidden=${hasLabel ? "false" : "true"}
                 ><slot name="label">${this.label}</slot>
             </label>
@@ -566,7 +571,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
                     ?multiple=${this.multiple}
                     step=${ifDefined(this.step as number)}
                     .value=${live(this.value)}
-                    autocapitalize=${this.autocapitalize ? this.autocapitalize : nothing}
+                    autocapitalize=${ifDefined(this.autocapitalize)}
                     autocorrect=${ifDefined(this.autocorrect)}
                     ?autofocus=${this.autoFocus}
                     enterkeyhint=${ifDefined(this.enterkeyhint)}

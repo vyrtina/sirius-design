@@ -1,5 +1,5 @@
 @use "../../styles/tokens.scss";
-@import "../../styles/_index";
+@use "../../styles/base.scss";
 
 :host {
     display: inline-block;
@@ -8,11 +8,12 @@
 
 .checkbox {
     position: relative;
+    box-sizing: border-box;
     display: inline-block;
     box-sizing: border-box;
     height: 1.125rem;
     width: 1.125rem;
-    border: $sd-border-width-small solid $sd-color-primary;
+    border: tokens.$sd-border-width-small solid tokens.$sd-color-primary;
     border-radius: 0.2rem;
 }
 
@@ -41,7 +42,7 @@ input:after {
     margin-left: -2px;
     margin-top: -4.2px;
     position: absolute;
-    border: 2px solid $sd-color-on-primary;
+    border: 2px solid tokens.$sd-color-on-primary;
     border-top: 0;
     border-left: 0;
     transform: rotate(20deg);
@@ -55,17 +56,16 @@ input:checked {
     }
 }
 
-:host([checked]) {
-    & .checkbox {
-        background: $sd-color-primary;
-    }
-    .state-layer {
-        background: $sd-color-on-primary;
-    }
+.checkbox.checkbox--checked {
+    background: tokens.$sd-color-primary;
+}
+
+.checkbox--checked .state-layer {
+    background: tokens.$sd-color-on-primary;
 }
 
 input:focus-visible {
-    @include base-outline-focus();
+    @include base.outline-focus();
 }
 
 .label {
@@ -73,6 +73,9 @@ input:focus-visible {
     vertical-align: top;
     cursor: pointer;
     margin-left: 4px;
+    &.drawAstersik ::after {
+        content: "*";
+    }
 }
 
 *:after {
@@ -80,18 +83,24 @@ input:focus-visible {
 }
 
 .checkbox:hover .state-layer {
-    opacity: $sd-opacity-state-layer-hover;
+    opacity: tokens.$sd-opacity-state-layer-hover;
 }
 
 .checkkbox:active .state-layer {
-    opacity: $sd-opacity-state-layer-click;
+    opacity: tokens.$sd-opacity-state-layer-click;
 }
 
 .checkbox.checkbox--focused .state-layer {
-    opacity: $sd-opacity-state-layer-focus;
+    opacity: tokens.$sd-opacity-state-layer-focus;
 }
 
-.checkbox.checkbox--dissabled {
+.checkbox.checkbox--disabled {
     cursor: not-allowed;
-    opacity: $sd-opacity-disabled;
+    opacity: tokens.$sd-opacity-disabled;
+}
+
+/** error styling */
+.checkbox.checkbox--user-invalid {
+    outline: 2px solid tokens.$sd-color-critical;
+    border-color: tokens.$sd-color-critical;
 }

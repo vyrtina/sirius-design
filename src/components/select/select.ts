@@ -22,6 +22,7 @@ import "../../icons/src/expand_more.js";
 import styles from "./select.scss?inline";
 import type { SdRemoveEvent } from "../../events/sd-remove.js";
 import "../tag/tag.js";
+import "../inline-error/inline-error.js";
 
 const BaseSelectClass = MixinFormAssociated(SdElement);
 
@@ -45,6 +46,7 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     @state() displayLabel = "";
     @state() currentOption?: SdOption;
     @state() selectedOptions: SdOption[] = [];
+    @state() override readonly waitUserInteraction = ["sd-show", "sd-blur"];
 
     /**
      * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
@@ -107,6 +109,9 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
 
     /** The select's required attribute. */
     @property({ type: Boolean, reflect: true }) required = false;
+
+    /** Disables the asterisk on the label, when the field is required. */
+    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
 
     /**
      * A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second
@@ -722,28 +727,32 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     }
 
     override getState() {
-        return { value: this.value };
+        return { "has-value": this.value };
     }
 
     protected render() {
         const isPlaceholderVisible = this.placeholder && this.value.length === 0;
+        /** only render the error when the user has interacted with the select component */
+        const hasError = this.internals.states.has("user-invalid");
+        const classes = {
+            select: true,
+            "select--standard": true,
+            "select--open": this.open,
+            "select--disabled": this.disabled,
+            "select--multiple": this.multiple,
+            "select--focused": this.focused,
+            "select--placeholder-visible": isPlaceholderVisible,
+            "select--top": this.placement === "top",
+            "select--bottom": this.placement === "bottom",
+            "select--user-invalid": hasError,
+        };
 
         return html`
             <div part="container" class="container">
                 ${this.renderLabel()}
 
                 <sd-popup
-                    class=${classMap({
-                        select: true,
-                        "select--standard": true,
-                        "select--open": this.open,
-                        "select--disabled": this.disabled,
-                        "select--multiple": this.multiple,
-                        "select--focused": this.focused,
-                        "select--placeholder-visible": isPlaceholderVisible,
-                        "select--top": this.placement === "top",
-                        "select--bottom": this.placement === "bottom",
-                    })}
+                    class=${classMap(classes)}
                     placement=${this.placement}
                     strategy=${this.hoist ? "fixed" : "absolute"}
                     flip
@@ -754,8 +763,7 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
                     distance="2">
                     ${this.renderCombobox()} ${this.renderListbox()}
                 </sd-popup>
-
-                ${this.renderHelpText()}
+                ${hasError ? this.renderErrorText() : this.renderHelpText()}
             </div>
         `;
     }
@@ -820,6 +828,7 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
             <input
                 part="display-input"
                 class="select__display-input"
+                id="display-input"
                 type="text"
                 placeholder=${this.placeholder}
                 .disabled=${this.disabled}
@@ -842,25 +851,43 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
 
     private renderLabel() {
         const hasLabel = !this.label || this.labelSlot.length > 0;
+        const classes = {
+            label: true,
+            drawAsterisk: this.required && !this.noAsterisk,
+        };
         return html`<label
             id="label"
+            for="display-input"
             part="label"
-            class="label"
-            aria-hidden=${hasLabel}
+            class=${classMap(classes)}
+            aria-hidden=${hasLabel ? "false" : "true"}
             @click=${this.handleLabelClick}>
-            <slot name="label"><p>${this.label}</p></slot>
+            <slot name="label">${this.label}</slot>
         </label> `;
     }
 
+    private renderErrorText() {
+        return html`
+            <span part="error-text" class="error-text">
+                <slot name="error-text"
+                    ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
+                >
+            </span>
+        `;
+    }
+
     private renderHelpText() {
-        if (this.helpText || this.helpTextSlot.length > 0) {
-            return html`
-                <div part="help-text" id="help-text" class="help-text">
-                    <slot name="help-text">${this.helpText}</slot>
-                </div>
-            `;
-        }
-        return html` <slot name="help-text">${this.helpText}</slot> `;
+        const hasHelpText = this.helpText || this.helpTextSlot.length > 0;
+
+        return html`
+            <span
+                part="help-text"
+                id="help-text"
+                class="help-text"
+                aria-hidden=${hasHelpText ? "false" : "true"}>
+                <slot name="help-text">${this.helpText}</slot>
+            </span>
+        `;
     }
 
     protected renderListbox() {

@@ -5,7 +5,7 @@
 
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { Icon, sizes } from '../../components/icon/icon';
+import { Icon } from '../../components/icon/icon';
 
 
 @customElement("sd-icon-do-not_disturb_off")

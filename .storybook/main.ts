@@ -18,15 +18,17 @@ const config: StorybookConfig = {
             },
         },
     },
-    core: {},
-    docs: {
-        autodocs: "tag",
+    core: {
+        builder: "@storybook/builder-vite",
     },
     staticDirs: ["../src/assets/"], //use "logo.png" if path is "../src/assets/logo.png"
     async viteFinal(config) {
         return {
             ...config,
-            plugins: await withoutVitePlugins(config.plugins, ["vite:dts"]),
+            plugins: await withoutVitePlugins(config.plugins, [
+                "vite:dts",
+                "vite:lib-inject-css",
+            ]),
         };
     },
 };

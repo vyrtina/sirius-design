@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { fixture, html, oneEvent, aTimeout, expect as expectWc } from "@open-wc/testing";
-import { userEvent, page } from "@vitest/browser/context";
+import { userEvent } from "@vitest/browser/context";
 
 import { runFormValidityTests } from "../../utils/form_tests.js";
 

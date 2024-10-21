@@ -184,11 +184,9 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
                 el instanceof HTMLSlotElement &&
                 getSlottedChildrenOutsideRootElement(el, root)
             ) {
-                el.assignedElements({ flatten: true }).forEach(
-                    (assignedEl: HTMLElement) => {
-                        walk(assignedEl);
-                    }
-                );
+                el.assignedElements({ flatten: true }).forEach((assignedEl: Element) => {
+                    walk(assignedEl as HTMLElement);
+                });
             }
 
             if (el.shadowRoot !== null && el.shadowRoot.mode === "open") {

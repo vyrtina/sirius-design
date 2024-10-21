@@ -33,7 +33,7 @@ export default class SdSwitch extends SdCheckbox {
                     @focus=${this.handleFocus} />
                 <label id="label" for="switch" class="label">
                     <span class="label-text">
-                        <slot><p>${this.labelText}</p></slot></span
+                        <slot><p>${this.label}</p></slot></span
                     >
                     <div class="visual"></div>
                 </label>
