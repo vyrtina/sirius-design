@@ -5,10 +5,11 @@ import {
     customElement,
     property,
     query,
+    queryAll,
     queryAssignedElements,
     state,
 } from "lit/decorators.js";
-import { removeDiacritics } from "../../utils/string.js";
+//import { removeDiacritics } from "../../utils/string.js";
 import styles from "./autocomplete.scss?inline";
 import "../spinner/spinner.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -19,7 +20,7 @@ import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import { waitForEvent } from "../../utils/event.js";
 
 import "../select/select-option.js";
-import type SdOption from "../select/select-option.js";
+import SdOption from "../select/select-option.js";
 import "../popup/popup.js";
 import type SdPopup from "../popup/popup.js";
 import "../inline-error/inline-error.js";
@@ -38,15 +39,13 @@ export default class SdAutocomplete
     implements SdFormControl
 {
     static override styles = unsafeCSS(styles);
-    @query(".select__display-input") searchInput?: HTMLInputElement;
-    /** override displayInput */
-    //@query(".select__search-input") displayInput?: HTMLInputElement;
 
     @query(".select") popup!: SdPopup;
     @query(".combobox") combobox!: HTMLSlotElement;
     @query(".select__display-input") displayInput!: HTMLInputElement;
     @query(".select__value-input") valueInput!: HTMLInputElement;
     @query(".listbox") listbox!: HTMLSlotElement;
+    @queryAll("sd-option") optionEls!: SdOption[];
     @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
     @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
 
@@ -57,6 +56,8 @@ export default class SdAutocomplete
     @state() displayLabel = "";
     @state() currentOption?: SdOption;
     @state() selectedOptions: SdOption[] = [];
+    @state() currentValue?: string;
+    @state() selectedValues: string[] = [];
     @state() override readonly waitUserInteraction = ["sd-show", "sd-blur"];
 
     /**
@@ -172,29 +173,18 @@ export default class SdAutocomplete
         return html` <sd-option value=${option.value}> ${option.label} </sd-option> `;
     };
 
-    private getSearchInput() {
-        if (!this.searchInput) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        if (this.isUpdatePending) {
-            this.scheduleUpdate();
-        }
-
-        return this.searchInput!;
-    }
-
     private handleDocumentMouseDown = (event: MouseEvent) => {
         // Close when clicking outside of the select
         const path = event.composedPath();
         if (this && !path.includes(this)) {
             this.hide();
             //erase content written in search input if no option selected
-            if (!this.selectedOptions) {
-                this.getSearchInput().value = "";
-            } else if (this.value !== this.getSearchInput().value) {
-                //!this.getSearchInput().value = this.value;
+            if (!this.selectedValues) {
+                this.displayInput.value = "";
+            } else if (this.value !== this.displayInput.value) {
+                this.displayInput.value = Array.isArray(this.value)
+                    ? this.value.join(", ")
+                    : this.value;
             }
         }
     };
@@ -214,7 +204,7 @@ export default class SdAutocomplete
             event.preventDefault();
             event.stopPropagation();
             this.hide();
-            this.getDisplayInput().focus({ preventScroll: true });
+            this.displayInput.focus({ preventScroll: true });
         }
 
         // Select value when pressing enter
@@ -244,7 +234,7 @@ export default class SdAutocomplete
 
                 if (!this.multiple) {
                     this.hide();
-                    this.getDisplayInput().focus({ preventScroll: true });
+                    this.displayInput.focus({ preventScroll: true });
                 }
             }
 
@@ -253,7 +243,7 @@ export default class SdAutocomplete
 
         // Navigate options
         if (["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
-            const currentIndex = this.options.indexOf(this.currentOption!);
+            const currentIndex = [...this.optionEls].indexOf(this.currentOption!);
             let newIndex = Math.max(0, currentIndex);
 
             // Prevent scrolling
@@ -281,8 +271,7 @@ export default class SdAutocomplete
             } else if (event.key === "End") {
                 newIndex = this.options.length - 1;
             }
-
-            this.setCurrentOption(this.options[newIndex]);
+            this.setCurrentOption(this.optionEls[newIndex]);
         }
 
         if (event.key.length === 1 || event.key === "Backspace") {
@@ -309,15 +298,15 @@ export default class SdAutocomplete
             return;
         }
 
-        this.getSearchInput().focus({ preventScroll: true });
+        this.displayInput.focus({ preventScroll: true });
         //always open if clicked
         this.open = true;
-        this.filterOptions("");
+        //this.filterOptions("");
     };
 
     protected selectionChanged() {
         // Update selected options cache
-        this.selectedOptions = this.options.filter((el) => el.selected);
+        this.selectedOptions = [...this.optionEls].filter((el) => el.selected);
 
         // Update the value and display label
         if (this.multiple) {
@@ -338,41 +327,10 @@ export default class SdAutocomplete
 
     protected handleFocus() {
         this.focused = true;
-        const displayInput = this.getDisplayInput();
+        const displayInput = this.displayInput;
         const displayInputLength = displayInput.value.length;
         displayInput.setSelectionRange(displayInputLength, displayInputLength);
         this.emit("sd-focus");
-    }
-
-    protected getPopup() {
-        if (!this.popup) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        return this.popup!;
-    }
-
-    protected getDisplayInput() {
-        if (!this.displayInput) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        if (this.isUpdatePending) {
-            this.scheduleUpdate();
-        }
-
-        return this.displayInput!;
-    }
-
-    protected getListbox() {
-        if (!this.listbox) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        return this.listbox!;
     }
 
     connectedCallback() {
@@ -410,7 +368,7 @@ export default class SdAutocomplete
             this.closeWatcher.onclose = () => {
                 if (this.open) {
                     this.hide();
-                    this.getDisplayInput().focus({ preventScroll: true });
+                    this.displayInput.focus({ preventScroll: true });
                 }
             };
         }
@@ -465,7 +423,7 @@ export default class SdAutocomplete
 
         if (this.value !== "") {
             this.setSelectedOptions([]);
-            this.getDisplayInput().focus({ preventScroll: true });
+            this.displayInput.focus({ preventScroll: true });
 
             // Emit after update
             this.updateComplete.then(() => {
@@ -484,19 +442,19 @@ export default class SdAutocomplete
 
     protected handleOptionClick(event: MouseEvent) {
         const target = event.target as HTMLElement;
-        const option = target.closest("sd-option");
+        const optionEl = target.closest("sd-option");
         const oldValue = this.value;
 
-        if (option && !option.disabled) {
+        if (optionEl && !optionEl.disabled) {
             if (this.multiple) {
-                this.toggleOptionSelection(option);
+                this.toggleOptionSelection(optionEl);
             } else {
-                this.setSelectedOptions(option);
+                this.setSelectedOptions(optionEl);
             }
 
             // Set focus after updating so the value is announced by screen readers
             this.updateComplete.then(() =>
-                this.getDisplayInput().focus({ preventScroll: true })
+                this.displayInput.focus({ preventScroll: true })
             );
 
             if (this.value !== oldValue) {
@@ -509,7 +467,7 @@ export default class SdAutocomplete
 
             if (!this.multiple) {
                 this.hide();
-                this.getDisplayInput().focus({ preventScroll: true });
+                this.displayInput.focus({ preventScroll: true });
             }
         }
     }
@@ -517,8 +475,6 @@ export default class SdAutocomplete
     protected handleDefaultSlotChange() {
         const value = Array.isArray(this.value) ? this.value : [this.value];
         const values: string[] = [];
-
-        console.log("slot changed");
 
         // Check for duplicate values in menu items
         if (customElements.get("sd-option")) {
@@ -552,7 +508,7 @@ export default class SdAutocomplete
 
     //unselect all options
     protected clearAllOptions() {
-        this.options.forEach((el) => {
+        this.optionEls.forEach((el) => {
             el.current = false;
             el.tabIndex = -1;
         });
@@ -562,15 +518,15 @@ export default class SdAutocomplete
 
     // Sets the current option, which is the option the user is currently interacting with (e.g. via keyboard). Only one
     // option may be "current" at a time.
-    protected setCurrentOption(option: SdOption | null) {
+    protected setCurrentOption(optionEl: SdOption | null) {
         this.clearAllOptions();
 
         // Select the target option
-        if (option) {
-            this.currentOption = option;
-            option.current = true;
-            option.tabIndex = 0;
-            option.focus();
+        if (optionEl) {
+            this.currentOption = optionEl;
+            optionEl.current = true;
+            optionEl.tabIndex = 0;
+            optionEl.focus();
         }
     }
 
@@ -579,11 +535,11 @@ export default class SdAutocomplete
         this.value = this.defaultValue;
     }
     // Sets the selected option(s)
-    protected setSelectedOptions(option: SdOption | SdOption[]) {
-        const newSelectedOptions = Array.isArray(option) ? option : [option];
+    protected setSelectedOptions(optionEl: SdOption | SdOption[]) {
+        const newSelectedOptions = Array.isArray(optionEl) ? optionEl : [optionEl];
 
         // Clear existing selection
-        this.options.forEach((el) => (el.selected = false));
+        this.optionEls.forEach((el) => (el.selected = false));
 
         // Set the new selection
         if (newSelectedOptions.length) {
@@ -638,7 +594,9 @@ export default class SdAutocomplete
         const value = Array.isArray(this.value) ? this.value : [this.value];
 
         // Select only the options that match the new value
-        this.setSelectedOptions(this.options.filter((el) => value.includes(el.value)));
+        this.setSelectedOptions(
+            [...this.optionEls].filter((el) => value.includes(el.value))
+        );
     }
 
     /** Shows the listbox. */
@@ -665,12 +623,12 @@ export default class SdAutocomplete
 
     /** Sets focus on the control. */
     focus(options?: FocusOptions) {
-        this.getDisplayInput().focus(options);
+        this.displayInput.focus(options);
     }
 
     /** Removes focus from the control. */
     blur() {
-        this.getDisplayInput().blur();
+        this.displayInput.blur();
     }
 
     getInputValue() {
@@ -704,13 +662,13 @@ export default class SdAutocomplete
         return { "has-value": this.value };
     }
 
-    handleInput(e: InputEvent) {
+    handleInput(/*e: InputEvent*/) {
         this.emit("sd-input-change");
-        this.filterOptions((<HTMLInputElement>e.target).value || "");
+        //this.filterOptions((<HTMLInputElement>e.target).value || "");
     }
 
     //TODO: add algorithms like fuzzy matching and prefix boosting
-    protected filterOptions(filterText: string) {
+    /*protected filterOptions(filterText: string) {
         const options = this.options;
         options.forEach((option) => {
             if (
@@ -723,7 +681,7 @@ export default class SdAutocomplete
                 option.hidden = true;
             }
         });
-    }
+    }*/
 
     @watch("open", { waitUntilFirstUpdate: true })
     handleOpenChange() {
@@ -735,12 +693,12 @@ export default class SdAutocomplete
             this.emit("sd-show");
             this.addOpenListeners();
 
-            this.getListbox().hidden = false;
-            this.getPopup().active = true;
+            this.listbox.hidden = false;
+            this.popup.active = true;
 
             // Make sure the current option is scrolled into view (required for Safari)
             if (this.currentOption) {
-                scrollIntoView(this.currentOption, this.getListbox(), "vertical", "auto");
+                scrollIntoView(this.currentOption, this.listbox, "vertical", "auto");
             }
 
             this.emit("sd-after-show");
@@ -749,8 +707,8 @@ export default class SdAutocomplete
             this.emit("sd-hide");
             this.removeOpenListeners();
 
-            this.getListbox().hidden = true;
-            this.getPopup().active = false;
+            this.listbox.hidden = true;
+            this.popup.active = false;
 
             this.emit("sd-after-hide");
         }

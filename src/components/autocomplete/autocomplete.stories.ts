@@ -56,9 +56,10 @@ export const AsynchronousRequests: Story = {
         placeholder: "--option--",
         label: "label",
         "help-text": "help text",
+        multiple: false,
     },
     render: (args) => {
-        async function onChange(e: Event) {
+        async function onInputChange(e: Event) {
             //fetch api data
             const el = e.target as SdAutocomplete;
             const currentInput = el.getInputValue();
@@ -72,10 +73,10 @@ export const AsynchronousRequests: Story = {
                 })
                 .then((data) => {
                     const options: SdOption[] = [];
-                    data.results.forEach((el: Object, i: number) => {
+                    data.results.forEach((el: Object) => {
                         const option: SdOption = new SdOption();
                         option.label = el["name"];
-                        option.value = i.toString();
+                        option.value = el["name"].replace(/ /g, "_");
                         options.push(option);
                     });
                     el.loading = false;
@@ -84,6 +85,9 @@ export const AsynchronousRequests: Story = {
                 .catch((error) => {
                     console.error("Fetch error:", error);
                 });
+        }
+        function onChange(e: Event) {
+            console.log("changed value to: ", (e.target as SdAutocomplete).value);
         }
         return html`
             <sd-autocomplete
@@ -94,15 +98,9 @@ export const AsynchronousRequests: Story = {
                 ?loading=${args["loading"]}
                 loading-text=${ifDefined(args["loading-text"])}
                 ?hoist=${args["hoist"]}
-                @sd-input-change="${onChange}">
+                @sd-change=${onChange}
+                @sd-input-change="${onInputChange}">
             </sd-autocomplete>
-            <script>
-                const autocomplete = document.querySelector("sd-autocomplete");
-                autocomplete.options = [
-                    { label: "test", value: "val1" },
-                    { label: "test2", value: "val2" },
-                ];
-            </script>
         `;
     },
 };
