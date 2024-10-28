@@ -58,7 +58,7 @@ export default class SdAutocomplete
     @state() selectedOptions: SdOption[] = [];
     @state() currentValue?: string;
     @state() selectedValues: string[] = [];
-    @state() override readonly waitUserInteraction = ["sd-show", "sd-blur"];
+    @state() override readonly waitUserInteraction = ["sd-show", "sd-blur", "sd-hide"];
 
     /**
      * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
@@ -469,26 +469,6 @@ export default class SdAutocomplete
                 this.hide();
                 this.displayInput.focus({ preventScroll: true });
             }
-        }
-    }
-
-    protected handleDefaultSlotChange() {
-        const value = Array.isArray(this.value) ? this.value : [this.value];
-        const values: string[] = [];
-
-        // Check for duplicate values in menu items
-        if (customElements.get("sd-option")) {
-            this.options.forEach((option) => values.push(option.value));
-
-            // Select only the options that match the new value
-            this.setSelectedOptions(
-                this.options.filter((el) => value.includes(el.value))
-            );
-        } else {
-            // Rerun this handler when <sl-option> is registered
-            customElements
-                .whenDefined("sd-option")
-                .then(() => this.handleDefaultSlotChange());
         }
     }
 

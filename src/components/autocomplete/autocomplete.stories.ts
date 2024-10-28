@@ -11,30 +11,52 @@ const meta: Meta = {
     component: "sd-autocomplete",
     tags: ["autodocs"],
     render: function Render(args) {
+        function addValues() {
+            let autocomplete = document.querySelector(
+                "sd-autocomplete"
+            ) as SdAutocomplete;
+            let options: SdOption[] = [];
+            for (let i = 0; i <= 10; i++) {
+                let option: SdOption = new SdOption();
+                option.label = "test number " + i;
+                option.value = "value_" + i;
+                options.push(option);
+            }
+            autocomplete.options = options;
+        }
+
+        function printValue() {
+            const autocomplete = document.querySelector(
+                "sd-autocomplete"
+            ) as SdAutocomplete;
+            console.log("value is: %s", autocomplete.value);
+        }
+
+        function onSubmit(event: Event) {
+            event.preventDefault(); // Prevent form from actually submitting
+
+            const formData = new FormData(event.target as HTMLFormElement);
+            const selectedOptions = formData.getAll("autocomplete");
+
+            console.log("Selected options:", selectedOptions);
+        }
         return html`
-            <sd-autocomplete
-                ?multiple=${args["multiple"]}
-                placeholder=${ifDefined(args["placeholder"])}
-                label=${ifDefined(args["label"])}
-                help-text=${ifDefined(args["help-text"])}
-                ?loading=${args["loading"]}
-                loading-text=${ifDefined(args["loading-text"])}
-                ?hoist=${args["hoist"]}>
-                <sd-option value="option-1">abba test</sd-option>
-                <sd-option value="option-2">abbaba</sd-option>
-                <sd-option value="option-3">Option 3</sd-option>
-                <sd-option value="option-4">Option 4</sd-option>
-                <sd-option value="option-5">abba</sd-option>
-                <sd-option value="option-6">Option 6</sd-option>
-            </sd-autocomplete>
-            <button onclick="printValue()">Autocomplete value</button>
-            <script>
-                function printValue() {
-                    const autocomplete = document.querySelector("sd-autocomplete");
-                    console.log("value is: %s", autocomplete.value);
-                    console.log(autocomplete.value);
-                }
-            </script>
+            <form @submit=${onSubmit}>
+                <sd-autocomplete
+                    name="autocomplete"
+                    ?multiple=${args["multiple"]}
+                    placeholder=${ifDefined(args["placeholder"])}
+                    label=${ifDefined(args["label"])}
+                    help-text=${ifDefined(args["help-text"])}
+                    ?loading=${args["loading"]}
+                    loading-text=${ifDefined(args["loading-text"])}
+                    ?required=${args["required"]}
+                    ?hoist=${args["hoist"]}>
+                </sd-autocomplete>
+                <button @click=${addValues}>Add options</button>
+                <button @click=${printValue}>Autocomplete value</button>
+                <button type="submit">Submit</button>
+            </form>
         `;
     },
 };
@@ -47,7 +69,8 @@ export const Primary: Story = {
         placeholder: "--option--",
         label: "label",
         "help-text": "help text",
-        multiple: true,
+        multiple: false,
+        required: true,
     },
 };
 
@@ -57,6 +80,7 @@ export const AsynchronousRequests: Story = {
         label: "label",
         "help-text": "help text",
         multiple: false,
+        required: true,
     },
     render: (args) => {
         async function onInputChange(e: Event) {
@@ -89,18 +113,31 @@ export const AsynchronousRequests: Story = {
         function onChange(e: Event) {
             console.log("changed value to: ", (e.target as SdAutocomplete).value);
         }
+        function onSubmit(event: Event) {
+            event.preventDefault(); // Prevent form from actually submitting
+
+            const formData = new FormData(event.target as HTMLFormElement);
+            const selectedOptions = formData.getAll("autocomplete");
+
+            console.log("Selected options:", selectedOptions);
+        }
         return html`
-            <sd-autocomplete
-                ?multiple=${args["multiple"]}
-                placeholder=${ifDefined(args["placeholder"])}
-                label=${ifDefined(args["label"])}
-                help-text=${ifDefined(args["help-text"])}
-                ?loading=${args["loading"]}
-                loading-text=${ifDefined(args["loading-text"])}
-                ?hoist=${args["hoist"]}
-                @sd-change=${onChange}
-                @sd-input-change="${onInputChange}">
-            </sd-autocomplete>
+            <form @submit=${onSubmit}>
+                <sd-autocomplete
+                    name="autocomplete"
+                    ?multiple=${args["multiple"]}
+                    placeholder=${ifDefined(args["placeholder"])}
+                    label=${ifDefined(args["label"])}
+                    help-text=${ifDefined(args["help-text"])}
+                    ?loading=${args["loading"]}
+                    loading-text=${ifDefined(args["loading-text"])}
+                    ?required=${args["required"]}
+                    ?hoist=${args["hoist"]}
+                    @sd-change=${onChange}
+                    @sd-input-change="${onInputChange}">
+                </sd-autocomplete>
+                <button type="submit">Submit</button>
+            </form>
         `;
     },
 };
