@@ -6,9 +6,6 @@ const meta: Meta = {
     title: "components/textarea",
     component: "sd-textarea",
     tags: ["autodocs"],
-    render: (args) => {
-        return html` <sd-textarea label=${args["label"]}></sd-textarea> `;
-    },
 };
 
 export default meta;
@@ -17,5 +14,6 @@ type Story = StoryObj;
 export const Default: Story = {
     args: {
         label: "label",
+        required: true,
     },
 };

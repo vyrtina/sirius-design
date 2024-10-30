@@ -22,12 +22,14 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
 
     private resizeObserver!: ResizeObserver;
 
-    @query(".textarea__control") input!: HTMLTextAreaElement;
+    @query(".textarea__input") input!: HTMLTextAreaElement;
     @query(".textarea__size-adjuster") sizeAdjuster!: HTMLTextAreaElement;
     @queryAssignedElements({ slot: "label" }) labelSlotEl!: HTMLSlotElement[];
     @queryAssignedElements({ slot: "help-text" }) helpTextSlotEl!: HTMLSlotElement[];
 
+    @state() override readonly waitUserInteraction = ["sd-blur"];
     @state() private focused = false;
+
     @property() title = ""; // make reactive to pass through
 
     /** The current value of the textarea, submitted as a name/value pair with form data. */
@@ -128,15 +130,15 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         | "email"
         | "url";
 
-    connectedCallback() {
+    async connectedCallback() {
         super.connectedCallback();
         this.defaultValue = this.value;
         this.resizeObserver = new ResizeObserver(() => this.setTextareaHeight());
 
-        this.updateComplete.then(() => {
-            this.setTextareaHeight();
-            this.resizeObserver.observe(this.input);
-        });
+        await this.updateComplete;
+
+        this.setTextareaHeight();
+        this.resizeObserver.observe(this.input);
     }
 
     disconnectedCallback() {
@@ -189,6 +191,7 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
     @watch("value", { waitUntilFirstUpdate: true })
     async handleValueChange() {
         await this.updateComplete;
+        console.log(this.checkValidity());
         //this.updateValidity();
         this.setTextareaHeight();
     }
@@ -279,20 +282,20 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
 
         return html`
-            <div part="container" class="container">
+            <div
+                part="container"
+                class=${classMap({
+                    container: true,
+                    "textarea--disabled": this.disabled,
+                    "textarea--focused": this.focused,
+                    "textarea--empty": !this.value,
+                    "textarea--resize-none": this.resize === "none",
+                    "textarea--resize-vertical": this.resize === "vertical",
+                    "textarea--resize-auto": this.resize === "auto",
+                })}>
                 ${hasLabel ? this.renderLabel() : nothing}
 
-                <div
-                    part="base"
-                    class=${classMap({
-                        textarea: true,
-                        "textarea--disabled": this.disabled,
-                        "textarea--focused": this.focused,
-                        "textarea--empty": !this.value,
-                        "textarea--resize-none": this.resize === "none",
-                        "textarea--resize-vertical": this.resize === "vertical",
-                        "textarea--resize-auto": this.resize === "auto",
-                    })}>
+                <div part="base" class="textarea">
                     <textarea
                         part="textarea"
                         id="input"

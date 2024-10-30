@@ -98,30 +98,6 @@ export default class SdButton extends BaseButtonClass {
         return this.button!;
     }
 
-    /** Gets the validity state object */
-    /*get validity() {
-        if (this.isButton()) {
-            return (this.button as HTMLButtonElement).validity;
-        }
-
-        return validValidityState;
-    }*/
-
-    /** Gets the validation message */
-    /*get validationMessage() {
-        if (this.isButton()) {
-            return (this.button as HTMLButtonElement).validationMessage;
-        }
-
-        return "";
-    }*/
-
-    /*firstUpdated() {
-        if (this.isButton()) {
-            this.updateValidity();
-        }
-    }*/
-
     private handleBlur() {
         this.focused = false;
         this.emit("sd-blur");
@@ -142,23 +118,6 @@ export default class SdButton extends BaseButtonClass {
         }
     }
 
-    /*private handleInvalid(event: Event) {
-        this.formControlController.setValidity(false);
-        this.formControlController.emitInvalidEvent(event);
-    }*/
-
-    /*private isButton() {
-        return this.href ? false : true;
-    }*/
-
-    /*@watch("disabled", { waitUntilFirstUpdate: true })
-    handleDisabledChange() {
-        if (this.isButton()) {
-            // Disabled form controls are always valid
-            this.formControlController.setValidity(this.disabled);
-        }
-    }*/
-
     /** Simulates a click on the button. */
     click() {
         this.getButton().click();
@@ -173,24 +132,6 @@ export default class SdButton extends BaseButtonClass {
     blur() {
         this.getButton().blur();
     }
-
-    /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
-    /*checkValidity() {
-        if (this.isButton()) {
-            return (this.button as HTMLButtonElement).checkValidity();
-        }
-
-        return true;
-    }*/
-
-    /** Checks for validity and shows the browser's validation message if the control is invalid. */
-    /*reportValidity() {
-        if (this.isButton()) {
-            return (this.button as HTMLButtonElement).reportValidity();
-        }
-
-        return true;
-    }*/
 
     render() {
         const buttonOrLink = this.href ? this.renderLink() : this.renderButton();
