@@ -2,6 +2,10 @@
 @use "../../styles/typography.scss";
 @use "../../styles/state-render.scss";
 
+* {
+    box-sizing: border-box;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -24,7 +28,6 @@
 }
 
 .textarea__input {
-    box-sizing: border-box;
     padding: 0.75rem;
     resize: none;
     border: none;
@@ -47,7 +50,7 @@
 }
 
 /** label */
-.textarea-label {
+.label {
     width: fit-content;
     @include typography.sd-body();
     &.drawAsterisk::after {
@@ -76,5 +79,9 @@ input::placeholder {
 
 /** error */
 .textarea--error .textarea {
-    border-color: tokens.$sd-color-critical;
+    outline-color: tokens.$sd-color-critical;
+}
+
+.error-text {
+    color: tokens.$sd-color-critical;
 }

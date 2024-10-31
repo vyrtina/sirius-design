@@ -785,7 +785,7 @@ export default class SdAutocomplete
     }
 
     private renderLabel() {
-        const hasLabel = !this.label || this.labelSlot.length > 0;
+        const hasLabel = this.label || this.labelSlot.length > 0;
         const classes = {
             label: true,
             drawAsterisk: this.required && !this.noAsterisk,

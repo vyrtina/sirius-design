@@ -11,6 +11,10 @@ const BaseButtonClass = MixinElementInternals(SdElement);
 export default class SdButton extends BaseButtonClass {
     static styles = unsafeCSS(styles);
 
+    static get formAssociated() {
+        return true;
+    }
+
     @query(".button") readonly button?: HTMLButtonElement | HTMLLinkElement;
 
     /** choose the style of the button. */
@@ -108,13 +112,21 @@ export default class SdButton extends BaseButtonClass {
         this.emit("sd-focus");
     }
 
+    get form() {
+        return this.internals.form;
+    }
+
     private handleClick() {
+        if (this.href) {
+            return;
+        }
+
         if (this.type === "submit") {
-            this.internals.form?.requestSubmit(this);
+            this.form?.requestSubmit(this);
         }
 
         if (this.type === "reset") {
-            this.internals.form?.reset();
+            this.form?.reset();
         }
     }
 

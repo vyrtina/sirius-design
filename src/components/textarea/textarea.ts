@@ -1,6 +1,6 @@
 import { classMap } from "lit/directives/class-map.js";
 import { MixinFormAssociated } from "../../utils/form.js";
-import { html, nothing, unsafeCSS } from "lit";
+import { html, unsafeCSS } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { live } from "lit/directives/live.js";
 import {
@@ -24,8 +24,8 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
 
     @query(".textarea__input") input!: HTMLTextAreaElement;
     @query(".textarea__size-adjuster") sizeAdjuster!: HTMLTextAreaElement;
-    @queryAssignedElements({ slot: "label" }) labelSlotEl!: HTMLSlotElement[];
-    @queryAssignedElements({ slot: "help-text" }) helpTextSlotEl!: HTMLSlotElement[];
+    @queryAssignedElements({ slot: "label" }) labelSlot!: HTMLSlotElement[];
+    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: HTMLSlotElement[];
 
     @state() override readonly waitUserInteraction = ["sd-blur"];
     @state() private focused = false;
@@ -37,12 +37,6 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
 
     /** the initial value of the textarea component. used to reset the value */
     @property() defaultValue = "";
-
-    /** The textarea's size. */
-    @property({ reflect: true }) size: "small" | "medium" | "large" = "medium";
-
-    /** Draws a filled textarea. */
-    @property({ type: Boolean, reflect: true }) filled = false;
 
     /** The textarea's label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
@@ -68,20 +62,14 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
     /** Makes the textarea a required field. */
     @property({ type: Boolean, reflect: true }) required = false;
 
+    /** Disables the asterisk on the label, when the field is required. */
+    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
+
     /** The minimum length of input that will be considered valid. */
     @property({ type: Number }) minlength?: number;
 
     /** The maximum length of input that will be considered valid. */
     @property({ type: Number }) maxlength?: number;
-
-    /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-    @property() autocapitalize:
-        | "off"
-        | "none"
-        | "on"
-        | "sentences"
-        | "words"
-        | "characters" = "off";
 
     /** Indicates whether the browser's autocorrect feature is on or off. */
     @property() autocorrect?: string;
@@ -276,11 +264,7 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
     }
 
     render() {
-        const hasLabelSlot = this.labelSlotEl.length > 0;
-        const hasHelpTextSlot = this.helpTextSlotEl.length > 0;
-        const hasLabel = this.label ? true : !!hasLabelSlot;
-        const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-
+        const hasError = this.internals.states.has("user-invalid");
         return html`
             <div
                 part="container"
@@ -289,11 +273,12 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
                     "textarea--disabled": this.disabled,
                     "textarea--focused": this.focused,
                     "textarea--empty": !this.value,
+                    "textarea--error": hasError,
                     "textarea--resize-none": this.resize === "none",
                     "textarea--resize-vertical": this.resize === "vertical",
                     "textarea--resize-auto": this.resize === "auto",
                 })}>
-                ${hasLabel ? this.renderLabel() : nothing}
+                ${this.renderLabel()}
 
                 <div part="base" class="textarea">
                     <textarea
@@ -331,24 +316,46 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
                         ?hidden=${this.resize !== "auto"}></div>
                 </div>
 
-                ${hasHelpText ? this.renderHelpText() : nothing}
+                ${hasError ? this.renderErrorText() : this.renderHelpText()}
             </div>
         `;
     }
 
     private renderLabel() {
-        return html`<label part="textarea-label" class="textarea__label" for="input">
+        const hasLabel = this.label || this.labelSlot.length > 0;
+        const classes = {
+            label: true,
+            drawAsterisk: this.required && !this.noAsterisk,
+        };
+        return html`<label
+            part="textarea-label"
+            class=${classMap(classes)}
+            for="input"
+            aria-hidden=${hasLabel ? "false" : "true"}>
             <slot name="label">${this.label}</slot>
         </label>`;
     }
 
+    private renderErrorText() {
+        return html`
+            <span part="error-text" class="error-text">
+                <slot name="error-text"
+                    ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
+                >
+            </span>
+        `;
+    }
+
     private renderHelpText() {
-        return html`<div
+        const hasHelpText = this.helpText || this.helpTextSlot.length > 0;
+
+        return html`<span
             part="textarea-help-text"
             id="help-text"
-            class="textarea__help-text">
+            class="textarea__help-text"
+            aria-hidden=${hasHelpText ? "false" : "true"}>
             <slot name="help-text">${this.helpText}</slot>
-        </div>`;
+        </span>`;
     }
 }
 
