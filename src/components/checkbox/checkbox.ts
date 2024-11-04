@@ -38,8 +38,8 @@ export default class SdCheckbox
     static styles = unsafeCSS(styles);
 
     @query('input[type="checkbox"]') input!: HTMLInputElement;
-    @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
-    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
+    @queryAssignedElements({ slot: "label" }) labelSlot!: HTMLSlotElement[];
+    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: HTMLSlotElement[];
 
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
     @property() value = "on";
@@ -66,8 +66,8 @@ export default class SdCheckbox
     /** Disables the asterisk on the label, when the field is required. */
     @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
 
-    /** The checkbox's lable. If you need to display HTML, use the `label` slot instead. */
-    @property({ attribute: "label" }) label = "";
+    /** The checkbox's label. If you need to display HTML, use the `label` slot instead. */
+    @property() label = "";
 
     /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
@@ -159,12 +159,13 @@ export default class SdCheckbox
     }
 
     render() {
+        const hasError = this.internals.states.has("user-invalid");
         const classes = {
             checkbox: true,
             "checkbox--checked": this.checked,
             "checkbox--focused": this.hasFocus,
             "checkbox--disabled": this.disabled,
-            "checkbox--user-invalid": this.internals.states.has("user-invalid"),
+            "checkbox--user-invalid": hasError,
         };
         return html`
             <div class=${classMap(classes)}>
@@ -187,9 +188,7 @@ export default class SdCheckbox
                     @focus=${this.handleFocus} />
             </div>
             ${this.renderLabel()}
-            <span class="help-text" id="help-text"
-                ><slot name="help-text">${this.helpText}</slot></span
-            >
+            ${hasError ? this.renderErrorText() : this.renderHelpText()}
         `;
     }
 
@@ -208,6 +207,30 @@ export default class SdCheckbox
                 aria-hidden=${hasLabel ? "false" : "true"}
                 ><slot name="label">${this.label}</slot>
             </label>
+        `;
+    }
+
+    private renderErrorText() {
+        return html`
+            <span part="error-text" class="error-text">
+                <slot name="error-text"
+                    ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
+                >
+            </span>
+        `;
+    }
+
+    private renderHelpText() {
+        const hasHelpText = this.helpText || this.helpTextSlot.length > 0;
+
+        return html`
+            <span
+                part="help-text"
+                id="help-text"
+                class="help-text"
+                aria-hidden=${hasHelpText ? "false" : "true"}>
+                <slot name="help-text">${this.helpText}</slot>
+            </span>
         `;
     }
 }

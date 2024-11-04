@@ -13,183 +13,8 @@
           "members": [
             {
               "kind": "field",
-              "name": "searchInput",
-              "type": {
-                "text": "HTMLInputElement | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "loading",
-              "type": "boolean",
-              "default": false,
-              "description": "override displayInput",
-              "attribute": "loading"
-            },
-            {
-              "kind": "field",
-              "name": "loadingText",
-              "type": "string",
-              "default": "Loading...",
-              "attribute": "loading-text"
-            },
-            {
-              "kind": "method",
-              "name": "getSearchInput",
-              "privacy": "protected"
-            },
-            {
-              "kind": "method",
-              "name": "handleDocumentMouseDown",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "handleDocumentKeyDown",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "handleComboboxMouseDown",
-              "privacy": "protected",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "selectionChanged",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleFocus",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleOpenChange",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "renderInput",
-              "privacy": "protected",
-              "description": "render the display input. to impelement the search, use the autocomplete component",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "renderListbox",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "InputEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "filterOptions",
-              "privacy": "protected",
-              "parameters": [
-                {
-                  "name": "filterText",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "typeToSelectString",
-              "type": "string",
-              "privacy": "protected",
-              "default": "",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "typeToSelectTimeout",
-              "type": "number",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "closeWatcher",
-              "type": {
-                "text": "CloseWatcher | null | undefined"
-              },
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "popup",
               "type": "object",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "properties": {
                 "anchorEl": {
                   "anyOf": [
@@ -407,96 +232,132 @@
               "kind": "field",
               "name": "combobox",
               "type": {
-                "text": "HTMLSlotElement | undefined"
-              },
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
+                "text": "HTMLSlotElement"
               }
             },
             {
               "kind": "field",
               "name": "displayInput",
               "type": {
-                "text": "HTMLInputElement | undefined"
-              },
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
+                "text": "HTMLInputElement"
               }
             },
             {
               "kind": "field",
               "name": "valueInput",
               "type": {
-                "text": "HTMLInputElement | undefined"
-              },
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
+                "text": "HTMLInputElement"
               }
             },
             {
               "kind": "field",
               "name": "listbox",
               "type": {
-                "text": "HTMLSlotElement | undefined"
-              },
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
+                "text": "HTMLSlotElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "optionEls",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "label": {
+                    "description": "the option's label. This will be shown to the user.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "disabled": {
+                    "description": "Draws the option in a disabled state, preventing selection.",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "cachedTextLabel": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "selected": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "current": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Node"
+                    }
+                  },
+                  "dir": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "lang": {
+                    "type": "string",
+                    "default": ""
+                  }
+                },
+                "additionalProperties": false
               }
             },
             {
               "kind": "field",
               "name": "labelSlot",
-              "type": "array",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "type": "array"
             },
             {
               "kind": "field",
               "name": "helpTextSlot",
-              "type": "array",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "typeToSelectString",
+              "type": "string",
+              "privacy": "protected",
+              "default": ""
+            },
+            {
+              "kind": "field",
+              "name": "closeWatcher",
+              "type": {
+                "text": "CloseWatcher | null | undefined"
+              },
+              "privacy": "protected"
             },
             {
               "kind": "field",
               "name": "focused",
               "type": "boolean",
               "privacy": "protected",
-              "default": false,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "default": false
             },
             {
               "kind": "field",
               "name": "displayLabel",
               "type": "string",
-              "default": "",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "default": ""
             },
             {
               "kind": "field",
               "name": "currentOption",
               "type": "object",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "properties": {
                 "value": {
                   "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                  "type": "string",
+                  "default": ""
+                },
+                "label": {
+                  "description": "the option's label. This will be shown to the user.",
                   "type": "string",
                   "default": ""
                 },
@@ -539,15 +400,16 @@
               "name": "selectedOptions",
               "type": "array",
               "default": [],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "items": {
                 "type": "object",
                 "properties": {
                   "value": {
                     "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "label": {
+                    "description": "the option's label. This will be shown to the user.",
                     "type": "string",
                     "default": ""
                   },
@@ -588,6 +450,35 @@
             },
             {
               "kind": "field",
+              "name": "currentValue",
+              "type": "string"
+            },
+            {
+              "kind": "field",
+              "name": "selectedValues",
+              "type": "array",
+              "default": [],
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "waitUserInteraction",
+              "type": "array",
+              "readonly": true,
+              "default": [
+                "sd-show",
+                "sd-blur",
+                "sd-hide"
+              ],
+              "description": "wait for these events to fire to consider the user interacted with the component",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
               "type": {
                 "text": "string | string[]"
@@ -595,10 +486,6 @@
               "default": "",
               "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
               "attribute": "value",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "anyOf": [
                 {
                   "type": "array",
@@ -620,10 +507,6 @@
               "default": "",
               "description": "The default value of the select component. used to reset the value.",
               "attribute": "defaultValue",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "anyOf": [
                 {
                   "type": "array",
@@ -642,11 +525,7 @@
               "type": "string",
               "default": "",
               "description": "Placeholder text to show as a hint when the select is empty.",
-              "attribute": "placeholder",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "attribute": "placeholder"
             },
             {
               "kind": "field",
@@ -655,11 +534,7 @@
               "default": false,
               "description": "Allows more than one option to be selected.",
               "attribute": "multiple",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "reflects": true
             },
             {
               "kind": "field",
@@ -667,11 +542,7 @@
               "type": "number",
               "default": 3,
               "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
-              "attribute": "max-options-visible",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "attribute": "max-options-visible"
             },
             {
               "kind": "field",
@@ -680,11 +551,7 @@
               "default": false,
               "description": "Disables the select control.",
               "attribute": "disabled",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "reflects": true
             },
             {
               "kind": "field",
@@ -692,11 +559,7 @@
               "type": "boolean",
               "default": false,
               "description": "Adds a clear button when the select is not empty.",
-              "attribute": "clearable",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "attribute": "clearable"
             },
             {
               "kind": "field",
@@ -705,11 +568,7 @@
               "default": false,
               "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
               "attribute": "open",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "reflects": true
             },
             {
               "kind": "field",
@@ -717,11 +576,7 @@
               "type": "boolean",
               "default": false,
               "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
-              "attribute": "hoist",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "attribute": "hoist"
             },
             {
               "kind": "field",
@@ -729,11 +584,7 @@
               "type": "string",
               "default": "",
               "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
-              "attribute": "label",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "attribute": "label"
             },
             {
               "kind": "field",
@@ -743,10 +594,6 @@
               "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
               "attribute": "placement",
               "reflects": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "enum": [
                 "bottom",
                 "top"
@@ -758,11 +605,7 @@
               "type": "string",
               "default": "",
               "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
-              "attribute": "help-text",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "attribute": "help-text"
             },
             {
               "kind": "field",
@@ -771,11 +614,15 @@
               "default": false,
               "description": "The select's required attribute.",
               "attribute": "required",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "noAsterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "attribute": "no-asterisk"
             },
             {
               "kind": "method",
@@ -783,152 +630,143 @@
               "type": "object",
               "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
               "attribute": "getTag",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "additionalProperties": false
             },
             {
-              "kind": "method",
-              "name": "getPopup",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "kind": "field",
+              "name": "loading",
+              "type": "boolean",
+              "default": false,
+              "description": "shows the spinner and loading text in place of options",
+              "attribute": "loading"
             },
             {
-              "kind": "method",
-              "name": "getDisplayInput",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "kind": "field",
+              "name": "loadingText",
+              "type": "string",
+              "default": "Loading...",
+              "description": "Text to display when in a loading state.",
+              "attribute": "loading-text"
             },
             {
-              "kind": "method",
-              "name": "getValueInput",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getListbox",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
+              "kind": "field",
+              "name": "options",
+              "type": "array",
+              "default": [],
+              "description": "List of options to be rendered.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "label": {
+                    "description": "the option's label. This will be shown to the user.",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "disabled": {
+                    "description": "Draws the option in a disabled state, preventing selection.",
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "cachedTextLabel": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "selected": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "current": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "labels": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Node"
+                    }
+                  },
+                  "dir": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "lang": {
+                    "type": "string",
+                    "default": ""
+                  }
+                },
+                "additionalProperties": false
               }
             },
             {
               "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
+              "name": "renderOption",
               "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
+              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+              "attribute": "renderOption",
               "additionalProperties": false
             },
             {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
-              "type": "string"
+              "kind": "method",
+              "name": "handleDocumentMouseDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleDocumentKeyDown",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleComboboxMouseDown",
+              "privacy": "protected",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "selectionChanged",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "handleFocus",
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "addOpenListeners",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "removeOpenListeners",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleBlur",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleDocumentFocusIn",
               "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "type": "object",
               "additionalProperties": false
             },
             {
               "kind": "method",
               "name": "handleLabelClick",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -941,11 +779,7 @@
                     "text": "KeyboardEvent"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
@@ -958,11 +792,7 @@
                     "text": "MouseEvent"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
@@ -975,11 +805,7 @@
                     "text": "MouseEvent"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
@@ -992,20 +818,7 @@
                     "text": "MouseEvent"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleDefaultSlotChange",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
@@ -1024,38 +837,12 @@
                     "text": "SdOption"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getAllOptions",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getFirstOption",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
               "name": "clearAllOptions",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
@@ -1063,25 +850,17 @@
               "privacy": "protected",
               "parameters": [
                 {
-                  "name": "option",
+                  "name": "optionEl",
                   "type": {
                     "text": "SdOption | null"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
               "name": "reset",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
@@ -1089,16 +868,12 @@
               "privacy": "protected",
               "parameters": [
                 {
-                  "name": "option",
+                  "name": "optionEl",
                   "type": {
                     "text": "SdOption | SdOption[]"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "method",
@@ -1118,57 +893,33 @@
                     "text": "boolean"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
             },
             {
               "kind": "field",
               "name": "tags",
               "privacy": "protected",
               "readonly": true,
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "type": "array",
               "items": {}
             },
             {
               "kind": "method",
-              "name": "handleDisabledChange",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "name": "handleDisabledChange"
             },
             {
               "kind": "method",
-              "name": "handleValueChange",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "name": "handleValueChange"
             },
             {
               "kind": "method",
               "name": "show",
-              "description": "Shows the listbox.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "description": "Shows the listbox."
             },
             {
               "kind": "method",
               "name": "hide",
-              "description": "Hides the listbox.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "description": "Hides the listbox."
             },
             {
               "kind": "method",
@@ -1182,28 +933,20 @@
                   }
                 }
               ],
-              "description": "Sets focus on the control.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "description": "Sets focus on the control."
             },
             {
               "kind": "method",
               "name": "blur",
-              "description": "Removes focus from the control.",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "description": "Removes focus from the control."
             },
             {
               "kind": "method",
-              "name": "getValidityAnchor",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "name": "getInputValue"
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor"
             },
             {
               "kind": "method",
@@ -1212,10 +955,6 @@
                 "type": {
                   "text": "void"
                 }
-              },
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
               }
             },
             {
@@ -1228,54 +967,56 @@
                     "text": "string"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue"
+            },
+            {
+              "kind": "method",
+              "name": "getState"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput"
+            },
+            {
+              "kind": "method",
+              "name": "handleOpenChange"
             },
             {
               "kind": "method",
               "name": "renderCombobox",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "renderLabel",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderErrorText",
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "renderHelpText",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderDisplayInput",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "renderListbox",
+              "privacy": "protected"
             }
           ],
           "attributes": [
-            {
-              "name": "loading",
-              "type": "boolean",
-              "default": false,
-              "description": "override displayInput",
-              "fieldName": "loading"
-            },
-            {
-              "name": "loading-text",
-              "type": "string",
-              "default": "Loading...",
-              "fieldName": "loadingText"
-            },
             {
               "name": "value",
               "type": {
@@ -1284,10 +1025,6 @@
               "default": "",
               "description": "The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the\nvalue attribute will be a space-delimited list of values based on the options selected, and the value property will\nbe an array. **For this reason, values must not contain spaces.**",
               "fieldName": "value",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "anyOf": [
                 {
                   "type": "array",
@@ -1308,10 +1045,6 @@
               "default": "",
               "description": "The default value of the select component. used to reset the value.",
               "fieldName": "defaultValue",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "anyOf": [
                 {
                   "type": "array",
@@ -1329,88 +1062,56 @@
               "type": "string",
               "default": "",
               "description": "Placeholder text to show as a hint when the select is empty.",
-              "fieldName": "placeholder",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "placeholder"
             },
             {
               "name": "multiple",
               "type": "boolean",
               "default": false,
               "description": "Allows more than one option to be selected.",
-              "fieldName": "multiple",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "multiple"
             },
             {
               "name": "max-options-visible",
               "type": "number",
               "default": 3,
               "description": "The maximum number of selected options to show when `multiple` is true. After the maximum, \"+n\" will be shown to\nindicate the number of additional items that are selected. Set to 0 to remove the limit.",
-              "fieldName": "maxOptionsVisible",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "maxOptionsVisible"
             },
             {
               "name": "disabled",
               "type": "boolean",
               "default": false,
               "description": "Disables the select control.",
-              "fieldName": "disabled",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "disabled"
             },
             {
               "name": "clearable",
               "type": "boolean",
               "default": false,
               "description": "Adds a clear button when the select is not empty.",
-              "fieldName": "clearable",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "clearable"
             },
             {
               "name": "open",
               "type": "boolean",
               "default": false,
               "description": "Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can\nuse the `show()` and `hide()` methods and this attribute will reflect the select's open state.",
-              "fieldName": "open",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "open"
             },
             {
               "name": "hoist",
               "type": "boolean",
               "default": false,
               "description": "Enable this option to prevent the listbox from being clipped when the component is placed inside a container with\n`overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.",
-              "fieldName": "hoist",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "hoist"
             },
             {
               "name": "label",
               "type": "string",
               "default": "",
               "description": "The select's label. If you need to display HTML, use the `label` slot instead.",
-              "fieldName": "label",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "label"
             },
             {
               "name": "placement",
@@ -1418,10 +1119,6 @@
               "default": "bottom",
               "description": "The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox\ninside of the viewport.",
               "fieldName": "placement",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "enum": [
                 "bottom",
                 "top"
@@ -1432,39 +1129,55 @@
               "type": "string",
               "default": "",
               "description": "The select's help text. If you need to display HTML, use the `help-text` slot instead.",
-              "fieldName": "helpText",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "helpText"
             },
             {
               "name": "required",
               "type": "boolean",
               "default": false,
               "description": "The select's required attribute.",
-              "fieldName": "required",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              }
+              "fieldName": "required"
+            },
+            {
+              "name": "no-asterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "fieldName": "noAsterisk"
             },
             {
               "name": "getTag",
               "type": "object",
               "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
               "fieldName": "getTag",
-              "inheritedFrom": {
-                "name": "SdSelect",
-                "module": "src/components/select/select.ts"
-              },
               "kind": "method",
+              "additionalProperties": false
+            },
+            {
+              "name": "loading",
+              "type": "boolean",
+              "default": false,
+              "description": "shows the spinner and loading text in place of options",
+              "fieldName": "loading"
+            },
+            {
+              "name": "loading-text",
+              "type": "string",
+              "default": "Loading...",
+              "description": "Text to display when in a loading state.",
+              "fieldName": "loadingText"
+            },
+            {
+              "name": "renderOption",
+              "type": "object",
+              "description": "A function that customizes the tags to be rendered when multiple=true. The first argument is the option, the second\nis the current tag's index.  The function should return either a Lit TemplateResult or a string containing trusted HTML of the symbol to render at\nthe specified value.",
+              "fieldName": "renderOption",
               "additionalProperties": false
             }
           ],
           "superclass": {
-            "name": "SdSelect",
-            "module": "/src/components/select/select"
+            "name": "BaseAutocompleteClass",
+            "module": "src/components/autocomplete/autocomplete.ts"
           },
           "tagName": "sd-autocomplete",
           "customElement": true
@@ -1757,6 +1470,162 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/carousel/carousel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCarousel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "autoTransition",
+              "type": "boolean",
+              "default": true,
+              "attribute": "autoTransition"
+            },
+            {
+              "kind": "field",
+              "name": "count",
+              "type": "number",
+              "default": 0,
+              "attribute": "count"
+            },
+            {
+              "kind": "field",
+              "name": "_slideIndex",
+              "type": "number",
+              "privacy": "private",
+              "default": 0
+            },
+            {
+              "kind": "method",
+              "name": "_showSlideRadio",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_changeRadio",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_showSlide",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_prevSlide"
+            },
+            {
+              "kind": "method",
+              "name": "_nextSlide"
+            },
+            {
+              "kind": "method",
+              "name": "_autoShowSlides"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "autoTransition",
+              "type": "boolean",
+              "default": true,
+              "fieldName": "autoTransition"
+            },
+            {
+              "name": "count",
+              "type": "number",
+              "default": 0,
+              "fieldName": "count"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-carousel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdCarousel",
+            "module": "src/components/carousel/carousel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-carousel",
+          "declaration": {
+            "name": "SdCarousel",
+            "module": "src/components/carousel/carousel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/carousel/slider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCarouselSlider",
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "sd-carousel-slider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdCarouselSlider",
+            "module": "src/components/carousel/slider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-carousel-slider",
+          "declaration": {
+            "name": "SdCarouselSlider",
+            "module": "src/components/carousel/slider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/breadcrumb/breadcrumb-item.ts",
       "declarations": [
         {
@@ -1948,6 +1817,78 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/card/card-filled.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardFilled",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-filled",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardFilled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-filled",
+          "declaration": {
+            "name": "SdCardFilled",
+            "module": "src/components/card/card-filled.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/card/card-outlined.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdCardOutlined",
+          "members": [],
+          "superclass": {
+            "name": "Card",
+            "module": "/src/components/card/internal/card"
+          },
+          "tagName": "sd-card-outlined",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "SdCardOutlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-card-outlined",
+          "declaration": {
+            "name": "SdCardOutlined",
+            "module": "src/components/card/card-outlined.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/button/button.ts",
       "declarations": [
         {
@@ -1955,6 +1896,12 @@
           "description": "",
           "name": "SdButton",
           "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "static": true,
+              "readonly": true
+            },
             {
               "kind": "field",
               "name": "button",
@@ -2137,13 +2084,31 @@
             {
               "kind": "method",
               "name": "handleBlur",
-              "privacy": "private",
-              "description": "Gets the validation message"
+              "privacy": "private"
             },
             {
               "kind": "method",
               "name": "handleFocus",
               "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "readonly": true,
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "patternProperties": {
+                    "^[0-9]+$": {
+                      "$ref": "#/definitions/Element"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             {
               "kind": "method",
@@ -2353,234 +2318,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/card/card-filled.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCardFilled",
-          "members": [],
-          "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
-          },
-          "tagName": "sd-card-filled",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdCardFilled",
-          "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-card-filled",
-          "declaration": {
-            "name": "SdCardFilled",
-            "module": "src/components/card/card-filled.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/card/card-outlined.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCardOutlined",
-          "members": [],
-          "superclass": {
-            "name": "Card",
-            "module": "/src/components/card/internal/card"
-          },
-          "tagName": "sd-card-outlined",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "SdCardOutlined",
-          "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-card-outlined",
-          "declaration": {
-            "name": "SdCardOutlined",
-            "module": "src/components/card/card-outlined.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/carousel/carousel.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCarousel",
-          "members": [
-            {
-              "kind": "field",
-              "name": "autoTransition",
-              "type": "boolean",
-              "default": true,
-              "attribute": "autoTransition"
-            },
-            {
-              "kind": "field",
-              "name": "count",
-              "type": "number",
-              "default": 0,
-              "attribute": "count"
-            },
-            {
-              "kind": "field",
-              "name": "_slideIndex",
-              "type": "number",
-              "privacy": "private",
-              "default": 0
-            },
-            {
-              "kind": "method",
-              "name": "_showSlideRadio",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_changeRadio",
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_showSlide",
-              "parameters": [
-                {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "_prevSlide"
-            },
-            {
-              "kind": "method",
-              "name": "_nextSlide"
-            },
-            {
-              "kind": "method",
-              "name": "_autoShowSlides"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "autoTransition",
-              "type": "boolean",
-              "default": true,
-              "fieldName": "autoTransition"
-            },
-            {
-              "name": "count",
-              "type": "number",
-              "default": 0,
-              "fieldName": "count"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-carousel",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "SdCarousel",
-            "module": "src/components/carousel/carousel.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-carousel",
-          "declaration": {
-            "name": "SdCarousel",
-            "module": "src/components/carousel/carousel.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/carousel/slider.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "SdCarouselSlider",
-          "members": [],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "tagName": "sd-carousel-slider",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "SdCarouselSlider",
-            "module": "src/components/carousel/slider.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "sd-carousel-slider",
-          "declaration": {
-            "name": "SdCarouselSlider",
-            "module": "src/components/carousel/slider.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/checkbox/checkbox.ts",
       "declarations": [
         {
@@ -2588,6 +2325,23 @@
           "description": "",
           "name": "SdCheckbox",
           "members": [
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlot",
+              "type": "array"
+            },
             {
               "kind": "field",
               "name": "value",
@@ -2622,7 +2376,15 @@
               "type": "boolean",
               "default": false,
               "description": "Draws the checkbox in a checked state.",
-              "attribute": "checked"
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "defalutChecked",
+              "type": "boolean",
+              "default": false,
+              "attribute": "defalutChecked"
             },
             {
               "kind": "field",
@@ -2644,11 +2406,19 @@
             },
             {
               "kind": "field",
-              "name": "labelText",
+              "name": "noAsterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "attribute": "no-asterisk"
+            },
+            {
+              "kind": "field",
+              "name": "label",
               "type": "string",
               "default": "",
-              "description": "The checkbox's lable. If you need to display HTML, use the `label` slot instead.",
-              "attribute": "label-text"
+              "description": "The checkbox's label. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label"
             },
             {
               "kind": "field",
@@ -2660,9 +2430,21 @@
             },
             {
               "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
+              "name": "hasFocus",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "waitUserInteraction",
+              "type": "array",
+              "readonly": true,
+              "default": [
+                "sd-blur"
+              ],
+              "description": "wait for these events to fire to consider the user interacted with the component",
+              "items": {
+                "type": "string"
               }
             },
             {
@@ -2677,17 +2459,17 @@
             },
             {
               "kind": "method",
+              "name": "handleFocus",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
               "name": "handleBlur",
               "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleInput",
-              "privacy": "protected"
-            },
-            {
-              "kind": "method",
-              "name": "handleFocus",
               "privacy": "protected"
             },
             {
@@ -2754,6 +2536,21 @@
                   "text": "CheckboxState"
                 }
               }
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderErrorText",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderHelpText",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -2789,6 +2586,12 @@
               "fieldName": "checked"
             },
             {
+              "name": "defalutChecked",
+              "type": "boolean",
+              "default": false,
+              "fieldName": "defalutChecked"
+            },
+            {
               "name": "indeterminate",
               "type": "boolean",
               "default": false,
@@ -2803,11 +2606,18 @@
               "fieldName": "required"
             },
             {
-              "name": "label-text",
+              "name": "no-asterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "fieldName": "noAsterisk"
+            },
+            {
+              "name": "label",
               "type": "string",
               "default": "",
-              "description": "The checkbox's lable. If you need to display HTML, use the `label` slot instead.",
-              "fieldName": "labelText"
+              "description": "The checkbox's label. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
             },
             {
               "name": "help-text",
@@ -3447,6 +3257,297 @@
           "declaration": {
             "name": "SdDropdown",
             "module": "src/components/dropdown/dropdown.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/dropzone/dropzone.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "SdDropzone",
+          "members": [
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "previewContainer",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The dropzone's label. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The current value of the dropzone, submitted as a name/value pair with form data.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "helpText",
+              "type": "string",
+              "default": "",
+              "description": "The dropzone's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "attribute": "help-text"
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the dropzone a required field.",
+              "attribute": "required",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "noAsterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "attribute": "no-asterisk"
+            },
+            {
+              "kind": "field",
+              "name": "dragHover",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "kind": "method",
+              "name": "onDragOver",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onDragEnter",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onDragLeave",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleDrop",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleFiles",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "files",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addPreview",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "_e",
+                  "type": {
+                    "text": "ProgressEvent"
+                  }
+                },
+                {
+                  "name": "reader",
+                  "type": {
+                    "text": "FileReader"
+                  }
+                },
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isValidFileType",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "any"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getFormValue"
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback"
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "parameters": [
+                {
+                  "name": "_state",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getValidityAnchor"
+            },
+            {
+              "kind": "method",
+              "name": "getState"
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderErrorText",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderHelpText",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "The dropzone's label. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The current value of the dropzone, submitted as a name/value pair with form data.",
+              "fieldName": "value"
+            },
+            {
+              "name": "help-text",
+              "type": "string",
+              "default": "",
+              "description": "The dropzone's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "fieldName": "helpText"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Makes the dropzone a required field.",
+              "fieldName": "required"
+            },
+            {
+              "name": "no-asterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "fieldName": "noAsterisk"
+            }
+          ],
+          "superclass": {
+            "name": "DropzoneBaseClass",
+            "module": "src/components/dropzone/dropzone.ts"
+          },
+          "tagName": "sd-dropzone",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "SdDropzone",
+            "module": "src/components/dropzone/dropzone.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-dropzone",
+          "declaration": {
+            "name": "SdDropzone",
+            "module": "src/components/dropzone/dropzone.ts"
           }
         }
       ]
@@ -4097,6 +4198,16 @@
             },
             {
               "kind": "field",
+              "name": "formAssociated",
+              "static": true,
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              }
+            },
+            {
+              "kind": "field",
               "name": "button",
               "type": {
                 "text": "HTMLButtonElement | HTMLLinkElement | undefined"
@@ -4354,7 +4465,6 @@
               "kind": "method",
               "name": "handleBlur",
               "privacy": "private",
-              "description": "Gets the validation message",
               "inheritedFrom": {
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
@@ -4368,6 +4478,29 @@
                 "name": "SdButton",
                 "module": "src/components/button/button.ts"
               }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "SdButton",
+                "module": "src/components/button/button.ts"
+              },
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "patternProperties": {
+                    "^[0-9]+$": {
+                      "$ref": "#/definitions/Element"
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             {
               "kind": "method",
@@ -4733,6 +4866,16 @@
             },
             {
               "kind": "field",
+              "name": "labelSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
               "name": "type",
               "type": "string",
               "default": "text",
@@ -4773,11 +4916,11 @@
             },
             {
               "kind": "field",
-              "name": "errorText",
+              "name": "errorMessage",
               "type": "string",
               "default": "",
               "description": "The error message that replaces supporting text when `error` is true. If\n`errorText` is an empty string, then the supporting text will continue to\nshow.\n\nThis error message overrides the error message displayed by\n`reportValidity()`.",
-              "attribute": "error-text"
+              "attribute": "error-message"
             },
             {
               "kind": "field",
@@ -4974,14 +5117,6 @@
             },
             {
               "kind": "field",
-              "name": "form_id",
-              "type": "string",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "attribute": "form_id",
-              "reflects": true
-            },
-            {
-              "kind": "field",
               "name": "multiple",
               "type": "boolean",
               "default": false,
@@ -5016,22 +5151,6 @@
               "description": "Describes what, if any, type of autocomplete functionality the input\nshould provide.\n\nhttps://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete",
               "attribute": "autocomplete",
               "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "nativeError",
-              "type": "boolean",
-              "privacy": "private",
-              "default": false,
-              "description": "Whether or not a native error has been reported via `reportValidity()`."
-            },
-            {
-              "kind": "field",
-              "name": "nativeErrorText",
-              "type": "string",
-              "privacy": "private",
-              "default": "",
-              "description": "The validation message displayed from a native error via\n`reportValidity()`."
             },
             {
               "kind": "method",
@@ -5093,13 +5212,6 @@
                   "type": "null"
                 }
               ]
-            },
-            {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "type": "string"
             },
             {
               "kind": "field",
@@ -5333,6 +5445,10 @@
             },
             {
               "kind": "method",
+              "name": "handleErrorMessageChange"
+            },
+            {
+              "kind": "method",
               "name": "handleStepChange"
             },
             {
@@ -5431,11 +5547,11 @@
               "fieldName": "error"
             },
             {
-              "name": "error-text",
+              "name": "error-message",
               "type": "string",
               "default": "",
               "description": "The error message that replaces supporting text when `error` is true. If\n`errorText` is an empty string, then the supporting text will continue to\nshow.\n\nThis error message overrides the error message displayed by\n`reportValidity()`.",
-              "fieldName": "errorText"
+              "fieldName": "errorMessage"
             },
             {
               "name": "label",
@@ -5598,12 +5714,6 @@
                 "text",
                 "url"
               ]
-            },
-            {
-              "name": "form_id",
-              "type": "string",
-              "description": "By default, form controls are associated with the nearest containing `<form>` element. This attribute allows you\nto place the form control outside of a form and associate it with the form that has this `id`. The form must be in\nthe same document or shadow root for this to work.",
-              "fieldName": "form_id"
             },
             {
               "name": "multiple",
@@ -7089,10 +7199,107 @@
           "kind": "class",
           "description": "",
           "name": "SdRadio",
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "description": "When selected, the radio group return this value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Make the radio disabled",
+              "attribute": "disabled"
+            },
+            {
+              "kind": "field",
+              "name": "checked",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "focused",
+              "type": "boolean",
+              "default": false
+            },
+            {
+              "kind": "field",
+              "name": "handleBlur",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "field",
+              "name": "handleFocus",
+              "privacy": "private",
+              "type": "object",
+              "additionalProperties": false
+            },
+            {
+              "kind": "method",
+              "name": "handleClick",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeydown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "handleCheckedChange"
+            },
+            {
+              "kind": "method",
+              "name": "handleDisabledChange"
+            },
+            {
+              "kind": "field",
+              "name": "role",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"radio\""
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": "string",
+              "description": "When selected, the radio group return this value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": false,
+              "description": "Make the radio disabled",
+              "fieldName": "disabled"
+            }
+          ],
+          "mixins": [
+            {
+              "name": "MixinElementInternals",
+              "module": "/src/utils/element-internals"
+            }
+          ],
           "superclass": {
-            "name": "LitElement",
-            "package": "lit"
+            "name": "SdElement",
+            "module": "/src/utils/sd-element"
           },
           "tagName": "sd-radio",
           "customElement": true
@@ -7119,1759 +7326,144 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/radio/single-selection-controller.ts",
+      "path": "src/components/radio-group/radio-group.ts",
       "declarations": [
         {
           "kind": "class",
-          "description": "A `ReactiveController` that provides root node-scoped single selection for\r\nelements, similar to native `<input type=\"radio\">` selection.\r\n\r\nTo use, elements should add the controller and call\r\n`selectionController.handleCheckedChange()` in a getter/setter. This must\r\nbe synchronous to match native behavior.",
-          "name": "SingleSelectionController",
+          "description": "",
+          "name": "SdRadioGroup",
           "members": [
             {
               "kind": "field",
-              "name": "controls",
-              "type": "array",
-              "description": "All single selection elements in the host element's root with the same\n`name` attribute, including the host element.",
-              "readonly": true,
-              "items": [
-                {
-                  "$ref": "#/definitions/SingleSelectionElement"
-                }
-              ],
-              "minItems": 1,
-              "additionalItems": {
-                "description": "An element that supports single-selection with `SingleSelectionController`.",
-                "type": "object",
-                "properties": {
-                  "checked": {
-                    "description": "Whether or not the element is selected.",
-                    "type": "boolean"
-                  },
-                  "accessKey": {
-                    "type": "string"
-                  },
-                  "accessKeyLabel": {
-                    "type": "string"
-                  },
-                  "autocapitalize": {
-                    "type": "string"
-                  },
-                  "dir": {
-                    "type": "string"
-                  },
-                  "draggable": {
-                    "type": "boolean"
-                  },
-                  "hidden": {
-                    "type": "boolean"
-                  },
-                  "inert": {
-                    "type": "boolean"
-                  },
-                  "innerText": {
-                    "type": "string"
-                  },
-                  "lang": {
-                    "type": "string"
-                  },
-                  "offsetHeight": {
-                    "type": "number"
-                  },
-                  "offsetLeft": {
-                    "type": "number"
-                  },
-                  "offsetParent": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/Element"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "offsetTop": {
-                    "type": "number"
-                  },
-                  "offsetWidth": {
-                    "type": "number"
-                  },
-                  "outerText": {
-                    "type": "string"
-                  },
-                  "spellcheck": {
-                    "type": "boolean"
-                  },
-                  "title": {
-                    "type": "string"
-                  },
-                  "translate": {
-                    "type": "boolean"
-                  },
-                  "attributes": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "patternProperties": {
-                      "^[0-9]+$": {
-                        "$ref": "#/definitions/Attr"
-                      }
-                    }
-                  },
-                  "classList": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "patternProperties": {
-                      "^[0-9]+$": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "className": {
-                    "type": "string"
-                  },
-                  "clientHeight": {
-                    "type": "number"
-                  },
-                  "clientLeft": {
-                    "type": "number"
-                  },
-                  "clientTop": {
-                    "type": "number"
-                  },
-                  "clientWidth": {
-                    "type": "number"
-                  },
-                  "id": {
-                    "type": "string"
-                  },
-                  "localName": {
-                    "type": "string"
-                  },
-                  "namespaceURI": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "onfullscreenchange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onfullscreenerror": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "outerHTML": {
-                    "type": "string"
-                  },
-                  "ownerDocument": {
-                    "$ref": "#/definitions/Document"
-                  },
-                  "part": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "patternProperties": {
-                      "^[0-9]+$": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "prefix": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "scrollHeight": {
-                    "type": "number"
-                  },
-                  "scrollLeft": {
-                    "type": "number"
-                  },
-                  "scrollTop": {
-                    "type": "number"
-                  },
-                  "scrollWidth": {
-                    "type": "number"
-                  },
-                  "shadowRoot": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/ShadowRoot"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "slot": {
-                    "type": "string"
-                  },
-                  "tagName": {
-                    "type": "string"
-                  },
-                  "baseURI": {
-                    "type": "string"
-                  },
-                  "childNodes": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/definitions/ChildNode"
-                    }
-                  },
-                  "firstChild": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/ChildNode"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "isConnected": {
-                    "type": "boolean"
-                  },
-                  "lastChild": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/ChildNode"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "nextSibling": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/ChildNode"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "nodeName": {
-                    "type": "string"
-                  },
-                  "nodeType": {
-                    "type": "number"
-                  },
-                  "nodeValue": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "parentElement": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/HTMLElement"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "parentNode": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/ParentNode"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "previousSibling": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/ChildNode"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "textContent": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ATTRIBUTE_NODE": {
-                    "type": "number"
-                  },
-                  "CDATA_SECTION_NODE": {
-                    "type": "number"
-                  },
-                  "COMMENT_NODE": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_FRAGMENT_NODE": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_NODE": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_POSITION_CONTAINED_BY": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_POSITION_CONTAINS": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_POSITION_DISCONNECTED": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_POSITION_FOLLOWING": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_POSITION_PRECEDING": {
-                    "type": "number"
-                  },
-                  "DOCUMENT_TYPE_NODE": {
-                    "type": "number"
-                  },
-                  "ELEMENT_NODE": {
-                    "type": "number"
-                  },
-                  "ENTITY_NODE": {
-                    "type": "number"
-                  },
-                  "ENTITY_REFERENCE_NODE": {
-                    "type": "number"
-                  },
-                  "NOTATION_NODE": {
-                    "type": "number"
-                  },
-                  "PROCESSING_INSTRUCTION_NODE": {
-                    "type": "number"
-                  },
-                  "TEXT_NODE": {
-                    "type": "number"
-                  },
-                  "ariaAtomic": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaAutoComplete": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaBusy": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaChecked": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaColCount": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaColIndex": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaColSpan": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaCurrent": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaDisabled": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaExpanded": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaHasPopup": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaHidden": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaKeyShortcuts": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaLabel": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaLevel": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaLive": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaModal": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaMultiLine": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaMultiSelectable": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaOrientation": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaPlaceholder": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaPosInSet": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaPressed": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaReadOnly": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaRequired": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaRoleDescription": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaRowCount": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaRowIndex": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaRowSpan": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaSelected": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaSetSize": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaSort": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaValueMax": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaValueMin": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaValueNow": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "ariaValueText": {
-                    "type": [
-                      "null",
-                      "string"
-                    ]
-                  },
-                  "innerHTML": {
-                    "type": "string"
-                  },
-                  "nextElementSibling": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/Element"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "previousElementSibling": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/Element"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "childElementCount": {
-                    "type": "number"
-                  },
-                  "children": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "patternProperties": {
-                      "^[0-9]+$": {
-                        "$ref": "#/definitions/Element"
-                      }
-                    }
-                  },
-                  "firstElementChild": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/Element"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "lastElementChild": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/Element"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "assignedSlot": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/definitions/HTMLSlotElement"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oncopy": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oncut": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpaste": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "style": {
-                    "type": "object",
-                    "additionalProperties": false,
-                    "patternProperties": {
-                      "^[0-9]+$": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "contentEditable": {
-                    "type": "string"
-                  },
-                  "enterKeyHint": {
-                    "type": "string"
-                  },
-                  "inputMode": {
-                    "type": "string"
-                  },
-                  "isContentEditable": {
-                    "type": "boolean"
-                  },
-                  "onabort": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onanimationcancel": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onanimationend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onanimationiteration": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onanimationstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onauxclick": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onblur": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oncanplay": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oncanplaythrough": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onchange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onclick": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onclose": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oncontextmenu": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oncuechange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondblclick": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondrag": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondragend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondragenter": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondragleave": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondragover": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondragstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondrop": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ondurationchange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onemptied": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onended": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onerror": {
-                    "$ref": "#/definitions/OnErrorEventHandler"
-                  },
-                  "onfocus": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onformdata": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ongotpointercapture": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oninput": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "oninvalid": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onkeydown": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onkeypress": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onkeyup": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onload": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onloadeddata": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onloadedmetadata": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onloadstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onlostpointercapture": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmousedown": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmouseenter": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmouseleave": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmousemove": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmouseout": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmouseover": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onmouseup": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpause": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onplay": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onplaying": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointercancel": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointerdown": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointerenter": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointerleave": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointermove": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointerout": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointerover": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onpointerup": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onprogress": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onratechange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onreset": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onresize": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onscroll": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onsecuritypolicyviolation": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onseeked": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onseeking": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onselect": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onselectionchange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onselectstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onslotchange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onstalled": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onsubmit": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onsuspend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontimeupdate": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontoggle": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontouchcancel": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontouchend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontouchmove": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontouchstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontransitioncancel": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontransitionend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontransitionrun": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "ontransitionstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onvolumechange": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onwaiting": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onwebkitanimationend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onwebkitanimationiteration": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onwebkitanimationstart": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onwebkittransitionend": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "onwheel": {
-                    "anyOf": [
-                      {
-                        "type": "object",
-                        "additionalProperties": false
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "autofocus": {
-                    "type": "boolean"
-                  },
-                  "dataset": {
-                    "$ref": "#/definitions/DOMStringMap"
-                  },
-                  "nonce": {
-                    "type": "string"
-                  },
-                  "tabIndex": {
-                    "type": "number"
-                  }
-                },
-                "additionalProperties": false
-              }
+              "name": "radioSlot",
+              "type": "array"
             },
             {
               "kind": "field",
-              "name": "focused",
+              "name": "labelSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "the radio group's label. If you need to display HTML, use the `label` slot instead.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "helpText",
+              "type": "string",
+              "default": "",
+              "description": "The radio groups's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "attribute": "help-text"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The current value of the radio group, submitted as a name/value pair with form data.",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "required",
               "type": "boolean",
-              "privacy": "private",
-              "default": false
-            },
-            {
-              "kind": "field",
-              "name": "root",
-              "type": {
-                "text": "ParentNode | null"
-              },
-              "privacy": "private",
-              "default": null,
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/ParentNode"
-                },
-                {
-                  "type": "null"
-                }
-              ]
+              "default": false,
+              "description": "Ensures a radio button in the group must be checked",
+              "attribute": "required",
+              "reflects": true
             },
             {
               "kind": "method",
-              "name": "hostConnected"
-            },
-            {
-              "kind": "method",
-              "name": "hostDisconnected"
-            },
-            {
-              "kind": "method",
-              "name": "handleCheckedChange",
-              "description": "Should be called whenever the host's `checked` property changes\r\nsynchronously."
-            },
-            {
-              "kind": "field",
-              "name": "handleFocusIn",
-              "privacy": "private",
-              "readonly": true,
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "handleFocusOut",
-              "privacy": "private",
-              "readonly": true,
-              "type": "object",
-              "additionalProperties": false
-            },
-            {
-              "kind": "method",
-              "name": "uncheckSiblings",
+              "name": "getRadios",
               "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "updateTabIndices",
-              "privacy": "private",
-              "description": "Updates the `tabindex` of the host and its siblings."
+              "name": "focus",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "FocusOptions"
+                  }
+                }
+              ],
+              "description": "Sets focus on the checked radio.\r\nif no radio is checked, check the first one not disabled"
             },
             {
               "kind": "method",
-              "name": "handleKeyDown",
-              "privacy": "private",
-              "readonly": true,
-              "description": "Handles arrow key events from the host. Using the arrow keys will\nselect and check the next or previous sibling with the host's\n`name` attribute.",
-              "type": "object",
-              "additionalProperties": false
+              "name": "formResetCallback"
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback"
             }
-          ]
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "the radio group's label. If you need to display HTML, use the `label` slot instead.",
+              "fieldName": "label"
+            },
+            {
+              "name": "help-text",
+              "type": "string",
+              "default": "",
+              "description": "The radio groups's help text. If you need to display HTML, use the `help-text` slot instead.",
+              "fieldName": "helpText"
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "default": "",
+              "description": "The current value of the radio group, submitted as a name/value pair with form data.",
+              "fieldName": "value"
+            },
+            {
+              "name": "required",
+              "type": "boolean",
+              "default": false,
+              "description": "Ensures a radio button in the group must be checked",
+              "fieldName": "required"
+            }
+          ],
+          "superclass": {
+            "name": "BaseRadioGroupClass",
+            "module": "src/components/radio-group/radio-group.ts"
+          },
+          "tagName": "sd-radio-group",
+          "customElement": true
         }
       ],
       "exports": [
         {
           "kind": "js",
-          "name": "SingleSelectionController",
+          "name": "default",
           "declaration": {
-            "name": "SingleSelectionController",
-            "module": "src/components/radio/single-selection-controller.ts"
+            "name": "SdRadioGroup",
+            "module": "src/components/radio-group/radio-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "sd-radio-group",
+          "declaration": {
+            "name": "SdRadioGroup",
+            "module": "src/components/radio-group/radio-group.ts"
           }
         }
       ]
@@ -9251,6 +7843,14 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "the option's label. This will be shown to the user.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
               "name": "disabled",
               "type": "boolean",
               "default": false,
@@ -9471,6 +8071,13 @@
               "default": "",
               "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
               "fieldName": "value"
+            },
+            {
+              "name": "label",
+              "type": "string",
+              "default": "",
+              "description": "the option's label. This will be shown to the user.",
+              "fieldName": "label"
             },
             {
               "name": "disabled",
@@ -9758,28 +8365,28 @@
               "kind": "field",
               "name": "combobox",
               "type": {
-                "text": "HTMLSlotElement | undefined"
+                "text": "HTMLSlotElement"
               }
             },
             {
               "kind": "field",
               "name": "displayInput",
               "type": {
-                "text": "HTMLInputElement | undefined"
+                "text": "HTMLInputElement"
               }
             },
             {
               "kind": "field",
               "name": "valueInput",
               "type": {
-                "text": "HTMLInputElement | undefined"
+                "text": "HTMLInputElement"
               }
             },
             {
               "kind": "field",
               "name": "listbox",
               "type": {
-                "text": "HTMLSlotElement | undefined"
+                "text": "HTMLSlotElement"
               }
             },
             {
@@ -9812,6 +8419,11 @@
               "properties": {
                 "value": {
                   "description": "The option's value. When selected, the containing form control will receive this value. The value must be unique\nfrom other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing\nmultiple values.",
+                  "type": "string",
+                  "default": ""
+                },
+                "label": {
+                  "description": "the option's label. This will be shown to the user.",
                   "type": "string",
                   "default": ""
                 },
@@ -9862,6 +8474,11 @@
                     "type": "string",
                     "default": ""
                   },
+                  "label": {
+                    "description": "the option's label. This will be shown to the user.",
+                    "type": "string",
+                    "default": ""
+                  },
                   "disabled": {
                     "description": "Draws the option in a disabled state, preventing selection.",
                     "type": "boolean",
@@ -9895,6 +8512,20 @@
                   }
                 },
                 "additionalProperties": false
+              }
+            },
+            {
+              "kind": "field",
+              "name": "waitUserInteraction",
+              "type": "array",
+              "readonly": true,
+              "default": [
+                "sd-show",
+                "sd-blur"
+              ],
+              "description": "wait for these events to fire to consider the user interacted with the component",
+              "items": {
+                "type": "string"
               }
             },
             {
@@ -10037,6 +8668,14 @@
               "reflects": true
             },
             {
+              "kind": "field",
+              "name": "noAsterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "attribute": "no-asterisk"
+            },
+            {
               "kind": "method",
               "name": "getTag",
               "type": "object",
@@ -10056,63 +8695,8 @@
             },
             {
               "kind": "method",
-              "name": "getValueInput",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
               "name": "getListbox",
               "privacy": "protected"
-            },
-            {
-              "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "type": "string"
             },
             {
               "kind": "method",
@@ -10396,6 +8980,14 @@
             },
             {
               "kind": "method",
+              "name": "getFormValue"
+            },
+            {
+              "kind": "method",
+              "name": "getState"
+            },
+            {
+              "kind": "method",
               "name": "renderCombobox",
               "privacy": "protected"
             },
@@ -10408,6 +9000,11 @@
             {
               "kind": "method",
               "name": "renderLabel",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderErrorText",
               "privacy": "private"
             },
             {
@@ -10542,6 +9139,13 @@
               "default": false,
               "description": "The select's required attribute.",
               "fieldName": "required"
+            },
+            {
+              "name": "no-asterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "fieldName": "noAsterisk"
             },
             {
               "name": "getTag",
@@ -11101,26 +9705,35 @@
           "members": [
             {
               "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labelSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
+              "name": "helpTextSlot",
+              "type": "array"
+            },
+            {
+              "kind": "field",
               "name": "value",
               "type": "string",
               "default": "on",
               "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
-              "attribute": "value",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "attribute": "value"
             },
             {
               "kind": "field",
               "name": "title",
               "type": "string",
               "default": "",
-              "attribute": "title",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "attribute": "title"
             },
             {
               "kind": "field",
@@ -11130,10 +9743,6 @@
               "description": "The checkbox's size.",
               "attribute": "size",
               "reflects": true,
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              },
               "enum": [
                 "medium",
                 "small"
@@ -11146,23 +9755,14 @@
               "default": false,
               "description": "Draws the checkbox in a checked state.",
               "attribute": "checked",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "indeterminate",
+              "name": "defalutChecked",
               "type": "boolean",
               "default": false,
-              "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
-              "attribute": "indeterminate",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "attribute": "defalutChecked"
             },
             {
               "kind": "field",
@@ -11171,23 +9771,23 @@
               "default": false,
               "description": "Makes the checkbox a required field.",
               "attribute": "required",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "reflects": true
             },
             {
               "kind": "field",
-              "name": "labelText",
+              "name": "noAsterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "attribute": "no-asterisk"
+            },
+            {
+              "kind": "field",
+              "name": "label",
               "type": "string",
               "default": "",
               "description": "The checkbox's lable. If you need to display HTML, use the `label` slot instead.",
-              "attribute": "label-text",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "attribute": "label"
             },
             {
               "kind": "field",
@@ -11195,84 +9795,55 @@
               "type": "string",
               "default": "",
               "description": "The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.",
-              "attribute": "help-text",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "attribute": "help-text"
             },
             {
               "kind": "field",
-              "name": "input",
-              "type": {
-                "text": "HTMLInputElement"
-              },
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "name": "focused",
+              "type": "boolean",
+              "default": false
             },
             {
-              "kind": "method",
-              "name": "getInput",
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
+              "kind": "field",
+              "name": "waitUserInteraction",
+              "type": "array",
+              "readonly": true,
+              "default": [
+                "sd-blur"
+              ],
+              "description": "wait for these events to fire to consider the user interacted with the component",
+              "items": {
+                "type": "string"
               }
             },
             {
               "kind": "method",
               "name": "handleClick",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleBlur",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "handleInput",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
               "name": "handleFocus",
-              "privacy": "protected",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "privacy": "protected"
             },
             {
               "kind": "method",
-              "name": "handleStateChange",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "name": "handleBlur",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "handleInput",
+              "privacy": "protected"
+            },
+            {
+              "kind": "method",
+              "name": "handleStateChange"
             },
             {
               "kind": "method",
               "name": "click",
-              "description": "Simulates a click on the checkbox.",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "description": "Simulates a click on the checkbox."
             },
             {
               "kind": "method",
@@ -11286,44 +9857,24 @@
                   }
                 }
               ],
-              "description": "Sets focus on the checkbox.",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "description": "Sets focus on the checkbox."
             },
             {
               "kind": "method",
               "name": "blur",
-              "description": "Removes focus from the checkbox.",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "description": "Removes focus from the checkbox."
             },
             {
               "kind": "method",
-              "name": "getFormValue",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "name": "getFormValue"
             },
             {
               "kind": "method",
-              "name": "getFormState",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "name": "getFormState"
             },
             {
               "kind": "method",
-              "name": "formResetCallback",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "name": "formResetCallback"
             },
             {
               "kind": "method",
@@ -11335,61 +9886,40 @@
                     "text": "string"
                   }
                 }
-              ],
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              ]
             },
             {
               "kind": "method",
-              "name": "getValidityAnchor",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "name": "getValidityAnchor"
             },
             {
               "kind": "method",
               "name": "getState",
               "return": {
                 "type": {
-                  "text": "CheckboxState"
+                  "text": "SwitchState"
                 }
-              },
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
               }
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "private"
             }
           ],
-          "superclass": {
-            "name": "SdCheckbox",
-            "module": "/src/components/checkbox/checkbox"
-          },
-          "tagName": "sd-switch",
-          "customElement": true,
           "attributes": [
             {
               "name": "value",
               "type": "string",
               "default": "on",
               "description": "The current value of the checkbox, submitted as a name/value pair with form data.",
-              "fieldName": "value",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "value"
             },
             {
               "name": "title",
               "type": "string",
               "default": "",
-              "fieldName": "title",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "title"
             },
             {
               "name": "size",
@@ -11397,10 +9927,6 @@
               "default": "medium",
               "description": "The checkbox's size.",
               "fieldName": "size",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              },
               "enum": [
                 "medium",
                 "small"
@@ -11411,57 +9937,49 @@
               "type": "boolean",
               "default": false,
               "description": "Draws the checkbox in a checked state.",
-              "fieldName": "checked",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "checked"
             },
             {
-              "name": "indeterminate",
+              "name": "defalutChecked",
               "type": "boolean",
               "default": false,
-              "description": "Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a \"select\nall/none\" behavior when associated checkboxes have a mix of checked and unchecked states.",
-              "fieldName": "indeterminate",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "defalutChecked"
             },
             {
               "name": "required",
               "type": "boolean",
               "default": false,
               "description": "Makes the checkbox a required field.",
-              "fieldName": "required",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "required"
             },
             {
-              "name": "label-text",
+              "name": "no-asterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "fieldName": "noAsterisk"
+            },
+            {
+              "name": "label",
               "type": "string",
               "default": "",
               "description": "The checkbox's lable. If you need to display HTML, use the `label` slot instead.",
-              "fieldName": "labelText",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "label"
             },
             {
               "name": "help-text",
               "type": "string",
               "default": "",
               "description": "The checkbox's help text. If you need to display HTML, use the `help-text` slot instead.",
-              "fieldName": "helpText",
-              "inheritedFrom": {
-                "name": "SdCheckbox",
-                "module": "src/components/checkbox/checkbox.ts"
-              }
+              "fieldName": "helpText"
             }
-          ]
+          ],
+          "superclass": {
+            "name": "SwitchBaseClass",
+            "module": "src/components/switch/switch.ts"
+          },
+          "tagName": "sd-switch",
+          "customElement": true
         }
       ],
       "exports": [
@@ -12348,17 +10866,30 @@
             },
             {
               "kind": "field",
-              "name": "labelSlotEl",
+              "name": "labelSlot",
               "type": "array"
             },
             {
               "kind": "field",
-              "name": "helpTextSlotEl",
+              "name": "helpTextSlot",
               "type": "array"
             },
             {
               "kind": "field",
-              "name": "hasFocus",
+              "name": "waitUserInteraction",
+              "type": "array",
+              "readonly": true,
+              "default": [
+                "sd-blur"
+              ],
+              "description": "wait for these events to fire to consider the user interacted with the component",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "focused",
               "type": "boolean",
               "privacy": "private",
               "default": false
@@ -12385,29 +10916,6 @@
               "default": "",
               "description": "the initial value of the textarea component. used to reset the value",
               "attribute": "defaultValue"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": "string",
-              "default": "medium",
-              "description": "The textarea's size.",
-              "attribute": "size",
-              "reflects": true,
-              "enum": [
-                "large",
-                "medium",
-                "small"
-              ]
-            },
-            {
-              "kind": "field",
-              "name": "filled",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws a filled textarea.",
-              "attribute": "filled",
-              "reflects": true
             },
             {
               "kind": "field",
@@ -12483,6 +10991,14 @@
             },
             {
               "kind": "field",
+              "name": "noAsterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "attribute": "no-asterisk"
+            },
+            {
+              "kind": "field",
               "name": "minlength",
               "type": "number",
               "description": "The minimum length of input that will be considered valid.",
@@ -12494,22 +11010,6 @@
               "type": "number",
               "description": "The maximum length of input that will be considered valid.",
               "attribute": "maxlength"
-            },
-            {
-              "kind": "field",
-              "name": "autocapitalize",
-              "type": "string",
-              "default": "off",
-              "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
-              "attribute": "autocapitalize",
-              "enum": [
-                "characters",
-                "none",
-                "off",
-                "on",
-                "sentences",
-                "words"
-              ]
             },
             {
               "kind": "field",
@@ -12573,56 +11073,6 @@
                 "text",
                 "url"
               ]
-            },
-            {
-              "kind": "field",
-              "name": "validity",
-              "description": "Gets the validity state object",
-              "readonly": true,
-              "type": "object",
-              "properties": {
-                "badInput": {
-                  "type": "boolean"
-                },
-                "customError": {
-                  "type": "boolean"
-                },
-                "patternMismatch": {
-                  "type": "boolean"
-                },
-                "rangeOverflow": {
-                  "type": "boolean"
-                },
-                "rangeUnderflow": {
-                  "type": "boolean"
-                },
-                "stepMismatch": {
-                  "type": "boolean"
-                },
-                "tooLong": {
-                  "type": "boolean"
-                },
-                "tooShort": {
-                  "type": "boolean"
-                },
-                "typeMismatch": {
-                  "type": "boolean"
-                },
-                "valid": {
-                  "type": "boolean"
-                },
-                "valueMissing": {
-                  "type": "boolean"
-                }
-              },
-              "additionalProperties": false
-            },
-            {
-              "kind": "field",
-              "name": "validationMessage",
-              "description": "Gets the validation message",
-              "readonly": true,
-              "type": "string"
             },
             {
               "kind": "method",
@@ -12762,6 +11212,10 @@
             },
             {
               "kind": "method",
+              "name": "getValidityAnchor"
+            },
+            {
+              "kind": "method",
               "name": "formResetCallback",
               "return": {
                 "type": {
@@ -12783,7 +11237,20 @@
             },
             {
               "kind": "method",
+              "name": "getFormValue"
+            },
+            {
+              "kind": "method",
+              "name": "getState"
+            },
+            {
+              "kind": "method",
               "name": "renderLabel",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "renderErrorText",
               "privacy": "private"
             },
             {
@@ -12812,25 +11279,6 @@
               "default": "",
               "description": "the initial value of the textarea component. used to reset the value",
               "fieldName": "defaultValue"
-            },
-            {
-              "name": "size",
-              "type": "string",
-              "default": "medium",
-              "description": "The textarea's size.",
-              "fieldName": "size",
-              "enum": [
-                "large",
-                "medium",
-                "small"
-              ]
-            },
-            {
-              "name": "filled",
-              "type": "boolean",
-              "default": false,
-              "description": "Draws a filled textarea.",
-              "fieldName": "filled"
             },
             {
               "name": "label",
@@ -12894,6 +11342,13 @@
               "fieldName": "required"
             },
             {
+              "name": "no-asterisk",
+              "type": "boolean",
+              "default": false,
+              "description": "Disables the asterisk on the label, when the field is required.",
+              "fieldName": "noAsterisk"
+            },
+            {
               "name": "minlength",
               "type": "number",
               "description": "The minimum length of input that will be considered valid.",
@@ -12904,21 +11359,6 @@
               "type": "number",
               "description": "The maximum length of input that will be considered valid.",
               "fieldName": "maxlength"
-            },
-            {
-              "name": "autocapitalize",
-              "type": "string",
-              "default": "off",
-              "description": "Controls whether and how text input is automatically capitalized as it is entered by the user.",
-              "fieldName": "autocapitalize",
-              "enum": [
-                "characters",
-                "none",
-                "off",
-                "on",
-                "sentences",
-                "words"
-              ]
             },
             {
               "name": "autocorrect",

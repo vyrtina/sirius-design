@@ -1,0 +1,59 @@
+@use "../../styles/tokens.scss";
+
+.label {
+    margin-bottom: 0.5rem;
+}
+
+.drop-area {
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: tokens.$sd-border-radius-medium;
+    border: 1px dashed tokens.$sd-color-border;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.preview-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/** state layer */
+.state-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-color: tokens.$sd-color-primary;
+    border-radius: inherit;
+}
+
+.dropzone--drag-hover .drop-area .state-layer {
+    opacity: tokens.$sd-opacity-state-layer-hover;
+}
+
+.preview-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: tokens.$sd-border-radius-small;
+    border: 1px solid #ddd;
+}
+
+/** placeholder */
+.image-placeholder {
+    padding: 1.5rem;
+    background-color: tokens.$sd-color-accent-container;
+    border-radius: tokens.$sd-border-radius-small;
+}
+
+.help-text {
+    flex-grow: 1;
+}
