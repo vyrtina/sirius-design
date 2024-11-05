@@ -22,10 +22,12 @@ export const Default: Story = {
             const form = e.target as HTMLFormElement;
             const formData = new FormData(form);
             console.log(formData.getAll("dropzone"));
+            console.log(formData.getAll("upload"));
         }
         return html`
-            <form method="GET" @submit=${handleSubmit}>
+            <form method="get" @submit=${handleSubmit} enctype="multipart/form-data">
                 <sd-dropzone name="dropzone"></sd-dropzone>
+                <input type="file" name="upload" multiple></input>
                 <button type="submit">Submit</button>
             </form>
         `;

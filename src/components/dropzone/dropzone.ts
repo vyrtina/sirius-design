@@ -76,6 +76,7 @@ export default class SdDropzone extends DropzoneBaseClass implements SdFormContr
     }
 
     private handleDrop(e: DragEvent) {
+        e.preventDefault();
         this.emit("sd-drop");
         this.dragHover = false;
 
