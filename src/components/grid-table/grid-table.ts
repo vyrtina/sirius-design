@@ -118,6 +118,8 @@ export default class SdGridTable extends SdElement {
         },
     };
 
+    @property({ attribute: false }) onRowClickCallback?: () => void;
+
     //the order of the columns. takes the field name as key index
     @state() columnOrder: string[] = [];
 
@@ -257,6 +259,10 @@ export default class SdGridTable extends SdElement {
         }
     }
 
+    private handleRowClick(e: Event) {
+        console.log("row clicked : ", e.target);
+    }
+
     render() {
         return html`
             <div class="table-wrapper">
@@ -264,7 +270,11 @@ export default class SdGridTable extends SdElement {
                     <div class="header-row table-row" role="row">
                         ${this.headers.map((header) => this.renderHeader(header))}
                     </div>
-                    ${this.renderRows()}
+                    <div
+                        class="row-container"
+                        @click=${(e: Event) => this.handleRowClick(e)}>
+                        ${this.renderRows()}
+                    </div>
                 </div>
                 ${this.renderFooter()}
             </div>
@@ -310,14 +320,16 @@ export default class SdGridTable extends SdElement {
             ) {
                 rowsTemplate.push(
                     html`<div class="table-row" role="row">
-                        ${this.renderRow(this.rows[i + start_index])}
+                        ${this.renderRowContent(this.rows[i + start_index])}
                     </div>`
                 );
             }
         } else {
             this.rows.forEach((row) => {
                 rowsTemplate.push(
-                    html`<div class="table-row" role="row">${this.renderRow(row)}</div>`
+                    html`<div class="table-row" role="row">
+                        ${this.renderRowContent(row)}
+                    </div>`
                 );
             });
         }
@@ -325,7 +337,7 @@ export default class SdGridTable extends SdElement {
         return rowsTemplate;
     }
 
-    private renderRow(row: GridRow) {
+    private renderRowContent(row: GridRow) {
         let rowTemplate: Array<TemplateResult> = [];
         // we search if the column field exist in the row
         // TODO: return a blank cell if it doesnt exist
