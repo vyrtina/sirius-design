@@ -118,8 +118,6 @@ export default class SdGridTable extends SdElement {
         },
     };
 
-    @property({ attribute: false }) onRowClickCallback?: () => void;
-
     //the order of the columns. takes the field name as key index
     @state() columnOrder: string[] = [];
 
@@ -132,17 +130,6 @@ export default class SdGridTable extends SdElement {
 
     @state()
     public currentPage: number = 1;
-
-    /** //TODO: add for custom element type 
-    sanitizeHTML(htmlString: string) {
-        return DOMPurify.sanitize(htmlString, {
-            CUSTOM_ELEMENT_HANDLING: {
-                tagNameCheck: /^sd-/,
-                attributeNameCheck: /^/,
-                allowCustomizedBuiltInElements: true,
-            },
-        });
-    }*/
 
     connectedCallback(): void {
         super.connectedCallback();
@@ -221,17 +208,6 @@ export default class SdGridTable extends SdElement {
         return this.tableCells!;
     }
 
-    /*
-    private getHeaderCells() {
-        if (!this.headerCells) {
-            this.scheduleUpdate();
-        }
-        if (this.isUpdatePending) {
-            this.scheduleUpdate();
-        }
-        return this.headerCells!;
-    }*/
-
     private switchSort(header: ColumnHeader) {
         if (this.sortModel[0]["field"] === header["field"]) {
             let order =
@@ -260,7 +236,10 @@ export default class SdGridTable extends SdElement {
     }
 
     private handleRowClick(e: Event) {
-        console.log("row clicked : ", e.target);
+        if (!e.target || e.target === e.currentTarget) {
+            return;
+        }
+        this.emit("sd-row-click", { detail: { row: e.target } });
     }
 
     render() {
@@ -381,6 +360,8 @@ export default class SdGridTable extends SdElement {
                 return this.renderCellTag(cell, header["typeArgs"]);
             case "datetime":
                 return this.renderCellDateTime(cell);
+            case "image":
+                return this.renderCellImage(cell);
             default:
                 return this.renderCellString(cell);
         }
@@ -406,6 +387,10 @@ export default class SdGridTable extends SdElement {
     private renderCellDateTime(cell: GridCell) {
         const date = new Date(cell["value"]);
         return html` ${date.toLocaleDateString()} `;
+    }
+
+    private renderCellImage(cell: GridCell) {
+        return html`<img src=${cell["value"]}></img>`;
     }
 
     private renderSortArrow(header: ColumnHeader) {

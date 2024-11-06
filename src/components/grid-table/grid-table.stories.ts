@@ -16,12 +16,14 @@ const meta: Meta = {
                     Status: { value: "complete" },
                     Task: { value: "build" },
                     price: { value: "256.000 DT" },
+                    image: { value: "https://picsum.photos/200/300" },
                 },
                 {
                     Status: { value: "working" },
                     ID: { value: "two", args: { tagVariant: "critical" } },
                     Task: { value: "test" },
                     price: { value: "24.000 DT" },
+                    image: { value: "https://picsum.photos/500/100" },
                 },
                 {
                     ID: {
@@ -33,6 +35,7 @@ const meta: Meta = {
                     Status: { value: "failed" },
                     Task: { value: "deploy" },
                     price: { value: "311.000 DT" },
+                    image: { value: "https://picsum.photos/300/150" },
                 }
             );
         }
@@ -50,9 +53,13 @@ const meta: Meta = {
                     { field: "Status", sortable: false },
                     { field: "Task" },
                     { field: "price", type: "number" },
+                    { field: "image", type: "image" },
                 ]}
                 .rows=${rows}
-                .pagination=${{ paginationMode: "client" }}>
+                .pagination=${{ paginationMode: "client" }}
+                @sd-row-click=${(e: CustomEvent) => {
+                    console.log("row clicked ! : ", e.detail["row"]);
+                }}>
             </sd-grid-table>
         `;
     },
