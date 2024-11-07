@@ -11,6 +11,7 @@ import "../../icons/src/keyboard_arrow_up.js";
 import "../../icons/src/keyboard_arrow_down.js";
 import SdPagination from "../pagination/pagination.js";
 import { TagVariant } from "../tag/tag.js";
+import { classMap } from "lit/directives/class-map.js";
 
 export type valueGetter = () => any;
 
@@ -67,12 +68,6 @@ export interface SortModel {
     sort: SortingType;
 }
 
-export interface GridInitialData {
-    sortModel?: SortModel[];
-    currentPageSize?: number;
-    currentPage?: number;
-}
-
 export interface PaginationType {
     hide?: boolean;
     pageSize?: Array<number>;
@@ -80,6 +75,15 @@ export interface PaginationType {
     handlePageChange?: () => void;
 }
 
+/**
+ * @event sd-row-click - Emitted when a row is clicked.
+ *
+ * @csspart header-row - The table's header row.
+ * @csspart header-cell - The table's header cells.
+ * @csspart table-row - The table's data rows.
+ * @csspart table-cell - The table's data cells.
+ *
+ */
 @customElement("sd-grid-table")
 export default class SdGridTable extends SdElement {
     static styles = unsafeCSS(styles);
@@ -103,14 +107,15 @@ export default class SdGridTable extends SdElement {
     /** the sort order cycle */
     @property({ type: Array }) sortOrder: Array<SortingType> = ["asc", "desc", "none"];
 
+    //TODO: add converter
     @property() defaultWidth = "100px";
     @property() defaultMinWidth = "10px";
+
+    @property() density: "compact" | "regular" | "relaxed" = "regular";
 
     @property({ attribute: false, type: Array }) headers: ColumnHeader[] = [];
 
     @property({ attribute: false, type: Array }) rows: GridRow[] = [];
-
-    @property({ attribute: false, type: Object }) initialData: GridInitialData = {};
 
     @property({ attribute: false, type: Object }) pagination: PaginationType = {
         handlePageChange() {
@@ -121,39 +126,24 @@ export default class SdGridTable extends SdElement {
     //the order of the columns. takes the field name as key index
     @state() columnOrder: string[] = [];
 
-    @state()
+    @property({ attribute: false, type: Array })
     sortModel: SortModel[] = [{ field: "", sort: "none" }];
 
-    /** rows per page */
-    @state()
-    public currentPageSize: number = 10;
+    /** number of rows displayed per page */
+    @property({ attribute: false, type: Number }) currentPageSize: number = 10;
 
-    @state()
-    public currentPage: number = 1;
-
-    connectedCallback(): void {
-        super.connectedCallback();
-        if (this.initialData["sortModel"]) {
-            this.sortModel = this.initialData["sortModel"];
-        }
-        if (this.initialData["currentPage"]) {
-            this.currentPage = this.initialData["currentPage"];
-        }
-        if (this.initialData["currentPageSize"]) {
-            this.currentPageSize = this.initialData["currentPageSize"];
-        } else if (this.pagination["pageSize"]) {
-            this.currentPageSize = this.pagination["pageSize"][0];
-        }
-    }
+    /** currently display page */
+    @property({ attribute: false, type: Number }) currentPage: number = 1;
 
     /** get the server field name from the field name */
     public getServerField(field: string) {
-        for (const header of this.headers) {
-            if (header.field === field) {
-                return header["serverField"] ?? header.field;
-            }
+        const header = this.headers.find(
+            (header: ColumnHeader) => header.field === field
+        );
+        if (!header) {
+            return undefined;
         }
-        return undefined;
+        return header["serverField"] ?? header.field;
     }
 
     updated(changedProperties: Map<string | number | symbol, unknown>): void {
@@ -227,6 +217,8 @@ export default class SdGridTable extends SdElement {
         }
     }
 
+    /** runs when a pagination button get pressed */
+    //TODO: emit event
     private handlePageChange(e: Event) {
         const target = e.target as SdPagination;
         this.currentPage = target.currentPage;
@@ -235,6 +227,7 @@ export default class SdGridTable extends SdElement {
         }
     }
 
+    /** runs when a row is clicked */
     private handleRowClick(e: Event) {
         if (!e.target || e.target === e.currentTarget) {
             return;
@@ -245,12 +238,20 @@ export default class SdGridTable extends SdElement {
     render() {
         return html`
             <div class="table-wrapper">
-                <div class="table" role="grid">
-                    <div class="header-row table-row" role="row">
+                <div
+                    class=${classMap({
+                        table: true,
+                        "table--compact": this.density === "compact",
+                        "table--regular": this.density === "regular",
+                        "table--relaxed": this.density === "relaxed",
+                    })}
+                    role="grid">
+                    <div class="header-row table-row" part="header-row" role="row">
                         ${this.headers.map((header) => this.renderHeader(header))}
                     </div>
                     <div
-                        class="row-container"
+                        class="row-group"
+                        role="rowgroup"
                         @click=${(e: Event) => this.handleRowClick(e)}>
                         ${this.renderRows()}
                     </div>
@@ -265,6 +266,7 @@ export default class SdGridTable extends SdElement {
         return html`
             <div
                 class="header-cell table-cell ${rightAlign ? "cell-right-align" : ""}"
+                part="header-cell"
                 role="columnheader"
                 aria-colindex=${this.columnOrder.indexOf(header.field)}
                 data-field="${header["field"]}"
@@ -276,9 +278,7 @@ export default class SdGridTable extends SdElement {
                     "min-width": header["minWidth"] ?? this.defaultMinWidth,
                 })}>
                 ${rightAlign ? this.renderSortArrow(header) : nothing}
-                <div class="header-cell__content">
-                    ${header["headerName"] ?? header["field"]}
-                </div>
+                ${header["headerName"] ?? header["field"]}
                 ${rightAlign ? nothing : this.renderSortArrow(header)}
             </div>
         `;
@@ -298,7 +298,7 @@ export default class SdGridTable extends SdElement {
                 i++
             ) {
                 rowsTemplate.push(
-                    html`<div class="table-row" role="row">
+                    html`<div class="table-row" part="table-row" role="row">
                         ${this.renderRowContent(this.rows[i + start_index])}
                     </div>`
                 );
@@ -306,7 +306,7 @@ export default class SdGridTable extends SdElement {
         } else {
             this.rows.forEach((row) => {
                 rowsTemplate.push(
-                    html`<div class="table-row" role="row">
+                    html`<div class="table-row" part="table-row" role="row">
                         ${this.renderRowContent(row)}
                     </div>`
                 );
@@ -337,12 +337,20 @@ export default class SdGridTable extends SdElement {
         const cellStyle = {
             width: header["width"] ?? this.defaultWidth,
         };
+        const classes = {
+            "table-cell": true,
+            "cell-right-align": header["type"] === "number",
+            "cell--type-string": header["type"] === "string",
+            "cell--type-number": header["type"] === "number",
+            "cell--type-tag": header["type"] === "tag",
+            "cell--type-datetime": header["type"] === "datetime",
+            "cell--type-image": header["type"] === "image",
+        };
         return html`
             <div
-                class="table-cell ${header["type"] === "number"
-                    ? "cell-right-align"
-                    : ""}"
+                class=${classMap(classes)}
                 role="gridcell"
+                part="table-cell"
                 data-field="${header.field}"
                 aria-colindex=${this.columnOrder.indexOf(header.field)}
                 style=${styleMap(cellStyle)}>

@@ -2,47 +2,48 @@
 @use "../../styles/layer.scss";
 @use "../../styles/typography.scss";
 
-.table-wrapper {
-    background-color: tokens.$sd-color-surface;
+:host {
+    display: block;
+    --row-height--compact: 40px;
+    --row-height--regular: 52px;
+    --row-height--relaxed: 60px;
 }
 
-.table {
-    display: grid;
+* {
     box-sizing: border-box;
+}
+
+.table-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: inherit;
+    position: relative;
     overflow: hidden;
     border-radius: tokens.$sd-border-radius-small;
 }
 
-.table-row.header-row {
-    background-color: layer.$sd-color-surface-1;
-    color: tokens.$sd-color-palette-neutral-600;
-    padding: 0 0.5rem;
-    @include typography.sd-body();
-    & .header-cell {
-        pointer-events: unset;
-        display: flex;
-        font-weight: inherit;
-        padding: 0.5rem;
-        &:not(:first-child) {
-            border-left: 1px solid tokens.$sd-color-border;
-        }
-        & .header-cell__content {
-            width: 100%;
-        }
-    }
+.table {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background-color: tokens.$sd-color-surface;
+    flex-grow: 1;
 }
 
 .table-row {
-    box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
     padding: 0 0.5rem;
+}
+
+.table-row:not(.header-row) {
     &:not(:last-child) {
         border-bottom: 1px solid tokens.$sd-color-border;
-    }
-    & .table-cell {
-        box-sizing: border-box;
-        padding: 0.5rem;
     }
     &:hover {
         background-color: rgba(
@@ -50,6 +51,43 @@
             $alpha: tokens.$sd-opacity-state-layer-hover
         );
     }
+}
+
+.table-row.header-row {
+    position: sticky;
+    top: 0px;
+    z-index: 5; //TODO: make the value not hardcoded
+    background-color: layer.$sd-color-surface-1;
+    color: tokens.$sd-color-palette-neutral-600;
+    padding: 0 0.5rem;
+    @include typography.sd-body();
+    & .header-cell {
+        pointer-events: unset;
+        font-weight: inherit;
+        &:not(:first-child) {
+            border-left: 1px solid tokens.$sd-color-border;
+        }
+    }
+}
+
+.table--compact .table-row {
+    --height: var(--row-height--compact);
+}
+
+.table--regular .table-row {
+    --height: var(--row-height--regular);
+}
+
+.table--relaxed .table-row {
+    --height: var(--row-height--relaxed);
+}
+
+.table-cell {
+    display: flex;
+    align-items: center;
+    height: var(--height);
+    padding: 0 0.5rem;
+    flex: 0 0 auto;
 }
 
 .table-cell,
@@ -61,7 +99,6 @@
 
 .resizer {
     position: relative;
-    box-sizing: border-box;
     cursor: col-resize;
     width: 8px;
     border-right: 1px solid tokens.$sd-color-primary;
@@ -72,11 +109,25 @@
     text-align: right;
 }
 
+/** footer */
 .table-footer {
     display: flex;
     flex-direction: row;
+    background-color: tokens.$sd-color-surface;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 1rem;
     border-top: 1px solid tokens.$sd-color-border;
+}
+
+/** cell content */
+.table-cell.cell--type-image img {
+    object-fit: cover;
+    aspect-ratio: 1;
+    height: 100%;
+}
+
+/** row group */
+.row-group {
+    overflow-y: auto;
 }

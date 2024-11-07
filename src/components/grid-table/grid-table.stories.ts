@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import "./grid-table";
 import "../tag/tag";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 const meta: Meta = {
     title: "components/grid-table",
@@ -41,8 +42,10 @@ const meta: Meta = {
         }
         return html`
             <sd-grid-table
-                sortingMode=${args["sortingMode"]}
-                row-count=${args["row-count"]}
+                style="max-height: 400px;"
+                sortingMode=${ifDefined(args["sortingMode"])}
+                row-count=${ifDefined(args["row-count"])}
+                density=${ifDefined(args["density"])}
                 .headers=${[
                     {
                         field: "ID",
@@ -71,5 +74,6 @@ type Story = StoryObj;
 export const Default: Story = {
     args: {
         sortingMode: "server",
+        density: "relaxed",
     },
 };

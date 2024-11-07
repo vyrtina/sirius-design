@@ -6,9 +6,11 @@
 
 .tag {
     display: flex;
+    line-height: normal;
     padding: 0.125rem 0.5rem 0.125rem 0.5rem;
     border-radius: tokens.$sd-border-radius-small;
     align-items: center;
+    height: min-content;
     &.primary {
         background-color: tokens.$sd-color-primary;
         color: tokens.$sd-color-on-primary;
