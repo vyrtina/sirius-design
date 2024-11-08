@@ -3,7 +3,6 @@ import { property, customElement, queryAll, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./grid-table.scss?inline";
-//import DOMPurify from "dompurify";
 import interact from "interactjs";
 import "../tag/tag.js";
 import "../pagination/pagination.js";

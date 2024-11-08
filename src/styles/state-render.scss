@@ -3,7 +3,7 @@
 
 //return True if the color is "dark"
 @function is-dark-color($color) {
-    @return (color.channel($color, "lightness", $space: hsl) < 50%);
+    @return color.channel($color, "lightness", hsl) < 50%;
 }
 
 @function state-color($color: tokens.$sd-color-primary, $state-type) {
