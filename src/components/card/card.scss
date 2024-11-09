@@ -1,0 +1,36 @@
+@use "../../styles/tokens";
+
+:host {
+    display: inline-block;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border-radius: tokens.$sd-border-radius-extra-small;
+    overflow: hidden;
+    border: 1px solid tokens.$sd-color-border;
+    background-color: tokens.$sd-color-surface;
+}
+
+.image::slotted(img) {
+    display: block;
+    width: 100%;
+}
+
+.header {
+    display: block;
+    padding: 1rem;
+    border-bottom: 1px solid tokens.$sd-color-border;
+}
+
+.body {
+    display: block;
+    padding: 1rem;
+}
+
+.footer {
+    display: block;
+    padding: 1rem;
+    border-top: 1px solid tokens.$sd-color-border;
+}

@@ -7,6 +7,7 @@ export { default as SdButton } from "./components/button/button";
 export { default as SdDivider } from "./components/divider/divider";
 export { default as SdDropdown } from "./components/dropdown/dropdown";
 export { default as SdDropzone } from "./components/dropzone/dropzone";
+export { default as SdCard } from "./components/card/card";
 export { default as SdCarousel } from "./components/carousel/carousel";
 export { default as SdCarouselSlider } from "./components/carousel/slider";
 export { default as SdCheckbox } from "./components/checkbox/checkbox";

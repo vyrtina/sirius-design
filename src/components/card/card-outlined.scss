@@ -1,7 +1,0 @@
-@use "./internal/card";
-@use "../../styles/tokens";
-
-.outline {
-    border-color: tokens.$sd-color-border;
-    border-width: tokens.$sd-border-width-small;
-}
