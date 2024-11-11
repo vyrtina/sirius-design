@@ -1,7 +1,8 @@
 import { html, nothing, unsafeCSS } from "lit";
-import { customElement, queryAssignedElements } from "lit/decorators.js";
+import { customElement, queryAssignedElements, property } from "lit/decorators.js";
 import styles from "./card.scss?inline";
 import SdElement from "../../utils/sd-element";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 /**
  *
@@ -25,35 +26,69 @@ export default class SdCard extends SdElement {
     @queryAssignedElements({ slot: "footer" }) footerSlot!: HTMLSlotElement[];
     @queryAssignedElements() bodySlot!: HTMLSlotElement[];
 
+    /** The URL that the card points to. also render the card as a link
+     *  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#href
+     */
+    @property() href?: string;
+
+    /** Where to display the linked URL.
+     *  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target
+     */
+    @property() target?: "_self" | "_blank" | "_parent" | "_top" | "_unfencedTop";
+
     private handleSlotChange() {
         this.requestUpdate();
     }
 
     protected render() {
+        return html` ${this.href ? this.renderLink() : this.renderDiv()} `;
+    }
+
+    private renderDiv() {
         return html`
-            <div class="container" part="container" @slotchange=${this.handleSlotChange}>
-                <slot
-                    name="header"
-                    style=${this.headerSlot.length > 0 ? nothing : "display:none;"}
-                    class="header"
-                    part="header"></slot>
-                <slot
-                    name="image"
-                    class="image"
-                    part="image"
-                    style=${this.imageSlot.length > 0 ? nothing : "display:none;"}></slot>
-                <slot
-                    part="body"
-                    class="body"
-                    style=${this.bodySlot.length > 0 ? nothing : "display:none;"}></slot>
-                <slot
-                    name="footer"
-                    class="footer"
-                    part="footer"
-                    style=${this.footerSlot.length > 0
-                        ? nothing
-                        : "display:none;"}></slot>
+            <div
+                class="container container--div"
+                part="container"
+                @slotchange=${this.handleSlotChange}>
+                ${this.renderContent()}
             </div>
+        `;
+    }
+
+    private renderLink() {
+        return html`
+            <a
+                class="container container--link"
+                part="container"
+                @slotchange=${this.handleSlotChange}
+                href=${ifDefined(this.href)}
+                target=${ifDefined(this.target)}>
+                ${this.renderContent()}
+            </a>
+        `;
+    }
+
+    private renderContent() {
+        function preventRender(slot: HTMLSlotElement[]) {
+            return slot.length > 0 ? nothing : "display: none;";
+        }
+        return html`
+            <slot
+                name="header"
+                style=${preventRender(this.headerSlot)}
+                class="header"
+                part="header"></slot>
+            <slot
+                name="image"
+                class="image"
+                part="image"
+                style=${preventRender(this.imageSlot)}></slot>
+            <slot part="body" class="body" style=${preventRender(this.bodySlot)}></slot>
+            <slot
+                name="footer"
+                class="footer"
+                part="footer"
+                style=${preventRender(this.footerSlot)}></slot>
         `;
     }
 }

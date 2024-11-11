@@ -122,7 +122,7 @@ export default class SdButton extends BaseButtonClass {
         }
 
         if (this.type === "submit") {
-            this.form?.requestSubmit(this);
+            this.form?.requestSubmit();
         }
 
         if (this.type === "reset") {

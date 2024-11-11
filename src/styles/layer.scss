@@ -1,22 +1,22 @@
 @use "./tokens.scss";
 @use "sass:color";
 
-$sd-color-surface-1: mix(
+$sd-color-surface-1: color.mix(
     tokens.$sd-color-surface,
     tokens.$sd-color-primary,
     92%
 ) !default;
-$sd-color-surface-2: mix(
+$sd-color-surface-2: color.mix(
     tokens.$sd-color-surface,
     tokens.$sd-color-primary,
     91%
 ) !default;
-$sd-color-surface-3: mix(
+$sd-color-surface-3: color.mix(
     tokens.$sd-color-surface,
     tokens.$sd-color-primary,
     88%
 ) !default;
-$sd-color-surface-4: mix(
+$sd-color-surface-4: color.mix(
     tokens.$sd-color-surface,
     tokens.$sd-color-primary,
     86%

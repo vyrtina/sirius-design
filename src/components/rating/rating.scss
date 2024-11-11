@@ -4,17 +4,19 @@
 :host {
     --symbol-color: #{tokens.$sd-color-palette-neutral-300}; //TODO: change
     --symbol-color-active: #{tokens.$sd-color-accent};
-    --symbol-size: 1.2rem;
+    --symbol-size: 1.5rem;
     --symbol-spacing: 0px;
 
     display: inline-flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    width: min-content;
-    position: relative;
 }
 
 .rating {
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+}
+
+.rating__icons {
     display: inline-flex;
     position: relative;
     font-size: var(--symbol-size);
@@ -24,7 +26,7 @@
     cursor: pointer;
 }
 
-.rating > * {
+.rating__icons > * {
     padding: var(--symbol-spacing);
 }
 
@@ -38,16 +40,16 @@
     left: var(--symbol-spacing);
 }
 
-.rating__symbol {
+.rating__icon {
     transition: tokens.$sd-motion-duration-050 scale;
     pointer-events: none;
 }
 
-.rating__symbol.active,
+.rating__icon.active,
 .rating__partial--filled {
     color: var(--symbol-color-active);
 }
 
-.rating__symbol.hover {
+.rating__icon.hover {
     scale: 1.2;
 }

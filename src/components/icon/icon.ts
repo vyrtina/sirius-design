@@ -5,7 +5,6 @@ import styles from "./icon.scss?inline";
 @customElement("sd-icon")
 export class Icon extends LitElement {
     @property({ type: Boolean }) fill = false;
-    @property({ type: String }) size: "small" | "medium" | "large" = "medium";
 
     static styles = unsafeCSS(styles);
 

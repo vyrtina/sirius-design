@@ -240,8 +240,8 @@ export default class SdRating extends SdElement {
 
         const classes = {
             rating: true,
-            readonly: this.readonly,
-            disabled: this.disabled,
+            "rating--readonly": this.readonly,
+            "rating--disabled": this.disabled,
         };
         const itemTemplates = [];
 
@@ -250,7 +250,7 @@ export default class SdRating extends SdElement {
                 itemTemplates.push(
                     html` <span
                         class=${classMap({
-                            rating__symbol: true,
+                            rating__icon: true,
                             "rating__partial-symbol-container": true,
                             hover: this.isHovering && Math.ceil(displayValue) === i + 1,
                         })}
@@ -278,7 +278,7 @@ export default class SdRating extends SdElement {
                 itemTemplates.push(html`
                     <span
                         class="${classMap({
-                            rating__symbol: true,
+                            rating__icon: true,
                             hover: this.isHovering && Math.ceil(displayValue) === i + 1,
                             active: displayValue >= i + 1,
                         })}"
@@ -288,7 +288,7 @@ export default class SdRating extends SdElement {
             }
         }
         return html`
-            <span
+            <div
                 class=${classMap(classes)}
                 role="slider"
                 aria-label=${this.label}
@@ -306,8 +306,8 @@ export default class SdRating extends SdElement {
                 @touchend=${this.handleTouchEnd}
                 @mousemove=${this.handleMouseMove}
                 @touchmove=${this.handleTouchMove}>
-                ${itemTemplates}
-            </span>
+                <span class="rating__icons"> ${itemTemplates} </span>
+            </div>
         `;
     }
 }

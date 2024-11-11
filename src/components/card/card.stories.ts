@@ -9,7 +9,7 @@ const meta: Meta = {
     component: "sd-card",
     tags: ["autodocs"],
 
-    render: ({}) =>
+    render: (args) =>
         html`
             <sd-card style="width: 350px;">
                 <div slot="header"><h3>Big Title</h3></div>
@@ -30,4 +30,16 @@ type Story = StoryObj;
 
 export const FullContent: Story = {
     args: {},
+};
+
+export const Link: Story = {
+    render: (args) => {
+        return html`
+            <sd-card style="width: 350px;" href="google.com">
+                <img src="https://picsum.photos/350/400" slot="image" />
+                <h3>Title</h3>
+                <p>title desciption</p>
+            </sd-card>
+        `;
+    },
 };
