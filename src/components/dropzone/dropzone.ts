@@ -18,6 +18,18 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 const DropzoneBaseClass = MixinFormAssociated(SdElement);
 
+/**
+ * @summary A file upload component with drag-and-drop support and file previews.
+ *
+ * @event sd-dragover - Emitted when a file is dragged over the dropzone.
+ * @event sd-dragenter - Emitted when a file enters the dropzone.
+ * @event sd-dragleave - Emitted when a file leaves the dropzone.
+ * @event sd-drop - Emitted when a file is dropped into the dropzone.
+ *
+ * @slot label - The dropzone's label. Falls back to the `label` property if no content is provided.
+ * @slot help-text - Help text displayed below the dropzone. Falls back to the `helpText` property if no content is provided.
+ * @slot error-text - Error text displayed when the dropzone is invalid.
+ */
 @customElement("sd-dropzone")
 export default class SdDropzone extends DropzoneBaseClass implements SdFormControl {
     static styles = unsafeCSS(styles);

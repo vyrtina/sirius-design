@@ -8,6 +8,13 @@ export interface MenuSelectEventDetail {
     item: SdMenuItem;
 }
 
+/**
+ * @summary A container for menu items with keyboard navigation and selection handling.
+ *
+ * @event sd-select - Emitted when a menu item is selected.
+ *
+ * @slot - Default slot for `sd-menu-item` elements.
+ */
 @customElement("sd-menu")
 export default class SdMenu extends SdElement {
     static override styles = unsafeCSS(styles);
@@ -36,7 +43,7 @@ export default class SdMenu extends SdElement {
             item.checked = !item.checked;
         }
 
-        this.emit("sl-select", { detail: { item } });
+        this.emit("sd-select", { detail: { item } });
     }
 
     private handleKeyDown(event: KeyboardEvent) {
@@ -102,7 +109,7 @@ export default class SdMenu extends SdElement {
 
     private isMenuItem(item: HTMLElement) {
         return (
-            item.tagName.toLowerCase() === "sl-menu-item" ||
+            item.tagName.toLowerCase() === "sd-menu-item" ||
             ["menuitem", "menuitemcheckbox", "menuitemradio"].includes(
                 item.getAttribute("role") ?? ""
             )
@@ -114,10 +121,8 @@ export default class SdMenu extends SdElement {
         return [...this.defaultSlot.assignedElements({ flatten: true })].filter(
             (el: Element) => {
                 const element = el as HTMLElement;
-                if (element.inert || !this.isMenuItem(element)) {
-                    return false;
-                }
-                return true;
+                return !(element.inert || !this.isMenuItem(element));
+
             }
         ) as SdMenuItem[];
     }

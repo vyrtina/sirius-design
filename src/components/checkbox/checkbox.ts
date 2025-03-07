@@ -30,6 +30,18 @@ export interface CheckboxState {
     readonly required: boolean;
 }
 
+/**
+ * @summary A versatile checkbox component with form support and accessibility.
+ *
+ * @event sd-change - Emitted when the checkboxes checked state changes.
+ * @event sd-input - Emitted when the checkbox receives input.
+ * @event sd-focus - Emitted when the checkbox gains focus.
+ * @event sd-blur - Emitted when the checkbox loses focus.
+ *
+ * @slot label - The checkboxes label. Falls back to the `label` property if no content is provided.
+ * @slot help-text - Help text displayed below the checkbox. Falls back to the `helpText` property if no content is provided.
+ * @slot error-text - Error text displayed when the checkbox is invalid.
+ */
 @customElement("sd-checkbox")
 export default class SdCheckbox
     extends CheckboxBaseClass
@@ -46,7 +58,7 @@ export default class SdCheckbox
 
     @property() title = ""; // make reactive to pass through
 
-    /** The checkbox's size. */
+    /** The checkboxes size. */
     @property({ reflect: true }) size: "small" | "medium" = "medium";
 
     /** Draws the checkbox in a checked state. */
@@ -66,10 +78,10 @@ export default class SdCheckbox
     /** Disables the asterisk on the label, when the field is required. */
     @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
 
-    /** The checkbox's label. If you need to display HTML, use the `label` slot instead. */
+    /** The checkboxes label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
 
-    /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
+    /** The checkboxes help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
     @state() hasFocus = false;

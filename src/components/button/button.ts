@@ -7,6 +7,19 @@ import { MixinElementInternals } from "../../utils/element-internals.js";
 
 const BaseButtonClass = MixinElementInternals(SdElement);
 
+/**
+ * @summary A versatile button component with support for multiple variants, sizes, and functionalities.
+ *
+ * @event sd-blur - Emitted when the button loses focus.
+ * @event sd-focus - Emitted when the button gains focus.
+ *
+ * @slot - The default slot for the button's label content. Falls back to the `label` property if no content is provided.
+ * @slot icon - A slot for adding an icon to the button. The icon can be positioned at the start or end of the label using the `trailingIcon` property.
+ *
+ * @method click - Simulates a click on the button.
+ * @method focus - Sets focus on the button.
+ * @method blur - Removes focus from the button.
+ */
 @customElement("sd-button")
 export default class SdButton extends BaseButtonClass {
     static styles = unsafeCSS(styles);
@@ -23,7 +36,7 @@ export default class SdButton extends BaseButtonClass {
     /** The button’s size. */
     @property({ type: String }) size: "small" | "medium" | "large" = "medium";
 
-    /* Whether or not the button is disabled. */
+    /* Whether the button is disabled. */
     @property({ type: Boolean, reflect: true }) disabled = false;
 
     /** the label of the button. can be used as a replacement for the slot. for icon buttons, this field is required */

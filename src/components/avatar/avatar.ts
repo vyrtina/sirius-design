@@ -27,6 +27,13 @@ const avatarColors = [
 ] as const;
 type avatarPossibleColors = (typeof avatarColors)[number];
 
+/**
+ * @summary A versatile avatar component for displaying user images, initials, or icons.
+ *
+ * @event sd-error - Emitted when the image fails to load.
+ *
+ * @slot icon - A fallback icon to display when no image or initials are provided.
+ */
 @customElement("sd-avatar")
 export default class SdAvatar extends SdElement {
     static styles = unsafeCSS(styles);
@@ -40,10 +47,10 @@ export default class SdAvatar extends SdElement {
     @property() label = "";
 
     /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
-    @property() initials = ""; //TODO: add hasChanged to see if more than 2 caracters
+    @property() initials = ""; //TODO: add hasChanged to see if more than 2 characters
 
     /** the full name of the user */
-    @property({ attribute: "username" }) fullname = "";
+    @property({ attribute: "username" }) username = "";
 
     /** Indicates how the browser should load the image. */
     @property() loading: "eager" | "lazy" = "eager";
@@ -74,14 +81,14 @@ export default class SdAvatar extends SdElement {
         this.hasError = false;
     }
 
-    @watch("fullname")
+    @watch("username")
     handleNameChange() {
         if (!this.getAttribute("initials")) {
-            const match = this.fullname.match(/\s+(\S)/);
-            this.initials = this.fullname.charAt(0) + (match ? match[1] : "");
+            const match = this.username.match(/\s+(\S)/);
+            this.initials = this.username.charAt(0) + (match ? match[1] : "");
         }
         if (!this.getAttribute("color")) {
-            this.color = this.getRandomColor(this.fullname);
+            this.color = this.getRandomColor(this.username);
         }
     }
 
@@ -108,7 +115,7 @@ export default class SdAvatar extends SdElement {
                 class="avatar"
                 role="img"
                 style="${styleMap(style)}"
-                aria-label=${this.label ? this.label : this.fullname}>
+                aria-label=${this.label ? this.label : this.username}>
                 ${this.renderContent()}
             </div>
         `;
@@ -129,7 +136,7 @@ export default class SdAvatar extends SdElement {
                 class="avatar"
                 role="img"
                 style="${styleMap(style)}"
-                aria-label=${this.label ? this.label : this.fullname}>
+                aria-label=${this.label ? this.label : this.username}>
                 <div class="state-layer"></div>
                 ${this.renderContent()}
             </a>

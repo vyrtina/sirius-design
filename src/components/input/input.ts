@@ -46,6 +46,23 @@ export type InvalidTextFieldType =
 
 const InputBaseClass = MixinFormAssociated(SdElement);
 
+/**
+ * @summary A versatile input component for text, numbers, passwords, and more.
+ *
+ * @event sd-blur - Emitted when the input loses focus.
+ * @event sd-change - Emitted when the input's value changes and the user commits the change.
+ * @event sd-clear - Emitted when the clear button is clicked.
+ * @event sd-focus - Emitted when the input gains focus.
+ * @event sd-input - Emitted when the input's value changes.
+ *
+ * @slot label - The input's label. Falls back to the `label` property if no content is provided.
+ * @slot help-text - Help text displayed below the input. Falls back to the `helpText` property if no content is provided.
+ * @slot leading-icon - An icon displayed at the start of the input.
+ * @slot trailing-icon - An icon displayed at the end of the input.
+ * @slot clear-icon - An icon for the clear button.
+ * @slot show-password-icon - An icon for the "show password" toggle.
+ * @slot hide-password-icon - An icon for the "hide password" toggle.
+ */
 @customElement("sd-input")
 export default class SdInput extends InputBaseClass implements SdFormControl {
     static override styles = unsafeCSS(styles);
@@ -103,7 +120,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     /** Disables the asterisk on the label, when the text field is required. */
     @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
 
-    /** Makes the input a required field. Additionally the floating label will render an asterisk "*" when true. */
+    /** Makes the input a required field. Additionally, the floating label will render an asterisk "*" when true. */
     @property({ type: Boolean, reflect: true }) required = false;
 
     /** The current value of the input, submitted as a name/value pair with form data. */
@@ -163,7 +180,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     /** Adds a button to toggle the password's visibility. Only applies to password types. */
     @property({ attribute: "password-toggle", type: Boolean }) passwordToggle = false;
 
-    /** Determines whether or not the password is currently visible. Only applies to password input types. */
+    /** Determines whether the password is currently visible. Only applies to password input types. */
     @property({ attribute: "password-visible", type: Boolean }) passwordVisible = false;
 
     /** Indicates whether the browser's autocorrect feature is on or off. */
@@ -187,7 +204,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         type: Boolean,
         converter: {
             // Allow "true|false" attribute values but keep the property boolean
-            fromAttribute: (value) => (!value || value === "false" ? false : true),
+            fromAttribute: (value) => (!(!value || value === "false")),
             toAttribute: (value) => (value ? "true" : "false"),
         },
     })

@@ -41,7 +41,7 @@ export default class SdPopup extends SdElement {
 
     /**
      * The preferred placement of the popup. Note that the actual placement will vary as configured to keep the
-     * panel inside of the viewport.
+     * panel inside the viewport.
      */
     @property({ reflect: true }) placement:
         | "top"
@@ -502,14 +502,14 @@ export default class SdPopup extends SdElement {
             const popupRect = this.getPopup().getBoundingClientRect();
             const isVertical =
                 this.placement.includes("top") || this.placement.includes("bottom");
-            let topLeftX = 0;
-            let topLeftY = 0;
-            let topRightX = 0;
-            let topRightY = 0;
-            let bottomLeftX = 0;
-            let bottomLeftY = 0;
-            let bottomRightX = 0;
-            let bottomRightY = 0;
+            let topLeftX: number;
+            let topLeftY: number;
+            let topRightX: number;
+            let topRightY: number;
+            let bottomLeftX: number;
+            let bottomLeftY: number;
+            let bottomRightX: number;
+            let bottomRightY: number;
 
             if (isVertical) {
                 if (anchorRect.top < popupRect.top) {

@@ -13,6 +13,17 @@ import type SdButton from "../button/button.js";
 import type SdIconButton from "../icon-button/icon-button.js";
 import type SdMenu from "../menu/menu.js";
 
+/**
+ * @summary A versatile dropdown component for displaying contextual content.
+ *
+ * @event sl-show - Emitted when the dropdown panel is shown.
+ * @event sl-after-show - Emitted after the dropdown panel is shown.
+ * @event sl-hide - Emitted when the dropdown panel is hidden.
+ * @event sl-after-hide - Emitted after the dropdown panel is hidden.
+ *
+ * @slot trigger - The element that triggers the dropdown (e.g., a button).
+ * @slot panel - The content displayed in the dropdown panel.
+ */
 @customElement("sd-dropdown")
 export default class SdDropdown extends SdElement {
     static override styles = unsafeCSS(styles);
@@ -24,14 +35,14 @@ export default class SdDropdown extends SdElement {
     private closeWatcher!: CloseWatcher | null;
 
     /**
-     * Indicates whether or not the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you
-     * can use the `show()` and `hide()` methods and this attribute will reflect the dropdown's open state.
+     * Indicates whether the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you
+     * can use the `show()` and `hide()` methods and this attribute will reflect the dropdowns open state.
      */
     @property({ type: Boolean, reflect: true }) open = false;
 
     /**
      * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
-     * inside of the viewport.
+     * inside the viewport.
      */
     @property({ reflect: true }) placement:
         | "top"

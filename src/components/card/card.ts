@@ -5,17 +5,12 @@ import SdElement from "../../utils/sd-element";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 /**
+ * @summary A versatile card component with optional linking and content sections.
  *
- * @slot header - header for the card
- * @slot image - image cover for the card
- * @slot - main content of the card
- * @slot footer - footer for the card
- *
- * @csspart container - the card's container
- * @csspart header - the card's header
- * @csspart image - the card's image
- * @csspart body - the card's body
- * @csspart footer - the card's footer
+ * @slot header - Content for the card's header section.
+ * @slot image - Content for the card's image section.
+ * @slot footer - Content for the card's footer section.
+ * @slot - Default slot for the card's main body content.
  */
 @customElement("sd-card")
 export default class SdCard extends SdElement {

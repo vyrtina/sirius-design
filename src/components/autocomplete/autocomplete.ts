@@ -33,6 +33,27 @@ export interface OptionProps {
 
 const BaseAutocompleteClass = MixinFormAssociated(SdElement);
 
+/**
+ * @summary A versatile autocomplete component with support for single/multiple selections, filtering, and form integration.
+ *
+ * @event sd-focus - Emitted when the component gains focus.
+ * @event sd-blur - Emitted when the component loses focus.
+ * @event sd-input - Emitted when the value changes due to user input.
+ * @event sd-change - Emitted when the value changes and the user commits the change.
+ * @event sd-clear - Emitted when the clear button is clicked.
+ * @event sd-show - Emitted when the dropdown listbox is shown.
+ * @event sd-hide - Emitted when the dropdown listbox is hidden.
+ * @event sd-after-show - Emitted after the dropdown listbox is shown.
+ * @event sd-after-hide - Emitted after the dropdown listbox is hidden.
+ *
+ * @slot label - The label for the autocomplete. Falls back to the `label` property if no content is provided.
+ * @slot help-text - Help text displayed below the autocomplete. Falls back to the `helpText` property if no content is provided.
+ * @slot error-text - Error text displayed when the component is invalid.
+ * @slot prefix - Content to display before the input field.
+ * @slot clear-icon - Icon for the clear button.
+ * @slot expand-icon - Icon for the expand/collapse button.
+ * @slot - Default slot for rendering options (`sd-option` elements).
+ */
 @customElement("sd-autocomplete")
 export default class SdAutocomplete
     extends BaseAutocompleteClass
@@ -96,8 +117,8 @@ export default class SdAutocomplete
     @property({ type: Boolean }) clearable = false;
 
     /**
-     * Indicates whether or not the select is open. You can toggle this attribute to show and hide the menu, or you can
-     * use the `show()` and `hide()` methods and this attribute will reflect the select's open state.
+     * Indicates whether the select is open. You can toggle this attribute to show and hide the menu, or you can
+     * use the `show()` and `hide()` methods and this attribute will reflect the selects open state.
      */
     @property({ type: Boolean, reflect: true }) open = false;
 
@@ -107,19 +128,19 @@ export default class SdAutocomplete
      */
     @property({ type: Boolean }) hoist = false;
 
-    /** The select's label. If you need to display HTML, use the `label` slot instead. */
+    /** The selects label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
 
     /**
-     * The preferred placement of the select's menu. Note that the actual placement may vary as needed to keep the listbox
-     * inside of the viewport.
+     * The preferred placement of the selects menu. Note that the actual placement may vary as needed to keep the listbox
+     * inside the viewport.
      */
     @property({ reflect: true }) placement: "top" | "bottom" = "bottom";
 
-    /** The select's help text. If you need to display HTML, use the `help-text` slot instead. */
+    /** The selects help text. If you need to display HTML, use the `help-text` slot instead. */
     @property({ attribute: "help-text" }) helpText = "";
 
-    /** The select's required attribute. */
+    /** The selects required attribute. */
     @property({ type: Boolean, reflect: true }) required = false;
 
     /** Disables the asterisk on the label, when the field is required. */
@@ -174,7 +195,7 @@ export default class SdAutocomplete
     };
 
     private handleDocumentMouseDown = (event: MouseEvent) => {
-        // Close when clicking outside of the select
+        // Close when clicking outside the select
         const path = event.composedPath();
         if (this && !path.includes(this)) {
             this.hide();

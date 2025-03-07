@@ -5,17 +5,9 @@ import type SdBreadcrumbItem from "./breadcrumb-item.js";
 import styles from "./breadcrumb.scss?inline";
 
 /**
- * @summary Breadcrumbs provide a group of links so users can easily navigate a website's hierarchy.
- * @documentation https://shoelace.style/components/breadcrumb
- * @status stable
- * @since 2.0
+ * @summary A navigation component for displaying breadcrumb trails.
  *
- * @slot - One or more breadcrumb items to display.
- * @slot separator - The separator to use between breadcrumb items. Works best with `<sl-icon>`.
- *
- * @dependency sl-icon
- *
- * @csspart base - The component's base wrapper.
+ * @slot - Default slot for `sd-breadcrumb-item` elements.
  */
 @customElement("sd-breadcrumb")
 export default class SdBreadcrumb extends SdElement {
@@ -59,6 +51,6 @@ export default class SdBreadcrumb extends SdElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        "sd-breadcrum": SdBreadcrumb;
+        "sd-breadcrumb": SdBreadcrumb;
     }
 }

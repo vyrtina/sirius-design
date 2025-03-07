@@ -4,6 +4,9 @@ import { watch } from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./divider.scss?inline";
 
+/**
+ * @summary A simple divider component for separating content.
+ */
 @customElement("sd-divider")
 export default class SdDivider extends SdElement {
     static styles = unsafeCSS(styles);

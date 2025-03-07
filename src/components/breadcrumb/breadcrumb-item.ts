@@ -4,6 +4,11 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./breadcrumb-item.scss?inline";
 
+/**
+ * @summary A component for individual breadcrumb items, supporting links and separators.
+ *
+ * @slot - Default slot for the breadcrumb item's label.
+ */
 @customElement("sd-breadcrumb-item")
 export default class SdBreadcrumbItem extends SdElement {
     static styles = unsafeCSS(styles);
@@ -24,7 +29,7 @@ export default class SdBreadcrumbItem extends SdElement {
     @property({ type: Boolean, attribute: "separator-right" }) separatorRight = false;
 
     render() {
-        const isLink = this.href ? true : false;
+        const isLink = !!this.href;
 
         return html`
             <div part="base" class="container">

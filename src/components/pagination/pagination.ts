@@ -8,6 +8,11 @@ import "../icon-button/icon-button.js";
 import "../button/button.js";
 import SdIconButton from "../icon-button/icon-button.js";
 
+/**
+ * @summary A pagination component with navigation buttons and ellipsis for large page ranges.
+ *
+ * @event sd-change - Emitted when the current page changes.
+ */
 @customElement("sd-pagination")
 export default class SdPagination extends SdElement {
     static styles = unsafeCSS(styles);
