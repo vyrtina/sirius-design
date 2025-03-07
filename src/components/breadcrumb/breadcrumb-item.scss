@@ -1,19 +1,19 @@
 @use "../../styles/tokens.scss";
 
 .container {
-    display: inline-flex;
+  display: inline-flex;
 }
 
 .separator {
-    display: inline;
-    margin: 0 0.25rem;
+  display: inline;
+  margin: 0 0.25rem;
 }
 
 .link {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
-:host(:not([href])) .label {
-    opacity: tokens.$sd-opacity-disabled;
+.label.disabled {
+  opacity: tokens.$sd-opacity-disabled;
 }

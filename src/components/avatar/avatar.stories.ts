@@ -1,7 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type {Meta, StoryObj} from "@storybook/web-components";
 import "./avatar";
-import { ifDefined } from "lit/directives/if-defined.js";
 
 const meta: Meta = {
     title: "components/avatar",

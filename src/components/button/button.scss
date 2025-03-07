@@ -1,6 +1,6 @@
 @use "../../styles/typography" as typo;
 @use "../../styles/tokens.scss";
-@import "../../styles/_index";
+@use "../../styles/base.scss";
 
 :host {
     --button-color: #{tokens.$sd-color-primary};
@@ -13,7 +13,7 @@
 }
 
 .button:focus-visible {
-    @include base-outline-focus;
+    @include base.outline-focus;
 }
 
 :host([variant="plain"]) {
@@ -34,7 +34,7 @@
     all: unset;
     box-sizing: border-box;
     display: inline-flex;
-    padding: 0 $sd-spacing-100;
+    padding: 0 tokens.$sd-spacing-100;
     align-items: center;
     border-radius: inherit;
     justify-content: center;
@@ -46,12 +46,12 @@
     height: 100%;
 
     & .label {
-        padding: 0 $sd-spacing-050;
+        padding: 0 tokens.$sd-spacing-050;
     }
 }
 
 .container.outlined {
-    border: $sd-border-width-medium solid $sd-color-primary;
+    border: tokens.$sd-border-width-medium solid tokens.$sd-color-primary;
 }
 
 .state-layer,

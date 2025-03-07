@@ -10,8 +10,8 @@ const BaseButtonClass = MixinElementInternals(SdElement);
 /**
  * @summary A versatile button component with support for multiple variants, sizes, and functionalities.
  *
- * @event sd-blur - Emitted when the button loses focus.
  * @event sd-focus - Emitted when the button gains focus.
+ * @event sd-blur - Emitted when the button loses focus.
  *
  * @slot - The default slot for the button's label content. Falls back to the `label` property if no content is provided.
  * @slot icon - A slot for adding an icon to the button. The icon can be positioned at the start or end of the label using the `trailingIcon` property.

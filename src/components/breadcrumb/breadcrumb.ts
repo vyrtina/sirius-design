@@ -1,5 +1,5 @@
-import { html, unsafeCSS } from "lit";
-import { property, queryAssignedElements, customElement } from "lit/decorators.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, queryAssignedElements} from "lit/decorators.js";
 import SdElement from "../../utils/sd-element.js";
 import type SdBreadcrumbItem from "./breadcrumb-item.js";
 import styles from "./breadcrumb.scss?inline";
@@ -21,6 +21,14 @@ export default class SdBreadcrumb extends SdElement {
      */
     @property() label = "";
 
+    render() {
+        return html`
+            <nav part="container" class="container" aria-label=${this.label}>
+                <slot @slotchange=${this.handleSlotChange}></slot>
+            </nav>
+        `;
+    }
+
     private handleSlotChange() {
         const items = this.defaultSlot.filter(
             (item) => item.tagName.toLowerCase() === "sd-breadcrumb-item"
@@ -38,14 +46,6 @@ export default class SdBreadcrumb extends SdElement {
                 item.removeAttribute("aria-current");
             }
         });
-    }
-
-    render() {
-        return html`
-            <nav part="container" class="container" aria-label=${this.label}>
-                <slot @slotchange=${this.handleSlotChange}></slot>
-            </nav>
-        `;
     }
 }
 
