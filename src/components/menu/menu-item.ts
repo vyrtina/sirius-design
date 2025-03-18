@@ -1,41 +1,32 @@
-import { classMap } from "lit/directives/class-map.js";
-import { getTextContent } from "../../utils/slot.js";
-import { html, unsafeCSS } from "lit";
-import { property, query, queryAssignedElements, customElement } from "lit/decorators.js";
-import { SubmenuController } from "./submenu-controller.js";
-import { watch } from "../../utils/watch.js";
+import {classMap} from "lit/directives/class-map.js";
+import {getTextContent} from "../../utils/slot.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, query, queryAssignedElements} from "lit/decorators.js";
+import {SubmenuController} from "./submenu-controller.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
-import "../../icons/src/chevron_right.js";
-import "../../icons/src/check.js";
+import "../../icons/src/sd-icon-chevron_right.js";
+import "../../icons/src/sd-icon-check.js";
 //import SdSpinner from "../spinner/spinner.js";
 import styles from "./menu-item.scss?inline";
 
 @customElement("sd-menu-item")
 export default class SdMenuItem extends SdElement {
     static override styles = unsafeCSS(styles);
-
-    private cachedTextLabel?: string;
-
     @query("slot:not([name])") defaultSlot!: HTMLSlotElement;
     @query(".menu-item") menuItem!: HTMLElement;
-
     /** The type of menu item to render. To use `checked`, this value must be set to `checkbox`. */
     @property() type: "normal" | "checkbox" = "normal";
-
     /** Draws the item in a checked state. */
-    @property({ type: Boolean, reflect: true }) checked = false;
-
+    @property({type: Boolean, reflect: true}) checked = false;
     /** A unique value to store in the menu item. This can be used as a way to identify menu items when selected. */
     @property() value = "";
-
     /** Draws the menu item in a loading state. */
-    @property({ type: Boolean, reflect: true }) loading = false;
-
+    @property({type: Boolean, reflect: true}) loading = false;
     /** Draws the menu item in a disabled state, preventing selection. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
-    @queryAssignedElements({ slot: "submenu" }) submenuSlot!: Array<HTMLElement>;
-
+    @property({type: Boolean, reflect: true}) disabled = false;
+    @queryAssignedElements({slot: "submenu"}) submenuSlot!: Array<HTMLElement>;
+    private cachedTextLabel?: string;
     private submenuController: SubmenuController = new SubmenuController(this);
 
     connectedCallback() {
@@ -49,39 +40,6 @@ export default class SdMenuItem extends SdElement {
         this.removeEventListener("click", this.handleHostClick);
         this.removeEventListener("mouseover", this.handleMouseOver);
     }
-
-    private handleDefaultSlotChange() {
-        const textLabel = this.getTextLabel();
-
-        // Ignore the first time the label is set
-        if (typeof this.cachedTextLabel === "undefined") {
-            this.cachedTextLabel = textLabel;
-            return;
-        }
-
-        // When the label changes, emit a slotchange event so parent controls see it
-        if (textLabel !== this.cachedTextLabel) {
-            this.cachedTextLabel = textLabel;
-            this.emit("slotchange", {
-                bubbles: true,
-                composed: false,
-                cancelable: false,
-            });
-        }
-    }
-
-    private handleHostClick = (event: MouseEvent) => {
-        // Prevent the click event from being emitted when the button is disabled or loading
-        if (this.disabled) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-        }
-    };
-
-    private handleMouseOver = (event: MouseEvent) => {
-        this.focus();
-        event.stopPropagation();
-    };
 
     @watch("checked")
     handleCheckedChange() {
@@ -139,17 +97,17 @@ export default class SdMenuItem extends SdElement {
             <div class="container">
                 <div class="state-layer"></div>
                 <div
-                    id="anchor"
-                    part="base"
-                    class=${classMap({
-                        "menu-item": true,
-                        checked: this.checked,
-                        loading: this.loading,
-                        "has-submenu": this.hasSubmenu(),
-                        "submenu-expanded": isSubmenuExpanded,
-                    })}
-                    aria-haspopup="${this.hasSubmenu() ? "menu" : "false"}"
-                    aria-expanded="${isSubmenuExpanded ? "true" : "false"}">
+                        id="anchor"
+                        part="base"
+                        class=${classMap({
+                            "menu-item": true,
+                            checked: this.checked,
+                            loading: this.loading,
+                            "has-submenu": this.hasSubmenu(),
+                            "submenu-expanded": isSubmenuExpanded,
+                        })}
+                        aria-haspopup="${this.hasSubmenu() ? "menu" : "false"}"
+                        aria-expanded="${isSubmenuExpanded ? "true" : "false"}">
                     <span part="checked-icon" class="check">
                         <sd-icon-check aria-hidden="true"></sd-icon-check>
                     </span>
@@ -157,9 +115,9 @@ export default class SdMenuItem extends SdElement {
                     <slot name="prefix" part="prefix" class="menu-item__prefix"></slot>
 
                     <slot
-                        part="label"
-                        class="label"
-                        @slotchange=${this.handleDefaultSlotChange}></slot>
+                            part="label"
+                            class="label"
+                            @slotchange=${this.handleDefaultSlotChange}></slot>
 
                     <slot name="suffix" part="suffix" class="suffix"></slot>
 
@@ -169,16 +127,49 @@ export default class SdMenuItem extends SdElement {
 
                     ${this.submenuController.renderSubmenu()}
                     ${this.loading
-                        ? html`
-                              <sd-spinner
-                                  part="spinner"
-                                  exportparts="base:spinner__base"></sd-spinner>
-                          `
-                        : ""}
+                            ? html`
+                                <sd-spinner
+                                        part="spinner"
+                                        exportparts="base:spinner__base"></sd-spinner>
+                            `
+                            : ""}
                 </div>
             </div>
         `;
     }
+
+    private handleDefaultSlotChange() {
+        const textLabel = this.getTextLabel();
+
+        // Ignore the first time the label is set
+        if (typeof this.cachedTextLabel === "undefined") {
+            this.cachedTextLabel = textLabel;
+            return;
+        }
+
+        // When the label changes, emit a slotchange event so parent controls see it
+        if (textLabel !== this.cachedTextLabel) {
+            this.cachedTextLabel = textLabel;
+            this.emit("slotchange", {
+                bubbles: true,
+                composed: false,
+                cancelable: false,
+            });
+        }
+    }
+
+    private handleHostClick = (event: MouseEvent) => {
+        // Prevent the click event from being emitted when the button is disabled or loading
+        if (this.disabled) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+        }
+    };
+
+    private handleMouseOver = (event: MouseEvent) => {
+        this.focus();
+        event.stopPropagation();
+    };
 }
 
 declare global {

@@ -1,10 +1,10 @@
-import { classMap } from "lit/directives/class-map.js";
-import { html, unsafeCSS } from "lit";
-import { property, query, customElement } from "lit/decorators.js";
-import { watch } from "../../utils/watch.js";
+import {classMap} from "lit/directives/class-map.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, query} from "lit/decorators.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import "../icon-button/icon-button.js";
-import "../../icons/src/close.js";
+import "../../icons/src/sd-icon-close.js";
 import styles from "./tab.scss?inline";
 
 let id = 0;
@@ -12,38 +12,26 @@ let id = 0;
 @customElement("sd-tab")
 export default class SdTab extends SdElement {
     static styles = unsafeCSS(styles);
-
-    private readonly attrId = ++id;
-    private readonly componentId = `sd-tab-${this.attrId}`;
-
     @query(".tab") tab!: HTMLElement;
-
     /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */
-    @property({ reflect: true }) panel = "";
-
+    @property({reflect: true}) panel = "";
     /** Draws the tab in an active state. */
-    @property({ type: Boolean, reflect: true }) active = false;
-
+    @property({type: Boolean, reflect: true}) active = false;
     /** Makes the tab closable and shows a close button. */
-    @property({ type: Boolean, reflect: true }) closable = false;
-
+    @property({type: Boolean, reflect: true}) closable = false;
     /** Disables the tab and prevents selection. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
+    @property({type: Boolean, reflect: true}) disabled = false;
     /**
      * @internal
      * Need to wrap in a `@property()` otherwise CustomElement throws a "The result must not have attributes" runtime error.
      */
-    @property({ type: Number, reflect: true }) tabIndex = 0;
+    @property({type: Number, reflect: true}) tabIndex = 0;
+    private readonly attrId = ++id;
+    private readonly componentId = `sd-tab-${this.attrId}`;
 
     connectedCallback() {
         super.connectedCallback();
         this.setAttribute("role", "tab");
-    }
-
-    private handleCloseClick(event: Event) {
-        event.stopPropagation();
-        this.emit("sl-close");
     }
 
     @watch("active")
@@ -68,31 +56,36 @@ export default class SdTab extends SdElement {
 
         return html`
             <div
-                part="base"
-                class=${classMap({
-                    tab: true,
-                    "tab--active": this.active,
-                    "tab--closable": this.closable,
-                    "tab--disabled": this.disabled,
-                })}>
+                    part="base"
+                    class=${classMap({
+                        tab: true,
+                        "tab--active": this.active,
+                        "tab--closable": this.closable,
+                        "tab--disabled": this.disabled,
+                    })}>
                 <slot></slot>
                 ${this.closable
-                    ? html`
-                          <sd-icon-button
-                              part="close-button"
-                              exportparts="base:close-button__base"
-                              name="x-lg"
-                              library="system"
-                              label="close"
-                              class="tab__close-button"
-                              @click=${this.handleCloseClick}
-                              tabindex="-1">
-                              <sd-icon-close></sd-icon-close>
-                          </sd-icon-button>
-                      `
-                    : ""}
+                        ? html`
+                            <sd-icon-button
+                                    part="close-button"
+                                    exportparts="base:close-button__base"
+                                    name="x-lg"
+                                    library="system"
+                                    label="close"
+                                    class="tab__close-button"
+                                    @click=${this.handleCloseClick}
+                                    tabindex="-1">
+                                <sd-icon-close></sd-icon-close>
+                            </sd-icon-button>
+                        `
+                        : ""}
             </div>
         `;
+    }
+
+    private handleCloseClick(event: Event) {
+        event.stopPropagation();
+        this.emit("sl-close");
     }
 }
 

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
-import "../../icons/src/edit";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
+import "../../icons/src/sd-icon-edit";
 import "./button";
-import { ifDefined } from "lit/directives/if-defined.js";
+import {ifDefined} from "lit/directives/if-defined.js";
 
 const meta: Meta = {
     title: "components/button",
@@ -11,15 +11,15 @@ const meta: Meta = {
     args: {
         textLabel: "button",
     },
-    render: ({ textLabel, variant, disabled }) => {
+    render: ({textLabel, variant, disabled}) => {
         return html`
             <sd-button
-                variant=${variant}
-                ?disabled=${disabled}
-                @click=${() => {
-                    console.log("button clicked");
-                }}
-                >${textLabel}
+                    variant=${variant}
+                    ?disabled=${disabled}
+                    @click=${() => {
+                        console.log("button clicked");
+                    }}
+            >${textLabel}
             </sd-button>
         `;
     },
@@ -51,13 +51,13 @@ export const Submit: Story = {
         return html`
             <form method="POST">
                 <sd-button
-                    variant=${ifDefined(args["variant"])}
-                    ?disabled=${args["disabled"]}
-                    @click=${() => {
-                        console.log("button clicked");
-                    }}
-                    type="submit"
-                    >${args["textLabel"]}
+                        variant=${ifDefined(args["variant"])}
+                        ?disabled=${args["disabled"]}
+                        @click=${() => {
+                            console.log("button clicked");
+                        }}
+                        type="submit"
+                >${args["textLabel"]}
                 </sd-button>
             </form>
         `;

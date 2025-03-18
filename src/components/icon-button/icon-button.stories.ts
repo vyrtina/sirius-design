@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
-import "../../icons/src/edit";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
+import "../../icons/src/sd-icon-edit";
 import "./icon-button";
 
 const meta: Meta = {
@@ -10,11 +10,13 @@ const meta: Meta = {
     args: {
         label: "edit button",
     },
-    render: ({ variant, label }) => {
+    render: ({variant, label}) => {
         return html`
             <sd-icon-button variant=${variant} label=${label}
-                ><sd-icon-edit></sd-icon-edit
-            ></sd-icon-button>
+            >
+                <sd-icon-edit></sd-icon-edit
+                >
+            </sd-icon-button>
         `;
     },
 };

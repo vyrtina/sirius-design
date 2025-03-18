@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
-import "../../icons/src/edit";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import "../../icons/src/sd-icon-edit";
 import "./rating";
 
 const meta: Meta = {
@@ -16,7 +15,7 @@ export const Default: Story = {
     args: {
         disabled: false,
         readonly: false,
-        defaultvalue: 3,
+        value: 3,
         label: "rating",
         precision: 0.5,
     },

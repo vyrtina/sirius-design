@@ -1,8 +1,8 @@
-import { unsafeCSS, html } from "lit";
-import { property, customElement } from "lit/decorators.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property} from "lit/decorators.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./inline-error.scss?inline";
-import "../../icons/src/error_outline.js";
+import "../../icons/src/sd-icon-error-outline.js";
 
 /**
  * @summary A simple inline error message component.

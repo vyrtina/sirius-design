@@ -1,17 +1,17 @@
-import { html, nothing, unsafeCSS } from "lit";
-import { property, query, customElement, queryAssignedElements } from "lit/decorators.js";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { classMap } from "lit/directives/class-map.js";
-import { live } from "lit/directives/live.js";
-import { watch } from "../../utils/watch.js";
+import {html, nothing, unsafeCSS} from "lit";
+import {customElement, property, query, queryAssignedElements} from "lit/decorators.js";
+import {ifDefined} from "lit/directives/if-defined.js";
+import {classMap} from "lit/directives/class-map.js";
+import {live} from "lit/directives/live.js";
+import {watch} from "../../utils/watch.js";
 import styles from "./input.scss?inline";
-import "../../icons/src/error.js";
-import { MixinFormAssociated } from "../../utils/form.js";
-import SdElement, { SdFormControl } from "../../utils/sd-element.js";
+import {MixinFormAssociated} from "../../utils/form.js";
+import SdElement, {SdFormControl} from "../../utils/sd-element.js";
 import "../inline-error/inline-error.js";
-import "../../icons/src/cancel.js";
-import "../../icons/src/visibility.js";
-import "../../icons/src/visibility_off.js";
+import "../../icons/src/sd-icon-error.js";
+import "../../icons/src/sd-icon-cancel.js";
+import "../../icons/src/sd-icon-visibility.js";
+import "../../icons/src/sd-icon-visibility-off.js";
 
 /**
  * Input types that are compatible with the text field.
@@ -66,12 +66,8 @@ const InputBaseClass = MixinFormAssociated(SdElement);
 @customElement("sd-input")
 export default class SdInput extends InputBaseClass implements SdFormControl {
     static override styles = unsafeCSS(styles);
-
-    @query(".input")
-    private readonly input!: HTMLInputElement;
-    @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
-    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
-
+    @queryAssignedElements({slot: "label"}) labelSlot!: Array<HTMLElement>;
+    @queryAssignedElements({slot: "help-text"}) helpTextSlot!: Array<HTMLElement>;
     /**
      * The `<input>` type to use, defaults to "text". The type greatly changes how
      * the text field behaves.
@@ -90,20 +86,17 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * - time
      *
      */
-    @property({ reflect: true })
+    @property({reflect: true})
     type: TextFieldType | UnsupportedTextFieldType = "text";
-
     /** the title of the input element */
     @property() title = "";
-
     /**
-     * Gets or sets whether or not the text field is in a visually invalid state.
+     * Gets or sets whether the text field is in a visually invalid state.
      *
      * This error state overrides the error state controlled by
      * `reportValidity()`.
      */
-    @property({ type: Boolean, reflect: true }) error = false;
-
+    @property({type: Boolean, reflect: true}) error = false;
     /**
      * The error message that replaces supporting text when `error` is true. If
      * `errorText` is an empty string, then the supporting text will continue to
@@ -112,83 +105,63 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * This error message overrides the error message displayed by
      * `reportValidity()`.
      */
-    @property({ attribute: "error-message" }) errorMessage = "";
-
+    @property({attribute: "error-message"}) errorMessage = "";
     /** The input's label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
-
     /** Disables the asterisk on the label, when the text field is required. */
-    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
-
+    @property({type: Boolean, attribute: "no-asterisk"}) noAsterisk = false;
     /** Makes the input a required field. Additionally, the floating label will render an asterisk "*" when true. */
-    @property({ type: Boolean, reflect: true }) required = false;
-
+    @property({type: Boolean, reflect: true}) required = false;
     /** The current value of the input, submitted as a name/value pair with form data. */
     @property() value = "";
-
     /** the default value of the field. used to reset the input field to an initial value. */
-    @property({ attribute: false }) defaultValue = "";
-
+    @property({attribute: false}) defaultValue = "";
     /** The input's help text. If you need to display HTML, use the `help-text` slot instead. */
-    @property({ attribute: "help-text" }) helpText = "";
-
+    @property({attribute: "help-text"}) helpText = "";
     /** Adds a clear button when the input is not empty. */
-    @property({ type: Boolean }) clearable = false;
-
+    @property({type: Boolean}) clearable = false;
     /**
      * Defines the greatest value in the range of permitted values.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#max
      */
     @property() max?: string;
-
     /**
      * The maximum number of characters a user can enter into the text field. Set
      * to -1 for none.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#maxlength
      */
-    @property({ type: Number }) maxlength?: number;
-
+    @property({type: Number}) maxlength?: number;
     /**
      * Defines the most negative value in the range of permitted values.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#min
      */
     @property() min?: string;
-
     /**
      * The minimum number of characters a user can enter into the text field. Set
      * to -1 for none.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#minlength
      */
-    @property({ type: Number }) minlength?: number;
-
+    @property({type: Number}) minlength?: number;
     /** Hides the browser's built-in increment/decrement spin buttons for number inputs. */
-    @property({ type: Boolean, attribute: "no-spinner" }) noSpinner = false;
-
+    @property({type: Boolean, attribute: "no-spinner"}) noSpinner = false;
     /** A regular expression pattern to validate input against. */
     @property() pattern?: string;
-
     /** Placeholder text to show as a hint when the input is empty. */
-    @property({ reflect: true }) placeholder = "";
-
+    @property({reflect: true}) placeholder = "";
     /** Makes the input readonly. */
-    @property({ type: Boolean, reflect: true }) readonly = false;
-
+    @property({type: Boolean, reflect: true}) readonly = false;
     /** Adds a button to toggle the password's visibility. Only applies to password types. */
-    @property({ attribute: "password-toggle", type: Boolean }) passwordToggle = false;
-
+    @property({attribute: "password-toggle", type: Boolean}) passwordToggle = false;
     /** Determines whether the password is currently visible. Only applies to password input types. */
-    @property({ attribute: "password-visible", type: Boolean }) passwordVisible = false;
-
+    @property({attribute: "password-visible", type: Boolean}) passwordVisible = false;
     /** Indicates whether the browser's autocorrect feature is on or off. */
     @property() autocorrect?: "off" | "on";
-
     /** Indicates that the input should receive focus on page load. */
-    @property({ type: Boolean }) autoFocus: boolean = false;
-
+    @property({type: Boolean}) autoFocus: boolean = false;
     /** Used to customize the label or icon of the Enter key on virtual keyboards. */
     @property() enterkeyhint?:
         | "enter"
@@ -198,7 +171,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         | "previous"
         | "search"
         | "send";
-
     /** Enables spell checking on the input. */
     @property({
         type: Boolean,
@@ -209,7 +181,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         },
     })
     spellcheck = true;
-
     /**
      * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
      * keyboard on supportive devices.
@@ -223,50 +194,32 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         | "search"
         | "email"
         | "url";
-
     /**
      * Indicates that input accepts multiple email addresses.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#multiple
      */
-    @property({ type: Boolean, reflect: true }) multiple = false;
-
+    @property({type: Boolean, reflect: true}) multiple = false;
     /**
      * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
      * implied, allowing any numeric value. Only applies to date and number input types.
      */
     @property() step?: number | "any";
-
     /**
      * Describes what, if any, type of autocomplete functionality the input
      * should provide.
      *
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
      */
-    @property({ reflect: true }) autocomplete?: string;
-
-    connectedCallback() {
-        super.connectedCallback();
-        this.defaultValue = this.value;
-    }
-
-    private getInput() {
-        if (!this.input) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        if (this.isUpdatePending) {
-            this.scheduleUpdate();
-        }
-
-        return this.input!;
-    }
+    @property({reflect: true}) autocomplete?: string;
+    @query(".input")
+    private readonly input!: HTMLInputElement;
 
     /** Gets or sets the direction in which selection occurred. */
     get selectionDirection() {
         return this.getInput().selectionDirection;
     }
+
     set selectionDirection(value: "forward" | "backward" | "none" | null) {
         this.getInput().selectionDirection = value;
     }
@@ -275,6 +228,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     get selectionEnd() {
         return this.getInput().selectionEnd;
     }
+
     set selectionEnd(value: number | null) {
         this.getInput().selectionEnd = value;
     }
@@ -283,6 +237,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     get selectionStart() {
         return this.getInput().selectionStart;
     }
+
     set selectionStart(value: number | null) {
         this.getInput().selectionStart = value;
     }
@@ -296,6 +251,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
 
         return input.valueAsNumber;
     }
+
     set valueAsNumber(value: number) {
         const input = this.getInput();
         if (!input) {
@@ -315,6 +271,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
 
         return input.valueAsDate;
     }
+
     set valueAsDate(value: Date | null) {
         const input = this.getInput();
         if (!input) {
@@ -329,61 +286,9 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         return this.error || !this.checkValidity();
     }
 
-    private handleBlur() {
-        this.emit("sd-blur");
-    }
-
-    private handleChange() {
-        this.value = this.getInput().value;
-        this.emit("sd-change");
-    }
-
-    private handleClearClick(event: MouseEvent) {
-        event.preventDefault();
-
-        if (this.value !== "") {
-            this.value = "";
-            this.emit("sd-clear");
-            this.emit("sd-input");
-            this.emit("sd-change");
-        }
-
-        this.getInput().focus();
-    }
-
-    private handleFocus() {
-        this.emit("sd-focus");
-    }
-
-    private handleInput(event: InputEvent) {
-        this.value = (event.target as HTMLInputElement).value;
-        //this.updateValidity();
-        this.emit("sd-input");
-    }
-
-    private handleKeyDown(event: KeyboardEvent) {
-        const hasModifier =
-            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-        // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
-        // submitting to allow users to cancel the keydown event if they need to
-        if (event.key === "Enter" && !hasModifier) {
-            setTimeout(() => {
-                //
-                // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
-                // to check for this is to look at event.isComposing, which will be true when the IME is open.
-                //
-                // See https://github.com/shoelace-style/shoelace/pull/988
-                //
-                if (!event.defaultPrevented && !event.isComposing && this.form) {
-                    this.form.requestSubmit();
-                }
-            });
-        }
-    }
-
-    private handlePasswordToggle() {
-        this.passwordVisible = !this.passwordVisible;
+    connectedCallback() {
+        super.connectedCallback();
+        this.defaultValue = this.value;
     }
 
     /** Sets focus on the input. */
@@ -405,18 +310,16 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         this.getInput().select();
     }
 
-    private getErrorText() {
-        return this.validationMessage;
-    }
-
     /** Replaces a range of text with a new string. */
     setRangeText(replacement: string): void;
+
     setRangeText(
         replacement: string,
         start: number,
         end: number,
         selectionMode?: SelectionMode
     ): void;
+
     setRangeText(...args: unknown[]) {
         // Calling setRangeText with 1 vs 3-4 arguments has different behavior.
         // Use spread syntax and type casting to ensure correct usage.
@@ -489,7 +392,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         }
     }
 
-    @watch("step", { waitUntilFirstUpdate: true })
+    @watch("step", {waitUntilFirstUpdate: true})
     handleStepChange() {
         // If step changes, the value may become invalid so we need to recheck after the update. We set the new step
         // imperatively so we don't have to wait for the next render to report the updated validity.
@@ -513,7 +416,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     }
 
     override getState() {
-        return { "has-value": this.value, required: this.required };
+        return {"has-value": this.value, required: this.required};
     }
 
     protected override render() {
@@ -530,7 +433,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
                 ${this.renderLabel()}
                 <div class="field">
                     <span class="leading-icon"
-                        ><slot name="leading-icon"><slot name="icon"></slot></slot
+                    ><slot name="leading-icon"><slot name="icon"></slot></slot
                     ></span>
                     ${this.renderInput()}
                     <span class="trailing-icon"><slot name="trailing-icon"></slot></span>
@@ -538,6 +441,80 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
                 ${this.renderErrorText()} ${this.renderHelpText()}
             </div>
         `;
+    }
+
+    private getInput() {
+        if (!this.input) {
+            this.connectedCallback();
+            this.scheduleUpdate();
+        }
+
+        if (this.isUpdatePending) {
+            this.scheduleUpdate();
+        }
+
+        return this.input!;
+    }
+
+    private handleBlur() {
+        this.emit("sd-blur");
+    }
+
+    private handleChange() {
+        this.value = this.getInput().value;
+        this.emit("sd-change");
+    }
+
+    private handleClearClick(event: MouseEvent) {
+        event.preventDefault();
+
+        if (this.value !== "") {
+            this.value = "";
+            this.emit("sd-clear");
+            this.emit("sd-input");
+            this.emit("sd-change");
+        }
+
+        this.getInput().focus();
+    }
+
+    private handleFocus() {
+        this.emit("sd-focus");
+    }
+
+    private handleInput(event: InputEvent) {
+        this.value = (event.target as HTMLInputElement).value;
+        //this.updateValidity();
+        this.emit("sd-input");
+    }
+
+    private handleKeyDown(event: KeyboardEvent) {
+        const hasModifier =
+            event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+
+        // Pressing enter when focused on an input should submit the form like a native input, but we wait a tick before
+        // submitting to allow users to cancel the keydown event if they need to
+        if (event.key === "Enter" && !hasModifier) {
+            setTimeout(() => {
+                //
+                // When using an Input Method Editor (IME), pressing enter will cause the form to submit unexpectedly. One way
+                // to check for this is to look at event.isComposing, which will be true when the IME is open.
+                //
+                // See https://github.com/shoelace-style/shoelace/pull/988
+                //
+                if (!event.defaultPrevented && !event.isComposing && this.form) {
+                    this.form.requestSubmit();
+                }
+            });
+        }
+    }
+
+    private handlePasswordToggle() {
+        this.passwordVisible = !this.passwordVisible;
+    }
+
+    private getErrorText() {
+        return this.validationMessage;
     }
 
     private renderLabel() {
@@ -549,11 +526,12 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
 
         return html`
             <label
-                for="input"
-                part="label"
-                class=${classMap(classes)}
-                aria-hidden=${hasLabel ? "false" : "true"}
-                ><slot name="label">${this.label}</slot>
+                    for="input"
+                    part="label"
+                    class=${classMap(classes)}
+                    aria-hidden=${hasLabel ? "false" : "true"}
+            >
+                <slot name="label">${this.label}</slot>
             </label>
         `;
     }
@@ -564,41 +542,41 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         return html`
             <div class="input-wrapper">
                 <input
-                    part="input"
-                    id="input"
-                    class="input"
-                    type=${this.type === "password" && this.passwordVisible
-                        ? "text"
-                        : this.type}
-                    title=${this.title}
-                    name=${this.name}
-                    aria-invalid=${this.hasError}
-                    aria-label=${ariaLabel}
-                    aria-describedby="help-text"
-                    autocomplete=${ifDefined(this.autocomplete)}
-                    ?disabled=${this.disabled}
-                    max=${ifDefined(this.max)}
-                    maxlength=${ifDefined(this.maxlength)}
-                    min=${ifDefined(this.min)}
-                    minlength=${ifDefined(this.minlength)}
-                    pattern=${ifDefined(this.pattern)}
-                    placeholder=${ifDefined(this.placeholder)}
-                    ?readonly=${this.readonly}
-                    ?required=${this.required}
-                    ?multiple=${this.multiple}
-                    step=${ifDefined(this.step as number)}
-                    .value=${live(this.value)}
-                    autocapitalize=${ifDefined(this.autocapitalize)}
-                    autocorrect=${ifDefined(this.autocorrect)}
-                    ?autofocus=${this.autoFocus}
-                    enterkeyhint=${ifDefined(this.enterkeyhint)}
-                    spellcheck=${this.spellcheck}
-                    @keydown=${this.handleKeyDown}
-                    @change=${this.handleChange}
-                    @focus=${this.handleFocus}
-                    @blur=${this.handleBlur}
-                    @input=${this.handleInput}
-                    inputmode=${ifDefined(this.inputmode)} />
+                        part="input"
+                        id="input"
+                        class="input"
+                        type=${this.type === "password" && this.passwordVisible
+                                ? "text"
+                                : this.type}
+                        title=${this.title}
+                        name=${this.name}
+                        aria-invalid=${this.hasError}
+                        aria-label=${ariaLabel}
+                        aria-describedby="help-text"
+                        autocomplete=${ifDefined(this.autocomplete)}
+                        ?disabled=${this.disabled}
+                        max=${ifDefined(this.max)}
+                        maxlength=${ifDefined(this.maxlength)}
+                        min=${ifDefined(this.min)}
+                        minlength=${ifDefined(this.minlength)}
+                        pattern=${ifDefined(this.pattern)}
+                        placeholder=${ifDefined(this.placeholder)}
+                        ?readonly=${this.readonly}
+                        ?required=${this.required}
+                        ?multiple=${this.multiple}
+                        step=${ifDefined(this.step as number)}
+                        .value=${live(this.value)}
+                        autocapitalize=${ifDefined(this.autocapitalize)}
+                        autocorrect=${ifDefined(this.autocorrect)}
+                        ?autofocus=${this.autoFocus}
+                        enterkeyhint=${ifDefined(this.enterkeyhint)}
+                        spellcheck=${this.spellcheck}
+                        @keydown=${this.handleKeyDown}
+                        @change=${this.handleChange}
+                        @focus=${this.handleFocus}
+                        @blur=${this.handleBlur}
+                        @input=${this.handleInput}
+                        inputmode=${ifDefined(this.inputmode)}/>
                 ${this.renderClearIcon()} ${this.renderPasswordToggle()}
             </div>
         `;
@@ -609,12 +587,12 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         if (hasClearIcon && (typeof this.value === "number" || this.value.length > 0)) {
             return html`
                 <button
-                    part="clear-button"
-                    class="input__clear"
-                    type="button"
-                    aria-label="clearEntry"
-                    @click=${this.handleClearClick}
-                    tabindex="-1">
+                        part="clear-button"
+                        class="input__clear"
+                        type="button"
+                        aria-label="clearEntry"
+                        @click=${this.handleClearClick}
+                        tabindex="-1">
                     <slot name="clear-icon">
                         <sd-icon-cancel></sd-icon-cancel>
                     </slot>
@@ -628,23 +606,23 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         if (this.passwordToggle && !this.disabled) {
             return html`
                 <button
-                    part="password-toggle-button"
-                    class="input__password-toggle"
-                    type="button"
-                    aria-label=${this.passwordVisible ? "hidePassword" : "showPassword"}
-                    @click=${this.handlePasswordToggle}
-                    tabindex="-1">
+                        part="password-toggle-button"
+                        class="input__password-toggle"
+                        type="button"
+                        aria-label=${this.passwordVisible ? "hidePassword" : "showPassword"}
+                        @click=${this.handlePasswordToggle}
+                        tabindex="-1">
                     ${this.passwordVisible
-                        ? html`
-                              <slot name="show-password-icon">
-                                  <sd-icon-visibility-off></sd-icon-visibility-off>
-                              </slot>
-                          `
-                        : html`
-                              <slot name="hide-password-icon">
-                                  <sd-icon-visibility></sd-icon-visibility>
-                              </slot>
-                          `}
+                            ? html`
+                                <slot name="show-password-icon">
+                                    <sd-icon-visibility-off></sd-icon-visibility-off>
+                                </slot>
+                            `
+                            : html`
+                                <slot name="hide-password-icon">
+                                    <sd-icon-visibility></sd-icon-visibility>
+                                </slot>
+                            `}
                 </button>
             `;
         }
@@ -653,7 +631,8 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
 
     private renderErrorText() {
         if (this.hasError && !this.disabled) {
-            return html` <sd-inline-error> ${this.getErrorText()} </sd-inline-error> `;
+            return html`
+                <sd-inline-error> ${this.getErrorText()}</sd-inline-error> `;
         }
         return nothing;
     }

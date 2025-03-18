@@ -1,15 +1,15 @@
-import { LitElement, html, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import {html, LitElement, unsafeCSS} from "lit";
+import {customElement, property, state} from "lit/decorators.js";
 import styles from "./carousel.scss?inline";
-import "../../icons/src/chevron_left";
-import "../../icons/src/chevron_right";
+import "../../icons/src/sd-icon-chevron-left";
+import "../../icons/src/sd-icon-chevron-right";
 
 @customElement("sd-carousel")
 export default class SdCarousel extends LitElement {
     static styles = unsafeCSS(styles);
 
-    @property({ type: Boolean }) autoTransition = true;
-    @property({ type: Number }) count = 0;
+    @property({type: Boolean}) autoTransition = true;
+    @property({type: Number}) count = 0;
 
     @state() private _slideIndex = 0;
 
@@ -33,11 +33,11 @@ export default class SdCarousel extends LitElement {
             sliderTemplates.push(html`
                 <slot name=${"slide-" + i} class="slide" id=${"slide-" + i}></slot>
                 <input
-                    type="radio"
-                    id=${"progress_radio_" + i}
-                    name="progress_radio_index"
-                    @change="${this._showSlideRadio}"
-                    value=${i} />
+                        type="radio"
+                        id=${"progress_radio_" + i}
+                        name="progress_radio_index"
+                        @change="${this._showSlideRadio}"
+                        value=${i}/>
                 <label for=${"progress_radio_" + i} class="sd-dot"></label>
             `);
         }

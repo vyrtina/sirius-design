@@ -1,16 +1,16 @@
-import { html, nothing, TemplateResult, unsafeCSS } from "lit";
-import { property, customElement, queryAll, state } from "lit/decorators.js";
-import { styleMap } from "lit/directives/style-map.js";
+import {html, nothing, TemplateResult, unsafeCSS} from "lit";
+import {customElement, property, queryAll, state} from "lit/decorators.js";
+import {styleMap} from "lit/directives/style-map.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./grid-table.scss?inline";
 import interact from "interactjs";
 import "../tag/tag.js";
 import "../pagination/pagination.js";
-import "../../icons/src/keyboard_arrow_up.js";
-import "../../icons/src/keyboard_arrow_down.js";
+import "../../icons/src/sd-icon-keyboard-arrow-up.js";
+import "../../icons/src/sd-icon-keyboard-arrow-down.js";
 import SdPagination from "../pagination/pagination.js";
-import { TagVariant } from "../tag/tag.js";
-import { classMap } from "lit/directives/class-map.js";
+import {TagVariant} from "../tag/tag.js";
+import {classMap} from "lit/directives/class-map.js";
 
 export type valueGetter = () => any;
 
@@ -90,49 +90,39 @@ export default class SdGridTable extends SdElement {
     @queryAll(".header-cell") readonly headerCells?: Array<HTMLElement>;
     @queryAll(".table-cell") readonly tableCells!: Array<HTMLElement>;
 
-    @property({ type: Boolean }) selection = false;
+    @property({type: Boolean}) selection = false;
 
     /** the total number of rows in the table. used for correct pagination display */
-    @property({ attribute: "row-count", type: Number }) rowCount?: number;
+    @property({attribute: "row-count", type: Number}) rowCount?: number;
 
     /** Sorting can be processed on the server or client-side. Set it to 'client' if you would like to handle sorting on the client-side.
      *  Set it to 'server' if you would like to handle sorting on the server-side. */
     @property() sortingMode: "client" | "server" = "client";
-
-    @property() handleSortChange: () => void = () => {
-        console.error("no callback for handling sort change is set");
-    };
-
     /** the sort order cycle */
-    @property({ type: Array }) sortOrder: Array<SortingType> = ["asc", "desc", "none"];
-
+    @property({type: Array}) sortOrder: Array<SortingType> = ["asc", "desc", "none"];
     //TODO: add converter
     @property() defaultWidth = "100px";
     @property() defaultMinWidth = "10px";
-
     @property() density: "compact" | "regular" | "relaxed" = "regular";
-
-    @property({ attribute: false, type: Array }) headers: ColumnHeader[] = [];
-
-    @property({ attribute: false, type: Array }) rows: GridRow[] = [];
-
-    @property({ attribute: false, type: Object }) pagination: PaginationType = {
+    @property({attribute: false, type: Array}) headers: ColumnHeader[] = [];
+    @property({attribute: false, type: Array}) rows: GridRow[] = [];
+    @property({attribute: false, type: Object}) pagination: PaginationType = {
         handlePageChange() {
             console.error("no callback for handling page change is set");
         },
     };
-
     //the order of the columns. takes the field name as key index
     @state() columnOrder: string[] = [];
-
-    @property({ attribute: false, type: Array })
-    sortModel: SortModel[] = [{ field: "", sort: "none" }];
-
+    @property({attribute: false, type: Array})
+    sortModel: SortModel[] = [{field: "", sort: "none"}];
     /** number of rows displayed per page */
-    @property({ attribute: false, type: Number }) currentPageSize: number = 10;
-
+    @property({attribute: false, type: Number}) currentPageSize: number = 10;
     /** currently display page */
-    @property({ attribute: false, type: Number }) currentPage: number = 1;
+    @property({attribute: false, type: Number}) currentPage: number = 1;
+
+    @property() handleSortChange: () => void = () => {
+        console.error("no callback for handling sort change is set");
+    };
 
     /** get the server field name from the field name */
     public getServerField(field: string) {
@@ -150,7 +140,7 @@ export default class SdGridTable extends SdElement {
             //we make the columns resizable
             const headerCell = interact(".header-cell");
             headerCell.resizable({
-                edges: { right: true },
+                edges: {right: true},
                 listeners: {
                     move: this.resize.bind(this),
                 },
@@ -165,6 +155,32 @@ export default class SdGridTable extends SdElement {
                 this.rowCount = this.rows.length;
             }
         }
+    }
+
+    render() {
+        return html`
+            <div class="table-wrapper">
+                <div
+                        class=${classMap({
+                            table: true,
+                            "table--compact": this.density === "compact",
+                            "table--regular": this.density === "regular",
+                            "table--relaxed": this.density === "relaxed",
+                        })}
+                        role="grid">
+                    <div class="header-row table-row" part="header-row" role="row">
+                        ${this.headers.map((header) => this.renderHeader(header))}
+                    </div>
+                    <div
+                            class="row-group"
+                            role="rowgroup"
+                            @click=${(e: Event) => this.handleRowClick(e)}>
+                        ${this.renderRows()}
+                    </div>
+                </div>
+                ${this.renderFooter()}
+            </div>
+        `;
     }
 
     private resize(event: any) {
@@ -231,51 +247,25 @@ export default class SdGridTable extends SdElement {
         if (!e.target || e.target === e.currentTarget) {
             return;
         }
-        this.emit("sd-row-click", { detail: { row: e.target } });
-    }
-
-    render() {
-        return html`
-            <div class="table-wrapper">
-                <div
-                    class=${classMap({
-                        table: true,
-                        "table--compact": this.density === "compact",
-                        "table--regular": this.density === "regular",
-                        "table--relaxed": this.density === "relaxed",
-                    })}
-                    role="grid">
-                    <div class="header-row table-row" part="header-row" role="row">
-                        ${this.headers.map((header) => this.renderHeader(header))}
-                    </div>
-                    <div
-                        class="row-group"
-                        role="rowgroup"
-                        @click=${(e: Event) => this.handleRowClick(e)}>
-                        ${this.renderRows()}
-                    </div>
-                </div>
-                ${this.renderFooter()}
-            </div>
-        `;
+        this.emit("sd-row-click", {detail: {row: e.target}});
     }
 
     private renderHeader(header: ColumnHeader) {
         const rightAlign = header["type"] === "number";
         return html`
             <div
-                class="header-cell table-cell ${rightAlign ? "cell-right-align" : ""}"
-                part="header-cell"
-                role="columnheader"
-                aria-colindex=${this.columnOrder.indexOf(header.field)}
-                data-field="${header["field"]}"
-                @click=${header["sortable"] === false
-                    ? nothing
-                    : () => this.switchSort(header)}
-                style=${styleMap({
-                    width: header["width"] ?? this.defaultWidth,
-                    "min-width": header["minWidth"] ?? this.defaultMinWidth,
-                })}>
+                    class="header-cell table-cell ${rightAlign ? "cell-right-align" : ""}"
+                    part="header-cell"
+                    role="columnheader"
+                    aria-colindex=${this.columnOrder.indexOf(header.field)}
+                    data-field="${header["field"]}"
+                    @click=${header["sortable"] === false
+                            ? nothing
+                            : () => this.switchSort(header)}
+                    style=${styleMap({
+                        width: header["width"] ?? this.defaultWidth,
+                        "min-width": header["minWidth"] ?? this.defaultMinWidth,
+                    })}>
                 ${rightAlign ? this.renderSortArrow(header) : nothing}
                 ${header["headerName"] ?? header["field"]}
                 ${rightAlign ? nothing : this.renderSortArrow(header)}
@@ -297,17 +287,19 @@ export default class SdGridTable extends SdElement {
                 i++
             ) {
                 rowsTemplate.push(
-                    html`<div class="table-row" part="table-row" role="row">
-                        ${this.renderRowContent(this.rows[i + start_index])}
-                    </div>`
+                    html`
+                        <div class="table-row" part="table-row" role="row">
+                            ${this.renderRowContent(this.rows[i + start_index])}
+                        </div>`
                 );
             }
         } else {
             this.rows.forEach((row) => {
                 rowsTemplate.push(
-                    html`<div class="table-row" part="table-row" role="row">
-                        ${this.renderRowContent(row)}
-                    </div>`
+                    html`
+                        <div class="table-row" part="table-row" role="row">
+                            ${this.renderRowContent(row)}
+                        </div>`
                 );
             });
         }
@@ -347,12 +339,12 @@ export default class SdGridTable extends SdElement {
         };
         return html`
             <div
-                class=${classMap(classes)}
-                role="gridcell"
-                part="table-cell"
-                data-field="${header.field}"
-                aria-colindex=${this.columnOrder.indexOf(header.field)}
-                style=${styleMap(cellStyle)}>
+                    class=${classMap(classes)}
+                    role="gridcell"
+                    part="table-cell"
+                    data-field="${header.field}"
+                    aria-colindex=${this.columnOrder.indexOf(header.field)}
+                    style=${styleMap(cellStyle)}>
                 ${cell ? this.renderCellContent(cell, header) : nothing}
             </div>
         `;
@@ -379,7 +371,7 @@ export default class SdGridTable extends SdElement {
     }
 
     private renderCellTag(cell: GridCell, args: ColumnTypeArgs | undefined) {
-        /**get the variant. the choice is made following the disponibility of these elements:
+        /**get the variant. the choice is made following the availability of these elements:
          * 1- tagVariant from the cell args
          * 2- tagVariant from the column args
          * 3- if none exist, defaults to "neutral"
@@ -388,7 +380,8 @@ export default class SdGridTable extends SdElement {
             cell["args"]?.["tagVariant"] ??
             args?.["tagVariant"]?.[cell["value"]] ??
             "neutral";
-        return html` <sd-tag variant=${variant}>${cell["value"]}</sd-tag> `;
+        return html`
+            <sd-tag variant=${variant}>${cell["value"]}</sd-tag> `;
     }
 
     private renderCellDateTime(cell: GridCell) {
@@ -407,23 +400,26 @@ export default class SdGridTable extends SdElement {
         ) {
             return nothing;
         } else if (this.sortModel[0]["sort"] === "asc") {
-            return html`<sd-icon-keyboard-arrow_up></sd-icon-keyboard-arrow_up>`;
+            return html`
+                <sd-icon-keyboard-arrow_up></sd-icon-keyboard-arrow_up>`;
         } else if (this.sortModel[0]["sort"] === "desc") {
-            return html`<sd-icon-keyboard-arrow_down></sd-icon-keyboard-arrow_down>`;
+            return html`
+                <sd-icon-keyboard-arrow_down></sd-icon-keyboard-arrow_down>`;
         }
         return nothing;
     }
 
     private renderFooter() {
         const count = this.rowCount ? this.rowCount / this.currentPageSize : 1;
-        return html`<div class="table-footer">
-            <div>${this.rowCount} total</div>
-            <sd-pagination
-                count=${count}
-                current-page=${this.currentPage}
-                @sd-change=${this.handlePageChange}></sd-pagination>
-            <div>rows per page: ${this.currentPageSize}</div>
-        </div>`;
+        return html`
+            <div class="table-footer">
+                <div>${this.rowCount} total</div>
+                <sd-pagination
+                        count=${count}
+                        current-page=${this.currentPage}
+                        @sd-change=${this.handlePageChange}></sd-pagination>
+                <div>rows per page: ${this.currentPageSize}</div>
+            </div>`;
     }
 }
 

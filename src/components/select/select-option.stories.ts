@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
 import "./select-option";
-import { ifDefined } from "lit/directives/if-defined.js";
-import "../../icons/src/grid_view";
-import "../../icons/src/edit";
+import {ifDefined} from "lit/directives/if-defined.js";
+import "../../icons/src/sd-icon-grid-view";
+import "../../icons/src/sd-icon-edit";
 
 const meta: Meta = {
     title: "components/select-option",
@@ -12,9 +12,10 @@ const meta: Meta = {
     render: function Render(args) {
         return html`
             <sd-select-option
-                ?disabled=${args["disabled"]}
-                value=${ifDefined(args["value"])}
-                >Option 1</sd-select-option
+                    ?disabled=${args["disabled"]}
+                    value=${ifDefined(args["value"])}
+            >Option 1
+            </sd-select-option
             >
         `;
     },
@@ -29,9 +30,13 @@ export const WithIcons: Story = {
     render: (args) => {
         return html`
             <sd-option ?disabled=${args["disabled"]} value=${ifDefined(args["value"])}
-                ><sd-icon-grid-view slot="prefix"></sd-icon-grid-view>Option
-                1<sd-icon-edit slot="suffix"></sd-icon-edit
-            ></sd-option>
+            >
+                <sd-icon-grid-view slot="prefix"></sd-icon-grid-view>
+                Option
+                1
+                <sd-icon-edit slot="suffix"></sd-icon-edit
+                >
+            </sd-option>
         `;
     },
 };

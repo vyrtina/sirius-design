@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
+import {ifDefined} from "lit/directives/if-defined.js";
 import "./input";
-import "../../icons/src/agriculture";
-import "../../icons/src/photo_camera";
-import { error } from "console";
+import "../../icons/src/sd-icon-agriculture";
+import "../../icons/src/sd-icon-photo-camera";
 
 const meta: Meta = {
     title: "components/input",
@@ -25,12 +24,12 @@ type Story = StoryObj;
 export const Text: Story = {};
 
 export const WithIcons: Story = {
-    render: ({ label, placeholder, type, clearable }) => html`
+    render: ({label, placeholder, type, clearable}) => html`
         <sd-input
-            label=${label}
-            placeholder=${placeholder}
-            type=${type}
-            ?clearable=${clearable}>
+                label=${label}
+                placeholder=${placeholder}
+                type=${type}
+                ?clearable=${clearable}>
             <sd-icon-agriculture slot="icon"></sd-icon-agriculture>
             <sd-icon-photo-camera slot="trailing-icon"></sd-icon-photo-camera>
         </sd-input>
@@ -48,7 +47,7 @@ export const Invalid: Story = {
     args: {
         value: "as68ka",
         error: true,
-        "error-text": "string must only contains caracters",
+        "error-text": "string must only contains characters",
         required: true,
     },
 };
@@ -63,14 +62,14 @@ export const Form: Story = {
     render: (args) => html`
         <form>
             <sd-input
-                label=${ifDefined(args["label"])}
-                placeholder=${ifDefined(args["placeholder"])}
-                title="${ifDefined(args["title"])}"
-                ?required=${args["required"]}
-                minlength=${ifDefined(args["minlength"])}
-                maxlength=${ifDefined(args["maxlength"])}
-                type=${ifDefined(args["type"])}
-                ?clearable=${args["clearable"]}>
+                    label=${ifDefined(args["label"])}
+                    placeholder=${ifDefined(args["placeholder"])}
+                    title="${ifDefined(args["title"])}"
+                    ?required=${args["required"]}
+                    minlength=${ifDefined(args["minlength"])}
+                    maxlength=${ifDefined(args["maxlength"])}
+                    type=${ifDefined(args["type"])}
+                    ?clearable=${args["clearable"]}>
             </sd-input>
             <button type="submit">Submit</button>
         </form>
@@ -96,7 +95,7 @@ export const Form: Story = {
 
                 const form = event.target;
 
-                /** Get all of the form data */
+                /** Get all the form data */
                 const formData = new FormData(form);
                 const data = {};
                 formData.forEach((value, key) => (data[key] = value));

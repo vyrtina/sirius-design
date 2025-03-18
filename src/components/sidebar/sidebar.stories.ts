@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
 import "./sidebar";
 import "./sidebar-item";
 import "../button/button";
-import "../../icons/src/browse_gallery";
+import "../../icons/src/sd-icon-browse-gallery";
 
 const meta: Meta = {
     title: "components/sidebar",
@@ -13,16 +13,20 @@ const meta: Meta = {
         return html`
             <div class="page">
                 <sd-sidebar
-                    variant=${args["variant"]}
-                    label="sidebar"
-                    class="sidebar-overview"
-                    visible>
+                        variant=${args["variant"]}
+                        label="sidebar"
+                        class="sidebar-overview"
+                        visible>
                     <sd-sidebar-item href="https://www.google.co.uk/" selected
-                        ><sd-icon-browse-gallery slot="prefix"></sd-icon-browse-gallery
-                        >Text</sd-sidebar-item
+                    >
+                        <sd-icon-browse-gallery slot="prefix"></sd-icon-browse-gallery
+                        >
+                        Text
+                    </sd-sidebar-item
                     >
                     <sd-sidebar-item href="https://www.google.co.uk/"
-                        >Menu</sd-sidebar-item
+                    >Menu
+                    </sd-sidebar-item
                     >
                     <sd-sidebar-item>Help</sd-sidebar-item>
                 </sd-sidebar>
@@ -36,12 +40,14 @@ const meta: Meta = {
                 .sb-main-padded {
                     padding: 0 !important;
                 }
+
                 .page {
                     display: flex;
                     flex-direction: row;
                     width: 100%;
                     height: 100%;
                 }
+
                 .content {
                     display: flex;
                     width: 100%;
@@ -55,7 +61,7 @@ const meta: Meta = {
                 const toggleShowButton = document.querySelector(".toggle_show");
 
                 toggleExpansionButton.addEventListener("click", () =>
-                    sidebar.toggleExpansion()
+                        sidebar.toggleExpansion()
                 );
                 toggleShowButton.addEventListener("click", () => sidebar.toggleDisplay());
             </script>

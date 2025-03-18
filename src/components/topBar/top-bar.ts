@@ -1,7 +1,7 @@
-import { LitElement, html, unsafeCSS } from "lit";
-import { customElement, state } from "lit/decorators.js";
+import {html, LitElement, unsafeCSS} from "lit";
+import {customElement, state} from "lit/decorators.js";
 import styles from "./top-bar.scss?inline";
-import "../../icons/src/menu";
+import "../../icons/src/sd-icon-menu";
 
 @customElement("sd-top-bar")
 export default class SdTopBar extends LitElement {
@@ -25,15 +25,17 @@ export default class SdTopBar extends LitElement {
                     </span>
                 </div>
                 <div
-                    id="menu-links"
-                    class=${"menu-links " + (this.expanded ? "expanded" : "")}>
-                    <slot name="menu-link"><slot name="text-links"></slot></slot>
+                        id="menu-links"
+                        class=${"menu-links " + (this.expanded ? "expanded" : "")}>
+                    <slot name="menu-link">
+                        <slot name="text-links"></slot>
+                    </slot>
                 </div>
                 <sd-icon-button-plain
-                    class="nav-menu-btn"
-                    id="top-bar-menu-btn"
-                    @click="${this._sidebarControl}"
-                    invert>
+                        class="nav-menu-btn"
+                        id="top-bar-menu-btn"
+                        @click="${this._sidebarControl}"
+                        invert>
                     <sd-icon-menu></sd-icon-menu>
                 </sd-icon-button-plain>
             </div>

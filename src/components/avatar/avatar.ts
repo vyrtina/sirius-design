@@ -1,10 +1,10 @@
-import { html, unsafeCSS } from "lit";
-import { property, state, customElement } from "lit/decorators.js";
-import { styleMap } from "lit-html/directives/style-map.js";
-import { watch } from "../../utils/watch.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, state} from "lit/decorators.js";
+import {styleMap} from "lit-html/directives/style-map.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./avatar.scss?inline";
-import "../../icons/src/person.js";
+import "../../icons/src/sd-icon-person.js";
 
 const avatarColors = [
     "red",
@@ -37,43 +37,23 @@ type avatarPossibleColors = (typeof avatarColors)[number];
 @customElement("sd-avatar")
 export default class SdAvatar extends SdElement {
     static styles = unsafeCSS(styles);
-
-    @state() private hasError = false;
-
     /** The image source to use for the avatar. */
     @property() image = "";
-
     /** A label to use to describe the avatar to assistive devices. */
     @property() label = "";
-
     /** Initials to use as a fallback when no image is available (1-2 characters max recommended). */
     @property() initials = ""; //TODO: add hasChanged to see if more than 2 characters
-
     /** the full name of the user */
-    @property({ attribute: "username" }) username = "";
-
+    @property({attribute: "username"}) username = "";
     /** Indicates how the browser should load the image. */
     @property() loading: "eager" | "lazy" = "eager";
-
     /** the background color of the avatar, if initials are shown */
     @property() color: avatarPossibleColors | undefined;
-
     /** the size of the component. apply to both height and width */
     @property() size = "";
-
     /** render a link */
     @property() href = "";
-
-    private getRandomColor(str: String) {
-        //use a hash function
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = (hash << 5) - hash + str.charCodeAt(i);
-            hash |= 0; // Convert to 32bit integer
-        }
-        hash = (Math.abs(hash) % 16) + 1;
-        return avatarColors[hash]; // Ensure the number is between 1 and 16
-    }
+    @state() private hasError = false;
 
     @watch("image")
     handleImageChange() {
@@ -92,13 +72,24 @@ export default class SdAvatar extends SdElement {
         }
     }
 
+    render() {
+        return html` ${this.href ? this.renderLink() : this.renderAvatar()} `;
+    }
+
+    private getRandomColor(str: String) {
+        //use a hash function
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = (hash << 5) - hash + str.charCodeAt(i);
+            hash |= 0; // Convert to 32bit integer
+        }
+        hash = (Math.abs(hash) % 16) + 1;
+        return avatarColors[hash]; // Ensure the number is between 1 and 16
+    }
+
     private handleImageLoadError() {
         this.hasError = true;
         this.emit("sd-error");
-    }
-
-    render() {
-        return html` ${this.href ? this.renderLink() : this.renderAvatar()} `;
     }
 
     private renderAvatar() {
@@ -111,11 +102,11 @@ export default class SdAvatar extends SdElement {
         }
         return html`
             <div
-                part="base"
-                class="avatar"
-                role="img"
-                style="${styleMap(style)}"
-                aria-label=${this.label ? this.label : this.username}>
+                    part="base"
+                    class="avatar"
+                    role="img"
+                    style="${styleMap(style)}"
+                    aria-label=${this.label ? this.label : this.username}>
                 ${this.renderContent()}
             </div>
         `;
@@ -131,12 +122,12 @@ export default class SdAvatar extends SdElement {
         }
         return html`
             <a
-                href="${this.href}"
-                part="base"
-                class="avatar"
-                role="img"
-                style="${styleMap(style)}"
-                aria-label=${this.label ? this.label : this.username}>
+                    href="${this.href}"
+                    part="base"
+                    class="avatar"
+                    role="img"
+                    style="${styleMap(style)}"
+                    aria-label=${this.label ? this.label : this.username}>
                 <div class="state-layer"></div>
                 ${this.renderContent()}
             </a>
@@ -156,18 +147,18 @@ export default class SdAvatar extends SdElement {
     private renderImage() {
         return html`
             <img
-                part="image"
-                class="image"
-                src="${this.image}"
-                loading="${this.loading}"
-                alt=""
-                @error="${this.handleImageLoadError}" />
+                    part="image"
+                    class="image"
+                    src="${this.image}"
+                    loading="${this.loading}"
+                    alt=""
+                    @error="${this.handleImageLoadError}"/>
         `;
     }
 
     private renderInitials() {
         return html`<span part="initials" class="initials ${this.color}"
-            >${this.initials}</span
+        >${this.initials}</span
         >`;
     }
 

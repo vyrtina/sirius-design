@@ -1,9 +1,9 @@
-import { html, unsafeCSS } from "lit";
-import { property, customElement } from "lit/decorators.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property} from "lit/decorators.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./pagination.scss?inline";
-import "../../icons/src/chevron_left.js";
-import "../../icons/src/chevron_right.js";
+import "../../icons/src/sd-icon-chevron-left.js";
+import "../../icons/src/sd-icon-chevron-right.js";
 import "../icon-button/icon-button.js";
 import "../button/button.js";
 import SdIconButton from "../icon-button/icon-button.js";
@@ -62,25 +62,12 @@ export default class SdPagination extends SdElement {
     currentPage = 1;
 
     /** Number of visible page buttons before and after the current page button. */
-    @property({ attribute: "sibling-count", type: Number }) siblingCount = 2;
+    @property({attribute: "sibling-count", type: Number}) siblingCount = 2;
 
     updated(changedProperties: Map<string | number | symbol, unknown>) {
         if (changedProperties.has("current-page")) {
             this.currentPage = Math.max(1, Math.min(this.count, this.currentPage)); // Enforce the range [0, count]
         }
-    }
-
-    private changePage(newIndex: number) {
-        this.currentPage = newIndex;
-        this.emit("sd-change");
-    }
-
-    private handlePageNavBtn(e: Event, i: number) {
-        const target = e.target as SdIconButton;
-        if (target.disabled) {
-            return;
-        }
-        this.changePage(i);
     }
 
     render() {
@@ -103,46 +90,68 @@ export default class SdPagination extends SdElement {
                 this.renderPageButton(this.count, this.currentPage === this.count)
             );
         }
-        return html` <nav class="container">
-            <ul class="pagination-list">
-                <li>
-                    <sd-icon-button
-                        variant="plain"
-                        @click=${(e: Event) =>
-                            this.handlePageNavBtn(e, this.currentPage - 1)}
-                        ?disabled=${this.currentPage === 1}
-                        ><sd-icon-chevron-left></sd-icon-chevron-left
-                    ></sd-icon-button>
-                </li>
-                ${pagesTemplate}
-                <li>
-                    <sd-icon-button
-                        variant="plain"
-                        @click=${(e: Event) =>
-                            this.handlePageNavBtn(e, this.currentPage + 1)}
-                        ?disabled=${this.currentPage === this.count}
-                        ><sd-icon-chevron-right></sd-icon-chevron-right
-                    ></sd-icon-button>
-                </li>
-            </ul>
-        </nav>`;
+        return html`
+            <nav class="container">
+                <ul class="pagination-list">
+                    <li>
+                        <sd-icon-button
+                                variant="plain"
+                                @click=${(e: Event) =>
+                                        this.handlePageNavBtn(e, this.currentPage - 1)}
+                                ?disabled=${this.currentPage === 1}
+                        >
+                            <sd-icon-chevron-left></sd-icon-chevron-left
+                            >
+                        </sd-icon-button>
+                    </li>
+                    ${pagesTemplate}
+                    <li>
+                        <sd-icon-button
+                                variant="plain"
+                                @click=${(e: Event) =>
+                                        this.handlePageNavBtn(e, this.currentPage + 1)}
+                                ?disabled=${this.currentPage === this.count}
+                        >
+                            <sd-icon-chevron-right></sd-icon-chevron-right
+                            >
+                        </sd-icon-button>
+                    </li>
+                </ul>
+            </nav>`;
+    }
+
+    private changePage(newIndex: number) {
+        this.currentPage = newIndex;
+        this.emit("sd-change");
+    }
+
+    private handlePageNavBtn(e: Event, i: number) {
+        const target = e.target as SdIconButton;
+        if (target.disabled) {
+            return;
+        }
+        this.changePage(i);
     }
 
     private renderPageButton(index: number, selected: boolean) {
         return html`
             <li>
                 <sd-button
-                    class="pagination-button"
-                    variant=${selected ? "filled" : "plain"}
-                    @click=${() => this.changePage(index)}
-                    >${index}</sd-button
+                        class="pagination-button"
+                        variant=${selected ? "filled" : "plain"}
+                        @click=${() => this.changePage(index)}
+                >${index}
+                </sd-button
                 >
             </li>
         `;
     }
 
     private renderEllipsis() {
-        return html`<li class="ellipsis"><div>...</div></li>`;
+        return html`
+            <li class="ellipsis">
+                <div>...</div>
+            </li>`;
     }
 }
 

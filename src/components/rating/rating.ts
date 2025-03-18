@@ -1,12 +1,12 @@
-import { html, unsafeCSS } from "lit";
-import { customElement, property, state, query, eventOptions } from "lit/decorators.js";
-import { watch } from "../../utils/watch.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, eventOptions, property, query, state} from "lit/decorators.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./rating.scss?inline";
-import "../../icons/src/star";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
-import { classMap } from "lit/directives/class-map.js";
-import { styleMap } from "lit/directives/style-map.js";
+import "../../icons/src/sd-icon-star.js";
+import {unsafeHTML} from "lit/directives/unsafe-html.js";
+import {classMap} from "lit/directives/class-map.js";
+import {styleMap} from "lit/directives/style-map.js";
 
 function clamp(value: number, min: number, max: number) {
     const noNegativeZero = (n: number) => (Object.is(n, -0) ? 0 : n);
@@ -27,27 +27,18 @@ export default class SdRating extends SdElement {
     static styles = unsafeCSS(styles);
 
     @query(".rating") rating!: HTMLElement;
-
-    @state() private hoverValue = 0;
-    @state() private isHovering = false;
-
     /* Removes all hover effects and pointer events.*/
-    @property({ type: Boolean }) readonly = false;
-
-    /** A label for accesibility. */
+    @property({type: Boolean}) readonly = false;
+    /** A label for accessibility. */
     @property() label = "";
-
     /** Disables the rating. */
-    @property({ type: Boolean }) disabled = false;
-
+    @property({type: Boolean}) disabled = false;
     /** The current rating. */
-    @property({ type: Number }) value = 0;
-
+    @property({type: Number}) value = 0;
     /**
      * Maximum rating.
      */
-    @property({ type: Number }) max = 5;
-
+    @property({type: Number}) max = 5;
     /**
      * define the minimum increment value change allowed.
      */
@@ -64,6 +55,8 @@ export default class SdRating extends SdElement {
         },
     })
     precision = 1;
+    @state() private hoverValue = 0;
+    @state() private isHovering = false;
 
     /**
      * A function that customizes the symbol to be rendered. The first and only argument is the rating's current value.
@@ -71,6 +64,119 @@ export default class SdRating extends SdElement {
      */
     @property() getSymbol: (value: number) => string = () =>
         "<sd-icon-star></sd-icon-star>";
+
+    @watch("hoverValue")
+    handleHoverValueChange() {
+        this.emit("sd-hover", {
+            detail: {
+                phase: "move",
+                value: this.hoverValue,
+            },
+        });
+    }
+
+    @watch("isHovering")
+    handleIsHoveringChange() {
+        this.emit("sd-hover", {
+            detail: {
+                phase: this.isHovering ? "start" : "end",
+                value: this.hoverValue,
+            },
+        });
+    }
+
+    /** Sets focus on the rating. */
+    focus(options?: FocusOptions) {
+        this.rating.focus(options);
+    }
+
+    /** Removes focus from the rating. */
+    blur() {
+        this.rating.blur();
+    }
+
+    render() {
+        const isRtl = this.matches(":dir(rtl)");
+        let displayValue = 0;
+
+        if (this.disabled || this.readonly) {
+            displayValue = this.value;
+        } else {
+            displayValue = this.isHovering ? this.hoverValue : this.value;
+        }
+
+        const classes = {
+            rating: true,
+            "rating--readonly": this.readonly,
+            "rating--disabled": this.disabled,
+        };
+        const itemTemplates = [];
+
+        for (let i: number = 0; i < this.max; i++) {
+            if (displayValue > i && displayValue < i + 1) {
+                itemTemplates.push(
+                    html` <span
+                            class=${classMap({
+                                rating__icon: true,
+                                "rating__partial-symbol-container": true,
+                                hover: this.isHovering && Math.ceil(displayValue) === i + 1,
+                            })}
+                            role="presentation">
+                        <div
+                                style=${styleMap({
+                                    clipPath: isRtl
+                                            ? `inset(0 ${(displayValue - i) * 100}% 0 0)`
+                                            : `inset(0 0 0 ${(displayValue - i) * 100}%)`,
+                                })}>
+                            ${unsafeHTML(this.getSymbol(i + 1))}
+                        </div>
+                        <div
+                                class="rating__partial--filled"
+                                style=${styleMap({
+                                    clipPath: isRtl
+                                            ? `inset(0 0 0 ${100 - (displayValue - i) * 100}%)`
+                                            : `inset(0 ${100 - (displayValue - i) * 100}% 0 0)`,
+                                })}>
+                            ${unsafeHTML(this.getSymbol(i + 1))}
+                        </div>
+                    </span>`
+                );
+            } else {
+                itemTemplates.push(html`
+                    <span
+                            class="${classMap({
+                                rating__icon: true,
+                                hover: this.isHovering && Math.ceil(displayValue) === i + 1,
+                                active: displayValue >= i + 1,
+                            })}"
+                    >${unsafeHTML(this.getSymbol(i + 1))}</span
+                    >
+                `);
+            }
+        }
+        return html`
+            <div
+                    class=${classMap(classes)}
+                    role="slider"
+                    aria-label=${this.label}
+                    aria-disabled=${this.disabled ? "true" : "false"}
+                    aria-readonly=${this.readonly ? "true" : "false"}
+                    aria-valuenow=${this.value}
+                    aria-valuemin=${0}
+                    aria-valuemax=${this.max}
+                    tabindex=${this.disabled ? "-1" : "0"}
+                    @click=${this.handleClick}
+                    @keydown=${this.handleKeyDown}
+                    @mouseenter=${this.handleMouseEnter}
+                    @touchstart=${this.handleTouchStart}
+                    @mouseleave=${this.handleMouseLeave}
+                    @touchend=${this.handleTouchEnd}
+                    @mousemove=${this.handleMouseMove}
+                    @touchmove=${this.handleTouchMove}>
+                <span class="rating__icons"> ${itemTemplates} </span>
+            </div>
+        `;
+    }
 
     private getValueFromMousePosition(event: MouseEvent) {
         return this.getValueFromXCoordinate(event.clientX);
@@ -82,16 +188,16 @@ export default class SdRating extends SdElement {
 
     private getValueFromXCoordinate(coordinate: number) {
         const isRtl = this.matches(":dir(rtl)");
-        const { left, right, width } = this.rating.getBoundingClientRect();
+        const {left, right, width} = this.rating.getBoundingClientRect();
         const value = isRtl
             ? this.roundToPrecision(
-                  ((right - coordinate) / width) * this.max,
-                  this.precision
-              )
+                ((right - coordinate) / width) * this.max,
+                this.precision
+            )
             : this.roundToPrecision(
-                  ((coordinate - left) / width) * this.max,
-                  this.precision
-              );
+                ((coordinate - left) / width) * this.max,
+                this.precision
+            );
 
         return clamp(value, 0, this.max);
     }
@@ -179,7 +285,7 @@ export default class SdRating extends SdElement {
         event.preventDefault();
     }
 
-    @eventOptions({ passive: true })
+    @eventOptions({passive: true})
     private handleTouchMove(event: TouchEvent) {
         this.hoverValue = this.getValueFromTouchPosition(event);
     }
@@ -196,119 +302,6 @@ export default class SdRating extends SdElement {
     private roundToPrecision(numberToRound: number, precision = 0.5) {
         const multiplier = 1 / precision;
         return Math.ceil(numberToRound * multiplier) / multiplier;
-    }
-
-    @watch("hoverValue")
-    handleHoverValueChange() {
-        this.emit("sd-hover", {
-            detail: {
-                phase: "move",
-                value: this.hoverValue,
-            },
-        });
-    }
-
-    @watch("isHovering")
-    handleIsHoveringChange() {
-        this.emit("sd-hover", {
-            detail: {
-                phase: this.isHovering ? "start" : "end",
-                value: this.hoverValue,
-            },
-        });
-    }
-
-    /** Sets focus on the rating. */
-    focus(options?: FocusOptions) {
-        this.rating.focus(options);
-    }
-
-    /** Removes focus from the rating. */
-    blur() {
-        this.rating.blur();
-    }
-
-    render() {
-        const isRtl = this.matches(":dir(rtl)");
-        let displayValue = 0;
-
-        if (this.disabled || this.readonly) {
-            displayValue = this.value;
-        } else {
-            displayValue = this.isHovering ? this.hoverValue : this.value;
-        }
-
-        const classes = {
-            rating: true,
-            "rating--readonly": this.readonly,
-            "rating--disabled": this.disabled,
-        };
-        const itemTemplates = [];
-
-        for (let i: number = 0; i < this.max; i++) {
-            if (displayValue > i && displayValue < i + 1) {
-                itemTemplates.push(
-                    html` <span
-                        class=${classMap({
-                            rating__icon: true,
-                            "rating__partial-symbol-container": true,
-                            hover: this.isHovering && Math.ceil(displayValue) === i + 1,
-                        })}
-                        role="presentation">
-                        <div
-                            style=${styleMap({
-                                clipPath: isRtl
-                                    ? `inset(0 ${(displayValue - i) * 100}% 0 0)`
-                                    : `inset(0 0 0 ${(displayValue - i) * 100}%)`,
-                            })}>
-                            ${unsafeHTML(this.getSymbol(i + 1))}
-                        </div>
-                        <div
-                            class="rating__partial--filled"
-                            style=${styleMap({
-                                clipPath: isRtl
-                                    ? `inset(0 0 0 ${100 - (displayValue - i) * 100}%)`
-                                    : `inset(0 ${100 - (displayValue - i) * 100}% 0 0)`,
-                            })}>
-                            ${unsafeHTML(this.getSymbol(i + 1))}
-                        </div>
-                    </span>`
-                );
-            } else {
-                itemTemplates.push(html`
-                    <span
-                        class="${classMap({
-                            rating__icon: true,
-                            hover: this.isHovering && Math.ceil(displayValue) === i + 1,
-                            active: displayValue >= i + 1,
-                        })}"
-                        >${unsafeHTML(this.getSymbol(i + 1))}</span
-                    >
-                `);
-            }
-        }
-        return html`
-            <div
-                class=${classMap(classes)}
-                role="slider"
-                aria-label=${this.label}
-                aria-disabled=${this.disabled ? "true" : "false"}
-                aria-readonly=${this.readonly ? "true" : "false"}
-                aria-valuenow=${this.value}
-                aria-valuemin=${0}
-                aria-valuemax=${this.max}
-                tabindex=${this.disabled ? "-1" : "0"}
-                @click=${this.handleClick}
-                @keydown=${this.handleKeyDown}
-                @mouseenter=${this.handleMouseEnter}
-                @touchstart=${this.handleTouchStart}
-                @mouseleave=${this.handleMouseLeave}
-                @touchend=${this.handleTouchEnd}
-                @mousemove=${this.handleMouseMove}
-                @touchmove=${this.handleTouchMove}>
-                <span class="rating__icons"> ${itemTemplates} </span>
-            </div>
-        `;
     }
 }
 

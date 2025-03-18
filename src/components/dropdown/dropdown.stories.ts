@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
-import "../../icons/src/edit";
-import "../../icons/src/favorite";
-import "../../icons/src/more_vert";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
+import "../../icons/src/sd-icon-edit";
+import "../../icons/src/sd-icon-favorite";
+import "../../icons/src/sd-icon-more-vert";
 import "./dropdown";
 import "../menu/menu";
 import "../menu/menu-item";
@@ -15,8 +15,10 @@ const meta: Meta = {
         return html`
             <sd-dropdown>
                 <sd-icon-button slot="trigger"
-                    ><sd-icon-more-vert></sd-icon-more-vert
-                ></sd-icon-button>
+                >
+                    <sd-icon-more-vert></sd-icon-more-vert
+                    >
+                </sd-icon-button>
                 <sd-menu>
                     <sd-menu-item>Dropdown Item 1</sd-menu-item>
                     <sd-menu-item>Dropdown Item 2</sd-menu-item>
