@@ -39,7 +39,7 @@ export const Link: Story = {
             <sd-card style="width: 350px;" href="google.com">
                 <img src="https://picsum.photos/350/400" slot="image"/>
                 <h3>Title</h3>
-                <p>title desciption</p>
+                <p>title description</p>
             </sd-card>
         `;
     },

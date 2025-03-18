@@ -1,13 +1,13 @@
-import { html, unsafeCSS } from "lit";
-import { customElement } from "lit/decorators.js";
+import {html, unsafeCSS} from "lit";
+import {customElement} from "lit/decorators.js";
 import SdButton from "../button/button.js";
 import styles from "./icon-button.scss?inline";
 
 /**
  * @summary A versatile icon button component with support for multiple variants, sizes, and functionalities.
  *
- * @event sd-blur - Emitted when the button loses focus.
  * @event sd-focus - Emitted when the button gains focus.
+ * @event sd-blur - Emitted when the button loses focus.
  *
  * @slot - The default slot for the button's icon.
  *
@@ -20,7 +20,8 @@ export default class SdIconButton extends SdButton {
     static override styles = unsafeCSS(styles);
 
     override renderContent() {
-        return html` <slot></slot> `;
+        return html`
+            <slot></slot> `;
     }
 }
 

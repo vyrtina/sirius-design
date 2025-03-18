@@ -1,10 +1,10 @@
-import { classMap } from "lit/directives/class-map.js";
-import { getTabbableBoundary } from "../../utils/tabbable.js";
-import { html, unsafeCSS } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { property, query, customElement } from "lit/decorators.js";
-import { waitForEvent } from "../../utils/event.js";
-import { watch } from "../../utils/watch.js";
+import {classMap} from "lit/directives/class-map.js";
+import {getTabbableBoundary} from "../../utils/tabbable.js";
+import {html, unsafeCSS} from "lit";
+import {ifDefined} from "lit/directives/if-defined.js";
+import {customElement, property, query} from "lit/decorators.js";
+import {waitForEvent} from "../../utils/event.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import type SdPopup from "../popup/popup.js";
 import "../popup/popup.js";
@@ -31,20 +31,16 @@ export default class SdDropdown extends SdElement {
     @query(".dropdown") popup!: SdPopup;
     @query(".dropdown__trigger") trigger!: HTMLSlotElement;
     @query(".dropdown__panel") panel!: HTMLSlotElement;
-
-    private closeWatcher!: CloseWatcher | null;
-
     /**
      * Indicates whether the dropdown is open. You can toggle this attribute to show and hide the dropdown, or you
      * can use the `show()` and `hide()` methods and this attribute will reflect the dropdowns open state.
      */
-    @property({ type: Boolean, reflect: true }) open = false;
-
+    @property({type: Boolean, reflect: true}) open = false;
     /**
      * The preferred placement of the dropdown panel. Note that the actual placement may vary as needed to keep the panel
      * inside the viewport.
      */
-    @property({ reflect: true }) placement:
+    @property({reflect: true}) placement:
         | "top"
         | "top-start"
         | "top-end"
@@ -57,40 +53,34 @@ export default class SdDropdown extends SdElement {
         | "left"
         | "left-start"
         | "left-end" = "bottom-start";
-
     /** Disables the dropdown so the panel will not open. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
+    @property({type: Boolean, reflect: true}) disabled = false;
     /**
      * By default, the dropdown is closed when an item is selected. This attribute will keep it open instead. Useful for
      * dropdowns that allow for multiple interactions.
      */
-    @property({ attribute: "stay-open-on-select", type: Boolean, reflect: true })
+    @property({attribute: "stay-open-on-select", type: Boolean, reflect: true})
     stayOpenOnSelect = false;
-
     /**
      * The dropdown will close when the user interacts outside of this element (e.g. clicking). Useful for composing other
      * components that use a dropdown internally.
      */
-    @property({ attribute: false }) containingElement?: HTMLElement;
-
+    @property({attribute: false}) containingElement?: HTMLElement;
     /** The distance in pixels from which to offset the panel away from its trigger. */
-    @property({ type: Number }) distance = 0;
-
+    @property({type: Number}) distance = 0;
     /** The distance in pixels from which to offset the panel along its trigger. */
-    @property({ type: Number }) skidding = 0;
-
+    @property({type: Number}) skidding = 0;
     /**
      * Enable this option to prevent the panel from being clipped when the component is placed inside a container with
      * `overflow: auto|scroll`. Hoisting uses a fixed positioning strategy that works in many, but not all, scenarios.
      */
-    @property({ type: Boolean }) hoist = false;
-
+    @property({type: Boolean}) hoist = false;
     /**
      * Syncs the popup width or height to that of the trigger element.
      */
-    @property({ reflect: true }) sync: "width" | "height" | "both" | undefined =
+    @property({reflect: true}) sync: "width" | "height" | "both" | undefined =
         undefined;
+    private closeWatcher!: CloseWatcher | null;
 
     connectedCallback() {
         super.connectedCallback();
@@ -117,7 +107,7 @@ export default class SdDropdown extends SdElement {
     }
 
     focusOnTrigger() {
-        const trigger = this.trigger.assignedElements({ flatten: true })[0] as
+        const trigger = this.trigger.assignedElements({flatten: true})[0] as
             | HTMLElement
             | undefined;
         if (typeof trigger?.focus === "function") {
@@ -127,81 +117,9 @@ export default class SdDropdown extends SdElement {
 
     getMenu() {
         return this.panel
-            .assignedElements({ flatten: true })
+            .assignedElements({flatten: true})
             .find((el) => el.tagName.toLowerCase() === "sd-menu") as SdMenu | undefined;
     }
-
-    private handleKeyDown = (event: KeyboardEvent) => {
-        // Close when escape is pressed inside an open dropdown. We need to listen on the panel itself and stop propagation
-        // in case any ancestors are also listening for this key.
-        if (this.open && event.key === "Escape") {
-            event.stopPropagation();
-            this.hide();
-            this.focusOnTrigger();
-        }
-    };
-
-    private handleDocumentKeyDown = (event: KeyboardEvent) => {
-        // Close when escape or tab is pressed
-        if (event.key === "Escape" && this.open && !this.closeWatcher) {
-            event.stopPropagation();
-            this.focusOnTrigger();
-            this.hide();
-            return;
-        }
-
-        // Handle tabbing
-        if (event.key === "Tab") {
-            // Tabbing within an open menu should close the dropdown and refocus the trigger
-            if (
-                this.open &&
-                document.activeElement?.tagName.toLowerCase() === "sd-menu-item"
-            ) {
-                event.preventDefault();
-                this.hide();
-                this.focusOnTrigger();
-                return;
-            }
-
-            // Tabbing outside of the containing element closes the panel
-            //
-            // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
-            // otherwise `document.activeElement` will only return the name of the parent shadow DOM element.
-            setTimeout(() => {
-                const activeElement =
-                    this.containingElement?.getRootNode() instanceof ShadowRoot
-                        ? document.activeElement?.shadowRoot?.activeElement
-                        : document.activeElement;
-
-                if (
-                    !this.containingElement ||
-                    activeElement?.closest(
-                        this.containingElement.tagName.toLowerCase()
-                    ) !== this.containingElement
-                ) {
-                    this.hide();
-                }
-            });
-        }
-    };
-
-    private handleDocumentMouseDown = (event: MouseEvent) => {
-        // Close when clicking outside of the containing element
-        const path = event.composedPath();
-        if (this.containingElement && !path.includes(this.containingElement)) {
-            this.hide();
-        }
-    };
-
-    private handlePanelSelect = (event: any) => {
-        const target = event.target as HTMLElement;
-
-        // Hide the dropdown when a menu item is selected
-        if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === "sd-menu") {
-            this.hide();
-            this.focusOnTrigger();
-        }
-    };
 
     handleTriggerClick() {
         if (this.open) {
@@ -213,7 +131,7 @@ export default class SdDropdown extends SdElement {
     }
 
     async handleTriggerKeyDown(event: KeyboardEvent) {
-        // When spacebar/enter is pressed, show the panel but don't focus on the menu. This let's the user press the same
+        // When spacebar/enter is pressed, show the panel but don't focus on the menu. This lets the user press the same
         // key again to hide the menu in case they don't want to make a selection.
         if ([" ", "Enter"].includes(event.key)) {
             event.preventDefault();
@@ -272,15 +190,6 @@ export default class SdDropdown extends SdElement {
     }
 
     //
-    // Slotted triggers can be arbitrary content, but we need to link them to the dropdown panel with `aria-haspopup` and
-    // `aria-expanded`. These must be applied to the "accessible trigger" (the tabbable portion of the trigger element
-    // that gets slotted in) so screen readers will understand them. The accessible trigger could be the slotted element,
-    // a child of the slotted element, or an element in the slotted element's shadow root.
-    //
-    // For example, the accessible trigger of an <sl-button> is a <button> located inside its shadow root.
-    //
-    // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
-    //
     updateAccessibleTrigger() {
         const assignedElements = this.trigger.assignedElements({
             flatten: true,
@@ -336,6 +245,16 @@ export default class SdDropdown extends SdElement {
         this.popup.reposition();
     }
 
+    //
+    // Slotted triggers can be arbitrary content, but we need to link them to the dropdown panel with `aria-haspopup` and
+    // `aria-expanded`. These must be applied to the "accessible trigger" (the tabbable portion of the trigger element
+    // that gets slotted in) so screen readers will understand them. The accessible trigger could be the slotted element,
+    // a child of the slotted element, or an element in the slotted element's shadow root.
+    //
+    // For example, the accessible trigger of an <sl-button> is a <button> located inside its shadow root.
+    //
+    // To determine this, we assume the first tabbable element in the trigger slot is the "accessible trigger."
+
     addOpenListeners() {
         this.panel.addEventListener("sl-select", this.handlePanelSelect);
         if ("CloseWatcher" in window) {
@@ -362,7 +281,7 @@ export default class SdDropdown extends SdElement {
         this.closeWatcher?.destroy();
     }
 
-    @watch("open", { waitUntilFirstUpdate: true })
+    @watch("open", {waitUntilFirstUpdate: true})
     async handleOpenChange() {
         if (this.disabled) {
             this.open = false;
@@ -394,40 +313,112 @@ export default class SdDropdown extends SdElement {
     render() {
         return html`
             <sd-popup
-                part="base"
-                exportparts="popup:base__popup"
-                id="dropdown"
-                placement=${this.placement}
-                distance=${this.distance}
-                skidding=${this.skidding}
-                strategy=${this.hoist ? "fixed" : "absolute"}
-                flip
-                shift
-                auto-size="vertical"
-                auto-size-padding="10"
-                sync=${ifDefined(this.sync ? this.sync : undefined)}
-                class=${classMap({
-                    dropdown: true,
-                    "dropdown--open": this.open,
-                })}>
+                    part="base"
+                    exportparts="popup:base__popup"
+                    id="dropdown"
+                    placement=${this.placement}
+                    distance=${this.distance}
+                    skidding=${this.skidding}
+                    strategy=${this.hoist ? "fixed" : "absolute"}
+                    flip
+                    shift
+                    auto-size="vertical"
+                    auto-size-padding="10"
+                    sync=${ifDefined(this.sync ? this.sync : undefined)}
+                    class=${classMap({
+                        dropdown: true,
+                        "dropdown--open": this.open,
+                    })}>
                 <slot
-                    name="trigger"
-                    slot="anchor"
-                    part="trigger"
-                    class="dropdown__trigger"
-                    @click=${this.handleTriggerClick}
-                    @keydown=${this.handleTriggerKeyDown}
-                    @keyup=${this.handleTriggerKeyUp}
-                    @slotchange=${this.handleTriggerSlotChange}></slot>
+                        name="trigger"
+                        slot="anchor"
+                        part="trigger"
+                        class="dropdown__trigger"
+                        @click=${this.handleTriggerClick}
+                        @keydown=${this.handleTriggerKeyDown}
+                        @keyup=${this.handleTriggerKeyUp}
+                        @slotchange=${this.handleTriggerSlotChange}></slot>
 
                 <div
-                    aria-hidden=${this.open ? "false" : "true"}
-                    aria-labelledby="dropdown">
+                        aria-hidden=${this.open ? "false" : "true"}
+                        aria-labelledby="dropdown">
                     <slot part="panel" class="dropdown__panel"></slot>
                 </div>
             </sd-popup>
         `;
     }
+
+    private handleKeyDown = (event: KeyboardEvent) => {
+        // Close when escape is pressed inside an open dropdown. We need to listen on the panel itself and stop propagation
+        // in case any ancestors are also listening for this key.
+        if (this.open && event.key === "Escape") {
+            event.stopPropagation();
+            this.hide();
+            this.focusOnTrigger();
+        }
+    };
+
+    private handleDocumentKeyDown = (event: KeyboardEvent) => {
+        // Close when escape or tab is pressed
+        if (event.key === "Escape" && this.open && !this.closeWatcher) {
+            event.stopPropagation();
+            this.focusOnTrigger();
+            this.hide();
+            return;
+        }
+
+        // Handle tabbing
+        if (event.key === "Tab") {
+            // Tabbing within an open menu should close the dropdown and refocus the trigger
+            if (
+                this.open &&
+                document.activeElement?.tagName.toLowerCase() === "sd-menu-item"
+            ) {
+                event.preventDefault();
+                this.hide();
+                this.focusOnTrigger();
+                return;
+            }
+
+            // Tabbing outside the containing element closes the panel
+            //
+            // If the dropdown is used within a shadow DOM, we need to obtain the activeElement within that shadowRoot,
+            // otherwise `document.activeElement` will only return the name of the parent shadow DOM element.
+            setTimeout(() => {
+                const activeElement =
+                    this.containingElement?.getRootNode() instanceof ShadowRoot
+                        ? document.activeElement?.shadowRoot?.activeElement
+                        : document.activeElement;
+
+                if (
+                    !this.containingElement ||
+                    activeElement?.closest(
+                        this.containingElement.tagName.toLowerCase()
+                    ) !== this.containingElement
+                ) {
+                    this.hide();
+                }
+            });
+        }
+    };
+
+    private handleDocumentMouseDown = (event: MouseEvent) => {
+        // Close when clicking outside the containing element
+        const path = event.composedPath();
+        if (this.containingElement && !path.includes(this.containingElement)) {
+            this.hide();
+        }
+    };
+
+    private handlePanelSelect = (event: any) => {
+        const target = event.target as HTMLElement;
+
+        // Hide the dropdown when a menu item is selected
+        if (!this.stayOpenOnSelect && target.tagName.toLowerCase() === "sd-menu") {
+            this.hide();
+            this.focusOnTrigger();
+        }
+    };
 }
 
 declare global {
