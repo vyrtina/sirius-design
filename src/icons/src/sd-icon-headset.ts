@@ -1,0 +1,29 @@
+/**
+ * generated file
+ * do not edit directly
+ */
+
+import { html } from "lit";
+import { customElement } from "lit/decorators.js";
+import { Icon } from '../../components/icon/icon';
+
+
+@customElement("sd-icon-headset")
+export class IconHeadset extends Icon {
+    constructor() {
+        super();
+        this.setAttribute("aria-hidden", "true");
+    }
+
+    protected override renderSVG() {
+        return html `
+                <svg fill="currentColor" height=100% width=100% viewBox="0 0 24 24"><path d="M19 14v3c0 .55-.45 1-1 1h-1v-4h2M7 14v4H6c-.55 0-1-.45-1-1v-3h2m5-13a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
+        `
+      }
+}
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "sd-icon-headset": IconHeadset;
+    }
+}
