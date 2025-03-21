@@ -1,55 +1,54 @@
 @use "../../styles/tokens.scss";
-@import "../../styles/_index";
 
 :host {
-    --symbol-color: #{tokens.$sd-color-palette-neutral-300}; //TODO: change
-    --symbol-color-active: #{tokens.$sd-color-accent};
-    --symbol-size: 1.5rem;
-    --symbol-spacing: 0px;
+  --symbol-color: #{tokens.$sd-color-palette-neutral-300}; //TODO: change
+  --symbol-color-active: #{tokens.$sd-color-accent};
+  --symbol-size: 1.5rem;
+  --symbol-spacing: 0px;
 
-    display: inline-flex;
+  display: inline-flex;
 }
 
 .rating {
-    display: inline-flex;
-    position: relative;
-    vertical-align: middle;
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
 }
 
 .rating__icons {
-    display: inline-flex;
-    position: relative;
-    font-size: var(--symbol-size);
-    line-height: 0;
-    color: var(--symbol-color);
-    white-space: nowrap;
-    cursor: pointer;
+  display: inline-flex;
+  position: relative;
+  font-size: var(--symbol-size);
+  line-height: 0;
+  color: var(--symbol-color);
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .rating__icons > * {
-    padding: var(--symbol-spacing);
+  padding: var(--symbol-spacing);
 }
 
 .rating__partial-symbol-container {
-    position: relative;
+  position: relative;
 }
 
 .rating__partial--filled {
-    position: absolute;
-    top: var(--symbol-spacing);
-    left: var(--symbol-spacing);
+  position: absolute;
+  top: var(--symbol-spacing);
+  left: var(--symbol-spacing);
 }
 
 .rating__icon {
-    transition: tokens.$sd-motion-duration-050 scale;
-    pointer-events: none;
+  transition: tokens.$sd-motion-duration-050 scale;
+  pointer-events: none;
 }
 
 .rating__icon.active,
 .rating__partial--filled {
-    color: var(--symbol-color-active);
+  color: var(--symbol-color-active);
 }
 
 .rating__icon.hover {
-    scale: 1.2;
+  scale: 1.2;
 }

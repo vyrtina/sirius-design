@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/web-components";
-import { html } from "lit";
+import type {Meta, StoryObj} from "@storybook/web-components";
+import {html} from "lit";
 import "./autocomplete";
 import "../select/select-option";
-import { ifDefined } from "lit/directives/if-defined.js";
+import {ifDefined} from "lit/directives/if-defined.js";
 import SdAutocomplete from "./autocomplete";
 import SdOption from "../select/select-option";
 
@@ -10,6 +10,21 @@ const meta: Meta = {
     title: "components/autocomplete",
     component: "sd-autocomplete",
     tags: ["autodocs"],
+};
+
+export default meta;
+type Story = StoryObj;
+
+export const Default: Story = {};
+
+export const ManualOptions: Story = {
+    args: {
+        placeholder: "--option--",
+        label: "label",
+        "help-text": "help text",
+        multiple: false,
+        required: true,
+    },
     render: function Render(args) {
         function addValues() {
             let autocomplete = document.querySelector(
@@ -40,37 +55,25 @@ const meta: Meta = {
 
             console.log("Selected options:", selectedOptions);
         }
+
         return html`
             <form @submit=${onSubmit}>
                 <sd-autocomplete
-                    name="autocomplete"
-                    ?multiple=${args["multiple"]}
-                    placeholder=${ifDefined(args["placeholder"])}
-                    label=${ifDefined(args["label"])}
-                    help-text=${ifDefined(args["help-text"])}
-                    ?loading=${args["loading"]}
-                    loading-text=${ifDefined(args["loading-text"])}
-                    ?required=${args["required"]}
-                    ?hoist=${args["hoist"]}>
+                        name="autocomplete"
+                        ?multiple=${args["multiple"]}
+                        placeholder=${ifDefined(args["placeholder"])}
+                        label=${ifDefined(args["label"])}
+                        help-text=${ifDefined(args["help-text"])}
+                        ?loading=${args["loading"]}
+                        loading-text=${ifDefined(args["loading-text"])}
+                        ?required=${args["required"]}
+                        ?hoist=${args["hoist"]}>
                 </sd-autocomplete>
                 <button @click=${addValues}>Add options</button>
                 <button @click=${printValue}>Autocomplete value</button>
                 <button type="submit">Submit</button>
             </form>
         `;
-    },
-};
-
-export default meta;
-type Story = StoryObj;
-
-export const Primary: Story = {
-    args: {
-        placeholder: "--option--",
-        label: "label",
-        "help-text": "help text",
-        multiple: false,
-        required: true,
     },
 };
 
@@ -97,7 +100,7 @@ export const AsynchronousRequests: Story = {
                 })
                 .then((data) => {
                     const options: SdOption[] = [];
-                    data.results.forEach((el: Object) => {
+                    data.results.forEach((el: { "name": string }) => {
                         const option: SdOption = new SdOption();
                         option.label = el["name"];
                         option.value = el["name"].replace(/ /g, "_");
@@ -110,31 +113,34 @@ export const AsynchronousRequests: Story = {
                     console.error("Fetch error:", error);
                 });
         }
+
         function onChange(e: Event) {
             console.log("changed value to: ", (e.target as SdAutocomplete).value);
         }
+
         function onSubmit(event: Event) {
-            event.preventDefault(); // Prevent form from actually submitting
+            event.preventDefault();
 
             const formData = new FormData(event.target as HTMLFormElement);
             const selectedOptions = formData.getAll("autocomplete");
 
             console.log("Selected options:", selectedOptions);
         }
+
         return html`
             <form @submit=${onSubmit}>
                 <sd-autocomplete
-                    name="autocomplete"
-                    ?multiple=${args["multiple"]}
-                    placeholder=${ifDefined(args["placeholder"])}
-                    label=${ifDefined(args["label"])}
-                    help-text=${ifDefined(args["help-text"])}
-                    ?loading=${args["loading"]}
-                    loading-text=${ifDefined(args["loading-text"])}
-                    ?required=${args["required"]}
-                    ?hoist=${args["hoist"]}
-                    @sd-change=${onChange}
-                    @sd-input-change="${onInputChange}">
+                        name="autocomplete"
+                        ?multiple=${args["multiple"]}
+                        placeholder=${ifDefined(args["placeholder"])}
+                        label=${ifDefined(args["label"])}
+                        help-text=${ifDefined(args["help-text"])}
+                        ?loading=${args["loading"]}
+                        loading-text=${ifDefined(args["loading-text"])}
+                        ?required=${args["required"]}
+                        ?hoist=${args["hoist"]}
+                        @sd-change=${onChange}
+                        @sd-input-change="${onInputChange}">
                 </sd-autocomplete>
                 <button type="submit">Submit</button>
             </form>

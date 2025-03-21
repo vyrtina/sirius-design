@@ -97,7 +97,7 @@ export default class SdRating extends SdElement {
 
     render() {
         const isRtl = this.matches(":dir(rtl)");
-        let displayValue = 0;
+        let displayValue: number;
 
         if (this.disabled || this.readonly) {
             displayValue = this.value;

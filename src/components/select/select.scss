@@ -2,198 +2,203 @@
 @use "../../styles/typography.scss";
 
 :host {
-    box-sizing: border-box;
-    display: block;
+  box-sizing: border-box;
+  display: block;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .label {
-    @include typography.sd-body();
-    &.drawAsterisk::after {
-        content: "*";
-    }
+  @include typography.sd-body();
+
+  &.drawAsterisk::after {
+    content: "*";
+  }
 }
 
 .help-text {
-    @include typography.sd-body-small();
-    color: tokens.$sd-color-help-text;
+  @include typography.sd-body-small();
+  color: tokens.$sd-color-help-text;
 }
 
 /** The popup */
 .select {
-    flex: 1 1 auto;
-    display: inline-flex;
-    width: 100%;
-    position: relative;
-    vertical-align: middle;
+  flex: 1 1 auto;
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+  vertical-align: middle;
 }
 
 .select[data-current-placement^="top"]::part(popup) {
-    transform-origin: bottom;
+  transform-origin: bottom;
 }
 
 .select[data-current-placement^="bottom"]::part(popup) {
-    transform-origin: top;
+  transform-origin: top;
 }
 
 .select[active] .combobox {
-    border-color: tokens.$sd-color-primary;
+  border-color: tokens.$sd-color-primary;
 }
 
 /* Combobox */
 .combobox {
-    flex: 1;
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    position: relative;
-    align-items: center;
-    justify-content: start;
-    vertical-align: middle;
-    overflow: hidden;
-    cursor: pointer;
+  flex: 1;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  align-items: center;
+  justify-content: start;
+  vertical-align: middle;
+  overflow: hidden;
+  cursor: pointer;
 
-    //
-    padding: 0.5rem 0.75rem;
-    border-radius: tokens.$sd-border-radius-small;
-    border: 1px solid tokens.$sd-color-border;
+  //
+  padding: 0.5rem 0.75rem;
+  border-radius: tokens.$sd-border-radius-small;
+  border: 1px solid tokens.$sd-color-border;
 }
 
 .select__display-input {
-    position: relative;
-    width: 100%;
-    font: inherit;
-    border: none;
-    background: none;
-    color: var(--sl-input-color);
-    cursor: inherit;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
-    appearance: none;
+  position: relative;
+  width: 100%;
+  font: inherit;
+  border: none;
+  background: none;
+  color: var(--sl-input-color);
+  cursor: inherit;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  appearance: none;
 }
 
 .select__display-input::placeholder {
-    color: var(--sl-input-placeholder-color);
+  color: var(--sl-input-placeholder-color);
 }
 
 .select:not(.select--disabled):hover .select__display-input {
-    color: var(--sl-input-color-hover);
+  color: var(--sl-input-color-hover);
 }
 
 .select__display-input:focus {
-    outline: none;
+  outline: none;
 }
 
 /* Visually hide the display input when multiple is enabled */
 .select--multiple:not(.select--placeholder-visible) .select__display-input {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 
 .select__value-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  z-index: -1;
 }
 
 .select__tags {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .select__tags::slotted(sd-tag) {
-    cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .select--disabled .select__tags,
 .select--disabled .select__tags::slotted(sd-tag) {
-    cursor: not-allowed !important;
+  cursor: not-allowed !important;
 }
 
 /* Prefix */
 .select__prefix {
-    flex: 0;
-    display: inline-flex;
-    align-items: center;
-    color: var(--sl-input-placeholder-color);
+  flex: 0;
+  display: inline-flex;
+  align-items: center;
+  color: var(--sl-input-placeholder-color);
 }
 
 /* Clear button */
 .select__clear {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: inherit;
-    color: var(--sl-input-icon-color);
-    border: none;
-    background: none;
-    padding: 0;
-    transition: var(--sl-transition-fast) color;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  color: var(--sl-input-icon-color);
+  border: none;
+  background: none;
+  padding: 0;
+  transition: var(--sl-transition-fast) color;
+  cursor: pointer;
 }
 
 .select__clear:hover {
-    color: var(--sl-input-icon-color-hover);
+  color: var(--sl-input-icon-color-hover);
 }
 
 .select__clear:focus {
-    outline: none;
+  outline: none;
 }
 
 /* Expand icon */
 .select__expand-icon {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    transition: var(--sl-transition-medium) rotate ease;
-    rotate: 0;
-    margin-inline-start: var(--sl-spacing-small);
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  transition: var(--sl-transition-medium) rotate ease;
+  rotate: 0;
+  margin-inline-start: var(--sl-spacing-small);
 }
 
 .select--open .select__expand-icon {
-    rotate: -180deg;
+  rotate: -180deg;
 }
 
 /* Listbox */
 .listbox {
-    display: block;
-    position: relative;
-    background: tokens.$sd-color-background;
-    border: 1px solid tokens.$sd-color-primary;
-    border-radius: tokens.$sd-border-radius-small;
-    padding-inline: 0;
-    overflow: auto;
-    overscroll-behavior: none;
+  display: block;
+  position: relative;
+  background: tokens.$sd-color-background;
+  border: 1px solid tokens.$sd-color-primary;
+  border-radius: tokens.$sd-border-radius-small;
+  padding-inline: 0;
+  overflow: auto;
+  overscroll-behavior: none;
 
-    /* Make sure it adheres to the popup's auto size */
-    max-width: var(--auto-size-available-width);
-    max-height: var(--auto-size-available-height);
+  /* Make sure it adheres to the popup's auto size */
+  max-width: var(--auto-size-available-width);
+  max-height: var(--auto-size-available-height);
 }
 
 /** error styling */
 .select--user-invalid .combobox {
-    border-color: tokens.$sd-color-critical;
+  border-color: tokens.$sd-color-critical;
+}
+
+.listbox--empty {
+  display: none;
 }

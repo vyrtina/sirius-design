@@ -5,7 +5,7 @@ import {customElement, property, query, queryAssignedElements} from "lit/decorat
 import {SubmenuController} from "./submenu-controller.js";
 import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
-import "../../icons/src/sd-icon-chevron_right.js";
+import "../../icons/src/sd-icon-chevron-right.js";
 import "../../icons/src/sd-icon-check.js";
 //import SdSpinner from "../spinner/spinner.js";
 import styles from "./menu-item.scss?inline";

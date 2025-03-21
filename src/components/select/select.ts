@@ -784,20 +784,65 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     }
 
     protected renderListbox() {
+        const classes = {
+            listbox: true,
+            "listbox--empty": this.getAllOptions().length === 0
+        }
         return html`
             <div
                     id="listbox"
+                    class=${classMap(classes)}
                     role="listbox"
                     aria-expanded=${this.open ? "true" : "false"}
                     aria-multiselectable=${this.multiple ? "true" : "false"}
                     aria-labelledby="label"
                     part="listbox"
-                    class="listbox"
                     tabindex="-1"
                     @mouseup=${this.handleOptionClick}
                     @slotchange=${this.handleDefaultSlotChange}>
                 <slot></slot>
             </div>
+        `;
+    }
+
+    protected renderLabel() {
+        const hasLabel = this.label || this.labelSlot.length > 0;
+        const classes = {
+            label: true,
+            drawAsterisk: this.required && !this.noAsterisk,
+        };
+        return html`<label
+                id="label"
+                for="display-input"
+                part="label"
+                class=${classMap(classes)}
+                aria-hidden=${hasLabel ? "false" : "true"}
+                @click=${this.handleLabelClick}>
+            <slot name="label">${this.label}</slot>
+        </label> `;
+    }
+
+    protected renderErrorText() {
+        return html`
+            <span part="error-text" class="error-text">
+                <slot name="error-text"
+                ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
+                >
+            </span>
+        `;
+    }
+
+    protected renderHelpText() {
+        const hasHelpText = this.helpText || this.helpTextSlot.length > 0;
+
+        return html`
+            <span
+                    part="help-text"
+                    id="help-text"
+                    class="help-text"
+                    aria-hidden=${hasHelpText ? "false" : "true"}>
+                <slot name="help-text">${this.helpText}</slot>
+            </span>
         `;
     }
 
@@ -847,47 +892,6 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
                 this.emit("sd-change");
             });
         }
-    }
-
-    private renderLabel() {
-        const hasLabel = this.label || this.labelSlot.length > 0;
-        const classes = {
-            label: true,
-            drawAsterisk: this.required && !this.noAsterisk,
-        };
-        return html`<label
-                id="label"
-                for="display-input"
-                part="label"
-                class=${classMap(classes)}
-                aria-hidden=${hasLabel ? "false" : "true"}
-                @click=${this.handleLabelClick}>
-            <slot name="label">${this.label}</slot>
-        </label> `;
-    }
-
-    private renderErrorText() {
-        return html`
-            <span part="error-text" class="error-text">
-                <slot name="error-text"
-                ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
-                >
-            </span>
-        `;
-    }
-
-    private renderHelpText() {
-        const hasHelpText = this.helpText || this.helpTextSlot.length > 0;
-
-        return html`
-            <span
-                    part="help-text"
-                    id="help-text"
-                    class="help-text"
-                    aria-hidden=${hasHelpText ? "false" : "true"}>
-                <slot name="help-text">${this.helpText}</slot>
-            </span>
-        `;
     }
 }
 
