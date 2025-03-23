@@ -123,8 +123,6 @@ export default class SdAutocomplete
     @property({type: Boolean, attribute: "no-asterisk"}) noAsterisk = false;
     /** shows the spinner and loading text in place of options */
     @property({type: Boolean}) loading = false;
-    /** Text to display when in a loading state. */
-    @property({attribute: "loading-text", type: String}) loadingText = "Loading...";
     /** List of options to be rendered. */
     @property({attribute: false}) options: SdOption[] = [];
     protected typeToSelectString = "";
@@ -645,6 +643,9 @@ export default class SdAutocomplete
             listbox: true,
             "listbox--empty": this.options.length === 0
         }
+        if (this.loading) {
+            return nothing;
+        }
         return html`
             <div
                     id="listbox"
@@ -656,12 +657,9 @@ export default class SdAutocomplete
                     part="listbox"
                     tabindex="-1"
                     @mouseup=${this.handleOptionClick}>
-                ${this.loading
-                        ? html`
-                            <div class="loading-label">${this.loadingText}</div>`
-                        : html`${this.options.map((option, i) =>
-                                this.renderOption(option, i)
-                        )}`}
+                ${this.options.map((option, i) =>
+                        this.renderOption(option, i)
+                )}
             </div>
         `;
     }
