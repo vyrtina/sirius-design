@@ -1,29 +1,10 @@
 /// <reference types="vitest" />
 
-import { extname, relative, resolve } from "path";
-import { fileURLToPath } from "node:url";
-import { glob } from "glob";
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
-import externalizeSourceDependencies from "@blockquote/rollup-plugin-externalize-source-dependencies";
-import VitePluginCustomElementsManifest from "vite-plugin-cem";
+import {resolve} from "path";
+import {defineConfig} from "vite";
 
 export default defineConfig({
-    plugins: [
-        libInjectCss(),
-        dts({}),
-        VitePluginCustomElementsManifest(),
-        externalizeSourceDependencies([
-            /* @web/test-runner-commands needs to establish a web-socket
-             * connection. It expects a file to be served from the
-             * @web/dev-server. So it should be ignored by Vite */
-            "/__web-dev-server__web-socket.js",
-        ]),
-    ],
     assetsInclude: ["/sb-preview/runtime.js"],
-    //root: resolve('./static/'),
-    //base: '/static/',
     server: {
         host: "localhost",
         port: 5169,
@@ -31,9 +12,6 @@ export default defineConfig({
         watch: {
             usePolling: true,
             disableGlobbing: false,
-        },
-        fs: {
-            cachedChecks: false,
         },
     },
     resolve: {
@@ -44,34 +22,21 @@ export default defineConfig({
         copyPublicDir: false,
         manifest: true,
         emptyOutDir: true,
-        target: "es2015",
+        target: "es2021",
         lib: {
             entry: resolve("./src/main.ts"),
+            name: 'SdComponents',
+            fileName: 'main',
             formats: ["es"],
         },
         minify: false,
         rollupOptions: {
-            input: Object.fromEntries(
-                glob
-                    .sync("src/**/*.ts", { ignore: "src/**/*.stories.ts" })
-                    .map((file) => [
-                        // The name of the entry point
-                        // lib/nested/foo.ts becomes nested/foo
-                        relative(
-                            "src",
-                            file.slice(0, file.length - extname(file).length)
-                        ),
-                        // The absolute path to the entry file
-                        // lib/nested/foo.ts becomes /project/lib/nested/foo.ts
-                        fileURLToPath(new URL(file, import.meta.url)),
-                    ])
-            ),
+
+            external: ['lit', /^lit\/.*/],
             output: {
-                assetFileNames: "assets/[name][extname]",
-                entryFileNames: "[name].js",
-                chunkFileNames: undefined,
-            },
-            external: ["./sb-preview/runtime.js", /^lit/],
+                preserveModules: true,
+                exports: 'named'
+            }
         },
     },
     test: {
@@ -83,11 +48,11 @@ export default defineConfig({
             provider: "playwright",
         },
     },
-    css: {
+    /*css: {
         preprocessorOptions: {
             scss: {
                 api: "modern-compiler",
             },
         },
-    },
+    },*/
 });

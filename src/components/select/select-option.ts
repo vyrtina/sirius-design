@@ -1,7 +1,7 @@
-import { html, unsafeCSS } from "lit";
-import { classMap } from "lit/directives/class-map.js";
-import { property, state, customElement, queryAssignedNodes } from "lit/decorators.js";
-import { watch } from "../../utils/watch.js";
+import {html, unsafeCSS} from "lit";
+import {classMap} from "lit/directives/class-map.js";
+import {customElement, property, queryAssignedNodes, state} from "lit/decorators.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import styles from "./select-option.scss?inline";
 
@@ -14,18 +14,15 @@ export default class SdOption extends SdElement {
      * from other options in the same group. Values may not contain spaces, as spaces are used as delimiters when listing
      * multiple values.
      */
-    @property({ reflect: true }) value = "";
+    @property({reflect: true}) value = "";
 
     /** the option's label. This will be shown to the user. */
     @property() label = "";
 
     /** Draws the option in a disabled state, preventing selection. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
-    private cachedTextLabel: string = "";
+    @property({type: Boolean, reflect: true}) disabled = false;
     @state() selected = false; // the option is selected and has aria-selected="true"
     @state() current = false; // the user has keyed into the option, but hasn't selected it yet (shows a highlight)
-
     @queryAssignedNodes()
     labels!: Array<Node>;
 
@@ -38,15 +35,9 @@ export default class SdOption extends SdElement {
     handleDefaultSlotChange() {
         const textLabel = this.getTextLabel();
 
-        // Ignore the first time the label is set
-        if (typeof this.cachedTextLabel === "undefined") {
-            this.cachedTextLabel = textLabel;
-            return;
-        }
-
         // When the label changes, emit a slotchange event so parent controls see it
-        if (textLabel !== this.cachedTextLabel) {
-            this.cachedTextLabel = textLabel;
+        if (textLabel !== this.label) {
+            this.label = textLabel;
             this.emit("slotchange", {
                 bubbles: true,
                 composed: false,
@@ -102,20 +93,21 @@ export default class SdOption extends SdElement {
     render() {
         return html`
             <div
-                class=${classMap({
-                    container: true,
-                    disabled: this.disabled,
-                    selected: this.selected,
-                    current: this.current,
-                })}>
+                    class=${classMap({
+                        container: true,
+                        disabled: this.disabled,
+                        selected: this.selected,
+                        current: this.current,
+                    })}>
                 <div class="state-layer"></div>
                 <div part="base" class="option">
                     <slot part="prefix" name="prefix" class="option__prefix"></slot>
                     <slot
-                        part="label"
-                        class="option__label"
-                        @slotchange=${this.handleDefaultSlotChange}
-                        >${this.label}</slot
+                            part="label"
+                            class="option__label"
+                            @slotchange=${this.handleDefaultSlotChange}
+                    >${this.label}
+                    </slot
                     >
                     <slot part="suffix" name="suffix" class="option__suffix"></slot>
                 </div>
