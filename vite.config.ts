@@ -2,9 +2,13 @@
 
 import {resolve} from "path";
 import {defineConfig} from "vite";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
-    assetsInclude: ["/sb-preview/runtime.js"],
+    assetsInclude: ["/sb-preview/runtime.js", "src/**/**/*.scss"],
+    plugins: [
+        dts({}),
+    ],
     server: {
         host: "localhost",
         port: 5169,
@@ -14,9 +18,6 @@ export default defineConfig({
             disableGlobbing: false,
         },
     },
-    resolve: {
-        extensions: [".ts", ".js", ".css", ".scss", ".mdx", ".json"],
-    },
     build: {
         assetsDir: resolve("./src/assets/"),
         copyPublicDir: false,
@@ -24,9 +25,7 @@ export default defineConfig({
         emptyOutDir: true,
         target: "es2021",
         lib: {
-            entry: resolve("./src/main.ts"),
-            name: 'SdComponents',
-            fileName: 'main',
+            entry: "src/main.ts",
             formats: ["es"],
         },
         minify: false,
@@ -48,11 +47,11 @@ export default defineConfig({
             provider: "playwright",
         },
     },
-    /*css: {
+    css: {
         preprocessorOptions: {
             scss: {
                 api: "modern-compiler",
             },
         },
-    },*/
+    },
 });
