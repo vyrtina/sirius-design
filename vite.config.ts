@@ -3,10 +3,12 @@
 import {resolve} from "path";
 import {defineConfig} from "vite";
 import dts from "vite-plugin-dts";
+import {libInjectCss} from "vite-plugin-lib-inject-css";
 
 export default defineConfig({
-    assetsInclude: ["/sb-preview/runtime.js", "src/**/**/*.scss"],
+    assetsInclude: ["/sb-preview/runtime.js"],
     plugins: [
+        libInjectCss(),
         dts({}),
     ],
     server: {
