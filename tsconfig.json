@@ -29,8 +29,8 @@
   ],
   "exclude": [
     "node_modules",
-    "**/__tests__/*",
-    "src/**/**/*.stories.ts"
+    "src/**/*.test.ts",
+    "src/**/*.stories.ts"
   ],
   /* ts-node-specific settings */
   "ts-node": {

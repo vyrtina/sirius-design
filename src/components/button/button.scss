@@ -3,112 +3,114 @@
 @use "../../styles/base.scss";
 
 :host {
-    --button-color: #{tokens.$sd-color-primary};
-    --button-color-fill: var(--button-color);
-    --button-color-on-fill: #{tokens.$sd-color-on-primary};
-    --button-border-radius: #{tokens.$sd-border-radius-circle};
+  --button-color: #{tokens.$sd-color-primary};
+  --button-color-fill: var(--button-color);
+  --button-color-on-fill: #{tokens.$sd-color-on-primary};
+  --button-border-radius: #{tokens.$sd-border-radius-circle};
 
-    display: block;
-    height: 3rem;
+  display: inline-flex;
+  height: 3rem;
 }
 
 .button:focus-visible {
-    @include base.outline-focus;
+  @include base.outline-focus;
 }
 
 :host([variant="plain"]) {
-    --button-color: inherit;
+  --button-color: inherit;
 }
 
 .container {
-    cursor: pointer;
-    position: relative;
-    border-radius: var(--button-border-radius);
-    color: var(--button-color);
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
+  cursor: pointer;
+  position: relative;
+  border-radius: var(--button-border-radius);
+  color: var(--button-color);
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
 
 .button {
-    all: unset;
-    box-sizing: border-box;
-    display: inline-flex;
-    padding: 0 tokens.$sd-spacing-100;
-    align-items: center;
-    border-radius: inherit;
-    justify-content: center;
-    white-space: nowrap;
-    color: inherit;
-    position: relative;
-    z-index: 5;
-    width: 100%;
-    height: 100%;
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  padding: 0 tokens.$sd-spacing-100;
+  align-items: center;
+  border-radius: inherit;
+  justify-content: center;
+  white-space: nowrap;
+  color: inherit;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
 
-    & .label {
-        padding: 0 tokens.$sd-spacing-050;
-    }
+  & .label {
+    padding: 0 tokens.$sd-spacing-050;
+  }
 }
 
-.container.outlined {
-    border: tokens.$sd-border-width-medium solid tokens.$sd-color-primary;
+.button--outlined {
+  border: tokens.$sd-border-width-medium solid tokens.$sd-color-primary;
 }
 
 .state-layer,
 .background {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
 }
 
 .state-layer {
-    background-color: currentColor;
-    transition: opacity tokens.$sd-motion-duration-250 tokens.$sd-motion-easing-ease-out;
-    opacity: 0;
-    z-index: 2;
+  background-color: currentColor;
+  transition: opacity tokens.$sd-motion-duration-250 tokens.$sd-motion-easing-ease-out;
+  opacity: 0;
+  z-index: 2;
 }
 
 .background {
-    z-index: 1;
+  z-index: 1;
 }
 
-.container.filled {
-    color: var(--button-color-on-fill);
-    & .background {
-        background-color: var(--button-color-fill);
-    }
-    & .state-layer {
-        background-color: var(--button-color-on-fill);
-    }
+.button--filled {
+  color: var(--button-color-on-fill);
+
+  & .background {
+    background-color: var(--button-color-fill);
+  }
+
+  & .state-layer {
+    background-color: var(--button-color-on-fill);
+  }
 }
 
 :host(:hover) {
-    & .state-layer {
-        opacity: tokens.$sd-opacity-state-layer-hover;
-    }
+  & .state-layer {
+    opacity: tokens.$sd-opacity-state-layer-hover;
+  }
 }
 
 :host(:active) {
-    & .state-layer {
-        opacity: tokens.$sd-opacity-state-layer-click;
-    }
+  & .state-layer {
+    opacity: tokens.$sd-opacity-state-layer-click;
+  }
 }
 
-:host(:focus) {
-    & .state-layer {
-        opacity: tokens.$sd-opacity-state-layer-focus;
-    }
+.button--focused .state-layer {
+  opacity: tokens.$sd-opacity-state-layer-focus;
 }
 
-:host([disabled]) .container {
-    cursor: default;
-    pointer-events: none;
-    opacity: tokens.$sd-opacity-disabled;
-    color: tokens.$sd-color-primary;
-    & .state-layer {
-        opacity: 0;
-    }
-    &.filled .background {
-        opacity: tokens.$sd-opacity-disabled-background;
-    }
+.button--disabled {
+  cursor: default;
+  pointer-events: none;
+  opacity: tokens.$sd-opacity-disabled;
+  color: tokens.$sd-color-primary;
+
+  & .state-layer {
+    opacity: 0;
+  }
+
+  &.button--filled .background {
+    opacity: tokens.$sd-opacity-disabled-background;
+  }
 }

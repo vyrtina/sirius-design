@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist"
   ],
   "main": "dist/main.js",
   "module": "dist/main.js",
@@ -17,7 +15,7 @@
     "build-ts": "tsc",
     "build-scss": "sass src/components:dist/components --style=compressed --no-source-map",
     "buid-scss-imports": "node scripts/build.js",
-    "build": "tsc; npm run build-scss && npm run buid-scss-imports",
+    "build": "npm run build-ts & npm run build-scss && npm run buid-scss-imports",
     "build-vite": "vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

@@ -11,18 +11,21 @@ const meta: Meta = {
     args: {
         textLabel: "button",
     },
-    render: ({textLabel, variant, disabled}) => {
+    render: args => {
         return html`
             <sd-button
-                    variant=${variant}
-                    ?disabled=${disabled}
+                    variant=${ifDefined(args["variant"])}
+                    ?disabled=${args["disabled"]}
                     @click=${() => {
                         console.log("button clicked");
                     }}
-            >${textLabel}
+                    type="submit"
+            >
+                <sd-icon-edit slot="icon"></sd-icon-edit>
+                ${args["textLabel"]}
             </sd-button>
         `;
-    },
+    }
 };
 
 export default meta;
@@ -43,23 +46,5 @@ export const Outlined: Story = {
 export const Plain: Story = {
     args: {
         variant: "plain",
-    },
-};
-
-export const Submit: Story = {
-    render: (args) => {
-        return html`
-            <form method="POST">
-                <sd-button
-                        variant=${ifDefined(args["variant"])}
-                        ?disabled=${args["disabled"]}
-                        @click=${() => {
-                            console.log("button clicked");
-                        }}
-                        type="submit"
-                >${args["textLabel"]}
-                </sd-button>
-            </form>
-        `;
     },
 };
