@@ -5,8 +5,6 @@ export {default as SdBreadcrumb} from "./components/breadcrumb/breadcrumb.js";
 export {default as SdBreadcrumbItem} from "./components/breadcrumb/breadcrumb-item.js";
 export {default as SdButton} from "./components/button/button.js";
 export {default as SdCard} from "./components/card/card.js";
-export {default as SdCarousel} from "./components/carousel/carousel.js";
-export {default as SdCarouselSlider} from "./components/carousel/slider.js";
 export {default as SdCheckbox} from "./components/checkbox/checkbox.js";
 export {default as SdDivider} from "./components/divider/divider.js";
 export {default as SdDropdown} from "./components/dropdown/dropdown.js";

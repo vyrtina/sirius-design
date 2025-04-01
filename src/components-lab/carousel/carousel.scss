@@ -1,0 +1,130 @@
+@use "../../styles/tokens.scss";
+@use "../../styles/base.scss";
+
+:host {
+  width: 100%;
+  aspect-ratio: 90/133;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+}
+
+.slide {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition-duration: 0s, 500ms;
+  transition-property: visibility, opacity;
+  transition-delay: 0s;
+  padding: 2rem var(--sd-margin);
+  align-items: flex-start;
+  box-sizing: border-box;
+
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: tokens.$sd-motion-duration-500, 0s;
+    transition-property: opacity, visibility;
+    transition-delay: 0s, tokens.$sd-motion-duration-500;
+  }
+}
+
+input {
+  display: none;
+}
+
+.sd-dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  align-self: flex-end;
+  bottom: 2rem;
+  z-index: 2;
+  padding: 2px;
+  height: 2rem;
+  cursor: pointer;
+  @include base.frosted-glass();
+}
+
+.sd-dot:first-of-type {
+  padding-left: 8px;
+  //border-radius: 100px 0 0 100px;
+  border-top-left-radius: tokens.$sd-border-radius-circle;
+  border-bottom-left-radius: tokens.$sd-border-radius-circle;
+}
+
+.sd-dot:last-of-type {
+  padding-right: 8px;
+  //border-radius: 0 100px 100px 0;
+  border-top-right-radius: tokens.$sd-border-radius-circle;
+  border-bottom-right-radius: tokens.$sd-border-radius-circle;
+}
+
+.sd-dot::after {
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+
+  content: "";
+  border-radius: 100%;
+  border: 1px solid rgba($color: tokens.$sd-color-surface, $alpha: 0.6);
+  transition: 0.2s ease-in-out;
+}
+
+input:checked + .sd-dot::after {
+  border: none;
+  background-color: rgba($color: tokens.$sd-color-surface, $alpha: 0.6);
+}
+
+.nav-btn {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  opacity: 0;
+  transition: tokens.$sd-motion-duration-150 tokens.$sd-motion-easing-ease-in;
+  -webkit-user-select: none;
+  user-select: none;
+
+  &.prev {
+    left: 0;
+  }
+
+  &.next {
+    right: 0;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.nav-btn sd-icon {
+  font-size: 48px;
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 200, "opsz" 48;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav-btn {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  :host {
+    aspect-ratio: 205/83;
+    justify-content: flex-start;
+  }
+
+  .sd-dot:first-of-type {
+    margin-left: var(--sd-margin);
+  }
+}

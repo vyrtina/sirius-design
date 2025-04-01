@@ -1,5 +1,5 @@
 import {html, nothing, unsafeCSS} from "lit";
-import {customElement, property, query, queryAssignedElements} from "lit/decorators.js";
+import {customElement, property, query, queryAssignedElements, state} from "lit/decorators.js";
 import {ifDefined} from "lit/directives/if-defined.js";
 import {classMap} from "lit/directives/class-map.js";
 import {live} from "lit/directives/live.js";
@@ -212,6 +212,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
      * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
      */
     @property({reflect: true}) autocomplete?: string;
+    @state() focused = false;
     @query(".input")
     private readonly input!: HTMLInputElement;
 
@@ -422,6 +423,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
     protected override render() {
         const classes = {
             "text-field": true,
+            "input--focused": this.focused,
             "input--disabled": this.disabled,
             "input--error": !this.disabled && this.hasError,
             "input--no-spinner": this.noSpinner,
@@ -432,6 +434,7 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
             <div class=${classMap(classes)}>
                 ${this.renderLabel()}
                 <div class="field">
+                    <div class="state-layer"></div>
                     <span class="leading-icon"
                     ><slot name="leading-icon"><slot name="icon"></slot></slot
                     ></span>
@@ -456,7 +459,13 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         return this.input!;
     }
 
+    private handleFocus() {
+        this.focused = true;
+        this.emit("sd-focus");
+    }
+
     private handleBlur() {
+        this.focused = false;
         this.emit("sd-blur");
     }
 
@@ -476,10 +485,6 @@ export default class SdInput extends InputBaseClass implements SdFormControl {
         }
 
         this.getInput().focus();
-    }
-
-    private handleFocus() {
-        this.emit("sd-focus");
     }
 
     private handleInput(event: InputEvent) {

@@ -1,138 +1,156 @@
 @use "../../styles/typography";
 @use "../../styles/tokens";
-@import "../../styles/index";
 
 :host {
-    display: inline;
-    box-sizing: border-box;
+  display: inline;
+  box-sizing: border-box;
 }
 
 .text-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .field {
-    display: flex;
-    height: 3rem;
-    align-items: center;
-    align-self: stretch;
-    align-items: stretch;
-    border-radius: $sd-border-radius-large;
-    outline: $sd-border-width-small solid $sd-color-border;
-    transition: background $sd-motion-duration-100 $sd-motion-easing-linear;
-    &:enabled {
-        @include state-render-overlay($sd-color-primary);
-    }
+  display: flex;
+  position: relative;
+  height: 3rem;
+  align-self: stretch;
+  align-items: stretch;
+  border-radius: tokens.$sd-border-radius-large;
+  outline: tokens.$sd-border-width-small solid tokens.$sd-color-border;
+}
+
+//state render
+.state-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-color: currentColor;
+  transition: opacity tokens.$sd-motion-duration-250 tokens.$sd-motion-easing-ease-out;
+  opacity: 0;
+}
+
+.field:hover .state-layer {
+  opacity: tokens.$sd-opacity-state-layer-hover;
+}
+
+.input--focused .state-layer {
+  opacity: tokens.$sd-opacity-state-layer-focus;
+}
+
+.input--disabled .label {
+  opacity: tokens.$sd-opacity-disabled;
+}
+
+.input--disabled .state-layer {
+  opacity: tokens.$sd-opacity-disabled-background;
+}
+
+.input--disabled {
+  cursor: not-allowed;
 }
 
 input {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 0 1rem;
-    background: rgba($color: $sd-color-primary, $alpha: 0);
-    color: $sd-color-on-surface;
-    @include typography.sd-body();
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 0 1rem;
+  background: rgba($color: tokens.$sd-color-primary, $alpha: 0);
+  color: tokens.$sd-color-on-surface;
+  @include typography.sd-body();
 }
 
 .input-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: stretch;
-    gap: 0.125rem;
-    @include typography.sd-body();
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: stretch;
+  gap: 0.125rem;
+  @include typography.sd-body();
 }
 
 .label {
-    width: fit-content;
-    @include typography.sd-body();
-    &.drawAsterisk::after {
-        content: "*";
-    }
+  width: fit-content;
+  @include typography.sd-body();
+
+  &.drawAsterisk::after {
+    content: "*";
+  }
 }
 
 .error-text,
 .help-text {
-    @include typography.sd-body-small();
+  @include typography.sd-body-small();
 }
 
 .help-text {
-    color: tokens.$sd-color-help-text;
+  color: tokens.$sd-color-help-text;
 }
 
 input::placeholder {
-    color: $sd-color-placeholder-text;
+  color: tokens.$sd-color-placeholder-text;
 }
 
 .leading-icon,
 .trailing-icon {
-    display: inline-flex;
-    flex: 0 0 auto;
-    color: $sd-color-placeholder-text;
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: tokens.$sd-color-placeholder-text;
 }
+
 .leading-icon::slotted(*) {
-    margin: 0 0.75rem;
+  margin: 0 0.75rem;
 }
+
 .trailing-icon::slotted(*) {
-    margin: 0 0.75rem;
+  margin: 0 0.75rem;
 }
 
 .field.error {
-    outline: 2px solid $sd-color-critical;
-    background-color: $sd-color-critical-container;
-    & .leading-icon,
-    .trailing-icon {
-        color: $sd-color-critical;
-    }
-    & + .error-label {
-        visibility: visible;
-    }
+  outline: 2px solid tokens.$sd-color-critical;
+  background-color: tokens.$sd-color-critical-container;
+
+  & .leading-icon,
+  .trailing-icon {
+    color: tokens.$sd-color-critical;
+  }
+
+  & + .error-label {
+    visibility: visible;
+  }
 }
 
 .field:has(input:focus-visible) {
-    outline: 2px solid $sd-color-primary;
+  outline: 2px solid tokens.$sd-color-primary;
 }
 
-.input--disabled .label {
-    @include state-render-disabled-element();
-}
-
-.input--disabled .field {
-    @include state-render-disabled(false);
-}
-
-input:disabled {
-    cursor: not-allowed;
-}
 
 //error styling
 .input--user-invalid .field {
-    outline: 2px solid $sd-color-critical;
+  outline: 2px solid tokens.$sd-color-critical;
 }
 
 .error-text {
-    display: inline-flex;
-    align-items: center;
-    gap: $sd-spacing-025;
-    margin-top: $sd-spacing-025;
-    color: $sd-color-critical;
-    & sd-icon {
-        color: $sd-color-critical;
-    }
+  display: inline-flex;
+  align-items: center;
+  gap: tokens.$sd-spacing-025;
+  margin-top: tokens.$sd-spacing-025;
+  color: tokens.$sd-color-critical;
+
 }
 
 .input__clear,
 .input__password-toggle {
-    background: none;
-    padding: 0;
-    border: none;
-    width: 3rem;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    color: tokens.$sd-color-placeholder-text;
-    cursor: pointer;
+  background: none;
+  padding: 0;
+  border: none;
+  width: 3rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: tokens.$sd-color-placeholder-text;
+  cursor: pointer;
 }
