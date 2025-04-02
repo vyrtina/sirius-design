@@ -32,7 +32,6 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     @state() displayLabel = "";
     @state() currentOption?: SdOption;
     @state() selectedOptions: SdOption[] = [];
-    @state() override readonly waitUserInteraction = ["sd-show", "sd-blur"];
     /**
      * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
      * value attribute will be a space-delimited list of values based on the options selected, and the value property will
@@ -88,6 +87,10 @@ export default class SdSelect extends BaseSelectClass implements SdFormControl {
     protected closeWatcher?: CloseWatcher | null;
     @state() protected focused = false;
     private typeToSelectTimeout?: number;
+
+    override get validationTriggerEvents() {
+        return ["sd-show", "sd-blur"];
+    }
 
     protected get tags() {
         return this.selectedOptions.map((option, index) => {

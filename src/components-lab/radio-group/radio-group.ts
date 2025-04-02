@@ -1,9 +1,9 @@
-import { unsafeCSS } from "lit";
-import { customElement, property, queryAssignedElements } from "lit/decorators.js";
+import {unsafeCSS} from "lit";
+import {customElement, property, queryAssignedElements} from "lit/decorators.js";
 import SdElement from "../../utils/sd-element";
-import { MixinElementInternals } from "../../utils/element-internals";
-import { MixinFormAssociated } from "../../utils/form";
-import SdRadio from "../radio/radio";
+import {MixinElementInternals} from "../../utils/element-internals";
+import {MixinFormAssociated} from "../../utils/form";
+import SdRadio from "../../components/radio/radio";
 import styles from "./radio-group.scss?inline";
 
 const BaseRadioGroupClass = MixinFormAssociated(MixinElementInternals(SdElement));
@@ -19,20 +19,14 @@ export default class SdRadioGroup extends BaseRadioGroupClass {
     /** the radio group's label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
 
-    /** The radio groups's help text. If you need to display HTML, use the `help-text` slot instead. */
-    @property({ attribute: "help-text" }) helpText = "";
+    /** The radio group's help text. If you need to display HTML, use the `help-text` slot instead. */
+    @property({attribute: "help-text"}) helpText = "";
 
     /** The current value of the radio group, submitted as a name/value pair with form data. */
-    @property({ reflect: true }) value = "";
+    @property({reflect: true}) value = "";
 
     /** Ensures a radio button in the group must be checked */
-    @property({ type: Boolean, reflect: true }) required = false;
-
-    private getRadios() {
-        return this.radioSlot.filter((el: HTMLSlotElement) => {
-            el.tagName === "sd-radio";
-        }) as unknown as SdRadio[];
-    }
+    @property({type: Boolean, reflect: true}) required = false;
 
     /** Sets focus on the checked radio.
      *  if no radio is checked, check the first one not disabled */
@@ -58,6 +52,12 @@ export default class SdRadioGroup extends BaseRadioGroupClass {
 
     formStateRestoreCallback() {
         return; //TODO
+    }
+
+    private getRadios() {
+        return this.radioSlot.filter((el: HTMLSlotElement) => {
+            el.tagName === "sd-radio";
+        }) as unknown as SdRadio[];
     }
 
     /*render() {

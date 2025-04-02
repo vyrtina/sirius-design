@@ -1,8 +1,8 @@
-import { classMap } from "lit/directives/class-map.js";
-import { html, unsafeCSS } from "lit";
-import { property, query, state, customElement } from "lit/decorators.js";
-import { scrollIntoView } from "../../utils/scroll.js";
-import { watch } from "../../utils/watch.js";
+import {classMap} from "lit/directives/class-map.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, query, state} from "lit/decorators.js";
+import {scrollIntoView} from "../../utils/scroll.js";
+import {watch} from "../../utils/watch.js";
 import SdElement from "../../utils/sd-element.js";
 import "../icon-button/icon-button.js";
 import styles from "./tab-group.scss?inline";
@@ -12,33 +12,27 @@ import type SdTabPanel from "./tab-panel.js";
 @customElement("sd-tab-group")
 export default class SdTabGroup extends SdElement {
     static styles = unsafeCSS(styles);
-
+    @query(".tab-group") tabGroup!: HTMLElement;
+    @query(".tab-group__body") body!: HTMLSlotElement;
+    @query(".tab-group__nav") nav!: HTMLElement;
+    @query(".tab-group__indicator") indicator!: HTMLElement;
+    /** The placement of the tabs. */
+    @property() placement: "top" | "bottom" | "start" | "end" = "top";
+    /**
+     * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
+     * manual, the tab will receive focus but will not show until the user presses spacebar or enter.
+     */
+    @property() activation: "auto" | "manual" = "auto";
+    /** Disables the scroll arrows that appear when tabs overflow. */
+    @property({attribute: "no-scroll-controls", type: Boolean}) noScrollControls =
+        false;
     private activeTab?: SdTab;
     private mutationObserver!: MutationObserver;
     private resizeObserver!: ResizeObserver;
     private tabs: SdTab[] = [];
     private focusableTabs: SdTab[] = [];
     private panels: SdTabPanel[] = [];
-
-    @query(".tab-group") tabGroup!: HTMLElement;
-    @query(".tab-group__body") body!: HTMLSlotElement;
-    @query(".tab-group__nav") nav!: HTMLElement;
-    @query(".tab-group__indicator") indicator!: HTMLElement;
-
     @state() private hasScrollControls = false;
-
-    /** The placement of the tabs. */
-    @property() placement: "top" | "bottom" | "start" | "end" = "top";
-
-    /**
-     * When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to
-     * manual, the tab will receive focus but will not show until the user presses spacebar or enter.
-     */
-    @property() activation: "auto" | "manual" = "auto";
-
-    /** Disables the scroll arrows that appear when tabs overflow. */
-    @property({ attribute: "no-scroll-controls", type: Boolean }) noScrollControls =
-        false;
 
     connectedCallback() {
         const whenAllDefined = Promise.all([
@@ -105,6 +99,104 @@ export default class SdTabGroup extends SdElement {
         this.resizeObserver?.unobserve(this.nav);
     }
 
+    @watch("noScrollControls", {waitUntilFirstUpdate: true})
+    updateScrollControls() {
+        if (this.noScrollControls) {
+            this.hasScrollControls = false;
+        } else {
+            // In most cases, we can compare scrollWidth to clientWidth to determine if scroll controls should show. However,
+            // Safari appears to calculate this incorrectly when zoomed at 110%, causing the controls to toggle indefinitely.
+            // Adding a single pixel to the comparison seems to resolve it.
+            //
+            // See https://github.com/shoelace-style/shoelace/issues/1839
+            this.hasScrollControls =
+                ["top", "bottom"].includes(this.placement) &&
+                this.nav.scrollWidth > this.nav.clientWidth + 1;
+        }
+    }
+
+    @watch("placement", {waitUntilFirstUpdate: true})
+    syncIndicator() {
+        const tab = this.getActiveTab();
+
+        if (tab) {
+            this.indicator.style.display = "block";
+            this.repositionIndicator();
+        } else {
+            this.indicator.style.display = "none";
+        }
+    }
+
+    /** Shows the specified tab panel. */
+    show(panel: string) {
+        const tab = this.tabs.find((el) => el.panel === panel);
+
+        if (tab) {
+            this.setActiveTab(tab, {scrollBehavior: "smooth"});
+        }
+    }
+
+    render() {
+        const isRtl = this.matches(":dir(rtl)");
+
+        return html`
+            <div
+                    part="base"
+                    class=${classMap({
+                        "tab-group": true,
+                        "tab-group--top": this.placement === "top",
+                        "tab-group--bottom": this.placement === "bottom",
+                        "tab-group--start": this.placement === "start",
+                        "tab-group--end": this.placement === "end",
+                        "tab-group--has-scroll-controls": this.hasScrollControls,
+                    })}
+                    @click=${this.handleClick}
+                    @keydown=${this.handleKeyDown}>
+                <div class="tab-group__nav-container" part="nav">
+                    ${this.hasScrollControls
+                            ? html`
+                                <sd-icon-button
+                                        part="scroll-button scroll-button--start"
+                                        exportparts="base:scroll-button__base"
+                                        class="tab-group__scroll-button tab-group__scroll-button--start"
+                                        name=${isRtl ? "chevron-right" : "chevron-left"}
+                                        library="system"
+                                        label="scrollToStart"
+                                        @click=${this.handleScrollToStart}></sd-icon-button>
+                            `
+                            : ""}
+
+                    <div class="tab-group__nav">
+                        <div part="tabs" class="tab-group__tabs" role="tablist">
+                            <div
+                                    part="active-tab-indicator"
+                                    class="tab-group__indicator"></div>
+                            <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
+                        </div>
+                    </div>
+
+                    ${this.hasScrollControls
+                            ? html`
+                                <sd-icon-button
+                                        part="scroll-button scroll-button--end"
+                                        exportparts="base:scroll-button__base"
+                                        class="tab-group__scroll-button tab-group__scroll-button--end"
+                                        name=${isRtl ? "chevron-left" : "chevron-right"}
+                                        library="system"
+                                        label="scrollToEnd"
+                                        @click=${this.handleScrollToEnd}></sd-icon-button>
+                            `
+                            : ""}
+                </div>
+
+                <slot
+                        part="body"
+                        class="tab-group__body"
+                        @slotchange=${this.syncTabsAndPanels}></slot>
+            </div>
+        `;
+    }
+
     private getAllTabs() {
         const slot = this.shadowRoot!.querySelector<HTMLSlotElement>('slot[name="nav"]')!;
 
@@ -132,7 +224,7 @@ export default class SdTabGroup extends SdElement {
         }
 
         if (tab !== null) {
-            this.setActiveTab(tab, { scrollBehavior: "smooth" });
+            this.setActiveTab(tab, {scrollBehavior: "smooth"});
         }
     }
 
@@ -149,7 +241,7 @@ export default class SdTabGroup extends SdElement {
         // Activate a tab
         if (["Enter", " "].includes(event.key)) {
             if (tab !== null) {
-                this.setActiveTab(tab, { scrollBehavior: "smooth" });
+                this.setActiveTab(tab, {scrollBehavior: "smooth"});
                 event.preventDefault();
             }
         }
@@ -191,10 +283,10 @@ export default class SdTabGroup extends SdElement {
                 }
 
                 nextTab.tabIndex = 0;
-                nextTab.focus({ preventScroll: true });
+                nextTab.focus({preventScroll: true});
 
                 if (this.activation === "auto") {
-                    this.setActiveTab(nextTab, { scrollBehavior: "smooth" });
+                    this.setActiveTab(nextTab, {scrollBehavior: "smooth"});
                 } else {
                     this.tabs.forEach((tabEl) => {
                         tabEl.tabIndex = tabEl === nextTab ? 0 : -1;
@@ -258,10 +350,10 @@ export default class SdTabGroup extends SdElement {
             // Emit events
             if (options.emitEvents) {
                 if (previousTab) {
-                    this.emit("sd-tab-hide", { detail: { name: previousTab.panel } });
+                    this.emit("sd-tab-hide", {detail: {name: previousTab.panel}});
                 }
 
-                this.emit("sd-tab-show", { detail: { name: this.activeTab.panel } });
+                this.emit("sd-tab-show", {detail: {name: this.activeTab.panel}});
             }
         }
     }
@@ -288,7 +380,7 @@ export default class SdTabGroup extends SdElement {
         const height = currentTab.clientHeight;
         const isRtl = this.matches(":dir(rtl)");
 
-        // We can't used offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
+        // We can't use offsetLeft/offsetTop here due to a shadow parent issue where neither can getBoundingClientRect
         // because it provides invalid values for animating elements: https://bugs.chromium.org/p/chromium/issues/detail?id=920069
         const allTabs = this.getAllTabs();
         const precedingTabs = allTabs.slice(0, allTabs.indexOf(currentTab));
@@ -297,7 +389,7 @@ export default class SdTabGroup extends SdElement {
                 left: previous.left + current.clientWidth,
                 top: previous.top + current.clientHeight,
             }),
-            { left: 0, top: 0 }
+            {left: 0, top: 0}
         );
 
         switch (this.placement) {
@@ -360,104 +452,6 @@ export default class SdTabGroup extends SdElement {
         }
 
         return nextTab;
-    }
-
-    @watch("noScrollControls", { waitUntilFirstUpdate: true })
-    updateScrollControls() {
-        if (this.noScrollControls) {
-            this.hasScrollControls = false;
-        } else {
-            // In most cases, we can compare scrollWidth to clientWidth to determine if scroll controls should show. However,
-            // Safari appears to calculate this incorrectly when zoomed at 110%, causing the controls to toggle indefinitely.
-            // Adding a single pixel to the comparison seems to resolve it.
-            //
-            // See https://github.com/shoelace-style/shoelace/issues/1839
-            this.hasScrollControls =
-                ["top", "bottom"].includes(this.placement) &&
-                this.nav.scrollWidth > this.nav.clientWidth + 1;
-        }
-    }
-
-    @watch("placement", { waitUntilFirstUpdate: true })
-    syncIndicator() {
-        const tab = this.getActiveTab();
-
-        if (tab) {
-            this.indicator.style.display = "block";
-            this.repositionIndicator();
-        } else {
-            this.indicator.style.display = "none";
-        }
-    }
-
-    /** Shows the specified tab panel. */
-    show(panel: string) {
-        const tab = this.tabs.find((el) => el.panel === panel);
-
-        if (tab) {
-            this.setActiveTab(tab, { scrollBehavior: "smooth" });
-        }
-    }
-
-    render() {
-        const isRtl = this.matches(":dir(rtl)");
-
-        return html`
-            <div
-                part="base"
-                class=${classMap({
-                    "tab-group": true,
-                    "tab-group--top": this.placement === "top",
-                    "tab-group--bottom": this.placement === "bottom",
-                    "tab-group--start": this.placement === "start",
-                    "tab-group--end": this.placement === "end",
-                    "tab-group--has-scroll-controls": this.hasScrollControls,
-                })}
-                @click=${this.handleClick}
-                @keydown=${this.handleKeyDown}>
-                <div class="tab-group__nav-container" part="nav">
-                    ${this.hasScrollControls
-                        ? html`
-                              <sd-icon-button
-                                  part="scroll-button scroll-button--start"
-                                  exportparts="base:scroll-button__base"
-                                  class="tab-group__scroll-button tab-group__scroll-button--start"
-                                  name=${isRtl ? "chevron-right" : "chevron-left"}
-                                  library="system"
-                                  label="scrollToStart"
-                                  @click=${this.handleScrollToStart}></sd-icon-button>
-                          `
-                        : ""}
-
-                    <div class="tab-group__nav">
-                        <div part="tabs" class="tab-group__tabs" role="tablist">
-                            <div
-                                part="active-tab-indicator"
-                                class="tab-group__indicator"></div>
-                            <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
-                        </div>
-                    </div>
-
-                    ${this.hasScrollControls
-                        ? html`
-                              <sd-icon-button
-                                  part="scroll-button scroll-button--end"
-                                  exportparts="base:scroll-button__base"
-                                  class="tab-group__scroll-button tab-group__scroll-button--end"
-                                  name=${isRtl ? "chevron-left" : "chevron-right"}
-                                  library="system"
-                                  label="scrollToEnd"
-                                  @click=${this.handleScrollToEnd}></sd-icon-button>
-                          `
-                        : ""}
-                </div>
-
-                <slot
-                    part="body"
-                    class="tab-group__body"
-                    @slotchange=${this.syncTabsAndPanels}></slot>
-            </div>
-        `;
     }
 }
 

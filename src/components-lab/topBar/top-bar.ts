@@ -43,7 +43,7 @@ export default class SdTopBar extends LitElement {
     }
 
     private _sidebarControl() {
-        var menu = <HTMLElement>this.shadowRoot?.getElementById("menu-links");
+        const menu = <HTMLElement>this.shadowRoot?.getElementById("menu-links");
 
         if (menu.classList.contains("display")) {
             menu.classList.remove("display");

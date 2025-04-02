@@ -1,20 +1,14 @@
-import { html, unsafeCSS } from "lit";
-import {
-    customElement,
-    property,
-    query,
-    queryAssignedElements,
-    state,
-} from "lit/decorators.js";
-import { live } from "lit/directives/live.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, query, queryAssignedElements, state,} from "lit/decorators.js";
+import {live} from "lit/directives/live.js";
 import styles from "./switch.scss?inline";
-import { classMap } from "lit/directives/class-map.js";
-import { MixinFormAssociated } from "../../utils/form";
+import {classMap} from "lit/directives/class-map.js";
+import {MixinFormAssociated} from "../../utils/form";
 import SdElement from "../../utils/sd-element";
-import { watch } from "../../utils/watch";
+import {watch} from "../../utils/watch";
 
 export interface SwitchState {
-    /** whethen the switch is on (cheked). */
+    /** whether the switch is on (checked). */
     readonly checked: boolean;
 
     /** whether the switch is required. */
@@ -28,62 +22,46 @@ export default class SdSwitch extends SwitchBaseClass {
     static styles = unsafeCSS(styles);
 
     @query('input[type="checkbox"]') input!: HTMLInputElement;
-    @queryAssignedElements({ slot: "label" }) labelSlot!: Array<HTMLElement>;
-    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: Array<HTMLElement>;
+    @queryAssignedElements({slot: "label"}) labelSlot!: Array<HTMLElement>;
+    @queryAssignedElements({slot: "help-text"}) helpTextSlot!: Array<HTMLElement>;
 
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
     @property() value = "on";
 
     @property() title = ""; // make reactive to pass through
 
-    /** The checkbox's size. */
-    @property({ reflect: true }) size: "small" | "medium" = "medium";
+    /** The switch size. */
+    @property({reflect: true}) size: "small" | "medium" = "medium";
 
     /** Draws the checkbox in a checked state. */
-    @property({ type: Boolean, reflect: true }) checked = false;
+    @property({type: Boolean, reflect: true}) checked = false;
 
-    @property({ type: Boolean }) defalutChecked = false;
+    @property({type: Boolean}) defaultChecked = false;
 
     /** Makes the checkbox a required field. */
-    @property({ type: Boolean, reflect: true }) required = false;
+    @property({type: Boolean, reflect: true}) required = false;
 
     /** Disables the asterisk on the label, when the field is required. */
-    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
+    @property({type: Boolean, attribute: "no-asterisk"}) noAsterisk = false;
 
-    /** The checkbox's lable. If you need to display HTML, use the `label` slot instead. */
-    @property({ attribute: "label" }) label = "";
+    /** The switch label. If you need to display HTML, use the `label` slot instead. */
+    @property({attribute: "label"}) label = "";
 
-    /** The checkbox's help text. If you need to display HTML, use the `help-text` slot instead. */
-    @property({ attribute: "help-text" }) helpText = "";
+    /** The switch help text. If you need to display HTML, use the `help-text` slot instead. */
+    @property({attribute: "help-text"}) helpText = "";
 
     @state() focused = false;
-    @state() override readonly waitUserInteraction = ["sd-blur"];
+
+    override get validationTriggerEvents() {
+        return ["sd-blur"];
+    }
 
     connectedCallback(): void {
         super.connectedCallback();
-        this.defalutChecked = this.checked;
+        this.defaultChecked = this.checked;
     }
 
-    protected handleClick() {
-        this.checked = !this.checked;
-        this.emit("sd-change");
-    }
-
-    protected handleFocus() {
-        this.focused = true;
-        this.emit("sd-focus");
-    }
-
-    protected handleBlur() {
-        this.focused = false;
-        this.emit("sd-blur");
-    }
-
-    protected handleInput() {
-        this.emit("sd-input");
-    }
-
-    @watch("checked", { waitUntilFirstUpdate: true })
+    @watch("checked", {waitUntilFirstUpdate: true})
     handleStateChange() {
         this.input.checked = this.checked; // force a sync update
     }
@@ -116,7 +94,7 @@ export default class SdSwitch extends SwitchBaseClass {
     }
 
     override formResetCallback() {
-        this.checked = this.defalutChecked;
+        this.checked = this.defaultChecked;
     }
 
     override formStateRestoreCallback(state: string) {
@@ -128,7 +106,7 @@ export default class SdSwitch extends SwitchBaseClass {
     }
 
     override getState(): SwitchState {
-        return { checked: this.checked, required: this.required };
+        return {checked: this.checked, required: this.required};
     }
 
     override render() {
@@ -142,32 +120,51 @@ export default class SdSwitch extends SwitchBaseClass {
         return html`
             <div class=${classMap(classes)}>
                 <input
-                    id="switch"
-                    class="switch__input"
-                    type="checkbox"
-                    title=${this.title}
-                    name=${this.name}
-                    ?disabled=${this.disabled}
-                    ?checked=${live(this.checked)}
-                    ?required=${this.required}
-                    aria-describedby="help-text"
-                    aria-checked=${this.checked ? "true" : "false"}
-                    @click=${this.handleClick}
-                    @input=${this.handleInput}
-                    @blur=${this.handleBlur}
-                    @focus=${this.handleFocus} />
+                        id="switch"
+                        class="switch__input"
+                        type="checkbox"
+                        title=${this.title}
+                        name=${this.name}
+                        ?disabled=${this.disabled}
+                        ?checked=${live(this.checked)}
+                        ?required=${this.required}
+                        aria-describedby="help-text"
+                        aria-checked=${this.checked ? "true" : "false"}
+                        @click=${this.handleClick}
+                        @input=${this.handleInput}
+                        @blur=${this.handleBlur}
+                        @focus=${this.handleFocus}/>
                 <label id="label" for="switch" class="label">
                     ${this.renderLabel()}
                     <div class="visual"></div>
                 </label>
                 <span
-                    class="help-text"
-                    id="help-text"
-                    aria-hidden=${hasHelpText ? "false" : "true"}
-                    ><slot name="help-text">${this.helpText}</slot></span
+                        class="help-text"
+                        id="help-text"
+                        aria-hidden=${hasHelpText ? "false" : "true"}
+                ><slot name="help-text">${this.helpText}</slot></span
                 >
             </div>
         `;
+    }
+
+    protected handleClick() {
+        this.checked = !this.checked;
+        this.emit("sd-change");
+    }
+
+    protected handleFocus() {
+        this.focused = true;
+        this.emit("sd-focus");
+    }
+
+    protected handleBlur() {
+        this.focused = false;
+        this.emit("sd-blur");
+    }
+
+    protected handleInput() {
+        this.emit("sd-input");
     }
 
     private renderLabel() {

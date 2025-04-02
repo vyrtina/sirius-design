@@ -69,7 +69,6 @@ export default class SdAutocomplete
     @state() selectedOptions: SdOption[] = [];
     @state() currentValue?: string;
     @state() selectedValues: string[] = [];
-    @state() override readonly waitUserInteraction = ["sd-show", "sd-blur", "sd-hide"];
     /**
      * The current value of the select, submitted as a name/value pair with form data. When `multiple` is enabled, the
      * value attribute will be a space-delimited list of values based on the options selected, and the value property will
@@ -128,6 +127,10 @@ export default class SdAutocomplete
     protected typeToSelectString = "";
     protected closeWatcher?: CloseWatcher | null;
     @state() protected focused = false;
+
+    override get validationTriggerEvents() {
+        return ["sd-show", "sd-blur", "sd-hide"];
+    }
 
     protected get tags() {
         return this.selectedOptions.map((option, index) => {

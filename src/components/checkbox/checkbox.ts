@@ -1,17 +1,11 @@
-import { html, unsafeCSS } from "lit";
-import {
-    customElement,
-    property,
-    query,
-    queryAssignedElements,
-    state,
-} from "lit/decorators.js";
-import { watch } from "../../utils/watch.js";
-import SdElement from "../../utils/sd-element.js";
+import {html, unsafeCSS} from "lit";
+import {customElement, property, query, queryAssignedElements, state,} from "lit/decorators.js";
+import {watch} from "../../utils/watch.js";
 import type SdFormControl from "../../utils/sd-element.js";
-import { MixinFormAssociated } from "../../utils/form.js";
+import SdElement from "../../utils/sd-element.js";
+import {MixinFormAssociated} from "../../utils/form.js";
 import styles from "./checkbox.scss?inline";
-import { classMap } from "lit/directives/class-map.js";
+import {classMap} from "lit/directives/class-map.js";
 
 const CheckboxBaseClass = MixinFormAssociated(SdElement);
 
@@ -45,13 +39,12 @@ export interface CheckboxState {
 @customElement("sd-checkbox")
 export default class SdCheckbox
     extends CheckboxBaseClass
-    implements SdFormControl, CheckboxState
-{
+    implements SdFormControl, CheckboxState {
     static styles = unsafeCSS(styles);
 
     @query('input[type="checkbox"]') input!: HTMLInputElement;
-    @queryAssignedElements({ slot: "label" }) labelSlot!: HTMLSlotElement[];
-    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: HTMLSlotElement[];
+    @queryAssignedElements({slot: "label"}) labelSlot!: HTMLSlotElement[];
+    @queryAssignedElements({slot: "help-text"}) helpTextSlot!: HTMLSlotElement[];
 
     /** The current value of the checkbox, submitted as a name/value pair with form data. */
     @property() value = "on";
@@ -59,69 +52,43 @@ export default class SdCheckbox
     @property() title = ""; // make reactive to pass through
 
     /** The checkboxes size. */
-    @property({ reflect: true }) size: "small" | "medium" = "medium";
+    @property({reflect: true}) size: "small" | "medium" = "medium";
 
     /** Draws the checkbox in a checked state. */
-    @property({ type: Boolean, reflect: true }) checked = false;
+    @property({type: Boolean, reflect: true}) checked = false;
 
-    @property({ type: Boolean }) defalutChecked = false;
+    @property({type: Boolean}) defaultChecked = false;
 
     /**
      * Draws the checkbox in an indeterminate state. This is usually applied to checkboxes that represents a "select
      * all/none" behavior when associated checkboxes have a mix of checked and unchecked states.
      */
-    @property({ type: Boolean, reflect: true }) indeterminate = false;
+    @property({type: Boolean, reflect: true}) indeterminate = false;
 
     /** Makes the checkbox a required field. */
-    @property({ type: Boolean, reflect: true }) required = false;
+    @property({type: Boolean, reflect: true}) required = false;
 
     /** Disables the asterisk on the label, when the field is required. */
-    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
+    @property({type: Boolean, attribute: "no-asterisk"}) noAsterisk = false;
 
     /** The checkboxes label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
 
     /** The checkboxes help text. If you need to display HTML, use the `help-text` slot instead. */
-    @property({ attribute: "help-text" }) helpText = "";
+    @property({attribute: "help-text"}) helpText = "";
 
     @state() hasFocus = false;
-    @state() override readonly waitUserInteraction = ["sd-blur"];
+
+    override get validationTriggerEvents() {
+        return ["sd-blur"]
+    };
 
     connectedCallback(): void {
         super.connectedCallback();
-        this.defalutChecked = this.checked;
+        this.defaultChecked = this.checked;
     }
 
-    private getInput() {
-        if (!this.input) {
-            this.connectedCallback();
-            this.scheduleUpdate();
-        }
-
-        return this.input!;
-    }
-
-    protected handleClick() {
-        this.checked = !this.checked;
-        this.indeterminate = false;
-        this.emit("sd-change");
-    }
-
-    protected handleFocus() {
-        this.hasFocus = true;
-        this.emit("sd-focus");
-    }
-
-    protected handleBlur() {
-        this.hasFocus = false;
-        this.emit("sd-blur");
-    }
-
-    protected handleInput() {
-        this.emit("sd-input");
-    }
-
-    @watch(["checked", "indeterminate"], { waitUntilFirstUpdate: true })
+    @watch(["checked", "indeterminate"], {waitUntilFirstUpdate: true})
     handleStateChange() {
         this.getInput().checked = this.checked; // force a sync update
         this.getInput().indeterminate = this.indeterminate; // force a sync update
@@ -155,7 +122,7 @@ export default class SdCheckbox
     }
 
     override formResetCallback() {
-        this.checked = this.defalutChecked;
+        this.checked = this.defaultChecked;
     }
 
     override formStateRestoreCallback(state: string) {
@@ -167,7 +134,7 @@ export default class SdCheckbox
     }
 
     override getState(): CheckboxState {
-        return { checked: this.checked, required: this.required };
+        return {checked: this.checked, required: this.required};
     }
 
     render() {
@@ -183,25 +150,54 @@ export default class SdCheckbox
             <div class=${classMap(classes)}>
                 <div class="state-layer"></div>
                 <input
-                    id="input"
-                    class="checkbox__input"
-                    type="checkbox"
-                    title=${this.title}
-                    name=${this.name}
-                    ?disabled=${this.disabled}
-                    ?checked=${this.checked}
-                    ?indeterminate=${this.indeterminate}
-                    ?required=${this.required}
-                    aria-describedby="help-text"
-                    aria-checked=${this.checked ? "true" : "false"}
-                    @click=${this.handleClick}
-                    @input=${this.handleInput}
-                    @blur=${this.handleBlur}
-                    @focus=${this.handleFocus} />
+                        id="input"
+                        class="checkbox__input"
+                        type="checkbox"
+                        title=${this.title}
+                        name=${this.name}
+                        ?disabled=${this.disabled}
+                        ?checked=${this.checked}
+                        ?indeterminate=${this.indeterminate}
+                        ?required=${this.required}
+                        aria-describedby="help-text"
+                        aria-checked=${this.checked ? "true" : "false"}
+                        @click=${this.handleClick}
+                        @input=${this.handleInput}
+                        @blur=${this.handleBlur}
+                        @focus=${this.handleFocus}/>
             </div>
             ${this.renderLabel()}
             ${hasError ? this.renderErrorText() : this.renderHelpText()}
         `;
+    }
+
+    protected handleClick() {
+        this.checked = !this.checked;
+        this.indeterminate = false;
+        this.emit("sd-change");
+    }
+
+    protected handleFocus() {
+        this.hasFocus = true;
+        this.emit("sd-focus");
+    }
+
+    protected handleBlur() {
+        this.hasFocus = false;
+        this.emit("sd-blur");
+    }
+
+    protected handleInput() {
+        this.emit("sd-input");
+    }
+
+    private getInput() {
+        if (!this.input) {
+            this.connectedCallback();
+            this.scheduleUpdate();
+        }
+
+        return this.input!;
     }
 
     private renderLabel() {
@@ -213,11 +209,12 @@ export default class SdCheckbox
 
         return html`
             <label
-                for="input"
-                part="label"
-                class=${classMap(classes)}
-                aria-hidden=${hasLabel ? "false" : "true"}
-                ><slot name="label">${this.label}</slot>
+                    for="input"
+                    part="label"
+                    class=${classMap(classes)}
+                    aria-hidden=${hasLabel ? "false" : "true"}
+            >
+                <slot name="label">${this.label}</slot>
             </label>
         `;
     }
@@ -226,7 +223,7 @@ export default class SdCheckbox
         return html`
             <span part="error-text" class="error-text">
                 <slot name="error-text"
-                    ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
+                ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
                 >
             </span>
         `;
@@ -237,10 +234,10 @@ export default class SdCheckbox
 
         return html`
             <span
-                part="help-text"
-                id="help-text"
-                class="help-text"
-                aria-hidden=${hasHelpText ? "false" : "true"}>
+                    part="help-text"
+                    id="help-text"
+                    class="help-text"
+                    aria-hidden=${hasHelpText ? "false" : "true"}>
                 <slot name="help-text">${this.helpText}</slot>
             </span>
         `;

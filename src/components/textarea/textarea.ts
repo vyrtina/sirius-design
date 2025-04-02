@@ -1,88 +1,58 @@
-import { classMap } from "lit/directives/class-map.js";
-import { MixinFormAssociated } from "../../utils/form.js";
-import { html, unsafeCSS } from "lit";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { live } from "lit/directives/live.js";
-import {
-    property,
-    query,
-    queryAssignedElements,
-    state,
-    customElement,
-} from "lit/decorators.js";
-import { watch } from "../../utils/watch.js";
+import {classMap} from "lit/directives/class-map.js";
+import {MixinFormAssociated} from "../../utils/form.js";
+import {html, unsafeCSS} from "lit";
+import {ifDefined} from "lit/directives/if-defined.js";
+import {live} from "lit/directives/live.js";
+import {customElement, property, query, queryAssignedElements, state,} from "lit/decorators.js";
+import {watch} from "../../utils/watch.js";
 import styles from "./textarea.scss?inline";
-import SdElement, { SdFormControl } from "../../utils/sd-element.js";
+import SdElement, {SdFormControl} from "../../utils/sd-element.js";
 
 const BaseTextareaClass = MixinFormAssociated(SdElement);
 
 @customElement("sd-textarea")
 export default class SdTextarea extends BaseTextareaClass implements SdFormControl {
     static override styles = unsafeCSS(styles);
-
-    private resizeObserver!: ResizeObserver;
-
     @query(".textarea__input") input!: HTMLTextAreaElement;
     @query(".textarea__size-adjuster") sizeAdjuster!: HTMLTextAreaElement;
-    @queryAssignedElements({ slot: "label" }) labelSlot!: HTMLSlotElement[];
-    @queryAssignedElements({ slot: "help-text" }) helpTextSlot!: HTMLSlotElement[];
-
-    @state() override readonly waitUserInteraction = ["sd-blur"];
-    @state() private focused = false;
-
+    @queryAssignedElements({slot: "label"}) labelSlot!: HTMLSlotElement[];
+    @queryAssignedElements({slot: "help-text"}) helpTextSlot!: HTMLSlotElement[];
     @property() title = ""; // make reactive to pass through
-
     /** The current value of the textarea, submitted as a name/value pair with form data. */
     @property() value = "";
-
     /** the initial value of the textarea component. used to reset the value */
     @property() defaultValue = "";
-
-    /** The textarea's label. If you need to display HTML, use the `label` slot instead. */
+    /** The text-area's label. If you need to display HTML, use the `label` slot instead. */
     @property() label = "";
-
-    /** The textarea's help text. If you need to display HTML, use the `help-text` slot instead. */
-    @property({ attribute: "help-text" }) helpText = "";
-
+    /** The text-area's help text. If you need to display HTML, use the `help-text` slot instead. */
+    @property({attribute: "help-text"}) helpText = "";
     /** Placeholder text to show as a hint when the input is empty. */
     @property() placeholder = "";
-
     /** The number of rows to display by default. */
-    @property({ type: Number }) rows = 4;
-
+    @property({type: Number}) rows = 4;
     /** Controls how the textarea can be resized. */
     @property() resize: "none" | "vertical" | "auto" = "vertical";
-
     /** Disables the textarea. */
-    @property({ type: Boolean, reflect: true }) disabled = false;
-
+    @property({type: Boolean, reflect: true}) disabled = false;
     /** Makes the textarea readonly. */
-    @property({ type: Boolean, reflect: true }) readonly = false;
-
+    @property({type: Boolean, reflect: true}) readonly = false;
     /** Makes the textarea a required field. */
-    @property({ type: Boolean, reflect: true }) required = false;
-
+    @property({type: Boolean, reflect: true}) required = false;
     /** Disables the asterisk on the label, when the field is required. */
-    @property({ type: Boolean, attribute: "no-asterisk" }) noAsterisk = false;
-
+    @property({type: Boolean, attribute: "no-asterisk"}) noAsterisk = false;
     /** The minimum length of input that will be considered valid. */
-    @property({ type: Number }) minlength?: number;
-
+    @property({type: Number}) minlength?: number;
     /** The maximum length of input that will be considered valid. */
-    @property({ type: Number }) maxlength?: number;
-
+    @property({type: Number}) maxlength?: number;
     /** Indicates whether the browser's autocorrect feature is on or off. */
     @property() autocorrect?: string;
-
     /**
      * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
      * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.
      */
     @property() autocomplete?: string;
-
     /** Indicates that the input should receive focus on page load. */
-    @property({ type: Boolean }) autofocus: boolean = false;
-
+    @property({type: Boolean}) autofocus: boolean = false;
     /** Used to customize the label or icon of the Enter key on virtual keyboards. */
     @property() enterkeyhint?:
         | "enter"
@@ -92,18 +62,16 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         | "previous"
         | "search"
         | "send";
-
     /** Enables spell checking on the textarea. */
     @property({
         type: Boolean,
         converter: {
             // Allow "true|false" attribute values but keep the property boolean
-            fromAttribute: (value) => (!value || value === "false" ? false : true),
+            fromAttribute: (value) => (!(!value || value === "false")),
             toAttribute: (value) => (value ? "true" : "false"),
         },
     })
     spellcheck = true;
-
     /**
      * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
      * keyboard on supportive devices.
@@ -117,6 +85,12 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         | "search"
         | "email"
         | "url";
+    private resizeObserver!: ResizeObserver;
+    @state() private focused = false;
+
+    override get validationTriggerEvents() {
+        return ["sd-blur"];
+    }
 
     async connectedCallback() {
         super.connectedCallback();
@@ -136,47 +110,12 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         }
     }
 
-    private handleBlur() {
-        this.focused = false;
-        this.emit("sd-blur");
-    }
-
-    private handleChange() {
-        this.value = this.input.value;
-        this.setTextareaHeight();
-        this.emit("sd-change");
-    }
-
-    private handleFocus() {
-        this.focused = true;
-        this.emit("sd-focus");
-    }
-
-    private handleInput() {
-        this.value = this.input.value;
-        this.emit("sd-input");
-    }
-
-    private setTextareaHeight() {
-        if (!this.input) {
-            return;
-        }
-        if (this.resize === "auto") {
-            // This prevents layout shifts. We use `clientHeight` instead of `scrollHeight` to account for if the `<textarea>` has a max-height set on it. In my tests, this has worked fine. Im not aware of any edge cases. [Konnor]
-            this.sizeAdjuster.style.height = `${this.input.clientHeight}px`;
-            this.input.style.height = "auto";
-            this.input.style.height = `${this.input.scrollHeight}px`;
-        } else {
-            (this.input.style.height as string | undefined) = undefined;
-        }
-    }
-
-    @watch("rows", { waitUntilFirstUpdate: true })
+    @watch("rows", {waitUntilFirstUpdate: true})
     handleRowsChange() {
         this.setTextareaHeight();
     }
 
-    @watch("value", { waitUntilFirstUpdate: true })
+    @watch("value", {waitUntilFirstUpdate: true})
     async handleValueChange() {
         await this.updateComplete;
         console.log(this.checkValidity());
@@ -199,7 +138,7 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         this.input.select();
     }
 
-    /** Gets or sets the textarea's scroll position. */
+    /** Gets or sets the text-area's scroll position. */
     scrollPosition(position?: {
         top?: number;
         left?: number;
@@ -260,65 +199,100 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
     }
 
     override getState() {
-        return { value: this.value };
+        return {value: this.value};
     }
 
     render() {
         const hasError = this.internals.states.has("user-invalid");
         return html`
             <div
-                part="container"
-                class=${classMap({
-                    container: true,
-                    "textarea--disabled": this.disabled,
-                    "textarea--focused": this.focused,
-                    "textarea--empty": !this.value,
-                    "textarea--error": hasError,
-                    "textarea--resize-none": this.resize === "none",
-                    "textarea--resize-vertical": this.resize === "vertical",
-                    "textarea--resize-auto": this.resize === "auto",
-                })}>
+                    part="container"
+                    class=${classMap({
+                        container: true,
+                        "textarea--disabled": this.disabled,
+                        "textarea--focused": this.focused,
+                        "textarea--empty": !this.value,
+                        "textarea--error": hasError,
+                        "textarea--resize-none": this.resize === "none",
+                        "textarea--resize-vertical": this.resize === "vertical",
+                        "textarea--resize-auto": this.resize === "auto",
+                    })}>
                 ${this.renderLabel()}
 
                 <div part="base" class="textarea">
                     <textarea
-                        part="textarea"
-                        id="input"
-                        class="textarea__input"
-                        title=${
-                            this
-                                .title /* An empty title prevents browser validation tooltips from appearing on hover */
-                        }
-                        name=${ifDefined(this.name)}
-                        .value=${live(this.value)}
-                        ?disabled=${this.disabled}
-                        ?readonly=${this.readonly}
-                        ?required=${this.required}
-                        placeholder=${ifDefined(this.placeholder)}
-                        rows=${ifDefined(this.rows)}
-                        minlength=${ifDefined(this.minlength)}
-                        maxlength=${ifDefined(this.maxlength)}
-                        autocapitalize=${ifDefined(this.autocapitalize)}
-                        autocorrect=${ifDefined(this.autocorrect)}
-                        ?autofocus=${this.autofocus}
-                        spellcheck=${ifDefined(this.spellcheck)}
-                        enterkeyhint=${ifDefined(this.enterkeyhint)}
-                        inputmode=${ifDefined(this.inputmode)}
-                        aria-describedby="help-text"
-                        @change=${this.handleChange}
-                        @input=${this.handleInput}
-                        @focus=${this.handleFocus}
-                        @blur=${this.handleBlur}></textarea>
+                            part="textarea"
+                            id="input"
+                            class="textarea__input"
+                            title=${
+                                    this
+                                            .title /* An empty title prevents browser validation tooltips from appearing on hover */
+                            }
+                            name=${ifDefined(this.name)}
+                            .value=${live(this.value)}
+                            ?disabled=${this.disabled}
+                            ?readonly=${this.readonly}
+                            ?required=${this.required}
+                            placeholder=${ifDefined(this.placeholder)}
+                            rows=${ifDefined(this.rows)}
+                            minlength=${ifDefined(this.minlength)}
+                            maxlength=${ifDefined(this.maxlength)}
+                            autocapitalize=${ifDefined(this.autocapitalize)}
+                            autocorrect=${ifDefined(this.autocorrect)}
+                            ?autofocus=${this.autofocus}
+                            spellcheck=${ifDefined(this.spellcheck)}
+                            enterkeyhint=${ifDefined(this.enterkeyhint)}
+                            inputmode=${ifDefined(this.inputmode)}
+                            aria-describedby="help-text"
+                            @change=${this.handleChange}
+                            @input=${this.handleInput}
+                            @focus=${this.handleFocus}
+                            @blur=${this.handleBlur}></textarea>
                     <!-- This "adjuster" exists to prevent layout shifting. https://github.com/shoelace-style/shoelace/issues/2180 -->
                     <div
-                        part="textarea-adjuster"
-                        class="textarea__size-adjuster"
-                        ?hidden=${this.resize !== "auto"}></div>
+                            part="textarea-adjuster"
+                            class="textarea__size-adjuster"
+                            ?hidden=${this.resize !== "auto"}></div>
                 </div>
 
                 ${hasError ? this.renderErrorText() : this.renderHelpText()}
             </div>
         `;
+    }
+
+    private handleBlur() {
+        this.focused = false;
+        this.emit("sd-blur");
+    }
+
+    private handleChange() {
+        this.value = this.input.value;
+        this.setTextareaHeight();
+        this.emit("sd-change");
+    }
+
+    private handleFocus() {
+        this.focused = true;
+        this.emit("sd-focus");
+    }
+
+    private handleInput() {
+        this.value = this.input.value;
+        this.emit("sd-input");
+    }
+
+    private setTextareaHeight() {
+        if (!this.input) {
+            return;
+        }
+        if (this.resize === "auto") {
+            // This prevents layout shifts. We use `clientHeight` instead of `scrollHeight` to account for if the `<textarea>` has a max-height set on it. In my tests, this has worked fine. I'm not aware of any edge cases. [Konnor]
+            this.sizeAdjuster.style.height = `${this.input.clientHeight}px`;
+            this.input.style.height = "auto";
+            this.input.style.height = `${this.input.scrollHeight}px`;
+        } else {
+            (this.input.style.height as string | undefined) = undefined;
+        }
     }
 
     private renderLabel() {
@@ -328,10 +302,10 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
             drawAsterisk: this.required && !this.noAsterisk,
         };
         return html`<label
-            part="textarea-label"
-            class=${classMap(classes)}
-            for="input"
-            aria-hidden=${hasLabel ? "false" : "true"}>
+                part="textarea-label"
+                class=${classMap(classes)}
+                for="input"
+                aria-hidden=${hasLabel ? "false" : "true"}>
             <slot name="label">${this.label}</slot>
         </label>`;
     }
@@ -340,7 +314,7 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         return html`
             <span part="error-text" class="error-text">
                 <slot name="error-text"
-                    ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
+                ><sd-inline-error>${this.validationMessage}</sd-inline-error></slot
                 >
             </span>
         `;
@@ -350,10 +324,10 @@ export default class SdTextarea extends BaseTextareaClass implements SdFormContr
         const hasHelpText = this.helpText || this.helpTextSlot.length > 0;
 
         return html`<span
-            part="textarea-help-text"
-            id="help-text"
-            class="textarea__help-text"
-            aria-hidden=${hasHelpText ? "false" : "true"}>
+                part="textarea-help-text"
+                id="help-text"
+                class="textarea__help-text"
+                aria-hidden=${hasHelpText ? "false" : "true"}>
             <slot name="help-text">${this.helpText}</slot>
         </span>`;
     }

@@ -1,4 +1,4 @@
-// Cached compute style calls. This is specifically for browsers that dont support `checkVisibility()`.
+// Cached compute style calls. This is specifically for browsers that don't support `checkVisibility()`.
 // computedStyle calls are "live" so they only need to be retrieved once for an element.
 const computedStyleMap = new WeakMap<Element, CSSStyleDeclaration>();
 
@@ -17,7 +17,7 @@ function isVisible(el: HTMLElement): boolean {
     // This is the fastest check, but isn't supported in Safari.
     if (typeof el.checkVisibility === "function") {
         // Opacity is focusable, visibility is not.
-        return el.checkVisibility({ checkOpacity: false, checkVisibilityCSS: true });
+        return el.checkVisibility({checkOpacity: false, checkVisibilityCSS: true});
     }
 
     // Fallback "polyfill" for "checkVisibility"
@@ -32,7 +32,7 @@ function isVisible(el: HTMLElement): boolean {
 function isOverflowingAndTabbable(el: HTMLElement): boolean {
     const computedStyle = getCachedComputedStyle(el);
 
-    const { overflowY, overflowX } = computedStyle;
+    const {overflowY, overflowX} = computedStyle;
 
     if (overflowY === "scroll" || overflowX === "scroll") {
         return true;
@@ -51,11 +51,9 @@ function isOverflowingAndTabbable(el: HTMLElement): boolean {
 
     const isOverflowingX = el.scrollWidth > el.clientWidth;
 
-    if (isOverflowingX && overflowX === "auto") {
-        return true;
-    }
+    return isOverflowingX && overflowX === "auto";
 
-    return false;
+
 }
 
 /** Determines if the specified element is tabbable using heuristics inspired by https://github.com/focus-trap/tabbable */
@@ -143,7 +141,7 @@ export function getTabbableBoundary(root: HTMLElement | ShadowRoot) {
     const start = tabbableElements[0] ?? null;
     const end = tabbableElements[tabbableElements.length - 1] ?? null;
 
-    return { start, end };
+    return {start, end};
 }
 
 /**
@@ -156,7 +154,7 @@ function getSlottedChildrenOutsideRootElement(
     root: HTMLElement | ShadowRoot
 ) {
     return (
-        (slotElement.getRootNode({ composed: true }) as ShadowRoot | null)?.host !== root
+        (slotElement.getRootNode({composed: true}) as ShadowRoot | null)?.host !== root
     );
 }
 
@@ -184,7 +182,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
                 el instanceof HTMLSlotElement &&
                 getSlottedChildrenOutsideRootElement(el, root)
             ) {
-                el.assignedElements({ flatten: true }).forEach((assignedEl: Element) => {
+                el.assignedElements({flatten: true}).forEach((assignedEl: Element) => {
                     walk(assignedEl as HTMLElement);
                 });
             }
@@ -202,7 +200,7 @@ export function getTabbableElements(root: HTMLElement | ShadowRoot) {
     // Collect all elements including the root
     walk(root);
 
-    // Is this worth having? Most sorts will always add increased overhead. And positive tabindexes shouldn't really be used.
+    // Is this worth having? Most sorts will always add increased overhead. And positive tab indexes shouldn't really be used.
     // So is it worth being right? Or fast?
     return tabbableElements.sort((a, b) => {
         // Make sure we sort by tabindex.

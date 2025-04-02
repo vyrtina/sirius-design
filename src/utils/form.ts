@@ -34,6 +34,25 @@ export interface FormAssociated {
     name: string;
 
     /**
+     * The DOM events that trigger user interaction validation states.
+     *
+     * When all specified events have fired, the component is considered
+     * "user-interacted" which enables validation states like:
+     * - `:user-invalid`
+     * - `:user-valid`
+     *
+     * @example
+     * // For a text input that should validate after blur:
+     * get validationTriggerEvents() {
+     *   return ['input', 'blur'];
+     * }
+     *
+     * @default ['sd-input']
+     * @readonly
+     */
+    readonly validationTriggerEvents: string[];
+
+    /**
      * Returns the current internal state of the form component.
      *
      * This should return an object representing all relevant state properties
@@ -113,8 +132,6 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(
         extends WithElementInternals
         implements FormAssociated, ConstraintValidation {
         @property({type: Boolean, reflect: true}) disabled = false;
-        /** wait for these events to fire to consider the user interacted with the component */
-        @state() readonly waitUserInteraction: string[] = ["sd-input"];
         @state() protected userInteracted = false;
         @state() private emittedEvents: string[] = [];
         /**  The last (current) state, used to determine if the state has changed */
@@ -127,6 +144,10 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(
 
         static get formAssociated() {
             return true;
+        }
+
+        get validationTriggerEvents(): string[] {
+            return ['sd-input'];
         }
 
         get form() {
@@ -175,21 +196,21 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(
             this.emittedEvents.push(e.type);
 
             /** check if all events have fired */
-            if (this.emittedEvents.length === this.waitUserInteraction.length) {
+            if (this.emittedEvents.length === this.validationTriggerEvents.length) {
                 this.userInteracted = true;
             }
         }
 
         connectedCallback(): void {
             super.connectedCallback();
-            this.waitUserInteraction.forEach((eventName: string) => {
+            this.validationTriggerEvents.forEach((eventName: string) => {
                 this.addEventListener(eventName, this.handleInteraction);
             });
         }
 
         disconnectedCallback(): void {
             super.disconnectedCallback();
-            this.waitUserInteraction.forEach((eventName: string) => {
+            this.validationTriggerEvents.forEach((eventName: string) => {
                 this.removeEventListener(eventName, this.handleInteraction);
             });
         }
