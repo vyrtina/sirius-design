@@ -1,9 +1,8 @@
-import type { LitElement, PropertyDeclaration, PropertyValues } from "lit";
-import { property, state } from "lit/decorators.js";
-import { MixinElementInternals } from "./element-internals.js";
-import { ConstraintValidation, ValidityAndMessage } from "./constraint-validation.js";
-//import { Validator } from "./validators/validator.js";
-import { watch } from "./watch.js";
+import type {LitElement, PropertyDeclaration, PropertyValues} from "lit";
+import {property, state} from "lit/decorators.js";
+import {MixinElementInternals, WithElementInternals} from "./element-internals.js";
+import {ConstraintValidation, ValidityAndMessage} from "./constraint-validation.js";
+import {watch} from "./watch.js";
 
 /** A value that can be provided for form submission and state. */
 export type FormValue = File | string | FormData;
@@ -25,7 +24,7 @@ export interface FormAssociated {
     /** the HTMLFormElement associated with this element. */
     readonly form: HTMLFormElement | null;
 
-    /** a NodeList of all of the label elements associated with this element. */
+    /** a NodeList of all the label elements associated with this element. */
     readonly labels: NodeList;
 
     /** Whether the form control is disabled */
@@ -34,14 +33,39 @@ export interface FormAssociated {
     /** Name of the form control. Submitted with the form as part of a name/value pair */
     name: string;
 
-    /** Gets the current form value of the element.
+    /**
+     * Returns the current internal state of the form component.
+     *
+     * This should return an object representing all relevant state properties
+     * that affect validation and form submission. The state is used to:
+     * - Determine if the component's value has changed
+     * - Compute validation status
+     * - Track form-associated states
+     *
+     * @example
+     * // For a text input component:
+     * getState() {
+     *   return {
+     *     value: this.value,
+     *     dirty: this.dirty,
+     *     required: this.required
+     *   };
+     * }
+     *
+     * @returns An object representing the component's current state.
+     *          The concrete properties depend on the component's implementation.
+     */
+    getState(): Object;
+
+    /**
+     * Gets the current form value of the element.
      * @return The current form value
      */
     getFormValue(): FormValue | null;
 
     /**
      * Gets the current form state of a component. Defaults to the component's
-     * `[formValue]`.
+     * `formValue`.
      *
      * Use this when the state of an element is different from its value, such as
      * checkboxes (internal boolean state and a user string value).
@@ -80,12 +104,27 @@ export interface FormAssociated {
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 
-export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base: TBase) {
+export function MixinFormAssociated<TBase extends Constructor<LitElement>>(
+    Base: TBase
+): (abstract new (...args: any[]) => FormAssociated & ConstraintValidation & WithElementInternals) & TBase {
     const WithElementInternals = MixinElementInternals(Base);
-    abstract class Mixin
+
+    abstract class FormAssociatedClass
         extends WithElementInternals
-        implements FormAssociated, ConstraintValidation
-    {
+        implements FormAssociated, ConstraintValidation {
+        @property({type: Boolean, reflect: true}) disabled = false;
+        /** wait for these events to fire to consider the user interacted with the component */
+        @state() readonly waitUserInteraction: string[] = ["sd-input"];
+        @state() protected userInteracted = false;
+        @state() private emittedEvents: string[] = [];
+        /**  The last (current) state, used to determine if the state has changed */
+        private lastState?: ReturnType<typeof this.getState>;
+        /** current validity computed. */
+        private currentValidity: ValidityAndMessage = {
+            validity: {},
+            validationMessage: "",
+        };
+
         static get formAssociated() {
             return true;
         }
@@ -102,21 +141,29 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
         get name() {
             return this.getAttribute("name") ?? "";
         }
+
         set name(name: string) {
             this.setAttribute("name", name);
         }
 
-        @property({ type: Boolean, reflect: true }) disabled = false;
+        //constraint validation
+        get validity() {
+            this.updateValidity();
+            return this.internals.validity;
+        }
 
-        /** wait for these events to fire to consider the user interacted with the component */
-        @state() readonly waitUserInteraction: string[] = ["sd-input"];
+        get validationMessage() {
+            this.updateValidity();
+            return this.internals.validationMessage;
+        }
 
-        @state() private emittedEvents: string[] = [];
-
-        @state() protected userInteracted = false;
+        get willValidate() {
+            this.updateValidity();
+            return this.internals.willValidate;
+        }
 
         /** if disabled has changed, recheck the element validity */
-        @watch("disabled", { waitUntilFirstUpdate: true })
+        @watch("disabled", {waitUntilFirstUpdate: true})
         handleDisabled() {
             this.updateValidity();
         }
@@ -161,7 +208,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             // callback again in a loop. This leads to stale state when Lit tries to
             // determine if a property changed or not.
             if (name === "name" || name === "disabled") {
-                // Disabled's value is only false if the attribute is missing and null.
+                // value of disabled is only false if the attribute is missing and null.
                 const oldValue = name === "disabled" ? old !== null : old;
                 // Trigger a lit update when the attribute changes.
                 this.requestUpdate(name, oldValue);
@@ -210,22 +257,6 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             reason: FormRestoreReason
         ): void;
 
-        //constraint validation
-        get validity() {
-            this.updateValidity();
-            return this.internals.validity;
-        }
-
-        get validationMessage() {
-            this.updateValidity();
-            return this.internals.validationMessage;
-        }
-
-        get willValidate() {
-            this.updateValidity();
-            return this.internals.willValidate;
-        }
-
         checkValidity() {
             this.updateValidity();
             return this.internals.checkValidity();
@@ -237,38 +268,12 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
         }
 
         setCustomValidity(error: string) {
-            this.internals.setValidity({ customError: true }, error);
+            this.internals.setValidity({customError: true}, error);
             this.updateValidity();
         }
 
-        /**  The last (current) state, used to determine if the state has changed */
-        private lastState?: ReturnType<typeof this.getState>;
-
-        /** current validity computed. */
-        private currentValidity: ValidityAndMessage = {
-            validity: {},
-            validationMessage: "",
-        };
-
         getState(): Object {
             throw new Error("Implement getState()");
-        }
-
-        protected fieldValidator(
-            _state: ReturnType<typeof this.getState>
-        ): ValidityAndMessage | undefined {
-            const anchor = this.getValidityAnchor();
-            if (!anchor) {
-                return { validity: {}, validationMessage: "" };
-            }
-            return {
-                validity: anchor.validity,
-                validationMessage: anchor.validationMessage!,
-            };
-        }
-
-        protected hasChanged(state: ReturnType<typeof this.getState>) {
-            return state !== this.lastState;
         }
 
         updateValidity() {
@@ -287,7 +292,7 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             const fieldValidity = this.fieldValidator(state);
             this.currentValidity = fieldValidity ?? this.currentValidity;
 
-            const { validity, validationMessage: nativeValidationMessage } =
+            const {validity, validationMessage: nativeValidationMessage} =
                 this.currentValidity;
 
             const customError = this.internals.validity.customError;
@@ -366,9 +371,27 @@ export function MixinFormAssociated<TBase extends Constructor<LitElement>>(Base:
             this.dispatchEvent(sdInvalidEvent);
         }
 
-        getValidityAnchor(): HTMLInputElement | HTMLTextAreaElement | undefined {
+        getValidityAnchor(): HTMLInputElement | HTMLTextAreaElement | null {
             throw new Error("Implement getValidityAnchor");
         }
+
+        protected fieldValidator(
+            _state: ReturnType<typeof this.getState>
+        ): ValidityAndMessage | undefined {
+            const anchor = this.getValidityAnchor();
+            if (!anchor) {
+                return {validity: {}, validationMessage: ""};
+            }
+            return {
+                validity: anchor.validity,
+                validationMessage: anchor.validationMessage!,
+            };
+        }
+
+        protected hasChanged(state: ReturnType<typeof this.getState>) {
+            return state !== this.lastState;
+        }
     }
-    return Mixin;
+
+    return FormAssociatedClass;
 }

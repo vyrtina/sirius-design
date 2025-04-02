@@ -41,6 +41,11 @@ export interface ConstraintValidation {
      * @param error The error message to display, or an empty string.
      */
     setCustomValidity(error: string): void;
+
+    /**
+     * returns the shadow DOM element that is used as anchor for validity
+     * */
+    getValidityAnchor(): HTMLInputElement | HTMLTextAreaElement | null;
 }
 
 /**
